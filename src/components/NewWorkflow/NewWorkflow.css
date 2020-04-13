@@ -1,16 +1,28 @@
 .phaseWrapper {
     overflow-y: scroll;
     white-space: nowrap;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
 }
 /* can change how many divs per screen based on width % */
 .phaseBlock {
-    background-color: gray;
+    background-color: #5F6360;
     height: 70px;
-    width: 19%;
+    width: 14%;
     display: inline-block;
     margin: 0.5%;
     border-radius: 15px;
     padding: 2.5%;
+}
+.workflowInfo {
+    background-color: #F0F0F0;
+    border-radius: 15px;
+    padding: 2.5%;
+    text-align: center;
+}
+.workflowDescription {
+    background-color: #d9d9d9;
+    border-radius: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 1%;
+    padding-bottom: 1%;
 }

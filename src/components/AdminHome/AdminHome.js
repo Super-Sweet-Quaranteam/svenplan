@@ -17,8 +17,8 @@ function AdminHome(props) {
                 <li>New Project</li>
                 <li>Existing Projects</li>
 
-                
             </ul>
+                <NewWorkflow />
         </div>
     );
 }
