@@ -1,3 +1,4 @@
+/* allows phase blocks to scroll side to side instead of stack */
 .phaseWrapper {
     overflow-y: scroll;
     white-space: nowrap;
@@ -12,12 +13,14 @@
     border-radius: 15px;
     padding: 2.5%;
 }
+/* overall background for a workflow */
 .workflowInfo {
     background-color: #F0F0F0;
     border-radius: 15px;
     padding: 2.5%;
     text-align: center;
 }
+/* darker gray background on description */
 .workflowDescription {
     background-color: #d9d9d9;
     border-radius: 15px;
