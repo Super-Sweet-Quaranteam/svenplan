@@ -1,4 +1,26 @@
+:root{
+    font-size: 16px;
+    font-family: 'Open Sans';
+    --text-primary: #b6b6b6;
+    --text-secondary: #ececec;
+    --text-tertiary: #f5f4f4;
+    --bg-primary: #23232e;
+    --bg-secondary: #141418;
+    --bg-tertiary: #0c0c0e;
+    --transition-speed: 600ms;
+}
 
-body{
-  color: limegreen;
+.addTask{
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+.taskCard{
+  color: var(--text-secondary);
+  background-color: var(--bg-secondary);
+}
+
+.sub{
+  color: var(--text-tertiary);
+  background-color: var(--bg-tertiary);
 }

@@ -7,6 +7,7 @@ import AdminHome from '../AdminHome/AdminHome';
 import ClientHome from '../ClientHome/ClientHome';
 import LandingPage from '../LandingPage/LandingPage';
 import Footer from '../Footer/Footer'
+import AddTask from '../AddTask/AddTask';
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           {/* be sure to protect this route */}
           <Route exact path="/adminHome" component={AdminHome} />
           <Route exact path="/clientHome" component={ClientHome} />
+          <Route exact path="/add-task" component={AddTask} />
         </Switch>
       </Router>
       <Footer />
