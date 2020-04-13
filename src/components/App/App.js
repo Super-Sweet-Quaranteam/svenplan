@@ -14,6 +14,7 @@ function App() {
     <div>
       <Router>
         <Switch>
+          {/* component view if not logged in */}
           <Route exact path="/" component={LandingPage} />
           {/* be sure to protect this route */}
           <Route exact path="/adminHome" component={AdminHome} />
