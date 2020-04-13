@@ -22,6 +22,14 @@ class NewWorkflow extends Component {
             }
         })
     }
+    editWorkflow=()=>{
+        this.setState({
+            workflow: {
+                ...this.state.workflow,
+                created: false,
+            }
+        })
+    }
     createWorkflow=()=>{ 
         this.setState({
             workflow:{
@@ -46,20 +54,23 @@ class NewWorkflow extends Component {
                         <>
                             <h3>{this.state.workflow.name}</h3>
                             <p className="workflowDescription">{this.state.workflow.description}</p>
+                            <br/>                   
+                            <button onClick={this.editWorkflow}>Edit</button>
+                            <br/>
                         </>
                         :
                         <>
                         <label> Workflow Name:
                             <br/>
-                            <input onChange={(event)=>this.handleChange(event, "inputName")}></input>
+                            <input defaultValue={this.state.workflow.name} onChange={(event)=>this.handleChange(event, "inputName")}></input>
                         </label> 
                         <br/>
                         <label> Description:
                             <br/>
-                            <textarea onChange={(event)=>this.handleChange(event, "inputDescription")}></textarea>
+                            <textarea defaultValue={this.state.workflow.description} onChange={(event)=>this.handleChange(event, "inputDescription")}></textarea>
                         </label>  
                         <br/>                   
-                        <button onClick={this.createWorkflow}>Create</button>
+                        <button onClick={this.createWorkflow}>Save</button>
                         <br/>
                     </>
                 }
@@ -68,8 +79,7 @@ class NewWorkflow extends Component {
                     <div className="phaseWrapper">
                         {this.state.workflow.phases.map(phase => <div className="phaseBlock">Add tasks button here</div>)}
                     </div>
-                </div>
-                        
+                </div>                        
             </div>
         );
     }
