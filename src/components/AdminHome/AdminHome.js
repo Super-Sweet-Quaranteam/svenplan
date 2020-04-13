@@ -1,13 +1,17 @@
 import React from 'react';
 
 
-function AdminHome() {
+function AdminHome(props) {
+
+    function newWorkflow(event) {
+        props.history.push({ pathname: '/createWorkflow' })
+    }
     return (
         <div>
             <h1>SvenPlan</h1>
             <h3>Admin Home </h3>
             <ul>
-                <li>New WorkFlow</li>
+                <li onClick={newWorkflow}>New WorkFlow</li>
                 <li>Existing WorkFlows</li>
                 <li>New Project</li>
                 <li>Existing Projects</li>
