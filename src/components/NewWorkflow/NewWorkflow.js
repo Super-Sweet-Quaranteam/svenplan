@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './NewWorkflow.css'
+import AddTask from '../AddTask/AddTask'
 
 class NewWorkflow extends Component {
     state = {
@@ -53,9 +54,10 @@ class NewWorkflow extends Component {
                 {this.state.workflow.created ? 
                         <>
                             <h3>{this.state.workflow.name}</h3>
-                            <p className="workflowDescription">{this.state.workflow.description}</p>
-                            <br/>                   
-                            <button onClick={this.editWorkflow}>Edit</button>
+                            <p className="workflowDescription">{this.state.workflow.description}
+                                <br/>                   
+                                <button onClick={this.editWorkflow}>Edit</button>
+                            </p>
                             <br/>
                         </>
                         :
@@ -70,14 +72,14 @@ class NewWorkflow extends Component {
                             <textarea defaultValue={this.state.workflow.description} onChange={(event)=>this.handleChange(event, "inputDescription")}></textarea>
                         </label>  
                         <br/>                   
-                        <button onClick={this.createWorkflow}>Save</button>
+                        <button onClick={this.createWorkflow}>Create</button>
                         <br/>
                     </>
                 }
                     {/* on btn click, a new phase is added to array, currently a taco string but maybe an array of tasks once add task component is set up */}
                     <button onClick={this.addPhase}>Add Phase</button>
                     <div className="phaseWrapper">
-                        {this.state.workflow.phases.map(phase => <div className="phaseBlock">Add tasks button here</div>)}
+                        {this.state.workflow.phases.map(phase => <div className="phaseBlock"><AddTask></div>)}
                     </div>
                 </div>                        
             </div>
