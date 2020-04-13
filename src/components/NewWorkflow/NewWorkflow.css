@@ -1,0 +1,16 @@
+.phaseWrapper {
+    overflow-y: scroll;
+    white-space: nowrap;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+/* can change how many divs per screen based on width % */
+.phaseBlock {
+    background-color: gray;
+    height: 70px;
+    width: 19%;
+    display: inline-block;
+    margin: 0.5%;
+    border-radius: 15px;
+    padding: 2.5%;
+}

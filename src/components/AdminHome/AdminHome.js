@@ -1,4 +1,5 @@
 import React from 'react';
+import NewWorkflow from '../NewWorkflow/NewWorkflow';
 
 
 function AdminHome(props) {
@@ -15,6 +16,8 @@ function AdminHome(props) {
                 <li>Existing WorkFlows</li>
                 <li>New Project</li>
                 <li>Existing Projects</li>
+
+                
             </ul>
         </div>
     );
