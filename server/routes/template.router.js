@@ -5,6 +5,9 @@ const router = express.Router();
 
 //no authentication
 router.get('/', (req, res) => { 
+    console.log('hit the get! YAY');
+    res.send("u got me");
+    
 });
 
 router.post('/', (req, res) => {
