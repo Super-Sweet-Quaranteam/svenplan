@@ -4,6 +4,8 @@ import AddSubTask from './AddSubTask';
 
 const AddTaskCard = (props) => {
     
+    const [displaySub, setDisplaySub] = useState(false);
+
     const [time, setTime] = useState(new Date())
 
     const [state, setState] = useState({name: 'new task'})
@@ -42,8 +44,14 @@ const AddTaskCard = (props) => {
             <div>
                 { state.name }
             </div>
-            <h6>this number is coming from addtask { props.count }</h6>
+            <h6>this number is coming from addtask <strong>{ props.count }</strong></h6>
+            <button onClick={() => setDisplaySub(!displaySub)} >display sub-task</button>
+            {displaySub
+            ? 
             <AddSubTask cardState={state}/>
+            : 
+            <p>****click button to add sub-task****</p>}
+            
             <br/>
         </div>
     )

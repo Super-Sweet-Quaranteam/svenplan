@@ -24,3 +24,19 @@
   color: var(--text-tertiary);
   background-color: var(--bg-tertiary);
 }
+
+.subtask-display-Container{
+  display: flex;
+  flex-direction: row;
+}
+
+.subtask-display{
+  contain: content;
+  text-transform: uppercase;
+  font-size: small;
+  height: 15vmin;
+  width: 15vmin;
+  border: 3px var(--bg-primary) solid;
+  border-radius: 5px;
+  margin: 1vmin;
+}

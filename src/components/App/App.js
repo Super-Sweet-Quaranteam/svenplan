@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
-import {HashRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
-import {connect} from 'react-redux';
+import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 
 import AdminHome from '../AdminHome/AdminHome';
 import ClientHome from '../ClientHome/ClientHome';
@@ -21,6 +20,12 @@ function App() {
           <Route exact path="/adminHome" component={AdminHome} />
           <Route exact path="/clientHome" component={ClientHome} />
           <Route exact path="/add-task" component={AddTask} />
+          {/* 404 page creation below */}
+          <Route render={() => 
+            <div className="fourOfour">
+              <a href="#add-task" ><img src="/images/NEOOPartnersLogo.png" alt="neoo"/></a>
+            </div>
+          } />
         </Switch>
       </Router>
       <Footer />
