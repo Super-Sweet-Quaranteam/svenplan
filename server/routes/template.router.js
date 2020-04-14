@@ -74,13 +74,25 @@ const router = express.Router();
                 res.sendStatus(500);
             })
     });//get comments and who left them and at what time from oldest to newest, on a certain task
-
-
-
-
-
-    router.post('/', (req, res) => {
-});
+    router.post('/notes-on-a-task', (req, res) => {
+        let arbitraryTaskID = 1;
+        let arbitraryUserID = 4;
+        let arbitraryNoteText = 'blah blah blah';
+        let queryText = `INSERT INTO "notes"
+                        ("task_id", "user_id", "text", "timestamp")
+                        VALUES
+                        ($1, $2, $3, NOW());`;
+        let values = [arbitraryTaskID, arbitraryUserID, arbitraryNoteText];
+        pool.query(queryText, values)
+            .then((response) => {
+                console.log('successful post');
+                res.sendStatus(201);
+            })
+            .catch(() => {
+                console.log('something went wrong in get at /');
+                res.sendStatus(500);
+            })
+    });//add a note on a task
 
 // all routes will need authentication eventually!
 // queries/responses might depend on user level sent with req.body:
