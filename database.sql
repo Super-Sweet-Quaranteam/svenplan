@@ -146,6 +146,12 @@ CREATE TABLE "subtasks"
     "user_id" INT REFERENCES "users"("id") ON DELETE CASCADE,
     "timestamp" TIMESTAMPTZ
 );
+CREATE TABLE "actiontypes"
+(
+    "id" SERIAL PRIMARY KEY,
+    "name" VARCHAR NOT NULL
+);
+
 CREATE TABLE "actions"
 (
     "id" SERIAL PRIMARY KEY,
@@ -154,20 +160,10 @@ CREATE TABLE "actions"
     "type_id" INT REFERENCES "actiontypes"("id") ON DELETE CASCADE,
     "timestamp" TIMESTAMPTZ
 );
-CREATE TABLE "actiontypes"
-(
-    "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR NOT NULL
-);
 
 ----------------------------------
 --INSERTION QUERIES/EXAMPLE DATA--
 ----------------------------------
-
-INSERT INTO "notes"
-    ("text","event_id", "time")
-VALUES
-    ('this looks great but I think the date is wrong?', 2, NOW());
 
 
 INSERT INTO "workflows"
@@ -374,59 +370,50 @@ INSERT INTO "users"
 VALUES
     ('DAngelos', 'password123', 3),
     ('Todd', 'password123', 3),
-    ('Denetrick', 'password123', 3),
-    ('Haley', 'password123', 4),
-    ('David', 'password123', 4),
-    ('Megan', 'password123', 4),
-    ('Corey', 'password123', 4),
-    ('John', 'password123', 5),
-    ('Emily', 'password123', 5),
-    ('Nate', 'password123', 5);
+    ('Denetrick', 'password123', 3);
 
 INSERT INTO "projects"
     ("name", "team_id", "description", "created")
 VALUES
     ('Duck Donuts', 3, 'a short or long description of the project', NOW()),
-    ('Regional Acceleration Center', 3, 'a short or long description of the project', NOW()),
-    ('Svenplans.com', 4, 'a short or long description of the project', NOW()),
-    ('Skyway Remodel', 5, 'a short or long description of the project', NOW());
+    ('Regional Acceleration Center', 3, 'a short or long description of the project', NOW());
 
 
 INSERT INTO "assigned_tasks"
     ("default_id", "project_id")
 VALUES
-    ( 1, 1 ),
-    ( 2, 1 ),
-    ( 3, 1 ),
-    ( 4, 1 ),
-    ( 5, 1 ),
-    ( 6, 1 ),
-    ( 7, 1 ),
-    ( 8, 1 ),
-    ( 9, 1 ),
-    ( 10, 1 ),
-    ( 11, 1 ),
-    ( 12, 4 ),
-    ( 13, 4 ),
-    ( 14, 4 ),
-    ( 15, 4 ),
-    ( 16, 4 ),
-    ( 17, 4 ),
-    ( 18, 4 ),
-    ( 19, 4 ),
-    ( 20, 4 ),
-    ( 21, 4 ),
-    ( 22, 4 );
+    ( 1, 9 ),
+    ( 2, 9),
+    ( 3, 9),
+    ( 4, 9 ),
+    ( 5, 9 ),
+    ( 6, 9 ),
+    ( 7, 9 ),
+    ( 8, 9 ),
+    ( 9, 9),
+    ( 10, 10 ),
+    ( 11, 10 ),
+    ( 12, 10),
+    ( 13, 10),
+    ( 14, 10 ),
+    ( 15, 10),
+    ( 16, 10 ),
+    ( 17, 10),
+    ( 18, 10),
+    ( 19, 10 ),
+    ( 20, 10),
+    ( 21, 10 ),
+    ( 22, 10);
 
 INSERT INTO "notes"
     ("task_id", "user_id", "text", "timestamp")
 VALUES
-    (1, 4, 'can someone explain to me what project trigger means?', NOW());
+    (45, 21, 'can someone explain to me what project trigger means?', NOW());
 
 INSERT INTO "notes"
     ("task_id", "user_id", "text", "timestamp")
 VALUES
-    (1, 1, 'it is when you trigger a project', NOW());
+    (45, 23, 'it is when you trigger a project', NOW());
 
 -------------------
 --  GET QUERIES  --
