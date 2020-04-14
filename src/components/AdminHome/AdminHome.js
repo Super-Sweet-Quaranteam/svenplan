@@ -1,6 +1,10 @@
 import React from 'react';
+
 import './AdminHome.css'
 import logo from '../Logo/svenplan-logo2.png'
+
+
+import NewWorkflow from '../NewWorkflow/NewWorkflow';
 
 
 
@@ -31,7 +35,10 @@ function AdminHome(props) {
             <ul>
                 <li onClick={newWorkflow}>New WorkFlow</li>
                 <li>New Project</li>
+
+                <li>Existing Projects</li>
             </ul>
+                <NewWorkflow />
         </div>
 
            
