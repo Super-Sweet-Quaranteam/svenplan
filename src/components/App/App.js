@@ -20,7 +20,7 @@ import ExistingWorkflows from '../AdminHome/ExistingWorkflows/ExistingWorkflows'
 
 function App() {
   return (
-    <div>
+    <>
       <Router>
         <Switch>
           {/* component view if not logged in */}
@@ -41,12 +41,10 @@ function App() {
               <a href="#add-task" ><img src="/images/NEOOPartnersLogo.png" alt="neoo"/></a>
             </div>
           } />
-
-          
         </Switch>
       </Router>
       <Footer />
-    </div>
+    </>
   )
 }
 
