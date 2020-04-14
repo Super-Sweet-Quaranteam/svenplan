@@ -12,6 +12,8 @@ import Container from '../AddTask/Container';
 import ClientList from '../AdminHome/ClientList/ClientList';
 import ExistingProjects from '../AdminHome/ExistingProjects/ExistingProjects';
 import ClientAlerts from '../AdminHome/ClientAlerts/ClientAlerts';
+import CreateWorkflow from '../AdminHome/CreateWorkflow/CreateWorkflow'
+import ExistingWorkflows from '../AdminHome/ExistingWorkflows/ExistingWorkflows';
 
 
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
@@ -26,9 +28,13 @@ function App() {
           {/* be sure to protect this route */}
           <Route exact path="/adminHome" component={AdminHome} />
           <Route exact path="/clientHome" component={ClientHome} />
-
+          <Route exact path="/createWorkflow" component={CreateWorkflow} />
+          <Route exact path="/existingWorkflows" component={ExistingWorkflows} />
           <Route exact path="/add-task" component={AddTask} />
           <Route exact path="/container" component={Container} />
+          <Route exact path="/clientList" component={ClientList} />
+          <Route exact path="/existingProjects" component={ExistingProjects} />
+          <Route exact path="/clientAlerts" component={ClientAlerts} />
           {/* 404 page creation below */}
           <Route render={() => 
             <div className="fourOfour">
@@ -36,9 +42,7 @@ function App() {
             </div>
           } />
 
-          <Route exact path="/clientList" component={ClientList} />
-          <Route exact path="/existingProjects" component={ExistingProjects} />
-          <Route exact path="/clientAlerts" component={ClientAlerts} />
+          
         </Switch>
       </Router>
       <Footer />
