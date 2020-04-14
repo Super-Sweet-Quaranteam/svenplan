@@ -18,7 +18,7 @@ import ClientAlerts from '../AdminHome/ClientAlerts/ClientAlerts';
 
 function App() {
   return (
-    <div>
+    <>
       <Router>
         <Switch>
           {/* component view if not logged in */}
@@ -26,23 +26,23 @@ function App() {
           {/* be sure to protect this route */}
           <Route exact path="/adminHome" component={AdminHome} />
           <Route exact path="/clientHome" component={ClientHome} />
-
+          <Route exact path="/clientList" component={ClientList} />
+          <Route exact path="/existingProjects" component={ExistingProjects} />
+          <Route exact path="/clientAlerts" component={ClientAlerts} />
           <Route exact path="/add-task" component={AddTask} />
           <Route exact path="/container" component={Container} />
+
+
           {/* 404 page creation below */}
           <Route render={() => 
             <div className="fourOfour">
               <a href="#add-task" ><img src="/images/NEOOPartnersLogo.png" alt="neoo"/></a>
             </div>
           } />
-
-          <Route exact path="/clientList" component={ClientList} />
-          <Route exact path="/existingProjects" component={ExistingProjects} />
-          <Route exact path="/clientAlerts" component={ClientAlerts} />
         </Switch>
       </Router>
       <Footer />
-    </div>
+    </>
   )
 }
 

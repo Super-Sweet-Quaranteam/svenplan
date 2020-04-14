@@ -7,7 +7,12 @@
     --bg-primary: #23232e;
     --bg-secondary: #141418;
     --bg-tertiary: #0c0c0e;
+    --bg-quaternary: #3f3f50;
     --transition-speed: 600ms;
+}
+
+body{
+  margin:0;
 }
 
 .addTask{
@@ -83,4 +88,68 @@ span{
 span:hover{
   color: blue;
   font-size: large;
+}
+
+.nav-wrapper{
+  position: sticky;
+  background-color: var(--bg-primary);
+  overflow: hidden;
+}
+
+.nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100vw;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  filter: grayscale(100%) opacity(0.7);
+  transition: var(--transition-speed);
+}
+
+.nav-link:hover {
+  filter: grayscale(0%) opacity(1);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.nav-logo {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-right: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--bg-quaternary);
+  font-size: 1.5rem;
+  letter-spacing: 0.3ch;
+  transition: var(--transition-speed);
+}
+
+.nav-logo:hover{
+  filter: grayscale(0%) opacity(1);
+  background: var(--text-secondary);
+}
+
+.nav-item {
+  text-align: center;
+}
+
+.hero-image{
+  margin: auto;
+  width: 100vw;
+  overflow: hidden;
+}
+
+footer{
+  position: fixed;
+  bottom: 0;
 }
