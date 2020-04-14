@@ -58,11 +58,13 @@ CREATE TABLE "tasks_types"
     "task_id" INT REFERENCES "default_tasks"("id") ON DELETE CASCADE,
     "type_id" INT REFERENCES "types"("id") ON DELETE CASCADE
 );
+
 CREATE TABLE "riskareas"
 (
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR NOT NULL,
     "description" VARCHAR,
+    "workflow_id" INT REFERENCES "default_tasks"("id") ON DELETE CASCADE,
     "created" TIMESTAMPTZ,
     "edited" TIMESTAMPTZ
 );
@@ -261,24 +263,24 @@ VALUES
 
 
 INSERT INTO "riskareas"
-    ("name", "description", "created")
+    ("name", "description", "created", "workflow_id")
 VALUES
-    ('Site Control', 'description of this risk area', NOW()),
-    ('Urban Planning & Design', 'description of this risk area', NOW()),
-    ('Architectural Design', 'description of this risk area', NOW()),
-    ('Engineering', 'description of this risk area', NOW()),
-    ('Environmental', 'description of this risk area', NOW()),
-    ('Geotechnical', 'description of this risk area', NOW()),
-    ('Capital Markets', 'description of this risk area', NOW()),
-    ('Financing/Pro Forma Modeling', 'description of this risk area', NOW()),
-    ('Community Engagement', 'description of this risk area', NOW()),
-    ('Construction', 'description of this risk area', NOW()),
-    ('Commissioning', 'description of this risk area', NOW()),
-    ('Property Management', 'description of this risk area', NOW()),
-    ('Asset Management', 'description of this risk area', NOW()),
-    ('Disposition', 'description of this risk area', NOW()),
-    ('Leasing & Marketing', 'description of this risk area', NOW()),
-    ('Legal', 'description of this risk area', NOW());
+    ('Site Control', 'description of this risk area', NOW(), 1),
+    ('Urban Planning & Design', 'description of this risk area', NOW(), 1),
+    ('Architectural Design', 'description of this risk area', NOW(), 1),
+    ('Engineering', 'description of this risk area', NOW(), 1),
+    ('Environmental', 'description of this risk area', NOW(), 1),
+    ('Geotechnical', 'description of this risk area', NOW(), 1),
+    ('Capital Markets', 'description of this risk area', NOW(), 1),
+    ('Financing/Pro Forma Modeling', 'description of this risk area', NOW(), 1),
+    ('Community Engagement', 'description of this risk area', NOW(), 1),
+    ('Construction', 'description of this risk area', NOW(), 1),
+    ('Commissioning', 'description of this risk area', NOW(), 1),
+    ('Property Management', 'description of this risk area', NOW(), 1),
+    ('Asset Management', 'description of this risk area', NOW(), 1),
+    ('Disposition', 'description of this risk area', NOW(), 1),
+    ('Leasing & Marketing', 'description of this risk area', NOW(), 1),
+    ('Legal', 'description of this risk area', NOW(), 1);
 
 INSERT INTO "tasks_riskareas"
     ("task_id", "riskarea_id")
@@ -416,9 +418,56 @@ VALUES
     ( 21, 4 ),
     ( 22, 4 );
 
+INSERT INTO "notes"
+    ("task_id", "user_id", "text", "timestamp")
+VALUES
+    (1, 4, 'can someone explain to me what project trigger means?', NOW());
+
+INSERT INTO "notes"
+    ("task_id", "user_id", "text", "timestamp")
+VALUES
+    (1, 1, 'it is when you trigger a project', NOW());
+
 -------------------
 --  GET QUERIES  --
 -------------------
 
-SELECT "default_tasks"."name" AS "task_name", "assigned_tasks"."completed" FROM "default_tasks" JOIN "assigned_tasks" ON
-"default_tasks"."id"="assigned_tasks"."default_id" WHERE "assigned_tasks"."project_id"="3";
+--get task names for a certain project, and whether or not they're done.
+SELECT "default_tasks"."name" AS "task_name", "assigned_tasks"."completed"
+FROM "default_tasks" JOIN "assigned_tasks" ON
+"default_tasks"."id"="assigned_tasks"."default_id"
+WHERE  "assigned_tasks"."project_id"=1;
+
+--get the number of risk areas per workflow (this will be how many radial axes in risk chart)
+SELECT "workflows"."name" AS "workflow", COUNT(*) AS "number_of_risk_areas"
+FROM "workflows" JOIN "riskareas"
+    ON "riskareas"."workflow_id"="workflows"."id"
+GROUP BY "workflows"."name";
+
+--get the number of tasks per risk area per workflow (this will help calculate how much risk is removed with completion of a task in a certian risk category)
+SELECT "riskareas"."name" AS "riskarea", COUNT(*) AS "number_of_tasks"
+FROM "riskareas"
+    JOIN "tasks_riskareas" ON "tasks_riskareas"."riskarea_id"="riskareas"."id"
+    JOIN "default_tasks" ON "default_tasks"."id"="tasks_riskareas"."task_id"
+GROUP BY "riskareas"."name";
+
+--(once populated with data) get comments and who left them and at what time from oldest to newest, on a certain task
+SELECT "notes"."text" AS "note", "users"."username" AS "user", "notes"."timestamp" AS "time"
+FROM "notes" JOIN "users"
+    ON "notes"."user_id"="users"."id"
+WHERE "notes"."task_id"=1
+ORDER BY "timestamp";
+
+---------------------
+--  OTHER QUERIES  --
+---------------------
+
+--mark a task complete (decide how to skip later...)
+UPDATE "assigned_tasks" SET "completed"=true WHERE "id"=5;
+
+--change a user's level (eg from subscriber to admin)
+UPDATE "users" SET "level"=100 WHERE "username"='DAngelos';
+
+
+
+
