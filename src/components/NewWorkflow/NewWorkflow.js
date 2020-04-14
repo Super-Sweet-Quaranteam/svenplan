@@ -85,7 +85,7 @@ class NewWorkflow extends Component {
                     {/* on btn click, a new phase is added to array, currently a taco string but maybe an array of tasks once add task component is set up */}
                     <button onClick={this.addPhase}>Add Phase</button>
                     <div className="phaseWrapper">
-                        {this.state.workflow.phases.map(phase => <div className="phaseBlock"><AddTask/></div>)}
+                        {this.state.workflow.phases.map(phase => <div key={Math.random()} className="phaseBlock"><AddTask/></div>)}
                     </div>
                     <button onClick={this.saveWorkflow}>Save Workflow</button>
                 </div>                        

@@ -5,8 +5,6 @@ import React from 'react';
 function ClientProfile() {
 
 
-   
-
     return (
         <>
             <h3>Client Profile</h3>

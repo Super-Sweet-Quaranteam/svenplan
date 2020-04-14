@@ -15,7 +15,8 @@ function ClientNav(props) {
                         <a className="nav-link" href="#/clientHome">New Projects</a></li>
                     <li className="nav-item" onClick={()=>props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayOldWorkFlow: true}})}>
                         <a className="nav-link" href="#/clientHome">Existing Projects</a></li>
-                    <li className="nav-item"><a className="nav-link" href="#add-task">Risk Data</a></li>
+                    <li className="nav-item" onClick={()=>props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayRisk: true}})}>
+                        <a className="nav-link" href="#/clientHome">Risk Data</a></li>
                     <li className="nav-item"><a className="nav-link" href="#add-task">Business Models</a></li>
                     <li className="nav-item"><a className="nav-link" href="#add-task">Support</a></li>
                 </ul>

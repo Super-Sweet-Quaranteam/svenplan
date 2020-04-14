@@ -30,9 +30,9 @@ function AdminHome(props) {
             <p>Admin Home </p>
 
             <h2>Welcome, 'username'</h2>
-            <div class='display'>
-            <div class="adminNav">
-                    <h5 onClick={existingWorkflows} class="navText">Existing WorkFlows</h5> <h5 onClick={existingProjects} class="navText">Existing Projects</h5> <h5 onClick={clientAlerts} class="navText">Client Alerts</h5> <h5 onClick={clientList} class="navText">Client List</h5> 
+            <div className='display'>
+            <div className="adminNav">
+                    <h5 onClick={existingWorkflows} className="navText">Existing WorkFlows</h5> <h5 onClick={existingProjects} className="navText">Existing Projects</h5> <h5 onClick={clientAlerts} className="navText">Client Alerts</h5> <h5 onClick={clientList} className="navText">Client List</h5> 
             </div>
             <ul>
                 <li onClick={createWorkflow}>Create WorkFlow</li>

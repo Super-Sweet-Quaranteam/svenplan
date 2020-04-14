@@ -4,27 +4,22 @@ import ClientNav from './ClientNav';
 import ClientProfile from './ClientProfile';
 import CreateWorkflow from '../AdminHome/CreateWorkflow/CreateWorkflow';
 import ExistingProjects from '../AdminHome/ExistingProjects/ExistingProjects';
+import ClientRisk from './ClientRisk';
 
 
 const ClientHome =(props)=>{
 
-    
 
     return (
         <>
             <ClientNav />
-            <h3>Client Home </h3>
-            <ul>
-                <li>New Project</li>
-                <li>Existing Projects</li>
-            </ul>
+            
             {props.reduxState.clientDisplay.displayProfile === true 
                 ?
                 <ClientProfile 
                 /> 
                 :
                 null
-           
             }
             {props.reduxState.clientDisplay.displayNewWorkFlow === true 
                 ?
@@ -36,6 +31,13 @@ const ClientHome =(props)=>{
             {props.reduxState.clientDisplay.displayOldWorkFlow === true 
                 ?
                 <ExistingProjects
+                /> 
+                :
+                null
+            }
+            {props.reduxState.clientDisplay.displayRisk === true 
+                ?
+                <ClientRisk
                 /> 
                 :
                 null
