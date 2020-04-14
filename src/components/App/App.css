@@ -1,6 +1,6 @@
 :root{
     font-size: 16px;
-    font-family: 'Open Sans';
+    font-family: 'Raleway', 'Open Sans';
     --text-primary: #b6b6b6;
     --text-secondary: #ececec;
     --text-tertiary: #f5f4f4;
@@ -11,16 +11,22 @@
 }
 
 .addTask{
+  padding-left: 1em;
+  padding-right: 1em;
   color: var(--text-primary);
   background-color: var(--bg-primary);
 }
 
 .taskCard{
+  padding-left: 1em;
+  padding-right: 1em;
   color: var(--text-secondary);
   background-color: var(--bg-secondary);
 }
 
 .sub{
+  padding-left: 1em;
+  padding-right: 1em;
   color: var(--text-tertiary);
   background-color: var(--bg-tertiary);
 }
@@ -28,15 +34,31 @@
 .subtask-display-Container{
   display: flex;
   flex-direction: row;
+  overflow-x: auto;
 }
 
 .subtask-display{
   contain: content;
   text-transform: uppercase;
   font-size: small;
-  height: 15vmin;
-  width: 15vmin;
+  min-height: 15vmin;
+  min-width: 15vmin;
   border: 3px var(--bg-primary) solid;
   border-radius: 5px;
   margin: 1vmin;
+}
+
+.button{
+  margin: 1em;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  padding: 1em;
+  border-radius: 3em;
+  transition: var(--transition-speed);
+}
+
+.button:hover{
+  background: var(--bg-secondary);
+  transform: scale(1.1);
+  transition: var(--transition-speed);
 }

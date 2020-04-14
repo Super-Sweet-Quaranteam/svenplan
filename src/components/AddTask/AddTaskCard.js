@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {connect} from 'react-redux';
 import AddSubTask from './AddSubTask';
 
-const AddTaskCard = (props) => {
+const AddTaskCard=(props)=>{
     
     const [displaySub, setDisplaySub] = useState(false);
 
@@ -10,14 +10,14 @@ const AddTaskCard = (props) => {
 
     const [state, setState] = useState({name: 'new task'})
 
-    const changeTime = () => {
+    const changeTime=()=>{
         setTime(new Date())
     }
 
     const handleChange=(e)=>{
         setState({
             name: e.target.value,
-            time: Date()
+            time: new Date().toLocaleTimeString()
         });
     }
 
@@ -26,12 +26,13 @@ const AddTaskCard = (props) => {
         props.dispatch({type: 'SENDING_NAME', payload: state})
     }
 
-    useEffect(() => {
-        const tick = setInterval(() => {
+    useEffect(()=>{
+        const tick = setInterval(()=>{
             changeTime()
         }, 1000)
-        return () => clearInterval(tick)
+        return ()=>clearInterval(tick)
     })
+
     return (
         <div className="taskCard">
             <hr/>
@@ -39,25 +40,24 @@ const AddTaskCard = (props) => {
             
             <form onSubmit={handleSubmit}>
                 <input type="text" name="typeHere" value={state.name} onChange={(e)=>handleChange(e)}/>
-                <input type="submit" value={time.toLocaleTimeString()}/>
+                <input type="submit" value={time.toLocaleTimeString()} className="button"/>
             </form>
             <div>
-                { state.name }
+                {state.name}
             </div>
-            <h6>this number is coming from addtask <strong>{ props.count }</strong></h6>
-            <button onClick={() => setDisplaySub(!displaySub)} >display sub-task</button>
-            {displaySub
-            ? 
-            <AddSubTask cardState={state}/>
-            : 
+            <h6>this number is coming from addtask <strong>{props.count}</strong></h6>
+            <button className="button" onClick={()=>setDisplaySub(!displaySub)}>display sub-task</button>
+                {displaySub
+                ? 
+                <AddSubTask cardState={state}/>
+                : 
             <p>****click button to add sub-task****</p>}
-            
             <br/>
         </div>
     )
 }
 
-const putReduxStateOnProps = (reduxState) => ({
+const putReduxStateOnProps=(reduxState)=>({
     reduxState
   });
   
