@@ -1,14 +1,16 @@
 :root{
-    font-size: 16px;
-    font-family: 'Raleway', 'Open Sans';
-    --text-primary: #b6b6b6;
-    --text-secondary: #ececec;
-    --text-tertiary: #f5f4f4;
-    --bg-primary: #23232e;
-    --bg-secondary: #141418;
-    --bg-tertiary: #0c0c0e;
-    --bg-quaternary: #3f3f50;
-    --transition-speed: 600ms;
+  font-size: 16px;
+  font-family: 'Raleway', 'Open Sans';
+  background-color: #FCFCFC;
+  --text-primary: #272727; 
+  --text-secondary: #9B9B9B; 
+  --text-tertiary: #f5f4f4;
+  --bg-primary: #D9D9D9;
+  --bg-secondary: #9B9B9B;
+  --bg-tertiary: #3A3E42;
+  --sven-red: #EC1515;
+  --sven-blue: #014AAD;
+  --transition-speed: 600ms;
 }
 
 body{
@@ -20,12 +22,13 @@ body{
   padding-right: 1em;
   color: var(--text-primary);
   background-color: var(--bg-primary);
+  border-radius: 15px;
 }
 
 .taskCard{
   padding-left: 1em;
   padding-right: 1em;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   background-color: var(--bg-secondary);
 }
 
@@ -56,14 +59,15 @@ body{
 .button{
   margin: 1em;
   color: var(--text-primary);
-  background: var(--bg-primary);
+  background-color: #FCFCFC;
   padding: 1em;
   border-radius: 3em;
   transition: var(--transition-speed);
+  border-color: var(--bg-secondary);
 }
 
 .button:hover{
-  background: var(--bg-secondary);
+  background: var(--sven-blue);
   transform: scale(1.1);
   transition: var(--transition-speed);
 }
@@ -86,7 +90,7 @@ span{
 }
 
 span:hover{
-  color: blue;
+  color: var(--sven-blue);
   font-size: large;
 }
 
