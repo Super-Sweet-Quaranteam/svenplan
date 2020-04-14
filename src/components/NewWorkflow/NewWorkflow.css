@@ -6,8 +6,8 @@
 /* can change how many divs per screen based on width % */
 .phaseBlock {
     background-color: #5F6360;
-    height: 70px;
-    width: 14%;
+    height: fit-content;
+    width: fit-content;
     display: inline-block;
     margin: 0.5%;
     border-radius: 15px;
