@@ -21,6 +21,9 @@ function AdminHome(props) {
     function existingProjects(event) {
         props.history.push({ pathname: '/existingProjects' })
     }
+    function existingWorkflows(event) {
+        props.history.push({ pathname: '/existingWorkflows' })
+    }
     return (
         <div >       
             <img src={logo} width="75px" alt="SvenPlan Logo" />
@@ -29,7 +32,7 @@ function AdminHome(props) {
             <h2>Welcome, 'username'</h2>
             <div class='display'>
             <div class="adminNav">
-                    <h5 class="navText">Existing WorkFlows</h5> <h5 onClick={existingProjects} class="navText">Existing Projects</h5> <h5 onClick={clientAlerts} class="navText">Client Alerts</h5> <h5 onClick={clientList} class="navText">Client List</h5> 
+                    <h5 onClick={existingWorkflows} class="navText">Existing WorkFlows</h5> <h5 onClick={existingProjects} class="navText">Existing Projects</h5> <h5 onClick={clientAlerts} class="navText">Client Alerts</h5> <h5 onClick={clientList} class="navText">Client List</h5> 
             </div>
             <ul>
                 <li onClick={createWorkflow}>Create WorkFlow</li>
