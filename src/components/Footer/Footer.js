@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
  
-class Footer extends Component {
-    render() {
+function Footer () {
+
+
+   
         return (
             <footer>
                 &copy; SVENPLAN powered by Neoo Partners
             </footer>
         )
-    }
 }
 export default Footer;
