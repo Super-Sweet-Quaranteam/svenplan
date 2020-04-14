@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import logo from '../../Logo/svenplan-logo2.png'
-import { useParams } from 'react-router-dom';
 
 class ClientList extends Component{
 state={ clients:[
