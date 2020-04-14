@@ -5,7 +5,7 @@
 }
 /* can change how many divs per screen based on width % */
 .phaseBlock {
-    background-color: #5F6360;
+    background-color: var(--bg-tertiary);
     height: fit-content;
     width: fit-content;
     display: inline-block;
@@ -15,14 +15,14 @@
 }
 /* overall background for a workflow */
 .workflowInfo {
-    background-color: #F0F0F0;
+    background-color: var(--bg-primary);
     border-radius: 15px;
     padding: 2.5%;
     text-align: center;
 }
 /* darker gray background on description */
 .workflowDescription {
-    background-color: #d9d9d9;
+    background-color: var(--bg-secondary);
     border-radius: 15px;
     margin-top: 0;
     margin-bottom: 0;
