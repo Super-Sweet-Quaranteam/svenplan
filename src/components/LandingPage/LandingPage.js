@@ -14,7 +14,7 @@ function LandingPage(props) {
 
     return (
         <div id="landingDisplay">
-            <img class="logo" width= "300px" src={logo} alt="SvenPlan Logo"></img>
+            <img className="logo" width= "300px" src={logo} alt="SvenPlan Logo"></img>
             <h4 onClick={Admin}>Admin Log In Placeholder</h4>
             <h4 onClick={Client}>Client Log In Placeholder</h4>
         </div>

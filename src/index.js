@@ -6,8 +6,13 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import logger from 'redux-logger';
 
-const reducerA = (state={}, action) => {
-  return state;
+const clientDisplay = (state={}, action) => {
+  switch (action.type) {
+    case 'CLIENT_DISPLAY':
+        return action.payload;
+    default:
+        return state;
+  }
 }
 
 const reducerB = (state = {}, action) => {
@@ -16,7 +21,7 @@ const reducerB = (state = {}, action) => {
  
 const store = createStore(
   combineReducers({
-    reducerA,
+    clientDisplay,
     reducerB
   }),
   applyMiddleware(logger)
