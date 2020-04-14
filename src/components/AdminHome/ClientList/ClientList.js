@@ -4,7 +4,8 @@ import logo from '../../Logo/svenplan-logo2.png'
 import { useParams } from 'react-router-dom';
 
 class ClientList extends Component{
-state=[{clientid:0,
+state={ clients:[
+    {clientid:0,
     company:'Target',
         address:'1500 Target Lane',
         phone:'(555)123-4567',
@@ -17,6 +18,7 @@ state=[{clientid:0,
         email: 'nabs@nabisco.com'
     }
 ]
+}
     render(){
     return (
         <div >
@@ -34,7 +36,7 @@ state=[{clientid:0,
                 </tr>
                 </thead>
                 <tbody>
-                    {this.state.map(client => (
+                    {this.state.clients.map(client => (
                         <tr key={client.clientid}><td>{client.company}</td><td>{client.address}</td><td>{client.phone}</td><td>{client.email}</td></tr>))}              
                 </tbody>
             </table>
