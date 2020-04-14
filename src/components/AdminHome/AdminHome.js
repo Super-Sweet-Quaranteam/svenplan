@@ -4,13 +4,12 @@ import './AdminHome.css'
 import logo from '../Logo/svenplan-logo2.png'
 
 
-import NewWorkflow from '../NewWorkflow/NewWorkflow';
 
 
 
 function AdminHome(props) {
 
-    function newWorkflow(event) {
+    function createWorkflow(event) {
         props.history.push({ pathname: '/createWorkflow' })
     }
     function clientList(event) {
@@ -33,12 +32,12 @@ function AdminHome(props) {
                     <h5 class="navText">Existing WorkFlows</h5> <h5 onClick={existingProjects} class="navText">Existing Projects</h5> <h5 onClick={clientAlerts} class="navText">Client Alerts</h5> <h5 onClick={clientList} class="navText">Client List</h5> 
             </div>
             <ul>
-                <li onClick={newWorkflow}>New WorkFlow</li>
+                <li onClick={createWorkflow}>Create WorkFlow</li>
                 <li>New Project</li>
 
                 <li>Existing Projects</li>
             </ul>
-                <NewWorkflow />
+            
         </div>
 
            
