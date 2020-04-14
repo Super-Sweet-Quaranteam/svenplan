@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+require('dotenv').config();
 const { Client } = require('pg');
 const bodyParser = require('body-parser');
 const sessionMiddleware = require('./modules/session-middleware');
@@ -37,6 +38,8 @@ app.listen(PORT, () => {
 
 // test that database is up
 const client = new Client({
+  // user: null || 'con',
+  // password: null || 'secretpass',
   host: 'localhost',
   port: 5432,
 })

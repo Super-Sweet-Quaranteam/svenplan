@@ -7,7 +7,7 @@ const router = express.Router();
 //these are just the queries from database.sql
 //they are just meant to be a base for making relevant queries
     router.get('/tasks-in-a-project', (req, res) => {
-        let arbitraryProjectID= 1;
+        let arbitraryProjectID= 10;
         let queryText = `SELECT "default_tasks"."name" AS "task_name", "assigned_tasks"."completed"
                         FROM "default_tasks" JOIN "assigned_tasks" ON
                         "default_tasks"."id"="assigned_tasks"."default_id"
@@ -23,6 +23,7 @@ const router = express.Router();
                 res.sendStatus(500);
             })
     });//get task names for a certain project, and whether or not they're done.
+
     router.get('/riskareas-in-a-workflow', (req, res) => {
         let queryText = `SELECT "workflows"."name" AS "workflow", COUNT(*) AS "number_of_risk_areas"
                         FROM "workflows" JOIN "riskareas"
@@ -39,6 +40,7 @@ const router = express.Router();
                 res.sendStatus(500);
             })
     });//get the number of risk areas per workflow(this will be how many radial axes in risk chart)
+
     router.get('/tasks-in-a-riskarea', (req, res) => {
         let queryText = `SELECT "riskareas"."name" AS "riskarea", COUNT(*) AS "number_of_tasks"
                         FROM "riskareas"
@@ -56,8 +58,9 @@ const router = express.Router();
                 res.sendStatus(500);
             })
     });//get the number of tasks per risk area per workflow(this will help calculate how much risk is removed with completion of a task in a certian risk category)
+
     router.get('/notes-on-a-task', (req, res) => {
-        let arbitraryTaskID = 1;
+        let arbitraryTaskID = 45;
         let queryText = `SELECT "notes"."text" AS "note", "users"."username" AS "user", "notes"."timestamp" AS "time"
                         FROM "notes" JOIN "users"
                         ON "notes"."user_id"="users"."id"
@@ -74,9 +77,10 @@ const router = express.Router();
                 res.sendStatus(500);
             })
     });//get comments and who left them and at what time from oldest to newest, on a certain task
+
     router.post('/notes-on-a-task', (req, res) => {
-        let arbitraryTaskID = 1;
-        let arbitraryUserID = 4;
+        let arbitraryTaskID = 54;
+        let arbitraryUserID = 23;
         let arbitraryNoteText = 'blah blah blah';
         let queryText = `INSERT INTO "notes"
                         ("task_id", "user_id", "text", "timestamp")
@@ -94,11 +98,11 @@ const router = express.Router();
             })
     });//add a note on a task
 
-// all routes will need authentication eventually!
-// queries/responses might depend on user level sent with req.body:
-router.get('/', rejectUnauthenticated, (req, res) => {
-});
-router.post('/', rejectUnauthenticated, (req, res) => {
-});
+    // all routes will need authentication eventually!
+    // queries/responses might depend on user level sent with req.body:
+    router.get('/', rejectUnauthenticated, (req, res) => {
+    });
+    router.post('/', rejectUnauthenticated, (req, res) => {
+    });
 
 module.exports = router;
