@@ -7,6 +7,7 @@ import ClientHome from '../ClientHome/ClientHome';
 import LandingPage from '../LandingPage/LandingPage';
 import Footer from '../Footer/Footer'
 import AddTask from '../AddTask/AddTask';
+import Container from '../AddTask/Container';
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/adminHome" component={AdminHome} />
           <Route exact path="/clientHome" component={ClientHome} />
           <Route exact path="/add-task" component={AddTask} />
+          <Route exact path="/container" component={Container} />
           {/* 404 page creation below */}
           <Route render={() => 
             <div className="fourOfour">
