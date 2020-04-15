@@ -106,6 +106,7 @@ CREATE TABLE "users"
     "lastname" VARCHAR,
     "email" VARCHAR,
     "phone" VARCHAR,
+    "company" VARCHAR,
     "password" VARCHAR NOT NULL,
     "level" INT DEFAULT 1,
     "team_id" INT REFERENCES "teams"("id") ON DELETE CASCADE
