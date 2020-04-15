@@ -9,6 +9,7 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const testRouter = require('./routes/template.router');
+const adminRouter = require('./routes/admin.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -23,6 +24,7 @@ app.use(passport.session());
 
 // Routes //
 app.use('/api/test', testRouter);
+app.use('/api/admin', adminRouter);
 
 
 // Serve static files
@@ -38,8 +40,8 @@ app.listen(PORT, () => {
 
 // test that database is up
 const client = new Client({
-  // user: null || 'con',
-  // password: null || 'secretpass',
+  user: null || 'con',
+  password: null || 'secretpass',
   host: 'localhost',
   port: 5432,
 })

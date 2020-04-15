@@ -1,31 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App/App.js';
-
-import {createStore, combineReducers, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import logger from 'redux-logger';
+import rootReducer from './redux/reducers';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './redux/sagas';
 
-const clientDisplay = (state={}, action) => {
-  switch (action.type) {
-    case 'CLIENT_DISPLAY':
-        return action.payload;
-    default:
-        return state;
-  }
-}
 
-const reducerB = (state = {}, action) => {
-  return state;
-}
+const sagaMiddleware = createSagaMiddleware();
+
+
+const middlewareList = process.env.NODE_ENV === 'development' ?
+  [sagaMiddleware, logger] :
+  [sagaMiddleware];
  
+
 const store = createStore(
-  combineReducers({
-    clientDisplay,
-    reducerB
-  }),
-  applyMiddleware(logger)
+  rootReducer,
+  applyMiddleware(...middlewareList)
 );
+
+
+sagaMiddleware.run(rootSaga);
+
 
 ReactDOM.render(
   <Provider store={store}>
