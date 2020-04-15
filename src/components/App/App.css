@@ -1,3 +1,5 @@
+/* these are base styles to be used throughout full project */
+/* component specific styles should stay within their component .css */
 :root{
   font-size: 16px;
   font-family: 'Raleway', 'Open Sans';
@@ -17,45 +19,6 @@ body{
   margin:0;
 }
 
-.addTask{
-  padding-left: 1em;
-  padding-right: 1em;
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
-  border-radius: 15px;
-}
-
-.taskCard{
-  padding-left: 1em;
-  padding-right: 1em;
-  color: var(--text-primary);
-  background-color: var(--bg-secondary);
-}
-
-.sub{
-  padding-left: 1em;
-  padding-right: 1em;
-  color: var(--text-tertiary);
-  background-color: var(--bg-tertiary);
-}
-
-.subtask-display-Container{
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-}
-
-.subtask-display{
-  contain: content;
-  text-transform: uppercase;
-  font-size: small;
-  min-height: 15vmin;
-  min-width: 15vmin;
-  border: 3px var(--bg-primary) solid;
-  border-radius: 5px;
-  margin: 1vmin;
-}
-
 .button{
   margin: 1em;
   color: var(--text-primary);
@@ -70,18 +33,6 @@ body{
   background: var(--sven-blue);
   transform: scale(1.1);
   transition: var(--transition-speed);
-}
-
-.container{
-  width:46vw;
-  float: left;
-  margin-right: 1em;
-}
-
-.wrapper:after{
-  content: "";
-  display: table;
-  clear: both;
 }
 
 span{
