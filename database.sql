@@ -97,10 +97,15 @@ CREATE TABLE "teams"
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR (80) UNIQUE NOT NULL
 );
+
 CREATE TABLE "users"
 (
     "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
+    "alias" VARCHAR,
+    "firstname" VARCHAR,
+    "lastname" VARCHAR,
+    "email" VARCHAR,
+    "phone" VARCHAR,
     "password" VARCHAR NOT NULL,
     "level" INT DEFAULT 1,
     "team_id" INT REFERENCES "teams"("id") ON DELETE CASCADE
@@ -370,26 +375,27 @@ VALUES
     ('Interior Design Team');
 
 INSERT INTO "users"
-    ("username", "password", "team_id")
+    ("firstname", "email", "password", "team_id")
 VALUES
-    ('DAngelos', 'password123', 3),
-    ('Todd', 'password123', 3),
-    ('Denetrick', 'password123', 3),
-    ('Haley', 'password123', 4),
-    ('David', 'password123', 4),
-    ('Megan', 'password123', 4),
-    ('Corey', 'password123', 4),
-    ('John', 'password123', 5),
-    ('Emily', 'password123', 5),
-    ('Nate', 'password123', 5);
+    ('DAngelos', 'dangelos@gmail.com', 'password123', 1),
+    ('Todd', 'todd@gmail.com', 'password123', 1),
+    ('Denetrick', 'denetrick@gmail.com', 'password123', 1),
+    ('Haley', 'haley@gmail.com', 'password123', 2),
+    ('David', 'david@gmail.com', 'password123', 2),
+    ('Megan', 'megan@gmail.com', 'password123', 2),
+    ('Corey', 'corey@gmail.com', 'password123', 2),
+    ('John', 'john@gmail.com', 'password123', 3),
+    ('Emily', 'emily@gmail.com', 'password123', 3),
+    ('Nate', 'nate@gmail.com', 'password123', 3);
+
 
 INSERT INTO "projects"
     ("name", "team_id", "description", "created")
 VALUES
-    ('Duck Donuts', 3, 'a short or long description of the project', NOW()),
-    ('Regional Acceleration Center', 3, 'a short or long description of the project', NOW()),
-    ('Svenplans.com', 4, 'a short or long description of the project', NOW()),
-    ('Skyway Remodel', 5, 'a short or long description of the project', NOW());
+    ('Duck Donuts', 1, 'a short or long description of the project', NOW()),
+    ('Regional Acceleration Center', 1, 'a short or long description of the project', NOW()),
+    ('Svenplans.com', 2, 'a short or long description of the project', NOW()),
+    ('Skyway Remodel', 3, 'a short or long description of the project', NOW());
 
 
 INSERT INTO "assigned_tasks"
@@ -452,7 +458,7 @@ FROM "riskareas"
 GROUP BY "riskareas"."name";
 
 --(once populated with data) get comments and who left them and at what time from oldest to newest, on a certain task
-SELECT "notes"."text" AS "note", "users"."username" AS "user", "notes"."timestamp" AS "time"
+SELECT "notes"."text" AS "note", "users"."firstname" AS "user", "notes"."timestamp" AS "time"
 FROM "notes" JOIN "users"
     ON "notes"."user_id"="users"."id"
 WHERE "notes"."task_id"=1
@@ -466,7 +472,7 @@ ORDER BY "timestamp";
 UPDATE "assigned_tasks" SET "completed"=true WHERE "id"=5;
 
 --change a user's level (eg from subscriber to admin)
-UPDATE "users" SET "level"=100 WHERE "username"='DAngelos';
+UPDATE "users" SET "level"=100 WHERE "firstname"='DAngelos';
 
 
 
