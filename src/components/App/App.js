@@ -15,6 +15,8 @@ import ClientAlerts from '../AdminHome/ClientAlerts/ClientAlerts';
 import CreateWorkflow from '../AdminHome/CreateWorkflow/CreateWorkflow'
 import ExistingWorkflows from '../AdminHome/ExistingWorkflows/ExistingWorkflows';
 
+import LoginPage from '../LoginPage/LoginPage';//haley added to test auth
+
 
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
@@ -35,6 +37,7 @@ function App() {
           <Route exact path="/clientList" component={ClientList} />
           <Route exact path="/existingProjects" component={ExistingProjects} />
           <Route exact path="/clientAlerts" component={ClientAlerts} />
+          <Route exact path="/login-register" component={LoginPage} />
           {/* 404 page creation below */}
           <Route render={() => 
             <div className="fourOfour">

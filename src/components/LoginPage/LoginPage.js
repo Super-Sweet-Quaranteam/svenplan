@@ -32,14 +32,15 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        {this.props.errors.loginMessage && (
+        {/* this.props.errors is currently undefined */}
+        {/* {this.props.errors.loginMessage && (
           <h2
             className="alert"
             role="alert"
           >
             {this.props.errors.loginMessage}
           </h2>
-        )}
+        )} */}
         <form onSubmit={this.login}>
           <h1>Login</h1>
           <div>
