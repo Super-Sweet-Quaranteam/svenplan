@@ -1,17 +1,26 @@
+/* keeps the content of this page uniform */
+.workflowWrapper{
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
 /* allows phase blocks to scroll side to side instead of stack */
 .phaseWrapper {
-    overflow-y: scroll;
+    overflow-x: auto;
     white-space: nowrap;
+    text-align: center;
+    justify-content: end;
+    
 }
 /* can change how many divs per screen based on width % */
 .phaseBlock {
     background-color: var(--bg-tertiary);
-    height: fit-content;
-    width: fit-content;
+    max-height: 70vh;
+    width: 34vw;
     display: inline-block;
-    margin: 0.5%;
-    border-radius: 15px;
-    padding: 2.5%;
+    margin: .5em;
+    border-radius: 1em;
+    padding: 1em;
 }
 /* overall background for a workflow */
 .workflowInfo {
@@ -29,3 +38,46 @@
     padding-top: 1%;
     padding-bottom: 1%;
 }
+/* the larger card of new phases */
+.addPhase{
+    align-self: start;
+    max-width: 40vw;
+    padding-left: 1em;
+    padding-right: 1em;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    border-radius: 15px;
+  }
+  /* task card, inside phase card */
+  .taskCard{
+    padding-left: 1em;
+    padding-right: 1em;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+  }
+  /* sub task card, inside task card */
+  .sub{
+    max-width: 60vw;
+    padding-left: 1em;
+    padding-right: 1em;
+    color: var(--text-tertiary);
+    background-color: var(--bg-tertiary);
+  }
+  /* container for subtask card to have each scroll horizontal */
+  .taskContainer{
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  /* how sub tasks get displayed in the card */
+  .subtask-display{
+    contain: content;
+    text-transform: uppercase;
+    font-size: small;
+    min-height: 15vmin;
+    min-width: 15vmin;
+    border: 3px var(--bg-primary) solid;
+    border-radius: 5px;
+    margin: 1vmin;
+  }
+  

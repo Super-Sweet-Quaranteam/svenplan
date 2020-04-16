@@ -36,7 +36,6 @@ componentDidMount(){
    render(){
     return (
         <div >
-            <img src={logo} width="75px" alt="SvenPlan Logo" />
             <p>Existing Projects </p>
 
             <h2>Your Current Projects:</h2>

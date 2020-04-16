@@ -14,28 +14,28 @@ const ClientHome =(props)=>{
         <>
             <ClientNav />
             
-            {props.reduxState.clientDisplay.displayProfile === true 
+            {props.reduxState.client.clientDisplay.displayProfile === true 
                 ?
                 <ClientProfile 
                 /> 
                 :
                 null
             }
-            {props.reduxState.clientDisplay.displayNewWorkFlow === true 
+            {props.reduxState.client.clientDisplay.displayNewWorkFlow === true 
                 ?
                 <CreateWorkflow 
                 /> 
                 :
                 <img className="hero-image" src="/images/skyline.png" alt="skyline"/>
             }
-            {props.reduxState.clientDisplay.displayOldWorkFlow === true 
+            {props.reduxState.client.clientDisplay.displayOldWorkFlow === true 
                 ?
                 <ExistingProjects
                 /> 
                 :
                 null
             }
-            {props.reduxState.clientDisplay.displayRisk === true 
+            {props.reduxState.client.clientDisplay.displayRisk === true 
                 ?
                 <ClientRisk
                 /> 
