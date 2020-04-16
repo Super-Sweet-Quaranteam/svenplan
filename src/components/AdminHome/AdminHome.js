@@ -28,7 +28,6 @@ function AdminHome(props) {
 
     return (
         <div >       
-            <img src={logo} width="75px" alt="SvenPlan Logo" />
             <p>Admin Home </p>
 
             <h2>Welcome, 'username'</h2>
