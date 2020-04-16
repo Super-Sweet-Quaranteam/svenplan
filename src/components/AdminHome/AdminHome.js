@@ -1,6 +1,15 @@
-import React from 'react';
+import React from 'react'; 
+import { connect } from 'react-redux';
 import './AdminHome.css'
-// import logo from '../Logo/svenplan-logo2.png'
+import logo from '../Logo/svenplan-logo2.png'
+import AdminNav from './AdminNav/AdminNav';
+import CreateWorkflow from './CreateWorkflow/CreateWorkflow';
+import ExistingWorkflows from './ExistingWorkflows/ExistingWorkflows'
+import ExistingProjects from './ExistingProjects/ExistingProjects'
+import ClientAlerts from './ClientAlerts/ClientAlerts';
+import ClientList from './ClientList/ClientList'
+
+
 
 
 
@@ -9,46 +18,60 @@ function AdminHome(props) {
 
 
 
-    function createWorkflow(event) {
-        props.history.push({ pathname: '/createWorkflow' })
-    }
-    function clientList(event) {
-        props.history.push({ pathname: '/clientList' })
-    }
-    function clientAlerts(event) {
-        props.history.push({ pathname: '/clientAlerts' })
-    }
-    function existingProjects(event) {
-        props.history.push({ pathname: '/existingProjects' })
-    }
-    function existingWorkflows(event) {
-        props.history.push({ pathname: '/existingWorkflows' })
-    }
 
 
     return (
-        <div >       
-            <p>Admin Home </p>
+        <>       
+          
+          
+               <AdminNav />
 
-            <h2>Welcome, 'username'</h2>
-            <div className='display'>
-                <div className="adminNav">
-                    <h5 onClick={existingWorkflows} className="navText">Existing WorkFlows</h5> 
-                    <h5 onClick={existingProjects} className="navText">Existing Projects</h5> 
-                    <h5 onClick={clientAlerts} className="navText">Client Alerts</h5> 
-                    <h5 onClick={clientList} className="navText">Client List</h5> 
-                </div>
-            <ul>
-                <li onClick={createWorkflow}>Create WorkFlow</li>
-                <li>New Project</li>
-                <li>Existing Projects</li>
-            </ul>
+            {props.reduxState.admin.adminDisplay.displayOldWorkFlow === true
+                ?
+                <ExistingWorkflows
+                />
+                :
+                null
+            }
+            {props.reduxState.admin.adminDisplay.displayNewWorkFlow === true
+                ?
+                <CreateWorkflow
+                />
+                :
+                <img className="hero-image" src="/images/skyline.png" alt="skyline" />
+            }
+            {props.reduxState.admin.adminDisplay.displayOldProjects === true
+                ?
+                <ExistingProjects
+                />
+                :
+                null
+            }
+            {props.reduxState.admin.adminDisplay.displayAlerts === true
+                ?
+                <ClientAlerts
+                />
+                :
+                null
+            }
+            {props.reduxState.admin.adminDisplay.displayClients === true
+                ?
+                <ClientList
+                />
+                :
+                null
+            }
+           
             
-        </div>
+       
 
            
-        </div>
+        </>
     );
 }
 
-export default AdminHome;
+const putReduxStateOnProps = (reduxState) => ({
+    reduxState
+});
+
+export default connect(putReduxStateOnProps)(AdminHome);

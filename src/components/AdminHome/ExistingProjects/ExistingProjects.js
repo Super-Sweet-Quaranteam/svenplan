@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-// import logo from '../../Logo/svenplan-logo2.png'
+
 
 class ExistingProjects extends Component {
 
