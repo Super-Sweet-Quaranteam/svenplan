@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-//this component is called from the ProtectedRoute component
-//this.props.errors is undefined at the time i'm writing this
-//because there's no error reducer
-//rather than deleting that or adding an error, 
-//i'm going to just comment it out in case we want to add it later.
-//note- remove error reducer state on props if we decide not to use it
+//I (Haley) changed this file a lot from the prime starter
+//for testing purposes and easier prs I wanted everything in one page
+//I think once things are working it would make a lot of sense to make it a lot more modular
+//for example prime code has a login page and a register page
+//i'm just conditionally rendering and doing functions based on this.state.mode
 
 class LoginPage extends Component {
   state = {
@@ -21,23 +20,32 @@ class LoginPage extends Component {
   login = (event) => {
     //don't reload page on submit
     event.preventDefault();
-    //if all the things you need are filled (this may change)
-    //dispatch the state to a saga
+    //if all the things you need are filled for the current mode (this may change) dispatch the state to a saga
     //otherwise, let the user know what they did wrong 
     //(prime code has errors from reducers, we didn't copy that over so I'm gonna use a general alert for now)
-    if (this.state.email && this.state.password) {
+    if (this.state.mode==='login' && this.state.email && this.state.password) {
       this.props.dispatch({
         type: 'LOGIN',
         payload: {
-          username: this.state.username,
+          email: this.state.email,
           password: this.state.password,
         },
       });
-    } else {
+    }//end if login mode
+    //register will eventually have more required fields but for now just email and password
+    else if (this.state.mode === 'register' && this.state.email && this.state.password) {
+      this.props.dispatch({
+        type: 'REGISTER',
+        payload: {
+          email: this.state.email,
+          password: this.state.password,
+        },
+      });
+    }//end if register mode
+    else {
       alert('please fill in all required fields');
-      // this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
-    }
-  } // end login
+    }//end else (fields not filled, not able to dispatch)
+  }//end login
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
