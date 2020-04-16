@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
+<<<<<<< HEAD
 import logo from '../../Logo/svenplan-logo2.png'
 import {connect} from 'react-redux';
+=======
+
+>>>>>>> master
 
 class ExistingProjects extends Component {
 
