@@ -40,6 +40,7 @@ class ExistingProjects extends Component {
             <p>Existing Projects </p>
 
             <h2>Your Current Projects:</h2>
+            {JSON.stringify(this.props.reduxState.subscriber)}
             <ul>
                 {this.state.projects.map(project => (
                     <li onClick={this.projectDetails} key={project.projectId}>
