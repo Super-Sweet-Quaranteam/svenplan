@@ -9,8 +9,10 @@ function* fetchExistingProjects(){
     try {
         yield console.log('stop trying to make fetch a thing');
         
-        // const response = yield axios.get('/existing-projects')    
-        // yield put({type: 'SET_COLLECTION', payload: response.data})
+        const response = yield axios.get('/subscriber/existing-projects')
+        yield console.log('back from server with ', response.data);
+          
+        // yield put({type: '', payload: response.data})
     } catch (error) {
         console.log(error);
     }
