@@ -32,13 +32,6 @@ function App() {
           {/* be sure to protect this route */}
           <Route exact path="/adminHome" component={AdminHome} />
           <Route exact path="/clientHome" component={ClientHome} />
-          <Route exact path="/createWorkflow" component={CreateWorkflow} />
-          <Route exact path="/existingWorkflows" component={ExistingWorkflows} />
-          
-          
-          <Route exact path="/clientList" component={ClientList} />
-          <Route exact path="/existingProjects" component={ExistingProjects} />
-          <Route exact path="/clientAlerts" component={ClientAlerts} />
           {/* 404 page creation below */}
           <Route render={() => 
             <div className="fourOfour">

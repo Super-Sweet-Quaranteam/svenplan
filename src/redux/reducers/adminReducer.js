@@ -13,8 +13,19 @@ const clientList = (state = [], action) => {
     }
 }
 
+const adminDisplay = (state = {}, action) => {
+  switch (action.type) {
+    case 'ADMIN_DISPLAY':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+
 
   export default combineReducers({
     clientList,
+    adminDisplay
 
   });
