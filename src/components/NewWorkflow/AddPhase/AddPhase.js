@@ -5,43 +5,59 @@ import AddTask from './AddTask';
 class AddPhase extends Component {
 
     state={
+        phaseEdit: true,
         displayCard: false,
-        phaseName: ''
+        time: new Date(),
+        phaseName: {
+            name: '',
+            id: null
+        }
     }
 
     // catalogs changes to be displayed
     handleChange=(e)=>{
         this.setState({phaseName: {
             name: e.target.value,
-            id: e.target.parentElement.parentElement.attributes[0].nodeValue
+            id: (Number(e.target.form.attributes[0].textContent)+1)
         }})
     }
 
     // sends relevant info upon submit
     handleSubmit=(e)=>{
-        let name = e.target.previousElementSibling.innerHTML;
-        let id = (Number(e.target.parentElement.parentElement.attributes[0].nodeValue) + 1);
+        e.preventDefault();
+        this.setState({phaseEdit:false})
+        let name = this.state.phaseName.name
+        let id = this.state.phaseName.id
         this.props.dispatch({type: 'ADD_PHASE', payload: {name: name, id: id}});
     }
 
 
-render() {
-    return (
+    render() {
+        return (
             <div className="addPhase">
-                <h1>{this.state.phaseName.name}</h1>
-                <form onSubmit={(e)=>this.handleSubmit(e)}>
-                    <input type="text" placeholder="enter name for phase" onChange={(e)=>this.handleChange(e)} />
+                {this.state.phaseEdit
+                ?
+                <form data-id={this.props.data} onSubmit={(e)=>this.handleSubmit(e)}>
+                    <input type="text" value={this.state.phaseName.name} placeholder="enter title for phase" onChange={(e)=>this.handleChange(e)} />
                     <input type="submit" value="save" className="button"/>
                 </form>
+                :
+                <>
+                <h1>{this.state.phaseName.name}</h1>
+                <button className="button" 
+                    onClick={()=>this.setState({phaseEdit: true})}>
+                    edit</button>
+                </>
+                }
                 <br/>
                 <button className="button" 
                 onClick={()=>this.setState({displayCard: !this.state.displayCard})}>
                     add tasks to this phase</button>
 
-                <div>
+                <div >
                     {this.state.displayCard
                     ? 
-                    <AddTask /> 
+                    <AddTask data={this.state.phaseName.id}/> 
                     :
                     null}
                 </div>

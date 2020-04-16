@@ -7,6 +7,7 @@ class NewWorkflow extends Component {
     state = {
         inputName: null,
         inputDescription: '',
+        time: new Date(),
         workflow: {
             created: false,
             number: 0,
@@ -54,7 +55,6 @@ class NewWorkflow extends Component {
         render() {
         return (
             <div className="workflowWrapper">
-                <h3>New Workflow Home Below</h3>
                 <div className="workflowInfo">
                 {/* conditional rendering on input fields vs title and description */}
                 {this.state.workflow.created ? 
@@ -84,11 +84,10 @@ class NewWorkflow extends Component {
                 }
                 {this.state.workflow.created === true &&
                 <>
-                
                     {/* on btn click, a new phase is added to array, currently a taco string but maybe an array of tasks once add task component is set up */}
                     <button className="button" onClick={this.addPhase}>Add Phase</button>
                     <div className="phaseWrapper">
-                        {this.state.workflow.phases.map((phase, i )=> <div key={i} data-id={i} className="phaseBlock"><AddPhase phase={this.state}/></div>)}
+                        {this.state.workflow.phases.map((phase, i )=> <div key={i} data-id={i} className="phaseBlock"><AddPhase data={i} phase={this.state}/></div>)}
                     </div>
                     <button className="button" onClick={this.saveWorkflow}>Publish Workflow</button>
                 </>
