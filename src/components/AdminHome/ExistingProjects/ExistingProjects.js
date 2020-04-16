@@ -4,29 +4,36 @@ import {connect} from 'react-redux';
 
 class ExistingProjects extends Component {
 
-    state = {projects:[
-        {
-        clientid: 0,
-        projectId:0,
-        projectName: "Dayton's Flagship",
+//     state = {projects:[
+//         {
+//         clientid: 0,
+//         projectId:0,
+//         projectName: "Dayton's Flagship",
        
-    },
-    {
-        clientid: 0,
-        projectId:1,
-       projectName: 'West Philly Expansion'
-    },
-       {clientid: 0,
-        projectId: 2,
-        projectName: 'New HQ'
-        },
-        {
-            clientid: 0,
-            projectId: 3,
-            projectName: 'Target Potato Farm'
-        }
-    ]
-}
+//     },
+//     {
+//         clientid: 0,
+//         projectId:1,
+//        projectName: 'West Philly Expansion'
+//     },
+//        {clientid: 0,
+//         projectId: 2,
+//         projectName: 'New HQ'
+//         },
+//         {
+//             clientid: 0,
+//             projectId: 3,
+//             projectName: 'Target Potato Farm'
+//         }
+//     ]
+// }
+    archiveProject=()=>{
+        console.log('archive btn clicked');
+        
+    }
+    continueWorkflow=()=>{
+        console.log('continue btn clicked');
+    }
     componentDidMount(){
         console.log('heyo');
         this.props.dispatch({type: 'FETCH_EXISTING_PROJECTS'})
@@ -53,7 +60,7 @@ class ExistingProjects extends Component {
                     <tr key={project.id}>
                         <td>{project.name}</td>
                         <td>Status percent(?) will go here</td>
-                        <td><button>Continue</button><button>Archive</button></td>
+                        <td><button onClick={this.continueWorkflow}>Continue</button><button onClick={this.archiveProject}>Archive</button></td>
                     </tr>)}
                 </tbody>
             </table>
