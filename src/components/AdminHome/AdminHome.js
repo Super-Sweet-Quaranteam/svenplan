@@ -1,7 +1,6 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
 import './AdminHome.css'
-import logo from '../Logo/svenplan-logo2.png'
 import AdminNav from './AdminNav/AdminNav';
 import CreateWorkflow from './CreateWorkflow/CreateWorkflow';
 import ExistingWorkflows from './ExistingWorkflows/ExistingWorkflows'
