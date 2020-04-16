@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 
 
-const existingProjects = (state={}, action) => {
+const existingProjects = (state=[], action) => {
     switch (action.type) {
       case 'SET_EXISTING_PROJECTS':
           return action.payload;

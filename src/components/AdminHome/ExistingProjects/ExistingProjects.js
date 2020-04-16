@@ -40,12 +40,24 @@ class ExistingProjects extends Component {
             <p>Existing Projects </p>
 
             <h2>Your Current Projects:</h2>
-            {JSON.stringify(this.props.reduxState.subscriber)}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {this.props.reduxState.subscriber.existingProjects.map(project =>
+                    <tr key={project.id}>
+                        <td>{project.name}</td>
+                        <td>Status percent(?) will go here</td>
+                        <td><button>Continue</button><button>Archive</button></td>
+                    </tr>)}
+                </tbody>
+            </table>
             <ul>
-                {this.state.projects.map(project => (
-                    <li onClick={this.projectDetails} key={project.projectId}>
-                        {project.projectName}
-                    </li>))}              
             </ul>
                
         </div>
