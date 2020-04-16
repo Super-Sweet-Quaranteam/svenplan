@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './NewWorkflow.css'
-import AddTask from '../AddTask/AddTask'
+import AddPhase from './AddPhase/AddPhase';
 
 class NewWorkflow extends Component {
     state = {
-        inputName: '',
+        inputName: null,
         inputDescription: '',
         workflow: {
             created: false,
@@ -53,7 +53,7 @@ class NewWorkflow extends Component {
     }
         render() {
         return (
-            <div>
+            <div className="workflowWrapper">
                 <h3>New Workflow Home Below</h3>
                 <div className="workflowInfo">
                 {/* conditional rendering on input fields vs title and description */}
@@ -62,7 +62,7 @@ class NewWorkflow extends Component {
                             <h3>{this.state.workflow.name}</h3>
                             <p className="workflowDescription">{this.state.workflow.description}
                                 <br/>                   
-                                <button onClick={this.editWorkflow}>Edit</button>
+                                <button className="button" onClick={this.editWorkflow}>Edit</button>
                             </p>
                             <br/>
                         </>
@@ -78,16 +78,21 @@ class NewWorkflow extends Component {
                                 <textarea defaultValue={this.state.workflow.description} onChange={(event)=>this.handleChange(event, "inputDescription")}></textarea>
                             </label>  
                             <br/>                   
-                            <button onClick={this.createWorkflow}>Create</button>
+                            <button className="button" onClick={this.createWorkflow}>Create</button>
                             <br/>
                         </>
                 }
+                {this.state.workflow.created === true &&
+                <>
+                
                     {/* on btn click, a new phase is added to array, currently a taco string but maybe an array of tasks once add task component is set up */}
-                    <button onClick={this.addPhase}>Add Phase</button>
+                    <button className="button" onClick={this.addPhase}>Add Phase</button>
                     <div className="phaseWrapper">
-                        {this.state.workflow.phases.map(phase => <div key={Math.random()} className="phaseBlock"><AddTask/></div>)}
+                        {this.state.workflow.phases.map((phase, i )=> <div key={i} data-id={i} className="phaseBlock"><AddPhase phase={this.state}/></div>)}
                     </div>
-                    <button onClick={this.saveWorkflow}>Save Workflow</button>
+                    <button className="button" onClick={this.saveWorkflow}>Publish Workflow</button>
+                </>
+                }
                 </div>                        
             </div>
         );
