@@ -14,6 +14,7 @@ import ExistingProjects from '../AdminHome/ExistingProjects/ExistingProjects';
 import ClientAlerts from '../AdminHome/ClientAlerts/ClientAlerts';
 import CreateWorkflow from '../AdminHome/CreateWorkflow/CreateWorkflow'
 import ExistingWorkflows from '../AdminHome/ExistingWorkflows/ExistingWorkflows';
+import ClientNav from '../ClientHome/ClientNav';
 
 
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'

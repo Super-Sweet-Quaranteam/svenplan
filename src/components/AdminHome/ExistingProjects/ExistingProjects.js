@@ -26,7 +26,10 @@ class ExistingProjects extends Component {
         }
     ]
 }
-
+componentDidMount(){
+    console.log('heyo');
+    
+}
     projectDetails=()=>{
         console.log('take to project details')
     }
