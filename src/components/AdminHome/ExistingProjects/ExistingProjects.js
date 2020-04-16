@@ -1,51 +1,21 @@
 import React, {Component} from 'react';
-<<<<<<< HEAD
 import logo from '../../Logo/svenplan-logo2.png'
 import {connect} from 'react-redux';
-=======
-
->>>>>>> master
 
 class ExistingProjects extends Component {
 
-//     state = {projects:[
-//         {
-//         clientid: 0,
-//         projectId:0,
-//         projectName: "Dayton's Flagship",
-       
-//     },
-//     {
-//         clientid: 0,
-//         projectId:1,
-//        projectName: 'West Philly Expansion'
-//     },
-//        {clientid: 0,
-//         projectId: 2,
-//         projectName: 'New HQ'
-//         },
-//         {
-//             clientid: 0,
-//             projectId: 3,
-//             projectName: 'Target Potato Farm'
-//         }
-//     ]
-// }
     archiveProject=()=>{
-        console.log('archive btn clicked');
-        
+        console.log('archive btn clicked');   
     }
-    continueWorkflow=()=>{
+    continueWorkflow=(project)=>{
         console.log('continue btn clicked');
+        console.log('this.props.history is', this.props);
     }
     componentDidMount(){
-        console.log('heyo');
         this.props.dispatch({type: 'FETCH_EXISTING_PROJECTS'})
     }
-    projectDetails=()=>{
-        console.log('take to project details')
-    }
-   render(){
+
+    render(){
     return (
         <div >
             <p>Existing Projects </p>
@@ -64,7 +34,7 @@ class ExistingProjects extends Component {
                     <tr key={project.id}>
                         <td>{project.name}</td>
                         <td>Status percent(?) will go here</td>
-                        <td><button onClick={this.continueWorkflow}>Continue</button><button onClick={this.archiveProject}>Archive</button></td>
+                        <td><button onClick={()=>this.continueWorkflow(project)}>Continue</button><button onClick={this.archiveProject}>Archive</button></td>
                     </tr>)}
                 </tbody>
             </table>
