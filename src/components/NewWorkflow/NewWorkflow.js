@@ -41,6 +41,10 @@ class NewWorkflow extends Component {
                 description: this.state.inputDescription
             }
         })
+        this.props.dispatch({type: 'ADD_WORKFLOW', payload: {
+            name: this.state.inputName, description: this.state.inputDescription}})
+        
+        
     }
     //handles text input, saves in state w/o displaying on dom
     handleChange=(event, typeOf)=>{                
@@ -50,9 +54,10 @@ class NewWorkflow extends Component {
     }
     //POST dispatch, sends whole workflow obj as payload. rn this is the only thing that saves to db
     saveWorkflow=()=>{
-        this.props.dispatch({type: 'SAVE_WORKFLOW', payload: this.state.workflow})
+        this.props.dispatch({type: 'PUBLISH_WORKFLOW', payload: this.props.admin.NewWorkflow})
     }
-        render() {
+
+    render() {
         return (
             <div className="workflowWrapper">
                 <div className="workflowInfo">

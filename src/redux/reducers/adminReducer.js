@@ -1,7 +1,17 @@
 import { combineReducers } from 'redux';
 
-
-
+const newWorkflow = (state = [], action) => {
+  switch (action.type) {
+      case 'ADD_WORKFLOW':
+          return state = [...state, action.payload];
+      case 'ADD_PHASE':
+          return state = [...state, action.payload];
+      case 'ADD_TASK':
+          return state = [...state, action.payload];
+      default:
+          return state;
+  }
+}
 
 
 const clientList = (state = [], action) => {
@@ -26,6 +36,7 @@ const adminDisplay = (state = {}, action) => {
 
   export default combineReducers({
     clientList,
+    newWorkflow,
     adminDisplay
 
   });
