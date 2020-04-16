@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../Logo/svenplan-logo2.png'
+
 
 function ClientAlerts(props) {
 

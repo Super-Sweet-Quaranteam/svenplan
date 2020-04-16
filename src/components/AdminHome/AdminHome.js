@@ -1,6 +1,6 @@
 import React from 'react';
 import './AdminHome.css'
-import logo from '../Logo/svenplan-logo2.png'
+
 
 
 

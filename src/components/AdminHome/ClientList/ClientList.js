@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import logo from '../../Logo/svenplan-logo2.png'
 
 class ClientList extends Component{
 

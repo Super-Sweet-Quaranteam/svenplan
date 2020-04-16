@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../../Logo/svenplan-logo2.png';
 import NewWorkflow from '../../NewWorkflow/NewWorkflow';
 
 
