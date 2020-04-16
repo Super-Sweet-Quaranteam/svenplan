@@ -1,5 +1,7 @@
 import React from 'react';
+
 import NewWorkflow from '../../NewWorkflow/NewWorkflow';
+import MiniTask from '../../MiniTask/MiniTask'
 
 
 function CreateWorkflow(props) {
@@ -12,6 +14,7 @@ function CreateWorkflow(props) {
             <h2>Create a new workflow</h2>
          
             <NewWorkflow />
+            <MiniTask />
 
         </div>
     );
