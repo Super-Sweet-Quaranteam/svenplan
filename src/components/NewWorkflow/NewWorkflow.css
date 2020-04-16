@@ -6,8 +6,8 @@
 
 /* allows phase blocks to scroll side to side instead of stack */
 .phaseWrapper {
-    /* overflow-y: scroll;
-    white-space: nowrap; */
+    overflow-x: auto;
+    white-space: nowrap;
     text-align: center;
     justify-content: end;
     
@@ -15,12 +15,12 @@
 /* can change how many divs per screen based on width % */
 .phaseBlock {
     background-color: var(--bg-tertiary);
-    height: fit-content;
-    max-width: 40vw;
+    max-height: 70vh;
+    width: 34vw;
     display: inline-block;
-    margin: 0.5%;
-    border-radius: 15px;
-    padding: 2.5%;
+    margin: .5em;
+    border-radius: 1em;
+    padding: 1em;
 }
 /* overall background for a workflow */
 .workflowInfo {
@@ -64,7 +64,7 @@
     background-color: var(--bg-tertiary);
   }
   /* container for subtask card to have each scroll horizontal */
-  .subtask-display-Container{
+  .taskContainer{
     display: flex;
     flex-direction: row;
     overflow-x: auto;
