@@ -13,8 +13,6 @@ import Footer from '../Footer/Footer';
 // import Container from '../AddTask/Container';
 
 
-
-
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 function App() {

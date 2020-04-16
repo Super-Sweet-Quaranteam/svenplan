@@ -1,51 +1,52 @@
 import React, {Component} from 'react';
-
+import logo from '../../Logo/svenplan-logo2.png'
+import {connect} from 'react-redux';
 
 class ExistingProjects extends Component {
-
-    state = {projects:[
-        {
-        clientid: 0,
-        projectId:0,
-        projectName: "Dayton's Flagship",
-       
-    },
-    {
-        clientid: 0,
-        projectId:1,
-       projectName: 'West Philly Expansion'
-    },
-       {clientid: 0,
-        projectId: 2,
-        projectName: 'New HQ'
-        },
-        {
-            clientid: 0,
-            projectId: 3,
-            projectName: 'Target Potato Farm'
-        }
-    ]
-}
-
-    projectDetails=()=>{
-        console.log('take to project details')
+    // subscriber-side code. When 'Existing Projects' is clicked, page loads table of project, status and option for subscriber to continue or archive project
+    archiveProject=()=>{
+        console.log('archive btn clicked');   
     }
-   render(){
+    continueWorkflow=(project)=>{
+        console.log('continue btn clicked');
+        console.log('this.props.history is', this.props);
+    }
+    componentDidMount(){
+        this.props.dispatch({type: 'FETCH_EXISTING_PROJECTS'})
+    }
+
+    render(){
     return (
         <div >
             <p>Existing Projects </p>
 
             <h2>Your Current Projects:</h2>
+            {/* table below displays all projects belonging to one user */}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {this.props.reduxState.subscriber.existingProjects.map(project =>
+                    <tr key={project.id}>
+                        <td>{project.name}</td>
+                        <td>Status percent(?) will go here</td>
+                        <td><button onClick={()=>this.continueWorkflow(project)}>Continue</button><button onClick={this.archiveProject}>Archive</button></td>
+                    </tr>)}
+                </tbody>
+            </table>
             <ul>
-                {this.state.projects.map(project => (
-                    <li onClick={this.projectDetails} key={project.projectId}>
-                        {project.projectName}
-                    </li>))}              
             </ul>
                
         </div>
     );
 }
 }
-
-export default ExistingProjects;
+const mapStateToProps = reduxState => ({
+reduxState
+});
+export default connect(mapStateToProps)(ExistingProjects);

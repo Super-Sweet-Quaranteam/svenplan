@@ -3,6 +3,7 @@ import clientList from './clientListSaga';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
+import SubscriberProjects from './SubscriberProjects'
 
 export default function* rootSaga() {
     yield all([
@@ -10,6 +11,6 @@ export default function* rootSaga() {
       loginSaga(),
       registrationSaga(),
       userSaga(),
-      
+      SubscriberProjects()
     ]);
   }
