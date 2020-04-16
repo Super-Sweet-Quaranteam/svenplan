@@ -6,7 +6,6 @@ function ClientAlerts(props) {
 
     return (
         <div >
-            <img src={logo} width="75px" alt="SvenPlan Logo" />
             <p>Client Alerts </p>
 
             <h2>Client Alerts:</h2>

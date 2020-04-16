@@ -25,7 +25,6 @@ class ExistingWorkflows extends Component {
     render() {
         return (
             <div >
-                <img src={logo} width="75px" alt="SvenPlan Logo" />
                 <p>Existing Workflows </p>
 
                 <h2>Your Current Workflows:</h2>

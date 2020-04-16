@@ -29,7 +29,6 @@ state={
     render(){
     return (
         <div >
-            <img src={logo} width="75px" alt="SvenPlan Logo" />
             <p>Client List </p>
 
             <h2>Clients using your workflows:</h2>
