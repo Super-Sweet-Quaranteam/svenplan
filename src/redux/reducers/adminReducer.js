@@ -13,7 +13,6 @@ const newWorkflow = (state = [], action) => {
   }
 }
 
-
 const clientList = (state = [], action) => {
     switch (action.type) {
         case 'SET_CLIENT_LIST':
