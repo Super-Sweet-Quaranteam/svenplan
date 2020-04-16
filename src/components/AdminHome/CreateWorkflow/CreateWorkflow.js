@@ -8,7 +8,6 @@ function CreateWorkflow(props) {
 
     return (
         <div >
-            <img src={logo} width="75px" alt="SvenPlan Logo" />
             <p>New Workflow</p>
 
             <h2>Create a new workflow</h2>

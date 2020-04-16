@@ -5,8 +5,9 @@ import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 import AdminHome from '../AdminHome/AdminHome';
 import ClientHome from '../ClientHome/ClientHome';
 import LandingPage from '../LandingPage/LandingPage';
-
-import Footer from '../Footer/Footer'
+import LoginPage from '../LoginPage/LoginPage';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import AddTask from '../AddTask/AddTask';
 import Container from '../AddTask/Container';
 import ClientList from '../AdminHome/ClientList/ClientList';
@@ -21,10 +22,12 @@ import ExistingWorkflows from '../AdminHome/ExistingWorkflows/ExistingWorkflows'
 function App() {
   return (
     <>
+    <Header></Header>
       <Router>
         <Switch>
           {/* component view if not logged in */}
           <Route exact path="/" component={LandingPage} />
+          <Route exact path="/logIn" component ={LoginPage} />
           {/* be sure to protect this route */}
           <Route exact path="/adminHome" component={AdminHome} />
           <Route exact path="/clientHome" component={ClientHome} />
