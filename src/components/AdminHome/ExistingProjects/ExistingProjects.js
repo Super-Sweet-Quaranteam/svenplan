@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import logo from '../../Logo/svenplan-logo2.png'
+import {connect} from 'react-redux';
 
 class ExistingProjects extends Component {
 
@@ -26,10 +27,10 @@ class ExistingProjects extends Component {
         }
     ]
 }
-componentDidMount(){
-    console.log('heyo');
-    
-}
+    componentDidMount(){
+        console.log('heyo');
+        this.props.dispatch({type: 'FETCH_EXISTING_PROJECTS'})
+    }
     projectDetails=()=>{
         console.log('take to project details')
     }
@@ -50,5 +51,7 @@ componentDidMount(){
     );
 }
 }
-
-export default ExistingProjects;
+const mapStateToProps = reduxState => ({
+reduxState
+});
+export default connect(mapStateToProps)(ExistingProjects);
