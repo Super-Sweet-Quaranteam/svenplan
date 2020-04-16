@@ -10,9 +10,6 @@ import { connect } from 'react-redux';
 class LoginPage extends Component {
   state = {
     mode: 'login',
-    toggleButtonText: 'switch to register mode',
-    headerText: 'Log In',
-    submitValue: 'Log In',
     email: '',
     password: '',
   };
@@ -55,7 +52,7 @@ class LoginPage extends Component {
 
   swtichMode=()=>{
     //update the state so new things show for buttons, header, and input
-    //the copy is a bit clumsy, but can be changed
+    //the copy is a clumsy/not for production, should be changed
     //also I think buttons and h1 text should maybe be conditionally rendered instead of from state
     if (this.state.mode==='login'){
       this.setState({mode:'register', toggleButtonText:'switch to login mode', headerText: 'Sign Up', submitValue: 'Register'})}
@@ -63,45 +60,66 @@ class LoginPage extends Component {
       this.setState({ mode: 'login', toggleButtonText: 'switch to register mode', headerText: 'Log In', submitValue: 'Log In' })}
   }
 
+  //rendering login stuff vs register stuff depending on local state
+  //probably should be broken into login page vs register page eventually
+  //at least it'll be easy to copy the code with it divided like this?
   render() {
     return (
       <div>
-        <button type="button" className="link-button" onClick={this.swtichMode}>
-          {this.state.toggleButtonText}
-        </button>
+        {this.state.mode==='login'
+          ?
+          <form onSubmit={this.login}>
+            <button type="button" className="link-button" onClick={this.swtichMode}>switch to register mode</button>
 
-        {/* this.props.errors is currently undefined */}
-        {/* {this.props.errors.loginMessage && (<h2 className="alert" role="alert">{this.props.errors.loginMessage}</h2>)} */}
-        <form onSubmit={this.login}>
-          <h1>{this.state.headerText}</h1>
-          <div>
-            <label htmlFor="email">
-              Email:
+            <h1>Log In</h1>
+            <div>
+              <label htmlFor="email">
+                Email:
+                  <input type="email" name="email" value={this.state.username}
+                  onChange={this.handleInputChangeFor('email')}/>
+              </label>
+            </div>
+            <div>
+              <label htmlFor="password">
+                Password:
+                <input type="password" name="password" value={this.state.password}
+                  onChange={this.handleInputChangeFor('password')}/>
+              </label>
+            </div>
+            <div>
+              <input className="log-in" type="submit" name="submit" value='Log In'/>
+            </div>
+          </form>
+        :
+          <form onSubmit={this.login}>
+            <button type="button" className="link-button" onClick={this.swtichMode}>switch to login mode</button>
+
+            <h1>Register</h1>
+            <div>
+              <label htmlFor="email">
+                Email:
                 <input type="email" name="email" value={this.state.username}
-                onChange={this.handleInputChangeFor('email')}/>
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
+                  onChange={this.handleInputChangeFor('email')} />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="password">
+                Password:
               <input type="password" name="password" value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}/>
-            </label>
-          </div>
-          <div>
-            <input className="log-in" type="submit" name="submit" value={this.state.submitValue}/>
-          </div>
-        </form>
+                  onChange={this.handleInputChangeFor('password')} />
+              </label>
+            </div>
+            <div>
+              <input className="log-in" type="submit" name="submit" value='Sign Up' />
+            </div>
+          </form>
+        }
       </div>
     );
   }
 }
 
-// Instead of taking everything from state, we just want the error messages.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({errors}) => ({ errors });
-// const mapStateToProps = state => ({
-//   errors: state.errors,
-// });
 export default connect()(LoginPage);
 //put mapStateToProps inside parentheses if reduxState is needed
+//prime code maps errors reducer to props so that dom displays different things accordingly
+//seems like a good idea for user experience but not core to 'getting auth to work'
