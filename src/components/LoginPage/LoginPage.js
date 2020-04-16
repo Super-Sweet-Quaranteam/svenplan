@@ -24,7 +24,7 @@ class LoginPage extends Component {
       this.props.dispatch({
         type: 'LOGIN',
         payload: {
-          email: this.state.email,
+          username: this.state.email,
           password: this.state.password,
         },
       });
@@ -34,7 +34,7 @@ class LoginPage extends Component {
       this.props.dispatch({
         type: 'REGISTER',
         payload: {
-          email: this.state.email,
+          username: this.state.email,
           password: this.state.password,
         },
       });
@@ -114,12 +114,21 @@ class LoginPage extends Component {
             </div>
           </form>
         }
+        <p>this.props.user is:</p>{JSON.stringify(this.props.user)}
+        {this.props.user.id &&
+          <button onClick={() => this.props.dispatch({ type: 'LOGOUT' })}>Log Out</button>
+        }
       </div>
     );
   }
 }
 
-export default connect()(LoginPage);
-//put mapStateToProps inside parentheses if reduxState is needed
+
+
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps)(LoginPage);
 //prime code maps errors reducer to props so that dom displays different things accordingly
 //seems like a good idea for user experience but not core to 'getting auth to work'

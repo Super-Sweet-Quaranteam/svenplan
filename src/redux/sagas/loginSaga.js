@@ -1,26 +1,20 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-//Haley cleared all the registration/login error stuff, because we don't have an errors reducer
-
 // worker Saga: will be fired on "LOGIN" actions
 function* loginUser(action) {
   try {
-    console.log('made it to loginUser with payload:', action.payload);
-
     const config = {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
-
     // send the action.payload as the body
     // the config includes credentials which
     // allow the server session to recognize the user
     yield axios.post('/api/user/login', action.payload, config);
-    
     // after the user has logged in
     // get the user information from the server
-    yield put({type: 'FETCH_USER'});
+    yield put({ type: 'FETCH_USER' });
   } catch (error) {
     console.log('Error with user login:', error);
     if (error.response.status === 401) {
