@@ -54,7 +54,7 @@ class NewWorkflow extends Component {
     }
     //POST dispatch, sends whole workflow obj as payload. rn this is the only thing that saves to db
     saveWorkflow=()=>{
-        this.props.dispatch({type: 'PUBLISH_WORKFLOW', payload: this.props.admin.NewWorkflow})
+        this.props.dispatch({type: 'PUBLISH_WORKFLOW', payload: this.props.reduxState.admin.NewWorkflow})
     }
 
     render() {
