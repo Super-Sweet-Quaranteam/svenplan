@@ -3,7 +3,7 @@ import logo from '../../Logo/svenplan-logo2.png'
 import {connect} from 'react-redux';
 
 class ExistingProjects extends Component {
-
+    // subscriber-side code. When 'Existing Projects' is clicked, page loads table of project, status and option for subscriber to continue or archive project
     archiveProject=()=>{
         console.log('archive btn clicked');   
     }
@@ -21,6 +21,7 @@ class ExistingProjects extends Component {
             <p>Existing Projects </p>
 
             <h2>Your Current Projects:</h2>
+            {/* table below displays all projects belonging to one user */}
             <table>
                 <thead>
                     <tr>
