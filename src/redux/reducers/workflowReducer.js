@@ -33,7 +33,7 @@ const allWorkflows = (state = [], action) => {
 // gets requested workflow
 const thisWorkflow = (state = [], action) => {
     switch (action.type) {
-        case 'SET_THIS_WORKFLOWS':
+        case 'SET_THIS_WORKFLOW':
             return action.payload;
         default:
             return state;

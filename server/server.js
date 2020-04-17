@@ -32,6 +32,7 @@ app.use('/api/admin', adminRouter);
 app.use('/api/user', userRouter);
 app.use('/api/teams', teamRouter);
 app.use('/subscriber', subscriberRouter);
+app.use('/api/workflow', workflowRouter);
 
 
 // Serve static files
@@ -47,8 +48,8 @@ app.listen(PORT, () => {
 
 // test that database is up
 const client = new Client({
-//   user: null || 'con',
-//   password: null || 'secretpass',
+  user: null || 'con',
+  password: null || 'secretpass',
   host: 'localhost',
   port: 5432,
 })

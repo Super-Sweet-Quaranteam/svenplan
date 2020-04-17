@@ -7,74 +7,58 @@ import EditPhase from './EditPhase';
 class EditWorkflow extends Component {
 
     state = {
-        time: new Date(),
+        phaseName: null,
+        edit: false,
+        editPhase: false,
         workflow: {
-            edit: false,
             id: this.props.wf.id,
             name: this.props.wf.name,
-            description: this.props.wf.description
+            description: this.props.wf.description,
+            time: new Date()
         }
     }
-    // addPhase=()=> {
-    //     this.setState({
-    //         workflow: {
-    //             ...this.state.workflow,
-    //             phases: [...this.state.workflow.phases, "phase"]
-    //         }
-    //     })
-    // }
-    // editWorkflow=()=>{
-    //     this.setState({
-    //         workflow: {
-    //             ...this.state.workflow,
-    //             edit: true,
-    //         }
-    //     })
-    // }
-    // keepWorkflow=()=>{ 
-    //     this.setState({
-    //         workflow:{
-    //             ...this.state.workflow,
-    //             edit: false,
-    //             name: this.state.inputName,
-    //             description: this.state.inputDescription
-    //         }
-    //     })
-    //     this.props.dispatch({type: 'ADD_WORKFLOW', payload: {
-    //         workflowName: this.state.inputName, description: this.state.inputDescription, time: this.state.time}})
-        
-        
-    // }
-    // //handles text input, saves in state w/o displaying on dom
-    // handleChange=(event, typeOf)=>{                
-    //     this.setState({
-    //         [typeOf]: event.target.value
-    //     })
-    // }
-    // //POST dispatch, sends whole workflow obj as payload. rn this is the only thing that saves to db
-    // saveWorkflow=()=>{
-    //     this.props.dispatch({type: 'PUBLISH_WORKFLOW', payload: this.props.reduxState.admin.NewWorkflow})
-    // }
+
+    editWorkflow=()=>{
+        this.setState({edit: true})
+    }
+
+    editPhase=()=>{
+        this.setState({editPhase: true})
+    }
+
+    handleChange=(event, propertyName)=>{                
+        this.setState({
+            workflow:{
+                ...this.state.workflow,
+                [propertyName]: event.target.value
+            }
+        })
+    }
+
+    save=()=>{
+        this.setState({edit:false})
+        this.props.dispatch({type: 'EDIT_WORKFLOW_NAME', payload: this.state.workflow})
+    }
 
     render() {
         return (
             <div className="workflowWrapper">
                 <div className="workflowInfo">
-                    {this.state.workflow.edit
+                    {this.state.edit === true
                     ?
                     <>
                         <hr/>
                         <label> Workflow Name:
                             <br/>
-                            <input defaultValue={this.props.wf.name} onChange={(event)=>this.handleChange(event, "inputName")}></input>
+                            <input defaultValue={this.state.workflow.name} onChange={(event)=>this.handleChange(event, "name")}></input>
                         </label> 
                         <br/>
                         <label> Description:
                             <br/>
-                            <textarea rows="5" defaultValue={this.props.wf.description} onChange={(event)=>this.handleChange(event, "inputDescription")}></textarea>
+                            <textarea rows="5" defaultValue={this.state.workflow.description} onChange={(event)=>this.handleChange(event, "description")}></textarea>
                         </label>  
                         <br/>                   
-                        <button className="button" onClick={this.keepWorkflow}>Keep</button>
+                        <button className="button" onClick={this.save}>Save</button>
                         <br/>
                     </> 
                     :
@@ -85,10 +69,25 @@ class EditWorkflow extends Component {
                                 <button className="button" onClick={this.addPhase}>Add Phase</button>                  
                             </h3>
                             <br/>
-                        {this.state.workflow.edit === true &&
+                        {this.props.reduxState.workflow.thisPhase &&
                         <>
+                        {this.props.reduxState.workflow.thisPhase[0] &&
+                            <>
+                                <h1>{this.props.reduxState.workflow.thisPhase[0].ph_name}</h1>
+                                <button className="button" onClick={this.editPhase}>Edit Phase</button> 
+                            </>
+                        }
+                        
                             <div className="phaseWrapper">
-                                {this.props.reduxState.workflow.thisWorkflow.map((phase, i )=> <div key={i} data-id={i} className="phaseBlock"><EditPhase data={i} phase={this.state}/></div>)}
+                                {this.props.reduxState.workflow.thisPhase.map((phase, i )=> 
+                                <EditPhase 
+                                    key={i}
+                                    phase={phase.ph_name}
+                                    name={phase.task_name}
+                                    description={phase.task_description}
+                                    edit={this.state.editPhase}
+                                />
+                                )}
                             </div>
                         </>
                         }
