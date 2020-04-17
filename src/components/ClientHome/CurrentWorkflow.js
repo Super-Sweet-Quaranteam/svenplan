@@ -57,8 +57,14 @@ class CurrentWorkflow extends Component {
                                 <button onClick={this.forwardATask}>Next</button>
                             :
                             <>
-                                <button onClick={this.backATask}>Back</button>
-                                <button onClick={this.forwardATask}>Next</button>
+                                {this.state.task == this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
+                                    <button onClick={this.backATask}>Back</button>
+                                :
+                                    <>
+                                        <button onClick={this.backATask}>Back</button>
+                                        <button onClick={this.forwardATask}>Next</button>
+                                    </>
+                                }
                             </>
                         }
                 </div>}
