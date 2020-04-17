@@ -21,6 +21,12 @@ class UserProfile extends Component {
     else if (this.state.mode === 'edit') {
       this.setState({ mode: 'display' })
     }
+    this.props.dispatch({ type: 'FETCH_CURRENT_USER', payload: this.props.user.currentUser.id })
+  }
+  handleInputChangeFor = propertyName => (event) => {
+    this.setState({
+      [propertyName]: event.target.value,
+    });
   }
  
   render() {
@@ -59,7 +65,16 @@ class UserProfile extends Component {
   if(this.state.mode==='edit'){
     return(
       <>
-      <p>in edit mode</p>
+      <h2>Edit Profile</h2>
+        <label htmlFor="emailEdit">Email:</label>
+        <input id='emailEdit' onChange={this.handleInputChangeFor('email')} value={this.props.user.currentUser.email}></input>
+        <label htmlFor="aliasEdit">Display Name:</label>
+        <input id='aliasEdit' onChange={this.handleInputChangeFor('alias')} value={this.props.user.currentUser.alias}></input>
+        <label htmlFor="firstNameEdit">First Name:</label>
+        <input id='firstNameEdit' onChange={this.handleInputChangeFor('firstname')} value={this.props.user.currentUser.firstname}></input>
+        <label htmlFor="lastNameEdit">Last Name:</label>
+        <input id='lastNameEdit' onChange={this.handleInputChangeFor('lastname')} value={this.props.user.currentUser.lastname}></input>
+        <p><button onClick={this.editMode}>Save Profile</button></p>
       <p><button onClick={this.editMode}>View Profile</button></p>
       </>
     )
