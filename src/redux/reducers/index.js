@@ -3,6 +3,7 @@ import admin from './adminReducer';
 import client from './clientReducer';
 import subscriber from './subscriberReducer';
 import user from './userReducer';
+import workflow from './workflowReducer';
 
 
 
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     client,
     subscriber,
     user,
+    workflow,
   });
   
   export default rootReducer;

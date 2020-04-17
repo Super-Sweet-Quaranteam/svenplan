@@ -3,7 +3,8 @@ import clientList from './clientListSaga';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
-import SubscriberProjects from './SubscriberProjects'
+import SubscriberProjects from './SubscriberProjects';
+import workflows from './workflowSaga';
 
 export default function* rootSaga() {
     yield all([
@@ -11,6 +12,7 @@ export default function* rootSaga() {
       loginSaga(),
       registrationSaga(),
       userSaga(),
-      SubscriberProjects()
+      SubscriberProjects(),
+      workflows(),
     ]);
   }
