@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
     client,
     subscriber,
     user,
-sweetalerts,
+// sweetalerts,
     workflow,
     errors,
   });
