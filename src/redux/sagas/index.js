@@ -3,6 +3,7 @@ import clientList from './clientListSaga';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
+import teamSaga from './teamSaga';
 import SubscriberProjects from './SubscriberProjects';
 import workflows from './workflowSaga';
 
@@ -12,6 +13,7 @@ export default function* rootSaga() {
       loginSaga(),
       registrationSaga(),
       userSaga(),
+      teamSaga(),
       SubscriberProjects(),
       workflows(),
     ]);

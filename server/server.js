@@ -11,6 +11,7 @@ const passport = require('./strategies/user.strategy');
 const testRouter = require('./routes/template.router');
 const adminRouter = require('./routes/admin.router');
 const userRouter = require('./routes/user.router');
+const teamRouter = require('./routes/teams.router');
 const subscriberRouter = require('./routes/subscriber.router');
 const workflowRouter = require('./routes/workflow.router');
 
@@ -28,9 +29,9 @@ app.use(passport.session());
 // Routes //
 app.use('/api/test', testRouter);
 app.use('/api/admin', adminRouter);
-app.use('/api/user', userRouter)
-app.use('/subscriber', subscriberRouter)
-app.use('/api/workflow', workflowRouter);
+app.use('/api/user', userRouter);
+app.use('/api/teams', teamRouter);
+app.use('/subscriber', subscriberRouter);
 
 
 // Serve static files

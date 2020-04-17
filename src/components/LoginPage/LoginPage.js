@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Teams from '../Teams/Teams';
+import UserProfile from '../UserProfile/UserProfile';
+
 //I (Haley) changed this file a lot from the prime starter
 //for testing purposes and easier prs I wanted everything in one page
 //I think once things are working it would make a lot of sense to make it a lot more modular
@@ -16,8 +19,12 @@ class LoginPage extends Component {
     firstname: '',
     lastname: '',
     phone: '',
-    company: ''
+    company: '',
   };
+
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_CURRENT_USER' })
+  }//this gets user info, upon reload (from session, I think)
 
   login = (event) => {
     //don't reload page on submit
@@ -45,7 +52,7 @@ class LoginPage extends Component {
           firstname: this.state.firstname,
           lastname: this.state.lastname,
           phone: this.state.phone,
-          company: this.state.company
+          company: this.state.company,
         },
       });
     }//end if register mode
@@ -55,6 +62,7 @@ class LoginPage extends Component {
     else{
       this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
     }//end else (fields not filled, not able to dispatch)
+    window.location.reload(false);
   }//end login
 
   handleInputChangeFor = propertyName => (event) => {
@@ -79,95 +87,104 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        {this.state.mode==='login'
+        {/* <p>this.props.user.currentUser: {JSON.stringify(this.props.user)}</p> */}
+        {this.props.user.currentUser.id 
           ?
-          <form onSubmit={this.login}>
-            <button type="button" className="link-button" onClick={this.swtichMode}>switch to register mode</button>
+            <div>
+              <button onClick={() => this.props.dispatch({ type: 'LOGOUT' })}>Log Out</button>
+              <UserProfile/>
+              <Teams/>
+            </div>
+          :
+            <>
+            {/* display this stuff when there isn't a user detected */}
+              {this.state.mode==='login'
+                ?
+                <form onSubmit={this.login}>
+                  <button type="button" className="link-button" onClick={this.swtichMode}>switch to register mode</button>
 
-            <h1>Log In</h1>
-            <h2>{this.props.errors.loginMessage}</h2>
-            <div>
-              <label htmlFor="email">
-                Email:
-                  <input type="email" name="email" value={this.state.username} required
-                  onChange={this.handleInputChangeFor('email')}/>
-              </label>
-            </div>
-            <div>
-              <label htmlFor="password">
-                Password:
-                <input type="password" name="password" value={this.state.password} required
-                  onChange={this.handleInputChangeFor('password')}/>
-              </label>
-            </div>
-            <div>
-              <input className="log-in" type="submit" name="submit" value='Log In'/>
-            </div>
-          </form>
-        :
-          <form onSubmit={this.login}>
-            <button type="button" className="link-button" onClick={this.swtichMode}>switch to login mode</button>
+                  <h1>Log In</h1>
+                  <h2>{this.props.errors.loginMessage}</h2>
+                  <div>
+                    <label htmlFor="email">
+                      Email:
+                        <input type="email" name="email" value={this.state.username} required
+                        onChange={this.handleInputChangeFor('email')}/>
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="password">
+                      Password:
+                      <input type="password" name="password" value={this.state.password} required
+                        onChange={this.handleInputChangeFor('password')}/>
+                    </label>
+                  </div>
+                  <div>
+                    <input className="log-in" type="submit" name="submit" value='Log In'/>
+                  </div>
+                </form>
+              :
+                <form onSubmit={this.login}>
+                  <button type="button" className="link-button" onClick={this.swtichMode}>switch to login mode</button>
 
-            <h1>Register</h1>
-            <h2>{this.props.errors.registrationMessage}</h2>
-            <div>
-              <label htmlFor="firstname">
-                First Name:
-                  <input type="text" name="firstname" value={this.state.firstname} required
-                  onChange={this.handleInputChangeFor('firstname')} />
-              </label>
-            </div>
-            <div>
-              <label htmlFor="lastname">
-                Last Name:
-                  <input type="text" name="lastname" value={this.state.lastname} required
-                  onChange={this.handleInputChangeFor('lastname')} />
-              </label>
-            </div>
-            <div>
-              <label htmlFor="alias">
-                What name should we display on your account?
-                  <input type="text" name="alias" value={this.state.alias} placeholder={this.state.firstname}
-                  onChange={this.handleInputChangeFor('alias')} />
-              </label>
-            </div>
-            <div>
-              <label htmlFor="email">
-                Email:
-                <input type="email" name="email" value={this.state.username} required
-                  onChange={this.handleInputChangeFor('email')} />
-              </label>
-            </div>
-            <div>
-              <label htmlFor="phone">
-                Phone Number:
-                  <input type="text" name="phone" value={this.state.phone}
-                  onChange={this.handleInputChangeFor('phone')} />
-              </label>
-            </div>
-            <div>
-              <label htmlFor="company">
-                Company:
-                  <input type="text" name="company" value={this.state.company}
-                  onChange={this.handleInputChangeFor('company')} />
-              </label>
-            </div>
-            <div>
-              <label htmlFor="password">
-                Password:
-              <input type="password" name="password" value={this.state.password} required
-                  onChange={this.handleInputChangeFor('password')} />
-              </label>
-            </div>
-            <div>
-              <input className="log-in" type="submit" name="submit" value='Sign Up' />
-            </div>
-          </form>
-        }
-        <p>this.props.user is:</p>{JSON.stringify(this.props.user)}
-        {this.props.user.id &&
-          <button onClick={() => this.props.dispatch({ type: 'LOGOUT' })}>Log Out</button>
-        }
+                  <h1>Register</h1>
+                  <h2>{this.props.errors.registrationMessage}</h2>
+                  <div>
+                    <label htmlFor="firstname">
+                      First Name:
+                        <input type="text" name="firstname" value={this.state.firstname} required
+                        onChange={this.handleInputChangeFor('firstname')} />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="lastname">
+                      Last Name:
+                        <input type="text" name="lastname" value={this.state.lastname} required
+                        onChange={this.handleInputChangeFor('lastname')} />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="alias">
+                      What name should we display on your account?
+                        <input type="text" name="alias" value={this.state.alias} placeholder={this.state.firstname}
+                        onChange={this.handleInputChangeFor('alias')} />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="email">
+                      Email:
+                      <input type="email" name="email" value={this.state.username} required
+                        onChange={this.handleInputChangeFor('email')} />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="phone">
+                      Phone Number:
+                        <input type="text" name="phone" value={this.state.phone}
+                        onChange={this.handleInputChangeFor('phone')} />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="company">
+                      Company:
+                        <input type="text" name="company" value={this.state.company}
+                        onChange={this.handleInputChangeFor('company')} />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="password">
+                      Password:
+                    <input type="password" name="password" value={this.state.password} required
+                        onChange={this.handleInputChangeFor('password')} />
+                    </label>
+                  </div>
+                  <div>
+                    <input className="log-in" type="submit" name="submit" value='Sign Up' />
+                  </div>
+                </form>
+              }
+          </>
+        }    
       </div>
     );
   }
@@ -178,6 +195,7 @@ class LoginPage extends Component {
 const mapStateToProps = state => ({
   user: state.user,
   errors: state.errors,
+  teams: state.teams
 });
 
 export default connect(mapStateToProps)(LoginPage);

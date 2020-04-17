@@ -1,0 +1,14 @@
+.profile p, h2 {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.profile p {
+    font-size: .8em;
+}
+
+.profile {
+    border: 2px solid black;
+    padding: 1em;
+}
