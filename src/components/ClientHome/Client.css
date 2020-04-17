@@ -1,0 +1,30 @@
+/* allows phase blocks to scroll side to side instead of stack */
+.phaseOverview {
+    background-color: var(--bg-primary);
+    overflow-x: auto;
+    white-space: nowrap;
+    text-align: center;    
+}
+/* can change how many divs per screen based on width % */
+.phaseOverviewItem {
+    background-color: var(--bg-tertiary);
+    color: var(--text-tertiary);
+    max-height: 70vh;
+    width: 20vw;
+    display: inline-block;
+    margin: .5em;
+    border-radius: 1em;
+    padding: 1em;
+}
+.taskWindow {
+    text-align: center;
+}
+.taskAtHand {
+    background-color: var(--bg-secondary);
+    color: var(--text-tertiary);
+    display: inline-block;
+    width: 90vw;
+    margin: .5em;
+    border-radius: 1em;
+    padding: 1em;
+}
