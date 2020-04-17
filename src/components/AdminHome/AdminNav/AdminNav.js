@@ -20,8 +20,7 @@ function AdminNav(props) {
                     <li className="nav-item"><Link to={`${url}/home`} className="nav-link"><img src="/images/square-logo.png" alt="logo" height="80px" /></Link></li>
                     <li className="nav-item"><Link to={`${url}/create-workflow`} className="nav-link">Create Workflow</Link></li>
                     <li className="nav-item"><Link to={`${url}/workflows`} className="nav-link">Existing Workflows</Link></li>
-                    <li className="nav-item"><Link to={`${url}/existing-projects`} className="nav-link">Existing Projects</Link></li>
-                    <li className="nav-item"><Link to={`${url}/alerts`} className="nav-link">Alerts</Link></li>
+                    {/* <li className="nav-item"><Link to={`${url}/alerts`} className="nav-link">Alerts</Link></li> */}
                     <li className="nav-item"><Link to={`${url}/subscribers`} className="nav-link">Subscribers</Link></li>
                     <li className="nav-item"><Link to={`${url}/profile`} className="nav-link">My Profile</Link></li>
                 </ul>
