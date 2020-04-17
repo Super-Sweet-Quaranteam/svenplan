@@ -12,9 +12,7 @@ function* fetchTeams() {
     const response = yield axios.get('/api/teams', config); 
     let teamArray = response.data;
     for (let i=0; i<teamArray.length; i++){
-      console.log('going through teamArray:', teamArray[i].name);
       let members = yield axios.get(`/api/teams/members/${teamArray[i].id}`, config);
-      console.log('members.data:', members.data);
       teamArray[i]={...teamArray[i], members:members.data}
     }
 

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Teams from '../Teams/Teams';
+import UserProfile from '../UserProfile/UserProfile';
+
 //I (Haley) changed this file a lot from the prime starter
 //for testing purposes and easier prs I wanted everything in one page
 //I think once things are working it would make a lot of sense to make it a lot more modular
@@ -16,11 +19,11 @@ class LoginPage extends Component {
     firstname: '',
     lastname: '',
     phone: '',
-    company: ''
+    company: '',
   };
 
   componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_USER' })
+    this.props.dispatch({ type: 'FETCH_CURRENT_USER' })
     this.props.dispatch({type: 'FETCH_TEAMS'})
   }//this gets user and team info, upon reload (from session, I think)
 
@@ -50,7 +53,7 @@ class LoginPage extends Component {
           firstname: this.state.firstname,
           lastname: this.state.lastname,
           phone: this.state.phone,
-          company: this.state.company
+          company: this.state.company,
         },
       });
     }//end if register mode
@@ -88,29 +91,8 @@ class LoginPage extends Component {
           ?
             <div>
               <button onClick={() => this.props.dispatch({ type: 'LOGOUT' })}>Log Out</button>
-              <h2>Current User Information</h2>
-              <p>Display Name: {this.props.user.alias}</p>
-              <p>ID: {this.props.user.id}</p>
-              <p>Level: {this.props.user.level}</p>
-              {this.props.user.team_id
-                ?
-                <p>Team: {this.props.user.team}</p>
-                :
-                <button>Add to Team</button>
-              }
-
-              <h2>Teams</h2>
-              {this.props.teams[0]&&
-              <ul>
-                {this.props.teams.map((team) => 
-                  <li key={team.id}>{team.name}
-                    {team.members.map(member =>
-                      <li>-----{member.firstname}</li>
-                      )}
-                  </li>
-                )}
-              </ul>
-              }
+              <UserProfile/>
+              <Teams/>
             </div>
           :
             <>

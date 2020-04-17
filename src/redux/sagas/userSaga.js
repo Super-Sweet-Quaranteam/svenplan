@@ -25,7 +25,7 @@ function* fetchUser() {
 }
 
 function* userSaga() {
-  yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('FETCH_CURRENT_USER', fetchUser);
 }
 
 export default userSaga;
