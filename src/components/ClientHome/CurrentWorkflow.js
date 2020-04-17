@@ -6,6 +6,10 @@ class CurrentWorkflow extends Component {
     componentDidMount(){
         this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW'})               
     }
+    showTasks=(phaseId)=>{
+        console.log('you clicked a phase');
+        this.props.dispatch({type: 'FETCH_PHASES_TASKS', payload: {phaseId: phaseId}})
+    }
     render() {
         return (
             <div className='CurrentWorkflow'>
@@ -13,7 +17,7 @@ class CurrentWorkflow extends Component {
                         <a className="nav-link" href="#/clientHome">Back</a></button>
                 <div className="phaseOverview">
                     {this.props.reduxState.subscriber.currentProject.map(phase => 
-                        <div className="phaseOverviewItem">{phase.name}</div>
+                        <button className="phaseOverviewItem" onClick={()=>this.showTasks(phase.id)}>{phase.name}</button>
                         )}
                 </div>
                 <div className="taskWindow">

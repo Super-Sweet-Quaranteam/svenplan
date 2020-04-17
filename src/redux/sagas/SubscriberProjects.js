@@ -4,6 +4,7 @@ import axios from 'axios';
 function* SubscriberProjects(){
     yield takeEvery('FETCH_EXISTING_PROJECTS', fetchExistingProjects)
     yield takeEvery('FETCH_CURRENT_WORKFLOW', fetchCurrentWorkflow)
+    yield takeEvery('FETCH_PHASES_TASKS', fetchPhasesTasks)
 }
 
 function* fetchExistingProjects(){
@@ -16,12 +17,21 @@ function* fetchExistingProjects(){
 }
 
 function* fetchCurrentWorkflow(){
-    try {
-        yield console.log('stop trying to make fetch a thing');
-        
+    try {        
         const response = yield axios.get('/subscriber/current-workflow/phases')
-        yield console.log('response.data is ', response.data);
         yield put({type: 'SET_CURRENT_PROJECT', payload: response.data})
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function* fetchPhasesTasks(action){
+    try {
+        yield console.log('stop trying to make fetch a thing', action.payload.phaseId);
+        
+        const response = yield axios.get('/subscriber/current-workflow/phases/tasks/'+ action.payload.phaseId)
+        yield console.log('response.data is ', response.data);
+        // yield put({type: 'SET_CURRENT_PROJECT', payload: response.data})
     } catch (error) {
         console.log(error);
     }

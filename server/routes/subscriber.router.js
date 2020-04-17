@@ -10,7 +10,7 @@ const router = express.Router();
         let queryText = `SELECT * FROM "projects" WHERE "team_id"= 2`;
         pool.query(queryText)
             .then((response) => {
-                console.log('successful get- response.rows:', response.rows);
+                // console.log('successful get- response.rows:', response.rows);
                 res.send(response.rows);
             })
             .catch(() => {
@@ -19,9 +19,25 @@ const router = express.Router();
             })
     });//get task names for a certain project, and whether or not they're done.
     
-    router.get('/current-workflow/phases', (req, res) => {        
+    router.get('/current-workflow/phases', (req, res) => {   
+        // workflow_id hardcoded for now -- will need to sanitize and make variable     
         let queryText = `SELECT * FROM "phases" WHERE "workflow_id"=5`;
         pool.query(queryText)
+            .then((response) => {
+                // console.log('successful get- response.rows:', response.rows);
+                res.send(response.rows);
+            })
+            .catch(() => {
+                console.log('something went wrong in get at /');
+                res.sendStatus(500);
+            })
+    });
+
+    router.get('/current-workflow/phases/tasks/:phaseId', (req, res) => {   
+        console.log('req.params is ', req.params.phaseId);
+        let phaseId = req.params.phaseId;
+        let queryText = `SELECT * FROM "default_tasks" WHERE "phase_id"=$1`;
+        pool.query(queryText,[phaseId])
             .then((response) => {
                 console.log('successful get- response.rows:', response.rows);
                 res.send(response.rows);
