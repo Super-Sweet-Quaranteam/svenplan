@@ -24,8 +24,30 @@ function* fetchUser() {
   }
 }
 
+// worker Saga: will be fired on "FETCH_SELECTED_USER" actions
+function* fetchSelectedUser(action) {
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+
+    // the config includes credentials which
+    // allow the server session to recognize the user
+    // If a user is logged in, this will return their information
+    // from the server session (req.user)
+    const response = yield axios.get(`/api/user/selected/${action.payload}`, config);
+    const teamResponse = yield axios.get(`/api/user/team/${action.payload}`, config);
+    yield put({ type: 'SET_SELECTED_USER', payload: { ...response.data, team: teamResponse.data } });
+  } catch (error) {
+    console.log('User get request failed', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_CURRENT_USER', fetchUser);
+  yield takeLatest('FETCH_SELECTED_USER', fetchSelectedUser);
+
 }
 
 export default userSaga;

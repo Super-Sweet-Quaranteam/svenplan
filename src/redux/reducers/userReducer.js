@@ -1,4 +1,7 @@
-const userReducer = (state = {}, action) => {
+import { combineReducers } from 'redux';
+
+
+const currentUser = (state = {}, action) => {
   switch (action.type) {
     case 'SET_USER':
       return action.payload;
@@ -9,6 +12,19 @@ const userReducer = (state = {}, action) => {
   }
 };
 
-// user will be on the redux state at:
-// state.user
-export default userReducer;
+const selectedUser = (state = {}, action) => {
+  switch (action.type) {
+    case 'SET_SELECTED_USER':
+      return action.payload;
+    case 'UNSET_SELECTED_USER':
+      return {};
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({
+  currentUser,
+  selectedUser,
+});
+

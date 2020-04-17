@@ -16,7 +16,7 @@ router.get('/', rejectUnauthenticated, (req, res)=>{
 });
 
 router.get('/members/:id', rejectUnauthenticated, (req, res) => {
-  const queryText = `SELECT "users"."alias" AS "user", "users"."firstname", "users"."lastname"
+  const queryText = `SELECT "users"."alias" AS "user", "users"."firstname", "users"."lastname", "users"."id"
                     FROM "teams" JOIN "users"
                     ON "teams"."id" = "users"."team_id"
                     WHERE "teams"."id" = $1;`

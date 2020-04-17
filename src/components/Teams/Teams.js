@@ -12,7 +12,11 @@ class Teams extends Component {
     this.props.dispatch({type: 'FETCH_TEAMS'})
   }//this gets team info upon loading
 
-
+  getSelectedUser(id) {
+    console.log('in getSelectedUser with id:', id);
+    this.props.dispatch({ type: 'FETCH_SELECTED_USER', payload: id });
+  }
+  
   render() {
     return (
       <div>
@@ -23,7 +27,9 @@ class Teams extends Component {
           <>
             <h3 key={team.id}>{team.name}</h3>
               {team.members.map(member =>
-                <li>{member.firstname}</li>
+                <li>{member.firstname}
+                  <button onClick={() => this.getSelectedUser(member.id)}>See Profile</button>
+                </li>
                 )}
                 </>
           )}
