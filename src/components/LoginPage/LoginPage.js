@@ -22,8 +22,11 @@ class LoginPage extends Component {
     company: '',
   };
 
+
   componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_CURRENT_USER' })
+    this.props.dispatch({ type: 'FETCH_CURRENT_USER' });
+    
+
   }//this gets user info, upon reload (from session, I think)
 
   login = (event) => {
@@ -40,6 +43,13 @@ class LoginPage extends Component {
           password: this.state.password,
         },
       });
+      this.props.history.push({ pathname: '/adminHome' })
+      // if (this.props.user.currentUser.level === 1) {
+      //   this.props.history.push({ pathname: '/adminHome' })
+      // }
+      // if (this.props.user.currentUser.level === 2) {
+      //   this.props.history.push({ pathname: '/clientHome' })
+      // }
     }//end if login mode
     //register will eventually have more required fields but for now just email and password
     else if (this.state.mode === 'register' && this.state.email && this.state.password) {
@@ -55,6 +65,13 @@ class LoginPage extends Component {
           company: this.state.company,
         },
       });
+      this.props.history.push({ pathname: '/adminHome' })
+      // if(this.props.user.currentUser.level === 1){
+      //   this.props.history.push({ pathname: '/adminHome' })
+      // }
+      //   if(this.props.user.currentUser.level === 2){
+      //     this.props.history.push({ pathname: '/clientHome' })
+      // }
     }//end if register mode
     else if (this.state.mode ==='login'){
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
@@ -62,7 +79,8 @@ class LoginPage extends Component {
     else{
       this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
     }//end else (fields not filled, not able to dispatch)
-    window.location.reload(false);
+    // window.location.reload(false);
+
   }//end login
 
   handleInputChangeFor = propertyName => (event) => {
