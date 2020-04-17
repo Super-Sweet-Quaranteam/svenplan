@@ -14,7 +14,8 @@ CREATE TABLE "workflows"
     "name" VARCHAR NOT NULL,
     "description" VARCHAR,
     "created" TIMESTAMPTZ,
-    "edited" TIMESTAMPTZ
+    "edited" TIMESTAMPTZ,
+    "published" BOOLEAN DEFAULT FALSE,
 );
 CREATE TABLE "phases"
 (
