@@ -8,6 +8,7 @@ import ExistingProjects from '../ExistingProjects/ExistingProjects'
 import ClientAlerts from '../ClientAlerts/ClientAlerts';
 import ClientList from '../ClientList/ClientList';
 import UserProfile from '../../UserProfile/UserProfile';
+import AdminHome from '../AdminHome';
 
 function AdminNav(props) {
     let { path, url } = useRouteMatch();
@@ -15,7 +16,7 @@ function AdminNav(props) {
         <>
             <nav className="nav-wrapper">
                 <ul className="nav">
-                    <li className="nav-item"><img src="/images/square-logo.png" alt="logo" height="80px"/></li>
+                    <li className="nav-item"><Link to={`${url}/home`} className="nav-link"><img src="/images/square-logo.png" alt="logo" height="80px" /></Link></li>
                     <li className="nav-item"><Link to={`${url}/create-workflow`} className="nav-link">Create Workflow</Link></li>
                     <li className="nav-item"><Link to={`${url}/workflows`} className="nav-link">Existing Workflows</Link></li>
                     <li className="nav-item"><Link to={`${url}/existing-projects`} className="nav-link">Existing Projects</Link></li>
@@ -26,6 +27,7 @@ function AdminNav(props) {
             </nav>
         
             <Switch>
+                <Route path={`${path}/home`} component={AdminHome} />
                 <Route path={`${path}/create-workflow`} component={CreateWorkflow}/>
                 <Route path={`${path}/workflows`} component={ExistingWorkflows} />
                 <Route path={`${path}/existing-projects`} component={ExistingProjects} />
