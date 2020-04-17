@@ -6,7 +6,8 @@ import CreateWorkflow from './CreateWorkflow/CreateWorkflow';
 import ExistingWorkflows from './ExistingWorkflows/ExistingWorkflows'
 import ExistingProjects from './ExistingProjects/ExistingProjects'
 import ClientAlerts from './ClientAlerts/ClientAlerts';
-import ClientList from './ClientList/ClientList'
+import ClientList from './ClientList/ClientList';
+import UserProfile from '../UserProfile/UserProfile';
 
 
 
@@ -49,6 +50,13 @@ function AdminHome(props) {
             {props.reduxState.admin.adminDisplay.displayClients === true
                 ?
                 <ClientList
+                />
+                :
+                null
+            }
+            {props.reduxState.admin.adminDisplay.displayProfile === true
+                ?
+                <UserProfile
                 />
                 :
                 null

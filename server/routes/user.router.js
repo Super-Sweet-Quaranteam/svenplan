@@ -14,6 +14,44 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+router.get('/selected/:id', rejectUnauthenticated, (req, res) => {
+  const queryText=`SELECT * FROM "users" WHERE "id"=$1;`;
+  const values=[req.params.id];
+  pool.query(queryText, values)
+    .then((response) => {
+      res.send(response.rows[0]);
+    })
+    .catch(() => res.sendStatus(500));
+});
+
+router.get('/team', rejectUnauthenticated, (req, res)=>{
+  if (req.user.team_id){  
+    const queryText = `SELECT "users"."alias" AS "user", "teams"."name" AS "team"
+                      FROM "teams" JOIN "users"
+                      ON "teams"."id" = "users"."team_id"
+                      WHERE "users"."id" = $1;`;
+    pool.query(queryText, [req.user.id])
+      .then((response) => {
+        res.send(response.rows[0].team);})
+      .catch(() => res.sendStatus(500));
+  }
+  else {
+    res.sendStatus(200);
+  }
+});
+
+router.get('/team/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT "users"."alias" AS "user", "teams"."name" AS "team"
+                    FROM "teams" JOIN "users"
+                    ON "teams"."id" = "users"."team_id"
+                    WHERE "users"."id" = $1;`;
+  pool.query(queryText, [req.params.id])
+    .then((response) => {
+      res.send(response.rows[0].team);
+    })
+    .catch(() => res.sendStatus(500));
+});
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
