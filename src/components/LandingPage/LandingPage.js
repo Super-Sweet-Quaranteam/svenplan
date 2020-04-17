@@ -6,7 +6,7 @@ import "./LandingPage.css"
 function LandingPage(props) {
 
    function Admin (event){
-        props.history.push({ pathname: '/adminHome'})
+        props.history.push({ pathname: '/admin'})
     }
     function Client (event){
         props.history.push({ pathname: '/clientHome'})

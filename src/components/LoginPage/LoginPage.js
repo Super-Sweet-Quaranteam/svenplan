@@ -43,9 +43,9 @@ class LoginPage extends Component {
           password: this.state.password,
         },
       });
-      this.props.history.push({ pathname: '/adminHome' })
+      this.props.history.push({ pathname: '/admin' })
       // if (this.props.user.currentUser.level === 1) {
-      //   this.props.history.push({ pathname: '/adminHome' })
+      //   this.props.history.push({ pathname: '/admin' })
       // }
       // if (this.props.user.currentUser.level === 2) {
       //   this.props.history.push({ pathname: '/clientHome' })
@@ -65,9 +65,9 @@ class LoginPage extends Component {
           company: this.state.company,
         },
       });
-      this.props.history.push({ pathname: '/adminHome' })
+      this.props.history.push({ pathname: '/admin' })
       // if(this.props.user.currentUser.level === 1){
-      //   this.props.history.push({ pathname: '/adminHome' })
+      //   this.props.history.push({ pathname: '/admin' })
       // }
       //   if(this.props.user.currentUser.level === 2){
       //     this.props.history.push({ pathname: '/clientHome' })
