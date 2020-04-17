@@ -4,7 +4,14 @@ import './Client.css';
 
 class CurrentWorkflow extends Component {
     state = {
-        task: null
+        task: null,
+        taskIndex: 0
+    }
+    backATask=()=>{
+        this.setState({
+            task: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex - 1],
+            taskIndex: this.state.taskIndex - 1
+        })
     }
     componentDidMount(){
         this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW'})               
@@ -13,10 +20,15 @@ class CurrentWorkflow extends Component {
         console.log('you clicked a phase');
         // passing function in payload so sagas can run it async.
         this.props.dispatch({type: 'FETCH_PHASES_TASKS', payload: {phaseId: phaseId, callback: () => {
-            this.setState({task: this.props.reduxState.subscriber.tasksInPhase[0]})
+            this.setState({task: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex]})
         }}})
     }
-
+    forwardATask=()=>{
+        this.setState({
+            task: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex + 1],
+            taskIndex: this.state.taskIndex + 1
+        })
+    }
     render() {
         return (
             <div className='CurrentWorkflow'>
@@ -37,8 +49,8 @@ class CurrentWorkflow extends Component {
                             <br/>
                             Will also include checkboxes, tutorials, etc
                             <br/>
-                            <button>Back</button>
-                            <button>Next</button>
+                            <button onClick={this.backATask}>Back</button>
+                            <button onClick={this.forwardATask}>Next</button>
                 </div>}
                     {/* {this.props.reduxState.subscriber.tasksInPhase.map(task =>
                         <div className="taskAtHand" key={task.id}>{task.name}
