@@ -24,8 +24,7 @@ class LoginPage extends Component {
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_CURRENT_USER' })
-    this.props.dispatch({type: 'FETCH_TEAMS'})
-  }//this gets user and team info, upon reload (from session, I think)
+  }//this gets user info, upon reload (from session, I think)
 
   login = (event) => {
     //don't reload page on submit
@@ -63,6 +62,7 @@ class LoginPage extends Component {
     else{
       this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
     }//end else (fields not filled, not able to dispatch)
+    window.location.reload(false);
   }//end login
 
   handleInputChangeFor = propertyName => (event) => {
@@ -87,6 +87,7 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
+        {/* <p>this.props.user.currentUser: {JSON.stringify(this.props.user)}</p> */}
         {this.props.user.currentUser.id 
           ?
             <div>

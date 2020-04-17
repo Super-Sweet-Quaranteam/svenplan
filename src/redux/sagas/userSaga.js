@@ -32,10 +32,6 @@ function* fetchSelectedUser(action) {
       withCredentials: true,
     };
 
-    // the config includes credentials which
-    // allow the server session to recognize the user
-    // If a user is logged in, this will return their information
-    // from the server session (req.user)
     const response = yield axios.get(`/api/user/selected/${action.payload}`, config);
     const teamResponse = yield axios.get(`/api/user/team/${action.payload}`, config);
     yield put({ type: 'SET_SELECTED_USER', payload: { ...response.data, team: teamResponse.data } });

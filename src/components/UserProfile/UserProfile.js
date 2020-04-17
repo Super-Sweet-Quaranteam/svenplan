@@ -10,12 +10,9 @@ class UserProfile extends Component {
   }
 
   getSelectedUser(id){
-    console.log('in getSelectedUser with id:', id);
     this.props.dispatch({ type: 'FETCH_SELECTED_USER', payload: id });
   }
  
-
-
   render() {
     return (
       <div>
@@ -25,16 +22,16 @@ class UserProfile extends Component {
           {/* <button onClick={() => this.props.dispatch({ type: 'FETCH_PROFILE', payload: this.props.user.id })}>See My Profile</button> */}
 
           <h2>{this.props.user.selectedUser.alias}'s Profile</h2>
-          <p>Full Name: {this.props.user.selectedUser.firstname} {this.props.user.selectedUser.lastname}</p>
-          <p>User ID: {this.props.user.selectedUserID}</p>
-          <p>Level: {this.props.user.selectedUser.level}</p>
-          {this.props.user.selectedUser.team_id
-              ?
-            <p>Team: {this.props.user.selectedUser.team}</p>
-              :
-              <button>Add to Team</button>
-            }
-        </div>
+            <p>Full Name: {this.props.user.selectedUser.firstname} {this.props.user.selectedUser.lastname}</p>
+            <p>User ID: {this.props.user.selectedUserID}</p>
+            <p>Level: {this.props.user.selectedUser.level}</p>
+            {this.props.user.selectedUser.team_id
+                ?
+              <p>Team: {this.props.user.selectedUser.team}</p>
+                :
+                <button>Add to Team</button>
+              }
+          </div>
       </div>
     );
   }
@@ -44,7 +41,6 @@ class UserProfile extends Component {
 
 const mapStateToProps = state => ({
   user: state.user,
-  errors: state.errors,
   teams: state.teams
 });
 
