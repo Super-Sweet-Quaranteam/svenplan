@@ -20,12 +20,10 @@ router.get('/all', (req, res) => {
 // get requested workflow
 router.get('/requested/:id', (req, res) => {
     console.log('in GET this workflow with id:', req.params.id)
-    const queryText = `SELECT "phases"."name" as ph_name, "phases"."description" as ph_description, "phases"."sequence" as ph_sequence,
-    "default_tasks"."name" as task_name, "default_tasks"."description" as task_description, "default_tasks"."sequence" as task_sequence
+    const queryText = `SELECT "phases"."name" as ph_name, "phases"."description" as ph_description, "phases"."sequence" as ph_sequence
     FROM "workflows"
-    JOIN "phases" ON "phases"."workflow_id" = "workflows".id
-    JOIN "default_tasks" ON "default_tasks"."phase_id" = "phases"."id"
-    WHERE "workflows"."id"=$1 ORDER BY "phases"."sequence" ASC;`;
+    join "phases" on "phases"."workflow_id" = "workflows".id
+    WHERE "workflows"."id"=$1 order by "phases"."sequence" ASC;`;
     pool.query(queryText, [req.params.id])
     .then( (result) => {
         console.log(result.rows);
@@ -33,6 +31,24 @@ router.get('/requested/:id', (req, res) => {
     })
     .catch( (error) => {
         console.log(`Error GET this workflow ${error}`);
+        res.sendStatus(500);
+    });
+});
+
+// get requested workflow
+router.get('/phase/:id', (req, res) => {
+    console.log('in GET this phase with id:', req.params.id)
+    const queryText = `SELECT "default_tasks"."name" as task_name, "default_tasks"."description" as task_description, "default_tasks"."sequence" as task_sequence
+    FROM "phases"
+    join "default_tasks" on "default_tasks"."phase_id" = "phases"."id"
+    WHERE "phases"."id"=$1 order by "default_tasks"."sequence" ASC;;`;
+    pool.query(queryText, [req.params.id])
+    .then( (result) => {
+        console.log(result.rows);
+        res.send(result.rows);
+    })
+    .catch( (error) => {
+        console.log(`Error GET this phase ${error}`);
         res.sendStatus(500);
     });
 });
