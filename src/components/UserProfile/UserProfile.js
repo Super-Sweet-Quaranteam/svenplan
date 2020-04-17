@@ -4,7 +4,8 @@ import './UserProfile.css';
 
 class UserProfile extends Component {
 
-  state={mode:'display'}
+  state={mode:'display',
+}
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_CURRENT_USER', payload: this.props.user.currentUser.id })
@@ -16,10 +17,14 @@ class UserProfile extends Component {
 
   editMode=()=>{
     if (this.state.mode === 'display') {
-      this.setState({ mode: 'edit' })
+      this.setState({ mode: 'edit',
+        email: this.props.user.currentUser.email,
+        firstName: this.props.user.currentUser.firstname,
+        lastName: this.props.user.currentUser.lastname,
+        alias: this.props.user.currentUser.alias })
     }
     else if (this.state.mode === 'edit') {
-      this.setState({ mode: 'display' })
+      this.setState({ mode: 'display'})
     }
     this.props.dispatch({ type: 'FETCH_CURRENT_USER', payload: this.props.user.currentUser.id })
   }
@@ -27,6 +32,7 @@ class UserProfile extends Component {
     this.setState({
       [propertyName]: event.target.value,
     });
+    console.log(this.state)
   }
  
   render() {
@@ -45,7 +51,7 @@ class UserProfile extends Component {
           <p>Display Name: {this.props.user.currentUser.alias}</p>
           <p>Full Name: {this.props.user.currentUser.firstname} {this.props.user.currentUser.lastname}</p>
           <p>User ID: {this.props.user.currentUser.id}</p>
-            <p>Level: {this.props.user.currentUser.level === 1 &&
+            <p>Access Level: {this.props.user.currentUser.level === 1 &&
              "Admin"  }
             {this.props.user.currentUser.level === 2 &&
               "Subscriber"}</p>
@@ -67,13 +73,13 @@ class UserProfile extends Component {
       <>
       <h2>Edit Profile</h2>
         <label htmlFor="emailEdit">Email:</label>
-        <input id='emailEdit' onChange={this.handleInputChangeFor('email')} value={this.props.user.currentUser.email}></input>
+        <input id='emailEdit' onChange={this.handleInputChangeFor('email')} value={this.state.email}></input>
         <label htmlFor="aliasEdit">Display Name:</label>
-        <input id='aliasEdit' onChange={this.handleInputChangeFor('alias')} value={this.props.user.currentUser.alias}></input>
+        <input id='aliasEdit' onChange={this.handleInputChangeFor('alias')} value={this.state.alias}></input>
         <label htmlFor="firstNameEdit">First Name:</label>
-        <input id='firstNameEdit' onChange={this.handleInputChangeFor('firstname')} value={this.props.user.currentUser.firstname}></input>
+        <input id='firstNameEdit' onChange={this.handleInputChangeFor('firstname')} value={this.state.firstName}></input>
         <label htmlFor="lastNameEdit">Last Name:</label>
-        <input id='lastNameEdit' onChange={this.handleInputChangeFor('lastname')} value={this.props.user.currentUser.lastname}></input>
+        <input id='lastNameEdit' onChange={this.handleInputChangeFor('lastname')} value={this.state.lastName}></input>
         <p><button onClick={this.editMode}>Save Profile</button></p>
       <p><button onClick={this.editMode}>View Profile</button></p>
       </>
