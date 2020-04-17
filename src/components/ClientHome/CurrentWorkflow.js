@@ -4,11 +4,13 @@ import './Client.css';
 
 class CurrentWorkflow extends Component {
     componentDidMount(){
-        console.log('we in it fam');        
+        this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW'})               
     }
     render() {
         return (
             <div className='CurrentWorkflow'>
+                <button className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayOldWorkFlow: true}})}>
+                        <a className="nav-link" href="#/clientHome">Back</a></button>
                 <div className="phaseOverview">
                     {/* once we have workflows in reduxState, we'll need to connect the code below */}
                     <div className="phaseOverviewItem">(filler) Phase 1: Ideation</div>

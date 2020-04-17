@@ -3,16 +3,26 @@ import axios from 'axios';
 
 function* SubscriberProjects(){
     yield takeEvery('FETCH_EXISTING_PROJECTS', fetchExistingProjects)
+    yield takeEvery('FETCH_CURRENT_WORKFLOW', fetchCurrentWorkflow)
 }
 
 function* fetchExistingProjects(){
+    try {        
+        const response = yield axios.get('/subscriber/existing-projects')        
+        yield put({type: 'SET_EXISTING_PROJECTS', payload: response.data})
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function* fetchCurrentWorkflow(){
     try {
         yield console.log('stop trying to make fetch a thing');
         
-        const response = yield axios.get('/subscriber/existing-projects')
-        // yield console.log('response.data is ', response.data);
+        const response = yield axios.get('/subscriber/current-workflow/phases')
+        yield console.log('response.data is ', response.data);
         
-        yield put({type: 'SET_EXISTING_PROJECTS', payload: response.data})
+        // yield put({type: 'SET_EXISTING_PROJECTS', payload: response.data})
     } catch (error) {
         console.log(error);
     }
