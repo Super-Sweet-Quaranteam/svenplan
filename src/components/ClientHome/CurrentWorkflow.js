@@ -29,7 +29,10 @@ class CurrentWorkflow extends Component {
         console.log('you clicked a phase');
         // passing function in payload so sagas can run it async.
         this.props.dispatch({type: 'FETCH_PHASES_TASKS', payload: {phaseId: phaseId, callback: () => {
-            this.setState({task: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex]})
+            this.setState({
+                task: this.props.reduxState.subscriber.tasksInPhase[0],
+                taskIndex: 0
+            })
         }}})
     }
 
