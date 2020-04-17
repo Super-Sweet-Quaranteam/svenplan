@@ -40,12 +40,22 @@ const thisWorkflow = (state = [], action) => {
     }
 }
 
+// gets requested phase tasks
+const thisPhase = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_THIS_PHASE':
+            return action.payload;
+        default:
+            return state;
+    }
+}
 
 
 export default combineReducers({
     newWorkflow,
     newPhase,
     allWorkflows,
-    thisWorkflow
+    thisWorkflow,
+    thisPhase
 
   });
