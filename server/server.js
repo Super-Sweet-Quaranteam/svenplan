@@ -13,6 +13,7 @@ const adminRouter = require('./routes/admin.router');
 const userRouter = require('./routes/user.router');
 const teamRouter = require('./routes/teams.router');
 const subscriberRouter = require('./routes/subscriber.router');
+const workflowRouter = require('./routes/workflow.router');
 
 // Body parser middleware
 app.use(bodyParser.json());

@@ -35,16 +35,6 @@ body{
   transition: var(--transition-speed);
 }
 
-span{
-  margin-left:3em;
-  text-decoration: overline underline;
-}
-
-span:hover{
-  color: var(--sven-blue);
-  font-size: large;
-}
-
 .nav-wrapper{
   position: sticky;
   background-color: var(--bg-primary);

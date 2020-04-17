@@ -102,6 +102,7 @@ class NewWorkflow extends Component {
         );
     }
 }
+
 const mapStateToProps = reduxState => ({
     reduxState
 });

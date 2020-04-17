@@ -1,15 +1,10 @@
 import React, {Component} from 'react';
-import logo from '../../Logo/svenplan-logo2.png'
 import {connect} from 'react-redux';
 
 class ExistingProjects extends Component {
     // subscriber-side code. When 'Existing Projects' is clicked, page loads table of project, status and option for subscriber to continue or archive project
     archiveProject=()=>{
         console.log('archive btn clicked');   
-    }
-    continueWorkflow=(project)=>{
-        console.log('continue btn clicked');
-        console.log('this.props.history is', this.props);
     }
     componentDidMount(){
         this.props.dispatch({type: 'FETCH_EXISTING_PROJECTS'})
@@ -35,7 +30,14 @@ class ExistingProjects extends Component {
                     <tr key={project.id}>
                         <td>{project.name}</td>
                         <td>Status percent(?) will go here</td>
-                        <td><button onClick={()=>this.continueWorkflow(project)}>Continue</button><button onClick={this.archiveProject}>Archive</button></td>
+                        {/* <td><button onClick={()=>this.continueWorkflow(project)}>Continue</button><button onClick={this.archiveProject}>Archive</button></td> */}           
+                        <td>
+                            {/* on btn click, user is routed to CurrentWorkflow component */}
+                            <button className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayCurrentWorkflow: true}})}>
+                                <a className="nav-link" href="#/clientHome">Continue</a>
+                            </button>
+                            <button onClick={this.archiveProject}>Archive</button>
+                        </td>
                     </tr>)}
                 </tbody>
             </table>

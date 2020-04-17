@@ -1,44 +1,41 @@
 import React, { Component } from 'react';
-
+import {connect} from 'react-redux';
 
 class ExistingWorkflows extends Component {
 
     state = {
-        workflows: [
-            {
-                workflowId: 0,
-                workflowName: "Small Business Guide",
-
-            },
-            {
-                workflowId: 1,
-                workflowName: 'Interior Design Guide'
-            },
-           
-        ]
+        edit: false
     }
 
-    editWorkflow = () => {
-        console.log('take to workflow')
-        this.props.history.push({ pathname: '/createWorkflow' })
+    componentDidMount=()=>{
+        this.props.dispatch({type: 'GET_ALL_WORKFLOWS'})
     }
+
+    editWorkflow=(id)=> {
+        this.setState({edit: true});
+        this.props.dispatch({type: 'GET_THIS_WORKFLOW', payload: {id: id}})
+    }
+
     render() {
         return (
-            <div >
-                <p>Existing Workflows </p>
-
-                <h2>Your Current Workflows:</h2>
+            <>
+                <h2>Existing Workflows:</h2>
                 <ul>
-                    {this.state.workflows.map(flow => (
-                        <li  key={flow.workflowId}>
-                            {flow.workflowName}
-                            <button onClick={this.editWorkflow}>Edit</button>
-                        </li>))}
+                    {this.props.reduxState.workflow.allWorkflows &&
+                        this.props.reduxState.workflow.allWorkflows.map(flow => (
+                            <li data-id={flow.id} key={flow.id}>
+                                {flow.name}
+                                <button onClick={()=>this.editWorkflow(flow.id)}>Edit</button>
+                            </li>
+                        ))
+                    }    
                 </ul>
-
-            </div>
+            </>
         );
     }
 }
 
-export default ExistingWorkflows;
+const mapStateToProps = reduxState => ({
+    reduxState
+});
+export default connect(mapStateToProps)(ExistingWorkflows);
