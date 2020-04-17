@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 
-import AdminHome from '../AdminHome/AdminHome';
 import AdminNav from '../AdminHome/AdminNav/AdminNav';
 import ClientHome from '../ClientHome/ClientHome';
 import LandingPage from '../LandingPage/LandingPage';
