@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import ClientNav from './ClientNav';
-import ClientProfile from './ClientProfile';
 import CreateWorkflow from '../AdminHome/CreateWorkflow/CreateWorkflow';
 import ExistingProjects from '../AdminHome/ExistingProjects/ExistingProjects';
 import ClientRisk from './ClientRisk';
