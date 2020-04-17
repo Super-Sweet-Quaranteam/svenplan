@@ -3,6 +3,7 @@ import './App.css';
 import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 
 import AdminHome from '../AdminHome/AdminHome';
+import AdminNav from '../AdminHome/AdminNav/AdminNav';
 import ClientHome from '../ClientHome/ClientHome';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -25,7 +26,7 @@ function App() {
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/logIn" component ={LoginPage} />
           {/* be sure to protect this route */}
-          <Route exact path="/adminHome" component={AdminHome} />
+          <Route path="/admin" component={AdminNav} />
           <Route exact path="/clientHome" component={ClientHome} />
           {/* 404 page creation below */}
           <Route render={() => 
