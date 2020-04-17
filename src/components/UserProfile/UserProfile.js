@@ -6,7 +6,7 @@ class UserProfile extends Component {
 
 
   componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_SELECTED_USER', payload: this.props.user.currentUser.id })
+    this.props.dispatch({ type: 'FETCH_CURRENT_USER', payload: this.props.user.currentUser.id })
   }
 
   getSelectedUser(id){
@@ -21,10 +21,10 @@ class UserProfile extends Component {
         <div className="profile">
           {/* <button onClick={() => this.props.dispatch({ type: 'FETCH_PROFILE', payload: this.props.user.id })}>See My Profile</button> */}
 
-          <h2>{this.props.user.selectedUser.alias}'s Profile</h2>
-            <p>Full Name: {this.props.user.selectedUser.firstname} {this.props.user.selectedUser.lastname}</p>
-            <p>User ID: {this.props.user.selectedUserID}</p>
-            <p>Level: {this.props.user.selectedUser.level}</p>
+          <h2>{this.props.user.currentUser.alias}'s Profile</h2>
+            <p>Full Name: {this.props.user.currentUser.firstname} {this.props.user.currentUser.lastname}</p>
+            <p>User ID: {this.props.user.currentUser.id}</p>
+            <p>Level: {this.props.user.currentUser.level}</p>
             {this.props.user.selectedUser.team_id
                 ?
               <p>Team: {this.props.user.selectedUser.team}</p>
