@@ -21,8 +21,7 @@ function* fetchCurrentWorkflow(){
         
         const response = yield axios.get('/subscriber/current-workflow/phases')
         yield console.log('response.data is ', response.data);
-        
-        // yield put({type: 'SET_EXISTING_PROJECTS', payload: response.data})
+        yield put({type: 'SET_CURRENT_PROJECT', payload: response.data})
     } catch (error) {
         console.log(error);
     }

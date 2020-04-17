@@ -12,8 +12,9 @@ class CurrentWorkflow extends Component {
                 <button className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayOldWorkFlow: true}})}>
                         <a className="nav-link" href="#/clientHome">Back</a></button>
                 <div className="phaseOverview">
-                    {/* once we have workflows in reduxState, we'll need to connect the code below */}
-                    <div className="phaseOverviewItem">(filler) Phase 1: Ideation</div>
+                    {this.props.reduxState.subscriber.currentProject.map(phase => 
+                        <div className="phaseOverviewItem">{phase.name}</div>
+                        )}
                 </div>
                 <div className="taskWindow">
                     {/* will also need to populate from reduxState */}
