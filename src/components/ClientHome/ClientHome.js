@@ -5,7 +5,7 @@ import ClientProfile from './ClientProfile';
 import CreateWorkflow from '../AdminHome/CreateWorkflow/CreateWorkflow';
 import ExistingProjects from '../AdminHome/ExistingProjects/ExistingProjects';
 import ClientRisk from './ClientRisk';
-
+import CurrentWorkflow from './CurrentWorkflow';
 
 const ClientHome =(props)=>{
 
@@ -38,6 +38,13 @@ const ClientHome =(props)=>{
             {props.reduxState.client.clientDisplay.displayRisk === true 
                 ?
                 <ClientRisk
+                /> 
+                :
+                null
+            }
+            {props.reduxState.client.clientDisplay.displayCurrentWorkflow === true 
+                ?
+                <CurrentWorkflow
                 /> 
                 :
                 null
