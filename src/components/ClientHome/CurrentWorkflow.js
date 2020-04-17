@@ -21,6 +21,7 @@ class CurrentWorkflow extends Component {
                         )}
                 </div>
                 <div className="taskWindow">
+                    {this.props.reduxState.subscriber.tasksInPhase.map(task => <h1>hey ya</h1>)}
                     {/* will also need to populate from reduxState */}
                     <div className="taskAtHand">(filler)Task Window
                         <br/>
