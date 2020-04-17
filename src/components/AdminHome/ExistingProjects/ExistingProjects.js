@@ -35,7 +35,13 @@ class ExistingProjects extends Component {
                     <tr key={project.id}>
                         <td>{project.name}</td>
                         <td>Status percent(?) will go here</td>
-                        <td><button onClick={()=>this.continueWorkflow(project)}>Continue</button><button onClick={this.archiveProject}>Archive</button></td>
+                        {/* <td><button onClick={()=>this.continueWorkflow(project)}>Continue</button><button onClick={this.archiveProject}>Archive</button></td> */}           
+                        <td>
+                            <div className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayCurrentWorkflow: true}})}>
+                                <a className="nav-link" href="#/clientHome">Continue</a>
+                            </div>
+                            <button onClick={this.archiveProject}>Archive</button>
+                        </td>
                     </tr>)}
                 </tbody>
             </table>
