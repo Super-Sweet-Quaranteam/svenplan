@@ -3,16 +3,20 @@ import {connect} from 'react-redux';
 import './Client.css';
 
 class CurrentWorkflow extends Component {
+    state = {
+        task: null
+    }
     componentDidMount(){
         this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW'})               
     }
     showTasks=(phaseId)=>{
         console.log('you clicked a phase');
-        this.props.dispatch({type: 'FETCH_PHASES_TASKS', payload: {phaseId: phaseId}})
+        // passing function in payload so sagas can run it async.
+        this.props.dispatch({type: 'FETCH_PHASES_TASKS', payload: {phaseId: phaseId, callback: () => {
+            this.setState({task: this.props.reduxState.subscriber.tasksInPhase[0]})
+        }}})
     }
-    selectTask=()=>{
-        
-    }
+
     render() {
         return (
             <div className='CurrentWorkflow'>
@@ -27,7 +31,16 @@ class CurrentWorkflow extends Component {
                     )}
                 </div>
                 <div className="taskWindow">
-                    {this.props.reduxState.subscriber.tasksInPhase.map(task =>
+                {this.state.task && <div className="taskAtHand" key={this.state.task.id}>{this.state.task.name}
+                            <br/>
+                            {this.state.task.description}
+                            <br/>
+                            Will also include checkboxes, tutorials, etc
+                            <br/>
+                            <button>Back</button>
+                            <button>Next</button>
+                </div>}
+                    {/* {this.props.reduxState.subscriber.tasksInPhase.map(task =>
                         <div className="taskAtHand" key={task.id}>{task.name}
                             <br/>
                             {task.description}
@@ -37,7 +50,7 @@ class CurrentWorkflow extends Component {
                             <button>Back</button>
                             <button>Next</button>
                         </div>
-                    )}
+                    )} */}
                 </div>
             </div>
         )

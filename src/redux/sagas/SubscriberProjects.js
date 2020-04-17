@@ -33,6 +33,10 @@ function* fetchPhasesTasks(action){
         const response = yield axios.get('/subscriber/current-workflow/phases/tasks/'+ action.payload.phaseId)
         yield console.log('response.data is ', response.data);
         yield put({type: 'SET_TASKS_IN_PHASE', payload: response.data})
+        // function passed in from payload is called below, 
+        // when ran, the function sets the local state of the component it belongs in
+        // using info passed to reduxState from code directly above 
+        yield action.payload.callback()
     } catch (error) {
         console.log(error);
     }
