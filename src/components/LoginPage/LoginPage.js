@@ -49,8 +49,11 @@ class LoginPage extends Component {
         },
       });
     }//end if register mode
-    else {
-      alert('please fill in all required fields');
+    else if (this.state.mode ==='login'){
+      this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
+    }
+    else{
+      this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
     }//end else (fields not filled, not able to dispatch)
   }//end login
 
@@ -82,18 +85,18 @@ class LoginPage extends Component {
             <button type="button" className="link-button" onClick={this.swtichMode}>switch to register mode</button>
 
             <h1>Log In</h1>
-           
+            <h2>{this.props.errors.loginMessage}</h2>
             <div>
               <label htmlFor="email">
                 Email:
-                  <input type="email" name="email" value={this.state.username}
+                  <input type="email" name="email" value={this.state.username} required
                   onChange={this.handleInputChangeFor('email')}/>
               </label>
             </div>
             <div>
               <label htmlFor="password">
                 Password:
-                <input type="password" name="password" value={this.state.password}
+                <input type="password" name="password" value={this.state.password} required
                   onChange={this.handleInputChangeFor('password')}/>
               </label>
             </div>
@@ -106,17 +109,18 @@ class LoginPage extends Component {
             <button type="button" className="link-button" onClick={this.swtichMode}>switch to login mode</button>
 
             <h1>Register</h1>
+            <h2>{this.props.errors.registrationMessage}</h2>
             <div>
               <label htmlFor="firstname">
                 First Name:
-                  <input type="text" name="firstname" value={this.state.firstname}
+                  <input type="text" name="firstname" value={this.state.firstname} required
                   onChange={this.handleInputChangeFor('firstname')} />
               </label>
             </div>
             <div>
               <label htmlFor="lastname">
                 Last Name:
-                  <input type="text" name="lastname" value={this.state.lastname}
+                  <input type="text" name="lastname" value={this.state.lastname} required
                   onChange={this.handleInputChangeFor('lastname')} />
               </label>
             </div>
@@ -130,7 +134,7 @@ class LoginPage extends Component {
             <div>
               <label htmlFor="email">
                 Email:
-                <input type="email" name="email" value={this.state.username}
+                <input type="email" name="email" value={this.state.username} required
                   onChange={this.handleInputChangeFor('email')} />
               </label>
             </div>
@@ -151,7 +155,7 @@ class LoginPage extends Component {
             <div>
               <label htmlFor="password">
                 Password:
-              <input type="password" name="password" value={this.state.password}
+              <input type="password" name="password" value={this.state.password} required
                   onChange={this.handleInputChangeFor('password')} />
               </label>
             </div>
@@ -173,6 +177,7 @@ class LoginPage extends Component {
 
 const mapStateToProps = state => ({
   user: state.user,
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps)(LoginPage);
