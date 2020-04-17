@@ -8,7 +8,7 @@ class WorkflowNav extends Component {
 
     viewTasks=(id)=>{
         console.log(id)
-        this.props.dispatch({type: 'GET_THIS_PHASE', payload:{id:id}})
+        this.props.dispatch({type: 'GET_THIS_PHASE', payload:{id:id}});
     }
 
 

@@ -2,67 +2,40 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import EditTask from './EditTask';
 
-class AddPhase extends Component {
+class EditPhase extends Component {
 
     state={
-        phaseEdit: true,
-        displayCard: false,
-        time: new Date(),
-        phaseName: {
-            name: '',
-            id: null
-        }
+        edit: this.props.edit,
     }
 
-    // catalogs changes to be displayed
-    handleChange=(e)=>{
-        this.setState({phaseName: {
-            name: e.target.value,
-            id: (Number(e.target.form.attributes[0].textContent)+1)
-        }})
+
+    componentDidMount=()=>{
+
     }
 
-    // sends relevant info upon submit
-    handleSubmit=(e)=>{
-        e.preventDefault();
-        this.setState({phaseEdit:false})
-        let name = this.state.phaseName.name
-        let id = this.state.phaseName.id
-        this.props.dispatch({type: 'ADD_PHASE', payload: {name: name, id: id}});
+    handleSubmit=()=>{
+        this.setState({edit: false})
     }
-
 
     render() {
         return (
+            <>
+            {this.props.edit === false
+            ?
             <div className="addPhase">
-                {this.state.phaseEdit
-                ?
+                <h3>{this.props.name}</h3>
+                <p>{this.props.description}</p>
+            </div>
+            :
+            <>
                 <form data-id={this.props.data} onSubmit={(e)=>this.handleSubmit(e)}>
-                    <input type="text" value={this.state.phaseName.name} placeholder="enter title for phase" onChange={(e)=>this.handleChange(e)} />
+                    <input type="text" value={this.props.name} placeholder="enter title for phase" onChange={(e)=>this.handleChange(e)} />
                     <input type="submit" value="save" className="button"/>
                 </form>
-                :
-                <>
-                <h1>{this.state.phaseName.name}</h1>
-                {/* <button className="button" 
-                    onClick={()=>this.setState({phaseEdit: true})}>
-                    edit</button> */}
-                </>
-                }
-                <br/>
-                <button className="button" 
-                onClick={()=>this.setState({displayCard: !this.state.displayCard})}>
-                    add tasks to this phase</button>
-
-                <div >
-                    {this.state.displayCard
-                    ? 
-                    <EditTask data={this.state.phaseName.id}/> 
-                    :
-                    null}
-                </div>
-            <h6>questions? click here for help</h6>
-            </div>
+                <button className="btn-sml">Edit Tasks</button>
+            </>
+            }
+            </>
         );
     }
 }
@@ -71,4 +44,4 @@ const putReduxStateOnProps=(reduxState)=>({
     reduxState
   });
   
-export default connect(putReduxStateOnProps)(AddPhase);
+export default connect(putReduxStateOnProps)(EditPhase);
