@@ -18,6 +18,7 @@ function AdminHome(props) {
         <>       
           
                <AdminNav />
+            {/* {<img className="hero-image" src="/images/skyline.png" alt="skyline" />} */}
 
             {props.reduxState.admin.adminDisplay.displayOldWorkFlow === true
                 ?
@@ -31,7 +32,7 @@ function AdminHome(props) {
                 <CreateWorkflow
                 />
                 :
-                <img className="hero-image" src="/images/skyline.png" alt="skyline" />
+                null
             }
             {props.reduxState.admin.adminDisplay.displayOldProjects === true
                 ?

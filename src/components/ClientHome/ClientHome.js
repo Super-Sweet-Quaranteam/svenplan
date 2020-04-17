@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import ClientNav from './ClientNav';
-import ClientProfile from './ClientProfile';
 import CreateWorkflow from '../AdminHome/CreateWorkflow/CreateWorkflow';
 import ExistingProjects from '../AdminHome/ExistingProjects/ExistingProjects';
 import ClientRisk from './ClientRisk';
 import CurrentWorkflow from './CurrentWorkflow';
+import UserProfile from '../UserProfile/UserProfile'
 
 const ClientHome =(props)=>{
 
@@ -16,7 +16,7 @@ const ClientHome =(props)=>{
             
             {props.reduxState.client.clientDisplay.displayProfile === true 
                 ?
-                <ClientProfile 
+                <UserProfile 
                 /> 
                 :
                 null
@@ -26,7 +26,7 @@ const ClientHome =(props)=>{
                 <CreateWorkflow 
                 /> 
                 :
-                <img className="hero-image" src="/images/skyline.png" alt="skyline"/>
+            null
             }
             {props.reduxState.client.clientDisplay.displayOldWorkFlow === true 
                 ?
