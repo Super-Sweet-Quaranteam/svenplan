@@ -104,7 +104,7 @@ CREATE TABLE "users"
     "alias" VARCHAR,
     "firstname" VARCHAR,
     "lastname" VARCHAR,
-    "email" VARCHAR,
+    "email" VARCHAR UNIQUE,
     "phone" VARCHAR,
     "company" VARCHAR,
     "password" VARCHAR NOT NULL,
