@@ -87,7 +87,7 @@ router.post('/logout', (req, res) => {
 });
 
 router.put('/:id', rejectUnauthenticated, (req, res) => {
-  const queryText = `SELECT * FROM "users" WHERE "id"=$1;`;
+  const queryText = `UPDATE FROM "users" WHERE "id"=$1 ("alias", "firstname", "lastname", "email") VALUES ($2,$3,$4,$5)`;
   const values = [req.params.id];
   pool.query(queryText, values)
     .then((response) => {
