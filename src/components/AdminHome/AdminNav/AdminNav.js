@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {HashRouter as Switch, Route, Link, useRouteMatch} from 'react-router-dom';
+import {HashRouter as Switch, Route, Link, Redirect, useRouteMatch} from 'react-router-dom';
 
 import CreateWorkflow from '../CreateWorkflow/CreateWorkflow';
 import ExistingWorkflows from '../ExistingWorkflows/ExistingWorkflows'
@@ -10,6 +10,7 @@ import ClientList from '../ClientList/ClientList';
 import UserProfile from '../../UserProfile/UserProfile';
 import AdminHome from '../AdminHome';
 
+//I'm using nested routing to do this! it does relative links based on current path.
 function AdminNav(props) {
     let { path, url } = useRouteMatch();
     return (
@@ -27,6 +28,7 @@ function AdminNav(props) {
             </nav>
         
             <Switch>
+                <Redirect exact from="/" to={`${path}/home`}/>
                 <Route path={`${path}/home`} component={AdminHome} />
                 <Route path={`${path}/create-workflow`} component={CreateWorkflow}/>
                 <Route path={`${path}/workflows`} component={ExistingWorkflows} />
