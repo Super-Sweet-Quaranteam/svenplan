@@ -21,7 +21,8 @@ class LoginPage extends Component {
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' })
-  }//this gets user info, upon reload (from session, I think)
+    this.props.dispatch({type: 'FETCH_TEAMS'})
+  }//this gets user and team info, upon reload (from session, I think)
 
   login = (event) => {
     //don't reload page on submit
@@ -83,7 +84,6 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        {JSON.stringify(this.props.user)}
         {this.props.user.id 
           ?
             <div>
@@ -100,6 +100,17 @@ class LoginPage extends Component {
               }
 
               <h2>Teams</h2>
+              {this.props.teams[0]&&
+              <ul>
+                {this.props.teams.map((team) => 
+                  <li key={team.id}>{team.name}
+                    {team.members.map(member =>
+                      <li>-----{member.firstname}</li>
+                      )}
+                  </li>
+                )}
+              </ul>
+              }
             </div>
           :
             <>
@@ -201,6 +212,7 @@ class LoginPage extends Component {
 const mapStateToProps = state => ({
   user: state.user,
   errors: state.errors,
+  teams: state.teams
 });
 
 export default connect(mapStateToProps)(LoginPage);

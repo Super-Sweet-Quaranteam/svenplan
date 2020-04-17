@@ -14,9 +14,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
-router.get('/team', rejectUnauthenticated, (req, res)=>{
-  console.log('req.user.id', req.user.id);
-  
+router.get('/team', rejectUnauthenticated, (req, res)=>{  
   const queryText = `SELECT "users"."alias" AS "user", "teams"."name" AS "team"
                     FROM "teams" JOIN "users"
                     ON "teams"."id" = "users"."team_id"
