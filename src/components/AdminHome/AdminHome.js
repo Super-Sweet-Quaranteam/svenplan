@@ -12,61 +12,15 @@ import UserProfile from '../UserProfile/UserProfile';
 
 
 function AdminHome(props) {
-
-
     return (
         <>       
-          
-               <AdminNav />
-            {/* {<img className="hero-image" src="/images/skyline.png" alt="skyline" />} */}
-
-            {props.reduxState.admin.adminDisplay.displayOldWorkFlow === true
-                ?
-                <ExistingWorkflows
-                />
-                :
-                null
-            }
-            {props.reduxState.admin.adminDisplay.displayNewWorkFlow === true
-                ?
-                <CreateWorkflow
-                />
-                :
-                null
-            }
-            {props.reduxState.admin.adminDisplay.displayOldProjects === true
-                ?
-                <ExistingProjects
-                />
-                :
-                null
-            }
-            {props.reduxState.admin.adminDisplay.displayAlerts === true
-                ?
-                <ClientAlerts
-                />
-                :
-                null
-            }
-            {props.reduxState.admin.adminDisplay.displayClients === true
-                ?
-                <ClientList
-                />
-                :
-                null
-            }
-            {props.reduxState.admin.adminDisplay.displayProfile === true
-                ?
-                <UserProfile
-                />
-                :
-                null
-            }
-           
-            
-       
-
-           
+            <AdminNav />
+            {props.reduxState.admin.adminDisplay.displayOldWorkFlow && <ExistingWorkflows/>}
+            {props.reduxState.admin.adminDisplay.displayNewWorkFlow && <CreateWorkflow/>}
+            {props.reduxState.admin.adminDisplay.displayOldProjects && <ExistingProjects/>}
+            {props.reduxState.admin.adminDisplay.displayAlerts && <ClientAlerts/>}
+            {props.reduxState.admin.adminDisplay.displayClients && <ClientList/>}
+            {props.reduxState.admin.adminDisplay.displayProfile && <UserProfile/>} 
         </>
     );
 }
