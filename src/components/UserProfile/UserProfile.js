@@ -34,6 +34,10 @@ class UserProfile extends Component {
     });
     console.log(this.state)
   }
+
+  updateUser=()=>{
+    this.props.dispatch({ type: 'UPDATE_CURRENT_USER', payload:this.state });
+  }
  
   render() {
 
@@ -80,7 +84,7 @@ class UserProfile extends Component {
         <input id='firstNameEdit' onChange={this.handleInputChangeFor('firstname')} value={this.state.firstName}></input>
         <label htmlFor="lastNameEdit">Last Name:</label>
         <input id='lastNameEdit' onChange={this.handleInputChangeFor('lastname')} value={this.state.lastName}></input>
-        <p><button onClick={this.editMode}>Save Profile</button></p>
+        <p><button onClick={this.updateUser}>Save Profile</button></p>
       <p><button onClick={this.editMode}>View Profile</button></p>
       </>
     )

@@ -86,4 +86,14 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT * FROM "users" WHERE "id"=$1;`;
+  const values = [req.params.id];
+  pool.query(queryText, values)
+    .then((response) => {
+      res.send(response.rows[0]);
+    })
+    .catch(() => res.sendStatus(500));
+});
+
 module.exports = router;

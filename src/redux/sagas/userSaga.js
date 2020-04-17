@@ -40,9 +40,23 @@ function* fetchSelectedUser(action) {
   }
 }
 
+function* updateUser(action) {
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+    console.log(action.payload, 'this is what Im sending')
+    const response = yield axios.put(`/api/user/${action.payload}`, config);
+  } catch (error) {
+    console.log('User update request failed', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_CURRENT_USER', fetchUser);
   yield takeLatest('FETCH_SELECTED_USER', fetchSelectedUser);
+  yield takeLatest('UPDATE_CURRENT_USER', updateUser);
 
 }
 
