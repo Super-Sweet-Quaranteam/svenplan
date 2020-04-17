@@ -14,6 +14,19 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+router.get('/team', rejectUnauthenticated, (req, res)=>{
+  console.log('req.user.id', req.user.id);
+  
+  const queryText = `SELECT "users"."alias" AS "user", "teams"."name" AS "team"
+                    FROM "teams" JOIN "users"
+                    ON "teams"."id" = "users"."team_id"
+                    WHERE "users"."id" = $1;`;
+  pool.query(queryText, [req.user.id])
+    .then((response) => {
+      res.send(response.rows[0].team);})
+    .catch(() => res.sendStatus(500));
+});
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
