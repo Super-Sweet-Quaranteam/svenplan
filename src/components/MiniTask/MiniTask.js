@@ -19,7 +19,7 @@ render(){
     return (
         <>
            
-            <label for="miniTask">Choose a task type:</label>
+            <label htmlFor="miniTask">Choose a task type:</label>
 
             <select onChange={this.taskSelect} id="miniTask">
                 <option value="default"></option>
@@ -27,16 +27,16 @@ render(){
                 <option value="Instruction">Instruction</option>
                
             </select>
-            <label for='taskText'>What is this task labeled?</label>
+            <label htmlFor='taskText'>What is this task labeled?</label>
             <input id='taskText' onChange={this.taskText} placeholder="Task Text"></input>
 <br></br>
-            {this.state.taskType == 'Input' && 
+            {this.state.taskType === 'Input' && 
             <div>
-            <label for='task'>{this.state.taskText}</label>
+            <label htmlFor='task'>{this.state.taskText}</label>
             <input id='task' placeholder="your Task"></input>
             <button>Add Task to Phase</button>
             </div>}
-            {this.state.taskType == 'Instruction' &&
+            {this.state.taskType === 'Instruction' &&
                 <div>
                 <p>{this.state.taskText}</p>
                     <button>Add Instruction to Phase</button>

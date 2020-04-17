@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 
 function AdminNav(props) {
 
-
     return (
         <>
             <nav className="nav-wrapper">

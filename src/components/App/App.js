@@ -6,7 +6,7 @@ import AdminHome from '../AdminHome/AdminHome';
 import ClientHome from '../ClientHome/ClientHome';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
-import Header from '../Header/Header';
+// import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 // import AddTask from '../AddTask/AddTask';
@@ -18,7 +18,7 @@ import Footer from '../Footer/Footer';
 function App() {
   return (
     <>
-    <Header></Header>
+    {/* <Header></Header> */}
       <Router>
         <Switch>
           {/* component view if not logged in */}
