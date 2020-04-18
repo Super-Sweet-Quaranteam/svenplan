@@ -22,7 +22,6 @@ state={
         else if(level=== 2 || 3){
             this.props.dispatch({type:"EDIT_ACCESS", payload:{id,level}})
         }
-        this.props.dispatch({ type: 'GET_CLIENT_LIST' })
         }
        
 

@@ -66,6 +66,7 @@ function* editAccess(action) {
       level: sendLevel
     };
     const response = yield axios.put(`/api/user/access/${action.payload.id}`, config);
+    yield put({ type: 'GET_CLIENT_LIST'})
   } catch (error) {
     console.log('User access update request failed', error);
   }
