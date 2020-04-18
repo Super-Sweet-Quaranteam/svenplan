@@ -20,8 +20,9 @@ state={
             return
         }
         else if(level=== 2 || 3){
-            this.props.dispatch({type:"EDIT_ACCESS", payload:{id,level}});
+            this.props.dispatch({type:"EDIT_ACCESS", payload:{id,level}})
         }
+        this.props.dispatch({ type: 'GET_CLIENT_LIST' })
         }
        
 
@@ -56,7 +57,7 @@ state={
                                 {subscriber.level === 1 &&
                                     'Administrator'}
                             </td>
-                            <td><button key={subscriber.id} onClick={()=>this.accessChange(subscriber.id, subscriber.level)} name='subscriber.clientid'>Grant/Revoke Access</button></td>
+                            <td><button key={subscriber.id} onClick={() => this.accessChange(subscriber.id, subscriber.level)} name='subscriber.clientid'>Grant/Revoke Access</button></td>
                             {/* <td>{client.address}</td> */}
                         </tr>))}              
                 </tbody>
