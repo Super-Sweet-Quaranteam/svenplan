@@ -13,8 +13,6 @@ state={
     }
 
     accessChange=(id, level)=>{
-        console.log(level, 'level');
-        console.log( id, 'clientid')
         if (level === 1) {
             alert('Admin Access cannot be changed')
             return
@@ -61,7 +59,6 @@ state={
                         </tr>))}              
                 </tbody>
             </table>
-            {JSON.stringify(this.props.reduxState.admin.clientList)}
         </div>
     );
 }
