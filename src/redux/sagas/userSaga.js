@@ -47,7 +47,6 @@ function* updateUser(action) {
       withCredentials: true,
       userInfo: action.payload
     };
-    console.log(action.payload, 'this is what Im sending')
     const response = yield axios.put(`/api/user/${action.payload.id}`, config);
   } catch (error) {
     console.log('User update request failed', error);
