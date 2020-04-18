@@ -67,11 +67,11 @@ class EditWorkflow extends Component {
         })
     }
 
-    handleChange=(event, propertyName)=>{                
+    handleChange=(e, propertyName)=>{   
         this.setState({
             workflow:{
                 ...this.state.workflow,
-                [propertyName]: event.target.value
+                [propertyName]: e.target.value
             }
         })
     }

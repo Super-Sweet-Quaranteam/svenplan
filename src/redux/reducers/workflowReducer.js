@@ -1,13 +1,4 @@
 import { combineReducers } from 'redux';
-
-const newWorkflow = (state = [], action) => {
-    switch (action.type) {
-        case 'ADD_WORKFLOW':
-            return action.payload;
-        default:
-            return state;
-    }
-}
   
 const newPhase = (state = [], action) => {
     switch (action.type) {
@@ -52,7 +43,6 @@ const thisPhase = (state = [], action) => {
 
 
 export default combineReducers({
-    newWorkflow,
     newPhase,
     allWorkflows,
     thisWorkflow,

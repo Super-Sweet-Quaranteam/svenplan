@@ -1,107 +1,61 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import WorkflowEditNav from './WorkflowEditNav';
-import EditPhase from './EditPhase';
+import Swal from 'sweetalert2'
 
 
 class CreateWorkflow extends Component {
 
     state = {
-        inputName: null,
-        inputDescription: '',
-        time: new Date(),
         workflow: {
-            created: false,
-            number: 0,
             name: '',
             description: '',
-            phases: [],
+            time: new Date()
         }
     }
 
-    addPhase=()=> {
-        this.setState({
-            workflow: {
-                ...this.state.workflow,
-                phases: [...this.state.workflow.phases, "phase"]
-            }
-        })
-    }
-
-    editWorkflow=()=>{
-        this.setState({
-            workflow: {
-                ...this.state.workflow,
-                created: false,
-            }
-        })
-    }
-
     createWorkflow=()=>{ 
+        this.props.dispatch({type: 'ADD_NEW_WORKFLOW', payload: {
+            name: this.state.workflow.name, description: this.state.workflow.description, time: this.state.workflow.time
+        }})
+        Swal.fire({
+            title: 'Created!',
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.value) {
+              this.props.history.push('/admin/workflows')
+            }
+          })
+    }
+
+    handleChange=(event, typeOf)=>{                
         this.setState({
             workflow:{
                 ...this.state.workflow,
-                created: true,
-                name: this.state.inputName,
-                description: this.state.inputDescription
+                [typeOf]: event.target.value
             }
         })
-        this.props.dispatch({type: 'ADD_WORKFLOW', payload: {
-            workflowName: this.state.inputName, description: this.state.inputDescription, time: this.state.time}})
-    }
-
-    //handles text input, saves in state w/o displaying on dom
-    handleChange=(event, typeOf)=>{                
-        this.setState({
-            [typeOf]: event.target.value
-        })
-    }
-    
-    //POST dispatch, sends whole workflow obj as payload. rn this is the only thing that saves to db
-    saveWorkflow=()=>{
-        this.props.dispatch({type: 'PUBLISH_WORKFLOW', payload: this.props.reduxState.admin.NewWorkflow})
     }
 
     render() {
         return (
             <div className="workflowWrapper">
                 <div className="workflowInfo">
-                {/* conditional rendering on input fields vs title and description */}
-                    {this.state.workflow.created 
-                    ? 
-                    <>
-                        <WorkflowEditNav publish={this.saveWorkflow} name={this.state.workflow.name} editWorkflow={this.editWorkflow}/>
-                            <h3 className="workflowDescription">{this.state.workflow.description}
-                                <br/> 
-                                <button className="button" onClick={this.addPhase}>Add Phase</button>                  
-                            </h3>
-                            <br/>
-                        {this.state.workflow.created === true &&
-                        <>
-                            <div className="phaseWrapper">
-                                {this.state.workflow.phases.map((phase, i )=> <div key={i} data-id={i} className="phaseBlock"><EditPhase data={i} phase={this.state}/></div>)}
-                            </div>
-                        </>
-                        }
-                    </>
-                    :
-                    <>
-                        <hr/>
-                        <label> Workflow Name:
-                            <br/>
-                            <input defaultValue={this.state.workflow.name} onChange={(event)=>this.handleChange(event, "inputName")}></input>
-                        </label> 
+                    <hr/>
+                    <label> Workflow Name:
                         <br/>
-                        <label> Description:
-                            <br/>
-                            <textarea defaultValue={this.state.workflow.description} onChange={(event)=>this.handleChange(event, "inputDescription")}></textarea>
-                        </label>  
-                        <br/>                   
-                        <button className="button" onClick={this.createWorkflow}>Create</button>
+                        <input defaultValue={this.state.workflow.name} placeholder="title new workflow" onChange={(event)=>this.handleChange(event, "name")}></input>
+                    </label> 
+                    <br/>
+                    <label> Description:
                         <br/>
-                    </>
-                    }
-                </div>                        
+                        <textarea rows="5" defaultValue={this.state.workflow.description} placeholder="describe new workflow" onChange={(event)=>this.handleChange(event, "description")}></textarea>
+                    </label>  
+                    <br/>                   
+                    <button className="button" onClick={this.createWorkflow}>Create</button>
+                    <br/>
+                </div>  
             </div>
         );
     }
@@ -111,4 +65,6 @@ class CreateWorkflow extends Component {
 const mapStateToProps = reduxState => ({
     reduxState
 });
+
+
 export default connect(mapStateToProps)(CreateWorkflow);

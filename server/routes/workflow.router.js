@@ -102,6 +102,22 @@ router.post('/add/phase', (req, res) => {
     });
 });
 
+// post new workflow to db
+router.post('/add/workflow', (req, res) => {
+    console.log('in new workflow POST with', req.body);
+    const name = req.body.name;
+    const desc = req.body.description;
+    const time = req.body.time;
+    const queryText = `INSERT INTO "workflows" ("name", "description", "created") VALUES ($1, $2, $3)`;
+    pool.query(queryText, [name, desc, time])
+    .then(() => { 
+        res.sendStatus(201)
+    }).catch((err) => {
+      console.log('Error completing new workflow POST', err);
+      res.sendStatus(500);
+    });
+});
+
 // delete phase from db
 router.delete('/remove/phase/:id', (req, res) => {
     console.log('in phase DELETE', req.params.id);

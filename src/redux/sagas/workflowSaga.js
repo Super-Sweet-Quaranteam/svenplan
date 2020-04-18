@@ -10,6 +10,7 @@ function* workflows() {
     yield takeEvery('EDIT_WORKFLOW_NAME', editWorkflowName);
     yield takeEvery('EDIT_PHASE_NAME', editPhaseName);
     yield takeEvery('EDIT_TASK_NAME', editTaskName);
+    yield takeEvery('ADD_NEW_WORKFLOW', addNewWorkflow);
     yield takeEvery('ADD_NEW_PHASE', addNewPhase);
     yield takeEvery('REMOVE_PHASE', removePhase);
 }
@@ -69,6 +70,16 @@ function* editTaskName(name){
         yield put({type: 'GET_THIS_WORKFLOW', payload: name.payload});
     } catch(error){
         console.log('error in saga /workflow/new-task-name:', error);
+    }
+}
+
+// add new workflow to db
+function* addNewWorkflow(wf) {
+    console.log("in saga add workflow POST with: ", wf.payload);
+    try {
+        yield axios.post(`/api/workflow/add/workflow/`, wf.payload);
+    } catch(error){
+        console.log(error);
     }
 }
 
