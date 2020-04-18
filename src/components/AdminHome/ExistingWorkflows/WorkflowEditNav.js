@@ -17,11 +17,13 @@ class WorkflowNav extends Component {
             <nav className="sidebar-nav">
                 <ul className="side-nav">
                     <li className="workflow-name">{this.props.name}
-                        <span className="side-item"><button className="button" onClick={this.props.editWorkflow}>Edit Title</button></span>
+                        <button className="btn-sml" onClick={this.props.editWorkflow}>Edit Title</button>
+                        <button className="btn-sml" onClick={this.props.add}>Add Phase</button>
                     </li>
                     {this.props.reduxState.workflow.thisWorkflow &&
                         this.props.reduxState.workflow.thisWorkflow.map(phase=>
-                            <li key={phase.ph_sequence} data-id={phase.ph_sequence} className="side-item" onClick={()=>this.viewTasks(phase.ph_sequence)}>{phase.ph_name}
+                            <li key={phase.ph_sequence} data-id={phase.ph_id} className="side-item" onClick={()=>this.viewTasks(phase.ph_id)}>
+                                {phase.ph_name}
                             </li>
                         )
                     }

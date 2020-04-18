@@ -21,8 +21,10 @@ if (process.env.DATABASE_URL) {
   };
 } else {
   config = {
+
 //     user: null || 'con',
 //     password: null || 'secretpass',
+
     host: 'localhost', // Server hosting the postgres database
     port: 5432, // env var: PGPORT
     database: 'svenplan_db',

@@ -35,11 +35,12 @@ td{border:solid 1px}
 }
 
 .sidebar-nav {
-    position: fixed;
+    position: absolute;
     background-color: var(--bg-primary);
     border: var(--bg-secondary) 1px solid;
     transition: width 600ms ease;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .side-nav {
