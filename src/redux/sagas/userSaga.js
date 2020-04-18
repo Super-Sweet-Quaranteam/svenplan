@@ -53,10 +53,30 @@ function* updateUser(action) {
   }
 }
 
+function* editAccess(action) {
+  console.log(action.payload, 'edit actionp')
+  let sendLevel = 3
+  if(action.payload.level ===3){
+    sendLevel=2
+  };
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+      level: sendLevel
+    };
+    const response = yield axios.put(`/api/user/access/${action.payload.id}`, config);
+  } catch (error) {
+    console.log('User access update request failed', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_CURRENT_USER', fetchUser);
   yield takeLatest('FETCH_SELECTED_USER', fetchSelectedUser);
   yield takeLatest('UPDATE_CURRENT_USER', updateUser);
+  yield takeLatest('EDIT_ACCESS', editAccess);
+
 
 }
 

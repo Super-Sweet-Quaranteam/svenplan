@@ -5,21 +5,7 @@ import {connect} from 'react-redux';
 class ClientList extends Component{
 
 state={ 
-    clients:[
-        {   
-            clientid:0,
-            company:'Target',
-            address:'1500 Target Lane',
-            phone:'(555)123-4567',
-            email:'target@target.com'
-        },
-        {   
-            clientid:1,
-            company: 'Nabisco',
-            address: '1500 Nabisco Lane',
-            phone: '(555)333-2323',
-            email: 'nabs@nabisco.com'
-        }]
+    
     }
 
     componentDidMount=()=>{
@@ -29,7 +15,15 @@ state={
     accessChange=(id, level)=>{
         console.log(level, 'level');
         console.log( id, 'clientid')
-    }
+        if (level === 1) {
+            alert('Admin Access cannot be changed')
+            return
+        }
+        else if(level=== 2 || 3){
+            this.props.dispatch({type:"EDIT_ACCESS", payload:{id,level}});
+        }
+        }
+       
 
     render(){
     return (

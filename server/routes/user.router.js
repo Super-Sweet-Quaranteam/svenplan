@@ -97,4 +97,17 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
   .catch(() => res.sendStatus(500));
 });
 
+router.put('/access/:id', rejectUnauthenticated, (req, res) => {
+  console.log(req.params)
+  console.log(req.body, 'body')
+  const queryText = `UPDATE "users" SET "level" = $1 WHERE "id"=$2`;
+  const values = [req.body.level, req.params.id];
+  pool.query(queryText, values)
+    .then((response) => {
+      res.send(response.rows[0]);
+    })
+    .catch(() => res.sendStatus(500));
+});
+
+
 module.exports = router;
