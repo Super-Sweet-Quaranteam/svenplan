@@ -19,8 +19,8 @@ class UserProfile extends Component {
     if (this.state.mode === 'display') {
       this.setState({ mode: 'edit',
         email: this.props.user.currentUser.email,
-        firstName: this.props.user.currentUser.firstname,
-        lastName: this.props.user.currentUser.lastname,
+        firstname: this.props.user.currentUser.firstname,
+        lastname: this.props.user.currentUser.lastname,
         alias: this.props.user.currentUser.alias,
         id: this.props.user.currentUser.id })
     }
@@ -38,6 +38,7 @@ class UserProfile extends Component {
 
   updateUser=()=>{
     this.props.dispatch({ type: 'UPDATE_CURRENT_USER', payload:this.state });
+    this.editMode();
   }
  
   render() {
@@ -82,9 +83,9 @@ class UserProfile extends Component {
         <label htmlFor="aliasEdit">Display Name:</label>
         <input id='aliasEdit' onChange={this.handleInputChangeFor('alias')} value={this.state.alias}></input>
         <label htmlFor="firstNameEdit">First Name:</label>
-        <input id='firstNameEdit' onChange={this.handleInputChangeFor('firstname')} value={this.state.firstName}></input>
+        <input id='firstNameEdit' onChange={this.handleInputChangeFor('firstname')} value={this.state.firstname}></input>
         <label htmlFor="lastNameEdit">Last Name:</label>
-        <input id='lastNameEdit' onChange={this.handleInputChangeFor('lastname')} value={this.state.lastName}></input>
+        <input id='lastNameEdit' onChange={this.handleInputChangeFor('lastname')} value={this.state.lastname}></input>
         <p><button onClick={this.updateUser}>Save Profile</button></p>
       <p><button onClick={this.editMode}>View Profile</button></p>
       </>
