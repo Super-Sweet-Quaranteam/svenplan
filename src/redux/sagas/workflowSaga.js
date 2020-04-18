@@ -10,6 +10,7 @@ function* workflows() {
     yield takeEvery('EDIT_WORKFLOW_NAME', editWorkflowName);
     yield takeEvery('EDIT_PHASE_NAME', editPhaseName);
     yield takeEvery('EDIT_TASK_NAME', editTaskName);
+    yield takeEvery('ADD_NEW_WORKFLOW', addNewWorkflow);
     yield takeEvery('ADD_NEW_PHASE', addNewPhase);
     yield takeEvery('REMOVE_PHASE', removePhase);
 }
@@ -55,7 +56,7 @@ function* editPhaseName(name){
         const editWFName = yield axios.put(`/api/workflow/new-phase-name/${name.payload.id}`, name.payload);
         console.log('in SAGA returning from new phase name PUT', editWFName);
         yield put({type: 'GET_THIS_WORKFLOW', payload: name.payload});
-        yield put({type: 'GET_THIS_PHASE', payload: name.payload});
+        yield put({type: 'GET_THIS_PHASE', payload: name.payload.phase});
     } catch(error){
         console.log('error in saga /workflow/new-phase-name:', error);
     }
@@ -72,13 +73,22 @@ function* editTaskName(name){
     }
 }
 
+// add new workflow to db
+function* addNewWorkflow(wf) {
+    console.log("in saga add workflow POST with: ", wf.payload);
+    try {
+        yield axios.post(`/api/workflow/add/workflow/`, wf.payload);
+    } catch(error){
+        console.log(error);
+    }
+}
+
 // add new phase to workflow
 function* addNewPhase(phase) {
     console.log("in saga add phase POST with: ", phase.payload);
     try {
         yield axios.post(`/api/workflow/add/phase/`, phase.payload);
         yield put({type: 'GET_THIS_WORKFLOW', payload: phase.payload});
-        yield put({type: 'GET_THIS_PHASE', payload: phase.payload});
     } catch(error){
         console.log(error);
     }
@@ -91,7 +101,7 @@ function* removePhase(remove) {
     try {
         yield axios.delete(`/api/workflow/remove/phase/${remove.payload.phase.id}`);
         yield put({type: 'GET_THIS_WORKFLOW', payload: remove.payload});
-        yield put({type: 'GET_THIS_PHASE', payload: remove.payload});
+        yield put({type: 'GET_THIS_PHASE', payload: remove.payload.phase});
     } catch(error){
         console.log(error);
     }

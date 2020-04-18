@@ -32,6 +32,8 @@ class ExistingWorkflows extends Component {
                 <>
                 <h2>Existing Workflows:</h2>
                 <ul>
+    {/* suggest having two buttons, one that shows only if unpublished with an option to publish workflow */}
+    {/* or better yet have this be displayed in two tables, on published and one not published with an option to publish */}
                     {this.props.reduxState.workflow.allWorkflows &&
                         this.props.reduxState.workflow.allWorkflows.map(flow => (
                             <li data-id={flow.id} key={flow.id}>

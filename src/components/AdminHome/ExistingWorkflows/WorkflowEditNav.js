@@ -6,11 +6,18 @@ import '../AdminHome.css'
 class WorkflowNav extends Component {
 
 
-    viewTasks=(id)=>{
+    viewPhase=(id)=>{
         console.log(id)
         this.props.dispatch({type: 'GET_THIS_PHASE', payload:{id:id}});
     }
 
+    // does not actually follow through yet, simple to implemet though
+    publishWorkflow=()=>{
+        let id = this.props.reduxState.workflow.thisWorkflow[0].wf_id;
+        console.log('tick boolean to true for workflow with id:', id);
+        // send dispatch to tick bool
+        // history push back to /admin/home
+    }
 
     render() {
         return (
@@ -22,13 +29,13 @@ class WorkflowNav extends Component {
                     </li>
                     {this.props.reduxState.workflow.thisWorkflow &&
                         this.props.reduxState.workflow.thisWorkflow.map(phase=>
-                            <li key={phase.ph_sequence} data-id={phase.ph_id} className="side-item" onClick={()=>this.viewTasks(phase.ph_id)}>
+                            <li key={phase.ph_sequence} data-id={phase.ph_id} className="side-item" onClick={()=>this.viewPhase(phase.ph_id)}>
                                 {phase.ph_name}
                             </li>
                         )
                     }
                     <li>
-                        <span className="span"><button className="button" onClick={this.props.saveWorkflow}>Publish Workflow</button></span>
+                        <span className="span"><button className="button" onClick={this.publishWorkflow}>Publish Workflow</button></span>
                     </li>
 
                     <li className="side-item final">
