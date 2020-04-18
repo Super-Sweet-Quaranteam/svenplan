@@ -69,7 +69,6 @@ class UserProfile extends Component {
                 :
                 <button>Add to Team</button>
               }
-              {JSON.stringify(this.props.user.currentUser)}
           </div>
       </div>
     );

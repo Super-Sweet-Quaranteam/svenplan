@@ -13,8 +13,6 @@ state={
     }
 
     accessChange=(id, level)=>{
-        console.log(level, 'level');
-        console.log( id, 'clientid')
         if (level === 1) {
             alert('Admin Access cannot be changed')
             return
@@ -22,7 +20,6 @@ state={
         else if(level=== 2 || 3){
             this.props.dispatch({type:"EDIT_ACCESS", payload:{id,level}})
         }
-        this.props.dispatch({ type: 'GET_CLIENT_LIST' })
         }
        
 
@@ -62,7 +59,6 @@ state={
                         </tr>))}              
                 </tbody>
             </table>
-            {JSON.stringify(this.props.reduxState.admin.clientList)}
         </div>
     );
 }
