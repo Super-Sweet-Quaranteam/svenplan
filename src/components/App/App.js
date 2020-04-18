@@ -3,7 +3,7 @@ import './App.css';
 import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import AdminNav from '../AdminHome/AdminNav/AdminNav';
+import Navbar from '../Navbar/Navbar';
 import ClientHome from '../ClientHome/ClientHome';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -27,12 +27,14 @@ class App extends Component {
       <>
     {/* <Header></Header> */}
         <Router>
+          {/* Navbar will show on every page, show different things based on user level/if user at all */}
+          <Navbar />
           <Switch>
             {/* component view if not logged in */}
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/logIn" component ={LoginPage} />
             {/* be sure to protect this route */}
-            <Route path="/admin" component={AdminNav} />
+            {/* <Route path="/admin" component={AdminNav} /> */}
             <Route exact path="/clientHome" component={ClientHome} />
             {/* 404 page creation below */}
             <Route render={() => 
