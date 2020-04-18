@@ -86,4 +86,15 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+  console.log(req.body)
+  const queryText = `UPDATE "users" SET "alias" = $1, "firstname"=$2, "lastname"=$3, "email"=$4 WHERE "id"=$5`;
+  const values = [req.body.userInfo.alias, req.body.userInfo.firstname, req.body.userInfo.lastname, req.body.userInfo.email, req.body.userInfo.id];
+   pool.query(queryText, values)
+  .then((response) => {
+   res.send(response.rows[0]);
+   })
+  .catch(() => res.sendStatus(500));
+});
+
 module.exports = router;
