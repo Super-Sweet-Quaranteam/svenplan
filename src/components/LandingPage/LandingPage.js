@@ -18,10 +18,13 @@ function LandingPage(props) {
     return (
         <div id="landingDisplay">
             <img className="logo" width= "300px" src={logo} alt="SvenPlan Logo"></img>
+            <h3>routes aren't protected yet.</h3>
+            <p>Later, logging in will go to '/home'. For now:</p>
+            
             <h4 onClick={logIn}>Log In</h4>
-
-            <h4 onClick={Admin}>Admin Log In Placeholder</h4>
-            <h4 onClick={Client}>Client Log In Placeholder</h4>
+            
+            <h4 onClick={Admin}>Go to Admin Home</h4>
+            <h4 onClick={Client}>Go to Subscriber Home</h4>
         </div>
     );
 }
