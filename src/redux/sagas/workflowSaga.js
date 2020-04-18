@@ -6,13 +6,15 @@ import {takeEvery, put} from "redux-saga/effects";
 function* workflows() {
     yield takeEvery('GET_ALL_WORKFLOWS', getAllWorkflows);
     yield takeEvery('GET_THIS_WORKFLOW', getThisWorkflow);
-    yield takeEvery('GET_THIS_PHASE', getThisPhase);
-    yield takeEvery('EDIT_WORKFLOW_NAME', editWorkflowName);
-    yield takeEvery('EDIT_PHASE_NAME', editPhaseName);
-    yield takeEvery('EDIT_TASK_NAME', editTaskName);
     yield takeEvery('ADD_NEW_WORKFLOW', addNewWorkflow);
+    yield takeEvery('EDIT_WORKFLOW_NAME', editWorkflowName);
+    yield takeEvery('PUBLISH_THIS_WORKFLOW', publishThisWorkflow);
+    yield takeEvery('DELETE_THIS_WORKFLOW', deleteThisWorkflow);
+    yield takeEvery('GET_THIS_PHASE', getThisPhase);
     yield takeEvery('ADD_NEW_PHASE', addNewPhase);
     yield takeEvery('REMOVE_PHASE', removePhase);
+    yield takeEvery('EDIT_PHASE_NAME', editPhaseName);
+    yield takeEvery('EDIT_TASK_NAME', editTaskName);
 }
 
 // gets all workflows from DB
@@ -95,13 +97,35 @@ function* addNewPhase(phase) {
 }
 
 
-//remove phase from workflow
+// remove phase from workflow
 function* removePhase(remove) {
     console.log("in saga phase DELETE with: ", remove.payload);
     try {
         yield axios.delete(`/api/workflow/remove/phase/${remove.payload.phase.id}`);
         yield put({type: 'GET_THIS_WORKFLOW', payload: remove.payload});
         yield put({type: 'GET_THIS_PHASE', payload: remove.payload.phase});
+    } catch(error){
+        console.log(error);
+    }
+}
+
+// updates task name / description in DB
+function* publishThisWorkflow(id){
+    try {
+        const publishWF = yield axios.put(`/api/workflow/publish/${id.payload.id}`);
+        console.log('in SAGA returning from publish workflow PUT', publishWF);
+        yield put({type: 'GET_ALL_WORKFLOWS'});
+    } catch(error){
+        console.log('error in saga /workflow/publish/wf:', error);
+    }
+}
+
+// remove workflow from db
+function* deleteThisWorkflow(remove) {
+    console.log("in saga workflow DELETE with: ", remove.payload);
+    try {
+        yield axios.delete(`/api/workflow/remove/workflow/${remove.payload.id}`);
+        yield put({type: 'GET_ALL_WORKFLOWS'});
     } catch(error){
         console.log(error);
     }

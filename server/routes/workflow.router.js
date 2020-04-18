@@ -131,5 +131,32 @@ router.delete('/remove/phase/:id', (req, res) => {
       });
   });
 
+// delete workflow from db
+router.delete('/remove/workflow/:id', (req, res) => {
+    console.log('in workflow DELETE', req.params.id);
+    const queryText = `DELETE FROM "workflows" WHERE id=$1`;
+    pool.query(queryText, [Number(req.params.id)])
+    .then(() => {
+      res.sendStatus(200);
+    }).catch(err => {
+        console.log("Error deleting workflow", err);
+        res.sendStatus(500);
+      });
+  });
+
+// set workflow to published
+router.put('/publish/:id', (req, res) => {
+    console.log('in workflow publish PUT with id:', req.params.id);
+    const queryText = `UPDATE "workflows" SET "published"=true WHERE "id"=$1;`;
+    pool.query(queryText, [Number(req.params.id)])
+    .then( (result) => {
+        res.send(result.rows);
+    })
+    .catch( (error) => {
+        console.log(`Error in workflow publish: ${error}`);
+        res.sendStatus(500);
+    });
+});
+
 
 module.exports = router;

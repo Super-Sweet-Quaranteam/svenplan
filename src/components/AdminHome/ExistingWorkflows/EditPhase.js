@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-// import EditTask from './EditTask';
+import EditTask from './EditTask';
 
 class EditPhase extends Component {
 
@@ -35,10 +35,9 @@ class EditPhase extends Component {
             {this.props.edit === false
             ?
             <>
-            <div className="addPhase">
-                <h3>{this.props.name}</h3>
-                <p>{this.props.description}</p>
-            </div>
+            <EditTask
+                wfID={this.props.wfID}
+            />
             </>
             :
             <>

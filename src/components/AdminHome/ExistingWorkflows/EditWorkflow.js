@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import WorkflowEditNav from './WorkflowEditNav';
 import EditPhase from './EditPhase';
+import Swal from 'sweetalert2';
 
 
 class EditWorkflow extends Component {
@@ -43,12 +44,30 @@ class EditWorkflow extends Component {
         })
     }
 
-    deletePhase=()=>{
-        this.setState({editPhase: !this.state.editPhase})
-        this.props.dispatch({type: 'REMOVE_PHASE', payload: {
-            id: this.state.workflow.id, 
-            phase: this.state.phase
-        }})
+    deletePhase=(name)=>{
+        this.setState({editPhase: !this.state.editPhase});
+        Swal.fire({
+            title: `Are you sure you want to delete ${name}?`,
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                'Deleted!',
+                `${name} has been removed from this workflow`,
+                'success'
+                );
+                this.props.dispatch({type: 'REMOVE_PHASE', payload: {
+                    id: this.state.workflow.id, 
+                    phase: this.state.phase
+                }});
+            }
+        })
+
     }
 
     editWorkflow=()=>{
@@ -180,7 +199,7 @@ class EditWorkflow extends Component {
                                     </label>
                                     <br/>
                                     <button className="button" onClick={this.savePhase}>Save Phase</button>
-                                    <button className="button" onClick={this.deletePhase}>Delete Phase</button>
+                                    <button className="button" onClick={()=>this.deletePhase(this.state.phase.name)}>Delete Phase</button>
                                     <button className="button" onClick={this.addTasks}>Add Tasks</button>
                                 </form>    
                                     <hr/>
@@ -199,6 +218,7 @@ class EditWorkflow extends Component {
                                     description={task.task_description}
                                     edit={this.state.editPhase}
                                     taskEdit={this.state.taskEdit}
+                                    wfID={this.props.wfID}
                                 />
                                 )}
                             </div>
