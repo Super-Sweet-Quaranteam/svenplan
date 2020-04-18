@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import WorkflowNav from './WorkflowNav';
-import AddPhase from './AddPhase';
+import WorkflowEditNav from './WorkflowEditNav';
+import EditPhase from './EditPhase';
 
 
 class CreateWorkflow extends Component {
@@ -18,6 +18,7 @@ class CreateWorkflow extends Component {
             phases: [],
         }
     }
+
     addPhase=()=> {
         this.setState({
             workflow: {
@@ -26,6 +27,7 @@ class CreateWorkflow extends Component {
             }
         })
     }
+
     editWorkflow=()=>{
         this.setState({
             workflow: {
@@ -34,6 +36,7 @@ class CreateWorkflow extends Component {
             }
         })
     }
+
     createWorkflow=()=>{ 
         this.setState({
             workflow:{
@@ -45,15 +48,15 @@ class CreateWorkflow extends Component {
         })
         this.props.dispatch({type: 'ADD_WORKFLOW', payload: {
             workflowName: this.state.inputName, description: this.state.inputDescription, time: this.state.time}})
-        
-        
     }
+
     //handles text input, saves in state w/o displaying on dom
     handleChange=(event, typeOf)=>{                
         this.setState({
             [typeOf]: event.target.value
         })
     }
+    
     //POST dispatch, sends whole workflow obj as payload. rn this is the only thing that saves to db
     saveWorkflow=()=>{
         this.props.dispatch({type: 'PUBLISH_WORKFLOW', payload: this.props.reduxState.admin.NewWorkflow})
@@ -67,7 +70,7 @@ class CreateWorkflow extends Component {
                     {this.state.workflow.created 
                     ? 
                     <>
-                        <WorkflowNav publish={this.saveWorkflow} name={this.state.workflow.name} editWorkflow={this.editWorkflow}/>
+                        <WorkflowEditNav publish={this.saveWorkflow} name={this.state.workflow.name} editWorkflow={this.editWorkflow}/>
                             <h3 className="workflowDescription">{this.state.workflow.description}
                                 <br/> 
                                 <button className="button" onClick={this.addPhase}>Add Phase</button>                  
@@ -76,7 +79,7 @@ class CreateWorkflow extends Component {
                         {this.state.workflow.created === true &&
                         <>
                             <div className="phaseWrapper">
-                                {this.state.workflow.phases.map((phase, i )=> <div key={i} data-id={i} className="phaseBlock"><AddPhase data={i} phase={this.state}/></div>)}
+                                {this.state.workflow.phases.map((phase, i )=> <div key={i} data-id={i} className="phaseBlock"><EditPhase data={i} phase={this.state}/></div>)}
                             </div>
                         </>
                         }

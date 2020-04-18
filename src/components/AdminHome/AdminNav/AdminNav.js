@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {HashRouter as Switch, Route, Link, Redirect, useRouteMatch} from 'react-router-dom';
 
-import CreateWorkflow from '../CreateWorkflow/CreateWorkflow';
+import CreateWorkflow from '../ExistingWorkflows/CreateWorkflow';
 import ExistingWorkflows from '../ExistingWorkflows/ExistingWorkflows'
 import ExistingProjects from '../ExistingProjects/ExistingProjects'
 import ClientAlerts from '../ClientAlerts/ClientAlerts';

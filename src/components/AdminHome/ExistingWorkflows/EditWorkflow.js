@@ -9,6 +9,7 @@ class EditWorkflow extends Component {
     state = {
         edit: false,
         editPhase: false,
+        taskEdit: false,
         addPhase: false,
         workflow: {
             id: this.props.wf.id,
@@ -150,10 +151,10 @@ class EditWorkflow extends Component {
                     </>
                     :
                     <>
-                        <WorkflowEditNav publish={this.saveWorkflow} name={this.state.workflow.name} editWorkflow={this.editWorkflow} add={this.addPhase}/>
+                        <WorkflowEditNav  name={this.state.workflow.name} editWorkflow={this.editWorkflow} add={this.addPhase}/>
                             <h3 className="workflowDescription">{this.state.workflow.description}
                                 <br/> 
-                                <button className="button" onClick={this.addPhase}>Add Phase</button>                  
+                                              
                             </h3>
                             <br/>
                         {this.props.reduxState.workflow.thisPhase &&
@@ -180,6 +181,7 @@ class EditWorkflow extends Component {
                                     <br/>
                                     <button className="button" onClick={this.savePhase}>Save Phase</button>
                                     <button className="button" onClick={this.deletePhase}>Delete Phase</button>
+                                    <button className="button" onClick={this.addTasks}>Add Tasks</button>
                                 </form>    
                                     <hr/>
                                 </>
@@ -196,6 +198,7 @@ class EditWorkflow extends Component {
                                     name={task.task_name}
                                     description={task.task_description}
                                     edit={this.state.editPhase}
+                                    taskEdit={this.state.taskEdit}
                                 />
                                 )}
                             </div>

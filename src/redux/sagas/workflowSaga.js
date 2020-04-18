@@ -55,7 +55,7 @@ function* editPhaseName(name){
         const editWFName = yield axios.put(`/api/workflow/new-phase-name/${name.payload.id}`, name.payload);
         console.log('in SAGA returning from new phase name PUT', editWFName);
         yield put({type: 'GET_THIS_WORKFLOW', payload: name.payload});
-        yield put({type: 'GET_THIS_PHASE', payload: name.payload});
+        yield put({type: 'GET_THIS_PHASE', payload: name.payload.phase});
     } catch(error){
         console.log('error in saga /workflow/new-phase-name:', error);
     }
@@ -78,7 +78,6 @@ function* addNewPhase(phase) {
     try {
         yield axios.post(`/api/workflow/add/phase/`, phase.payload);
         yield put({type: 'GET_THIS_WORKFLOW', payload: phase.payload});
-        yield put({type: 'GET_THIS_PHASE', payload: phase.payload});
     } catch(error){
         console.log(error);
     }
@@ -91,7 +90,7 @@ function* removePhase(remove) {
     try {
         yield axios.delete(`/api/workflow/remove/phase/${remove.payload.phase.id}`);
         yield put({type: 'GET_THIS_WORKFLOW', payload: remove.payload});
-        yield put({type: 'GET_THIS_PHASE', payload: remove.payload});
+        yield put({type: 'GET_THIS_PHASE', payload: remove.payload.phase});
     } catch(error){
         console.log(error);
     }
