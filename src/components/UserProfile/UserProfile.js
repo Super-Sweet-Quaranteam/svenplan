@@ -21,7 +21,8 @@ class UserProfile extends Component {
         email: this.props.user.currentUser.email,
         firstName: this.props.user.currentUser.firstname,
         lastName: this.props.user.currentUser.lastname,
-        alias: this.props.user.currentUser.alias })
+        alias: this.props.user.currentUser.alias,
+        id: this.props.user.currentUser.id })
     }
     else if (this.state.mode === 'edit') {
       this.setState({ mode: 'display'})
