@@ -12,6 +12,7 @@ const ClientHome =(props)=>{
 
     return (
         <>
+            <h2>This is client home. it still has client nav in it. Haley was afraid of messing things up.</h2>
             <ClientNav />
             
             {props.reduxState.client.clientDisplay.displayProfile === true 
