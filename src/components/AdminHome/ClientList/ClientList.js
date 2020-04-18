@@ -29,30 +29,29 @@ state={
     render(){
     return (
         <div >
-            <p>Client List </p>
 
-            <h2>Clients using your workflows:</h2>
+            <h2>Subscribers using your workflows:</h2>
             <table id="clientTable">
                 <thead>
                     <tr>
                         <th>Company</th>
-                        <th>Address</th>
-                        <th>Phone</th>
+                        <th>Name</th>
                         <th>Email</th>
+                        <th>Phone</th>
+                        {/* <th>Address</th> */}
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.clients.map(client => (
-                        <tr key={client.clientid}>
-                            <td>{client.company}</td>
-                            <td>{client.address}</td>
-                            <td>{client.phone}</td>
-                            <td>{client.email}</td>
+                    {this.props.reduxState.admin.clientList.map(subscriber => (
+                        <tr key={subscriber.clientid}>
+                            <td>{subscriber.company}</td>
+                            <td>{subscriber.firstname} {subscriber.lastname}</td>
+                            <td>{subscriber.email}</td>
+                            <td>{subscriber.phone}</td>
+                            {/* <td>{client.address}</td> */}
                         </tr>))}              
                 </tbody>
             </table>
-            <br/>
-            {JSON.stringify(this.props.reduxState.admin)}
         </div>
     );
 }
