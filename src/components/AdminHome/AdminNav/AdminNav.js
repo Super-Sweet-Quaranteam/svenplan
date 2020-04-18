@@ -23,6 +23,15 @@ function AdminNav(props) {
                     {/* <li className="nav-item"><Link to={`${url}/alerts`} className="nav-link">Alerts</Link></li> */}
                     <li className="nav-item"><Link to={`${url}/subscribers`} className="nav-link">Subscribers</Link></li>
                     <li className="nav-item"><Link to={`${url}/profile`} className="nav-link">My Profile</Link></li>
+                    <li className="nav-item">
+                        {props.user.currentUser.id 
+                            ?
+                            <button onClick={() => props.dispatch({ type: 'LOGOUT' })}>Log Out</button>
+                            // I think this should also reroute the user to the landing screen- use protected route or push history?
+                            :
+                            <button onClick={() => props.history.push({ pathname: '/logIn' })}>Log In</button>
+                        }
+                    </li>
                 </ul>
             </nav>
         
@@ -40,4 +49,9 @@ function AdminNav(props) {
     );  
 }
   
-export default connect()(AdminNav);
+
+const mapStateToProps = state => ({
+    user: state.user,
+});
+
+export default connect(mapStateToProps)(AdminNav);
