@@ -21,7 +21,7 @@ router.get('/all', (req, res) => {
 router.get('/requested/:id', (req, res) => {
     console.log('in GET this workflow with id:', req.params.id)
     const queryText = `SELECT "phases"."name" as ph_name, "phases"."description" as ph_description, 
-    "phases"."sequence" as ph_sequence, "phases"."id" as ph_id
+    "phases"."sequence" as ph_sequence, "phases"."id" as ph_id, "workflow_id" as wf_id
     FROM "workflows"
     JOIN "phases" ON "phases"."workflow_id" = "workflows".id
     WHERE "workflows"."id"=$1 ORDER BY "phases"."sequence" ASC;`;
@@ -84,7 +84,7 @@ router.put('/new-phase-name/:id', (req, res) => {
     });
 });
 
-//post new phase to workflow
+// post new phase to workflow
 router.post('/add/phase', (req, res) => {
     console.log('in new phase POST with', req.body);
     const wfID = req.body.id;
@@ -102,7 +102,23 @@ router.post('/add/phase', (req, res) => {
     });
 });
 
-//delete phase from db
+// post new workflow to db
+router.post('/add/workflow', (req, res) => {
+    console.log('in new workflow POST with', req.body);
+    const name = req.body.name;
+    const desc = req.body.description;
+    const time = req.body.time;
+    const queryText = `INSERT INTO "workflows" ("name", "description", "created") VALUES ($1, $2, $3)`;
+    pool.query(queryText, [name, desc, time])
+    .then(() => { 
+        res.sendStatus(201)
+    }).catch((err) => {
+      console.log('Error completing new workflow POST', err);
+      res.sendStatus(500);
+    });
+});
+
+// delete phase from db
 router.delete('/remove/phase/:id', (req, res) => {
     console.log('in phase DELETE', req.params.id);
     const queryText = `DELETE FROM "phases" WHERE id=$1`;
