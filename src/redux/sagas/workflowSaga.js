@@ -8,6 +8,10 @@ function* workflows() {
     yield takeEvery('GET_THIS_WORKFLOW', getThisWorkflow);
     yield takeEvery('GET_THIS_PHASE', getThisPhase);
     yield takeEvery('EDIT_WORKFLOW_NAME', editWorkflowName);
+    yield takeEvery('EDIT_PHASE_NAME', editPhaseName);
+    yield takeEvery('EDIT_TASK_NAME', editTaskName);
+    yield takeEvery('ADD_NEW_PHASE', addNewPhase);
+    yield takeEvery('REMOVE_PHASE', removePhase);
 }
 
 // gets all workflows from DB
@@ -31,10 +35,10 @@ function* getThisPhase(phase){
     console.log("We are here in saga GET this phase");
     const getPhase = yield axios.get(`/api/workflow/phase/${phase.payload.id}`);
     console.log('in saga - GET this phase back with:', getPhase.data);
-    yield put({type: 'SET_THIS_PHASE', payload: getPhase.data})
+    yield put({type: 'SET_THIS_PHASE', payload: getPhase.data});
 }
 
-//updates workflow name / description in DB
+// updates workflow name / description in DB
 function* editWorkflowName(name){
     try {
         const editWFName = yield axios.put(`/api/workflow/new-wf-name/${name.payload.id}`, name.payload);
@@ -42,6 +46,54 @@ function* editWorkflowName(name){
         yield put({type: 'GET_THIS_WORKFLOW', payload: name.payload})
     } catch(error){
         console.log('error in saga /workflow/new-wf-name:', error);
+    }
+}
+
+// updates phase name / description in DB
+function* editPhaseName(name){
+    try {
+        const editWFName = yield axios.put(`/api/workflow/new-phase-name/${name.payload.id}`, name.payload);
+        console.log('in SAGA returning from new phase name PUT', editWFName);
+        yield put({type: 'GET_THIS_WORKFLOW', payload: name.payload});
+        yield put({type: 'GET_THIS_PHASE', payload: name.payload});
+    } catch(error){
+        console.log('error in saga /workflow/new-phase-name:', error);
+    }
+}
+
+// updates task name / description in DB
+function* editTaskName(name){
+    try {
+        const editTaskName = yield axios.put(`/api/workflow/new-task-name/${name.payload.id}`, name.payload);
+        console.log('in SAGA returning from new task name PUT', editTaskName);
+        yield put({type: 'GET_THIS_WORKFLOW', payload: name.payload});
+    } catch(error){
+        console.log('error in saga /workflow/new-task-name:', error);
+    }
+}
+
+// add new phase to workflow
+function* addNewPhase(phase) {
+    console.log("in saga add phase POST with: ", phase.payload);
+    try {
+        yield axios.post(`/api/workflow/add/phase/`, phase.payload);
+        yield put({type: 'GET_THIS_WORKFLOW', payload: phase.payload});
+        yield put({type: 'GET_THIS_PHASE', payload: phase.payload});
+    } catch(error){
+        console.log(error);
+    }
+}
+
+
+//remove phase from workflow
+function* removePhase(remove) {
+    console.log("in saga phase DELETE with: ", remove.payload);
+    try {
+        yield axios.delete(`/api/workflow/remove/phase/${remove.payload.phase.id}`);
+        yield put({type: 'GET_THIS_WORKFLOW', payload: remove.payload});
+        yield put({type: 'GET_THIS_PHASE', payload: remove.payload});
+    } catch(error){
+        console.log(error);
     }
 }
 

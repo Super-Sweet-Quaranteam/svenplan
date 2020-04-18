@@ -1,20 +1,32 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import EditTask from './EditTask';
+// import EditTask from './EditTask';
 
 class EditPhase extends Component {
 
     state={
         edit: this.props.edit,
+        task:{
+            id: this.props.id,
+            name: this.props.name,
+            description: this.props.description
+        }
+        
     }
 
-
-    componentDidMount=()=>{
-
+    handleChange=(e, propertyName)=>{
+        this.setState({
+            task:{
+                ...this.state.task,
+                [propertyName]: e.target.value
+            }
+        })
     }
 
     handleSubmit=()=>{
         this.setState({edit: false})
+        console.log(this.state.task)
+        this.props.dispatch({type: 'EDIT_TASK_NAME', payload: this.state.task})
     }
 
     render() {
@@ -22,17 +34,27 @@ class EditPhase extends Component {
             <>
             {this.props.edit === false
             ?
+            <>
             <div className="addPhase">
                 <h3>{this.props.name}</h3>
                 <p>{this.props.description}</p>
             </div>
+            </>
             :
             <>
-                <form data-id={this.props.data} onSubmit={(e)=>this.handleSubmit(e)}>
-                    <input type="text" value={this.props.name} placeholder="enter title for phase" onChange={(e)=>this.handleChange(e)} />
+                <form data-id={this.props.id} onSubmit={(e)=>this.handleSubmit(e)}>
+                    <label htmlFor="task-name">Task Title: 
+                        <input type="text" data-id={this.props.id} value={this.state.task.name} placeholder="enter title for task" onChange={(e)=>this.handleChange(e, 'name')} />
+                    </label>
+                    <br/>
+                    <label htmlFor="task-desctioption">Description: 
+                        <input type="text" size="50" data-id={this.props.id} value={this.state.task.description} placeholder="enter description for task" onChange={(e)=>this.handleChange(e, 'description')} />
+                    </label>
+                    <br/>
                     <input type="submit" value="save" className="button"/>
                 </form>
                 <button className="btn-sml">Edit Tasks</button>
+                <hr width="250em"/>
             </>
             }
             </>
