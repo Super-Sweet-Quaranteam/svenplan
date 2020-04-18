@@ -60,6 +60,7 @@ class App extends Component {
             {/* 404 page creation below */}
             <Route render={() => 
               <div className="fourOfour">
+                <h1>There doesn't seem to be anything here.</h1>
                 <a href="#add-task" ><img src="/images/NEOOPartnersLogo.png" alt="neoo"/></a>
               </div>
             } />
