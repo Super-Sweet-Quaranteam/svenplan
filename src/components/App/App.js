@@ -3,21 +3,32 @@ import './App.css';
 import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 
+//THESE ARE DEFINITELY BEING USED
 import Navbar from '../Navbar/Navbar';
-import ClientHome from '../ClientHome/ClientHome';
-import LandingPage from '../LandingPage/LandingPage';
-import LoginPage from '../LoginPage/LoginPage';
-// import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
+import LandingPage from '../LandingPage/LandingPage';
+import LoginPage from '../LoginPage/LoginPage';
+
+import UserProfile from '../UserProfile/UserProfile';
+
+import CreateWorkflow from '../AdminHome/ExistingWorkflows/CreateWorkflow';
+import ExistingWorkflows from '../AdminHome/ExistingWorkflows/ExistingWorkflows';
+import Subscribers from '../AdminHome/ClientList/ClientList';
+import AdminHome from '../AdminHome/AdminHome';
+import SubscriberHome from '../ClientHome/ClientHome';
+import ExistingProjects from '../AdminHome/ExistingProjects/ExistingProjects'
+
+// THESE SEEM UNUSED
 // import AddTask from '../AddTask/AddTask';
 // import Container from '../AddTask/Container';
-
-
+// import Header from '../Header/Header';
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
+// import ClientAlerts from '../AdminHome/ClientAlerts/ClientAlerts';
+// {/* <Route path="/admin" component={AdminNav} /> */ }
 
 class App extends Component {
-  //sets the user in redux (even tho this component isn't connected to store)
+  //sets the user, if there is one, in redux (even tho this component isn't connected to store)
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_CURRENT_USER' });
   }
@@ -25,7 +36,6 @@ class App extends Component {
   render() {
     return (
       <>
-    {/* <Header></Header> */}
         <Router>
           {/* Navbar will show on every page, show different things based on user level/if user at all */}
           <Navbar />
@@ -33,9 +43,20 @@ class App extends Component {
             {/* component view if not logged in */}
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/logIn" component ={LoginPage} />
-            {/* be sure to protect this route */}
-            {/* <Route path="/admin" component={AdminNav} /> */}
-            <Route exact path="/clientHome" component={ClientHome} />
+            {/* these routes should be available when logged in as subscriber or admin */}
+            <Route exact path="/profile" component={UserProfile}/>
+
+            {/* this is for subscribers (maybe also admins?) */}
+            <Route exact path="/dashboard" component={SubscriberHome}/>
+            <Route exact path="/projects" component={ExistingProjects}/>
+
+            {/* these routes should be available to admins only */}
+            <Route exact path="/admin" component={AdminHome}/>
+              {/* maybe '/dashboard' as a protected route that would display AdminHome or ClientHome would be more intuitive */}
+            <Route exact path="/workflows/new" component={CreateWorkflow}/>
+            <Route exact path="/workflows" component={ExistingWorkflows}/>
+            <Route exact path="/subscribers" component={Subscribers}/>
+                                
             {/* 404 page creation below */}
             <Route render={() => 
               <div className="fourOfour">
