@@ -17,7 +17,8 @@ import ExistingWorkflows from '../WorkflowEditor/ExistingWorkflows';
 import Subscribers from '../Subscribers/Subscribers';
 import AdminHome from '../AdminHome/AdminHome';
 import SubscriberHome from '../SubscriberHome/SubscriberHome';
-import ExistingProjects from '../ProjectManager/ExistingProjects'
+import ExistingProjects from '../ProjectManager/ExistingProjects';
+import SupportPage from '../SupportPage/SupportPage';
 
 // THESE SEEM UNUSED
 // import AddTask from '../AddTask/AddTask';
@@ -49,6 +50,7 @@ class App extends Component {
             {/* this is for subscribers (maybe also admins?) */}
             <Route exact path="/dashboard" component={SubscriberHome}/>
             <Route exact path="/projects" component={ExistingProjects}/>
+            <Route exact path="/support" component={SupportPage}/>
 
             {/* these routes should be available to admins only */}
             <Route exact path="/admin" component={AdminHome}/>
