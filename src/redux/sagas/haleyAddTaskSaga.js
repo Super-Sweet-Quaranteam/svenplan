@@ -5,6 +5,9 @@ import { takeEvery, put } from "redux-saga/effects";
 // these sagas take the dispatch and runs them before they get to the reducers
 function* workflows() {
     yield takeEvery('SET_PHASE_ID', setPhaseID);
+
+    yield takeEvery('FETCH_RISK_TYPES', setRiskTypes);
+
     // yield takeEvery('GET_THIS_WORKFLOW', getThisWorkflow);
     // yield takeEvery('ADD_NEW_WORKFLOW', addNewWorkflow);
     // yield takeEvery('EDIT_WORKFLOW_NAME', editWorkflowName);
@@ -21,6 +24,16 @@ function* workflows() {
 
 function* setPhaseID (action) {
     yield put({type: 'UPDATE_PHASE_ID', payload: action.payload});
+}
+
+function* setRiskTypes (action) {
+    const riskTypes = yield axios.get(`/api/haley-task/risktypes/${action.payload}`);
+    let riskTypesArray = [];
+    for (let i=0; i<riskTypes.data.length; i++){
+        // console.log(riskTypes.data[i].riskarea)
+        riskTypesArray.push(riskTypes.data[i].riskarea);
+    }
+    yield put({ type: 'UPDATE_RISKAREA_OPTIONS', payload: riskTypesArray });
 }
 
 // // gets all workflows from DB
