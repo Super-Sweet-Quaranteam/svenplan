@@ -2,14 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import CreateWorkflow from '../AdminHome/ExistingWorkflows/CreateWorkflow';
-import ExistingWorkflows from '../AdminHome/ExistingWorkflows/ExistingWorkflows'
-import ExistingProjects from '../AdminHome/ExistingProjects/ExistingProjects'
-import ClientAlerts from '../AdminHome/ClientAlerts/ClientAlerts';
-import ClientList from '../AdminHome/ClientList/ClientList';
-import UserProfile from '../UserProfile/UserProfile';
-import AdminHome from '../AdminHome/AdminHome';
-
 function Navbar(props) {
     // let { path, url } = useRouteMatch();
     return (

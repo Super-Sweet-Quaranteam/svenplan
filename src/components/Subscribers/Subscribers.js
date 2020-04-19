@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 
-class ClientList extends Component{
+class Subscribers extends Component{
 
 state={ 
     
@@ -68,4 +68,4 @@ const putReduxStateOnProps=(reduxState)=>({
     reduxState
   });
   
-export default connect(putReduxStateOnProps)(ClientList);
+export default connect(putReduxStateOnProps)(Subscribers);
