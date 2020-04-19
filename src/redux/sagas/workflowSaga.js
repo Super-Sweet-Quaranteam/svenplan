@@ -15,6 +15,7 @@ function* workflows() {
     yield takeEvery('REMOVE_PHASE', removePhase);
     yield takeEvery('EDIT_PHASE_NAME', editPhaseName);
     yield takeEvery('EDIT_TASK_NAME', editTaskName);
+    yield takeEvery('ADD_NEW_TASK', addNewTask);
 }
 
 // gets all workflows from DB
@@ -69,9 +70,20 @@ function* editTaskName(name){
     try {
         const editTaskName = yield axios.put(`/api/workflow/new-task-name/${name.payload.id}`, name.payload);
         console.log('in SAGA returning from new task name PUT', editTaskName);
-        yield put({type: 'GET_THIS_WORKFLOW', payload: name.payload});
+        yield put({type: 'GET_THIS_PHASE', payload: name.payload});
     } catch(error){
         console.log('error in saga /workflow/new-task-name:', error);
+    }
+}
+
+// add new task to task
+function* addNewTask(name) {
+    console.log("in saga add task POST with: ", name.payload);
+    try {
+        yield axios.post(`/api/workflow/add/task/`, name.payload);
+        yield put({type: 'GET_THIS_PHASE', payload: name.payload});
+    } catch(error){
+        console.log(error);
     }
 }
 
@@ -96,7 +108,6 @@ function* addNewPhase(phase) {
     }
 }
 
-
 // remove phase from workflow
 function* removePhase(remove) {
     console.log("in saga phase DELETE with: ", remove.payload);
@@ -109,7 +120,7 @@ function* removePhase(remove) {
     }
 }
 
-// updates task name / description in DB
+// mark workflow as published in DB
 function* publishThisWorkflow(id){
     try {
         const publishWF = yield axios.put(`/api/workflow/publish/${id.payload.id}`);

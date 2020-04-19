@@ -68,6 +68,7 @@ class ExistingWorkflows extends Component {
     render() {
         return (
             <>
+            {/* thinking this should be a tbale layout in the future */}
                 {this.state.edit
                 ?
                 <EditWorkflow wf={this.state.wf} wfID={this.state.wf.id}/>   

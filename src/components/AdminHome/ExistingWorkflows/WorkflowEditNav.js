@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../AdminHome.css'
+import Swal from 'sweetalert2';
 
 
 class WorkflowNav extends Component {
@@ -11,12 +12,26 @@ class WorkflowNav extends Component {
         this.props.dispatch({type: 'GET_THIS_PHASE', payload:{id:id}});
     }
 
-    // does not actually follow through yet, simple to implemet though
     publishWorkflow=()=>{
         let id = this.props.reduxState.workflow.thisWorkflow[0].wf_id;
-        console.log('tick boolean to true for workflow with id:', id);
-        // send dispatch to tick bool
-        // history push back to /admin/home
+        Swal.fire({
+            title: `Would you like to make this workflow available to subsribers?`,
+            text: "Publishing a workflow allows an admin to give a subscriber access to it",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+            }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                'Published!',
+                `Workflow will now be available`,
+                'success'
+                );
+                this.props.dispatch({type: 'PUBLISH_THIS_WORKFLOW', payload: {id: id}})
+            }
+        })
     }
 
     render() {
@@ -35,7 +50,8 @@ class WorkflowNav extends Component {
                         )
                     }
                     <li>
-                        <span className="span"><button className="button" onClick={this.publishWorkflow}>Publish Workflow</button></span>
+                        {/* maybe conditionally render this button and toggle between publish and unpublish */}
+                        <span className="span"><button className="button" onClick={()=>this.publishWorkflow()}>Publish Workflow</button></span>
                     </li>
 
                     <li className="side-item final">
