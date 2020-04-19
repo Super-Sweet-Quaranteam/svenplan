@@ -1,17 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { HashRouter as Switch, Route, useRouteMatch } from 'react-router-dom';
 
-//admin home was basically acting as half a nav, so I moved that stuff to nav
+import AddTask0 from './subcomponents/AddTask0';
+import AddTask1 from './subcomponents/AddTask1';
+import AddTaskSummary from './subcomponents/AddTaskSummary'
+
 function AddTask(props) {
+    let { path, url } = useRouteMatch();
     return (
         <>
-            <p>Haley's add task thingy</p>
+            <h2>Add Task Simulator</h2>
+            <Switch>
+                <Route exact path={`${path}`}><AddTask0/></Route> 
+                <Route path={`${path}/1`} component={AddTask1} />
+            </Switch>
+            <AddTaskSummary/>
         </>
     );
 }
 
-const putReduxStateOnProps = (reduxState) => ({
-    user: reduxState.user
+
+const mapStateToProps = state => ({
+    user: state.user,
 });
 
-export default connect(putReduxStateOnProps)(AddTask);
+export default connect(mapStateToProps)(AddTask);
+

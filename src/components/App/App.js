@@ -22,6 +22,7 @@ import SupportPage from '../SupportPage/SupportPage';
 
 //TEMPORARY!
 import AddTaskHaley from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
+  // import AddTaskSummary from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
 
 // THESE SEEM UNUSED
 // import AddTask from '../AddTask/AddTask';
@@ -63,7 +64,8 @@ class App extends Component {
             <Route exact path="/subscribers" component={Subscribers}/>
 
             {/* temporary!!! */}
-            <Route exact path="/add-task-haley" component={AddTaskHaley} />
+            <Route path="/add-task-haley" component={AddTaskHaley} />
+              {/* <Route path={`/add-task-haley/summary`} component={AddTaskSummary} /> */}
 
             {/* 404 page creation below */}
             <Route render={() => 
