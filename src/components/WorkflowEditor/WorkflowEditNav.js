@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import '../AdminHome.css'
 import Swal from 'sweetalert2';
 
 
