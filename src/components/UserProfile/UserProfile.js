@@ -80,13 +80,13 @@ class UserProfile extends Component {
       <>
       <h2>Edit Profile</h2>
         <label htmlFor="emailEdit">Email:</label>
-        <input id='emailEdit' onChange={this.handleInputChangeFor('email')} value={this.state.email}></input>
+        <input type="email" id='emailEdit' onChange={()=>this.handleInputChangeFor('email')} value={this.state.email}></input>
         <label htmlFor="aliasEdit">Display Name:</label>
-        <input id='aliasEdit' onChange={this.handleInputChangeFor('alias')} value={this.state.alias}></input>
+        <input type="text" id='aliasEdit' onChange={()=>this.handleInputChangeFor('alias')} value={this.state.alias}></input>
         <label htmlFor="firstNameEdit">First Name:</label>
-        <input id='firstNameEdit' onChange={this.handleInputChangeFor('firstname')} value={this.state.firstname}></input>
+        <input type="text" id='firstNameEdit' onChange={()=>this.handleInputChangeFor('firstname')} value={this.state.firstname}></input>
         <label htmlFor="lastNameEdit">Last Name:</label>
-        <input id='lastNameEdit' onChange={this.handleInputChangeFor('lastname')} value={this.state.lastname}></input>
+        <input type="text" id='lastNameEdit' onChange={()=>this.handleInputChangeFor('lastname')} value={this.state.lastname}></input>
         <p><button onClick={this.updateUser}>Save Profile</button></p>
       <p><button onClick={this.editMode}>View Profile</button></p>
       </>
