@@ -10,7 +10,6 @@ class EditWorkflow extends Component {
     state = {
         edit: false,
         editPhase: false,
-        taskEdit: false,
         addPhase: false,
         workflow: {
             id: this.props.wf.id,
@@ -106,10 +105,11 @@ class EditWorkflow extends Component {
 
     saveNewPhase=()=>{
         this.setState({edit: false, addPhase: false});
+        const nextSequence = (Math.max(...this.props.reduxState.workflow.thisWorkflow.map(phase=>phase.ph_sequence),0)+1);
         this.props.dispatch({type: 'ADD_NEW_PHASE', payload: {
             id: this.state.workflow.id, 
             phase: this.state.newPhase,
-            sequence: (this.props.reduxState.workflow.thisWorkflow.length + 1)
+            sequence: nextSequence
         }})
     }
 
@@ -200,7 +200,6 @@ class EditWorkflow extends Component {
                                     <br/>
                                     <button className="button" onClick={this.savePhase}>Save Phase</button>
                                     <button className="button" onClick={()=>this.deletePhase(this.state.phase.name)}>Delete Phase</button>
-                                    <button className="button" onClick={this.addTasks}>Add Tasks</button>
                                 </form>    
                                     <hr/>
                                 </>
@@ -213,11 +212,12 @@ class EditWorkflow extends Component {
                                 <EditPhase 
                                     key={i}
                                     id={task.task_id}
+                                    phaseId={task.ph_id}
                                     phase={task.ph_name}
                                     name={task.task_name}
                                     description={task.task_description}
+                                    nextSequence={task.task_sequence}
                                     edit={this.state.editPhase}
-                                    taskEdit={this.state.taskEdit}
                                     wfID={this.props.wfID}
                                 />
                                 )}
