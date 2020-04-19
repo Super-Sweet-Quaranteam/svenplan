@@ -60,7 +60,9 @@ class UserProfile extends Component {
             <p>Access Level: {this.props.user.currentUser.level === 1 &&
              "Admin"  }
             {this.props.user.currentUser.level === 2 &&
-              "Subscriber"}</p>
+              "Subscriber"}
+            {this.props.user.currentUser.level === 3 &&
+              "Log In Created"}</p>
           <p><button onClick={this.editMode}>Edit Profile</button></p>
           <br></br>
             {this.props.user.selectedUser.team_id
