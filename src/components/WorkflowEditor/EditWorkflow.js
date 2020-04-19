@@ -43,6 +43,7 @@ class EditWorkflow extends Component {
         })
     }
 
+    // deletes selected phase, has warning before removal
     deletePhase=(name)=>{
         this.setState({editPhase: !this.state.editPhase});
         Swal.fire({

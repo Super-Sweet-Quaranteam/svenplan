@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Swal from 'sweetalert2';
 
+
+/////////////currently unused component!
+
 class AddTask extends Component {
     
     // holds an array of what is to be displayed

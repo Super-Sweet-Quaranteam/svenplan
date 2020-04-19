@@ -14,10 +14,12 @@ class ExistingWorkflows extends Component {
         }
     }
 
+    // collects all workflows from db
     componentDidMount=()=>{
         this.props.dispatch({type: 'GET_ALL_WORKFLOWS'})
     }
 
+    // user warning before deleting a workflow
     deleteWorkflow=(id)=> {
         Swal.fire({
             title: `Are you sure you want to delete this workflow?`,
@@ -39,6 +41,7 @@ class ExistingWorkflows extends Component {
         })
     }
 
+    // one of two places to publish a workflow
     publishWorkflow=(id)=> {
         Swal.fire({
             title: `Would you like to make this workflow available to subsribers?`,
@@ -60,6 +63,7 @@ class ExistingWorkflows extends Component {
         })
     }
 
+    // identifies workflow to be viewed and displays in new dom with side nav
     viewWorkflow=(id, name, description)=> {
         this.setState({edit: true, wf:{id: id, name: name, description: description}});
         this.props.dispatch({type: 'GET_THIS_WORKFLOW', payload: {id: id}})

@@ -5,12 +5,13 @@ import Swal from 'sweetalert2';
 
 class WorkflowNav extends Component {
 
-
+    // gets current phase by id to be displayed outside of side nav
     viewPhase=(id)=>{
         console.log(id)
         this.props.dispatch({type: 'GET_THIS_PHASE', payload:{id:id}});
     }
 
+    // one of two places workflows can be published, has alert before publishing
     publishWorkflow=()=>{
         let id = this.props.reduxState.workflow.thisWorkflow[0].wf_id;
         Swal.fire({

@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 import './NewWorkflow.css'
 import AddPhase from './AddPhase/AddPhase';
 
+
+/////////////currently unused component!
+
 class NewWorkflow extends Component {
     state = {
         inputName: null,
