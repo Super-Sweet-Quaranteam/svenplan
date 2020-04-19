@@ -60,20 +60,25 @@ class EditPhase extends Component {
             </>
             :
             <>
-                <form data-id={this.props.id} onSubmit={(e)=>this.handleSubmit(e, this.props.id)}>
-                    <label htmlFor="task-name">Task Title: 
+                <form className="form" data-id={this.props.id} onSubmit={(e)=>this.handleSubmit(e, this.props.id)}>
+                    <li>
+                    <label htmlFor="task-name">Task Title: </label>
                         <input type="text" data-id={this.props.id} value={this.state.task.name || ""} placeholder="enter title for task" onChange={(e)=>this.handleChange(e, 'name')} />
-                    </label>
-                    <br/>
-                    <label htmlFor="task-desctioption">Description: 
+                        <span>Enter task name here</span>
+                    </li>
+                    <li>
+                    <label htmlFor="task-desctioption">Description: </label>
                         <input type="text" size="50" data-id={this.props.id} value={this.state.task.description || ""} placeholder="enter description for task" onChange={(e)=>this.handleChange(e, 'description')} />
-                    </label>
-                    <br/>
-                    <input type="submit" value="save" className="button"/>
-                </form>
-                {this.state.edit === false &&
+                        <span>Describe the task here</span>
+                    </li>
+                    <input type="submit" value="save" className="btn-sml"/>
                     <button onClick={this.editOptions} className="btn-sml">Edit Task Options</button>
-                }
+                </form>
+                <br/>
+                <br/> 
+                <br/>                
+                <hr width="250em"/>
+
                 {this.state.edit === true &&
                 <>
                     <button onClick={this.saveOptions} className="btn-sml">Save Task Options</button>

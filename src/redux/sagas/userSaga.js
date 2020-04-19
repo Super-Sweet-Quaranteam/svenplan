@@ -49,6 +49,7 @@ function* updateUser(action) {
     };
     const response = yield axios.put(`/api/user/${action.payload.id}`, config);
     console.log(response)
+    yield put({ type: 'FETCH_CURRENT_USER'})
   } catch (error) {
     console.log('User update request failed', error);
   }
