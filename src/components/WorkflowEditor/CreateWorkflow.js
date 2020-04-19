@@ -24,7 +24,7 @@ class CreateWorkflow extends Component {
             confirmButtonText: 'OK'
           }).then((result) => {
             if (result.value) {
-              this.props.history.push('/admin/workflows')
+              this.props.history.push('/workflows')
             }
           })
     }
