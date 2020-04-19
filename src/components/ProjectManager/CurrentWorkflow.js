@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import '../ClientHome/Client.css';
+import '../SubscriberHome/Subscriber.css';
 
 class CurrentWorkflow extends Component {
     state = {

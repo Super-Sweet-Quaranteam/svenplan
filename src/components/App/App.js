@@ -16,7 +16,7 @@ import CreateWorkflow from '../WorkflowEditor/CreateWorkflow';
 import ExistingWorkflows from '../WorkflowEditor/ExistingWorkflows';
 import Subscribers from '../Subscribers/Subscribers';
 import AdminHome from '../AdminHome/AdminHome';
-import SubscriberHome from '../ClientHome/ClientHome';
+import SubscriberHome from '../SubscriberHome/SubscriberHome';
 import ExistingProjects from '../ProjectManager/ExistingProjects'
 
 // THESE SEEM UNUSED
