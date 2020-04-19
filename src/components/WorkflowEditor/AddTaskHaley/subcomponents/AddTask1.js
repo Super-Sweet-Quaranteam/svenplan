@@ -29,9 +29,17 @@ class AddTask1 extends Component {
                 </div>
                 <div>
                     <p>Risk Area (select all that apply):</p>
-                    <input type="checkbox" id="check-text" value="text"/>
-                        <label htmlFor="check-text">Risk Area</label>
-                    <br/>
+                    {this.props.task.taskInProgress.riskareaOptions&&
+                        <>
+                        {this.props.task.taskInProgress.riskareaOptions.map((riskarea)=>
+                            <div>
+                                <input type="checkbox" id="check-text" value={riskarea} />
+                                <label htmlFor="check-text">{riskarea}</label>
+                            </div>
+                        )}
+                        </>
+                    }
+
                     <input type="checkbox" id="check-text" value="text" />
                         <label htmlFor="check-text">New Risk Area</label>
                     
@@ -44,7 +52,8 @@ class AddTask1 extends Component {
 }
 
 const putReduxStateOnProps = (reduxState) => ({
-    user: reduxState.user
+    user: reduxState.user,
+    task: reduxState.task
 });
 
 export default connect(putReduxStateOnProps)(AddTask1);
