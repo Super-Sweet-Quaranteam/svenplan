@@ -12,28 +12,12 @@ margin-left:10px;
 #clientTable{
     margin-left: auto;
     margin-right:auto;
-    border: solid 2px;
+    border: solid 2px var(--bg-primary);
     text-align: center;
 }
 
 th{border:solid 2px}
 td{border:solid 1px}
-
-.btn-sml{
-    margin: 1em;
-    color: var(--text-primary);
-    background-color: #FCFCFC;
-    padding: .5em;
-    border-radius: 3em;
-    transition: var(--transition-speed);
-    border-color: var(--bg-secondary);
-}
-  
-.btn-sml:hover{
-    background: var(--sven-blue);
-    transform: scale(1.1);
-    transition: var(--transition-speed);
-}
 
 .sidebar-nav {
     position: absolute;

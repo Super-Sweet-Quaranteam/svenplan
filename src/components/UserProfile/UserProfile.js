@@ -4,13 +4,15 @@ import './UserProfile.css';
 
 class UserProfile extends Component {
 
-  state={mode:'display',
-}
+  state={
+    mode:'display',
+  }
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_CURRENT_USER', payload: this.props.user.currentUser.id })
   }
 
+  // not seing where this is being used???? is this not needed?
   getSelectedUser(id){
     this.props.dispatch({ type: 'FETCH_SELECTED_USER', payload: id });
   }
@@ -29,6 +31,7 @@ class UserProfile extends Component {
     }
     this.props.dispatch({ type: 'FETCH_CURRENT_USER', payload: this.props.user.currentUser.id })
   }
+
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
       [propertyName]: event.target.value,
@@ -63,13 +66,13 @@ class UserProfile extends Component {
               "Subscriber"}
             {this.props.user.currentUser.level === 3 &&
               "Log In Created"}</p>
-          <p><button onClick={this.editMode}>Edit Profile</button></p>
+          <p><button className="btn-sml" onClick={this.editMode}>Edit Profile</button></p>
           <br></br>
             {this.props.user.selectedUser.team_id
                 ?
               <p>Team: {this.props.user.selectedUser.team}</p>
                 :
-                <button>Add to Team</button>
+                <button className="btn-sml" >Add to Team</button>
               }
           </div>
       </div>
@@ -78,17 +81,35 @@ class UserProfile extends Component {
   if(this.state.mode==='edit'){
     return(
       <>
-      <h2>Edit Profile</h2>
-        <label htmlFor="emailEdit">Email:</label>
-        <input id='emailEdit' onChange={this.handleInputChangeFor('email')} value={this.state.email}></input>
-        <label htmlFor="aliasEdit">Display Name:</label>
-        <input id='aliasEdit' onChange={this.handleInputChangeFor('alias')} value={this.state.alias}></input>
-        <label htmlFor="firstNameEdit">First Name:</label>
-        <input id='firstNameEdit' onChange={this.handleInputChangeFor('firstname')} value={this.state.firstname}></input>
-        <label htmlFor="lastNameEdit">Last Name:</label>
-        <input id='lastNameEdit' onChange={this.handleInputChangeFor('lastname')} value={this.state.lastname}></input>
-        <p><button onClick={this.updateUser}>Save Profile</button></p>
-      <p><button onClick={this.editMode}>View Profile</button></p>
+        <h2>Edit Profile</h2>
+        <br/>
+        <form className="form">
+          <ul>
+            <li>
+              <label htmlFor="emailEdit">Email:</label>
+              <input type="email" id='emailEdit' onChange={this.handleInputChangeFor('email')} value={this.state.email || ""}></input>
+              <span>Enter your email here</span>
+            </li>
+            <li>
+              <label htmlFor="aliasEdit">Display Name:</label>
+              <input type="text" id='aliasEdit' onChange={this.handleInputChangeFor('alias')} value={this.state.alias || ""}></input>
+              <span>Enter your display name here</span>
+            </li>
+            <li>
+              <label htmlFor="firstNameEdit">First Name:</label>
+              <input type="text" id='firstNameEdit' onChange={this.handleInputChangeFor('firstname')} value={this.state.firstname || ""}></input>
+              <span>Enter your first name here</span>
+            </li>
+            <li>
+              <label htmlFor="lastNameEdit">Last Name:</label>
+              <input type="text" id='lastNameEdit' onChange={this.handleInputChangeFor('lastname')} value={this.state.lastname || ""}></input>
+              <span>Enter your last name here</span>
+            </li>
+          </ul>
+          <button className="btn-sml" onClick={this.updateUser}>Save Profile</button>
+          <button className="btn-sml" onClick={this.editMode}>View Profile</button>
+        </form>
+          
       </>
     )
   }
