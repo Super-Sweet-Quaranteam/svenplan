@@ -10,12 +10,17 @@ class EditTask extends Component {
 
     render() {
         
+        // creates the dropdown options for task input types
+        const taskTypes = this.props.reduxState.workflow.taskOptions.map(types =>{
+        return (<option key={types.id} value={types.id}>{types.name}</option>)
+        })
+
         return (
             <div className="taskCard">
+                <select className="task-option" name="task-types">
+                    {taskTypes}
+                </select> 
                 <hr/>
-                <div>{this.props.wfID}</div>
-                <div>{this.props.wfID}</div>
-                <div>{this.props.taskID}</div>
             </div>
         );
     }

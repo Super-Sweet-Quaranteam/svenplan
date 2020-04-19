@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import AddTask from './AddTask';
 
+
+/////////////currently unused component!
+
+
 class AddPhase extends Component {
 
     state={

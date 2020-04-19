@@ -15,8 +15,15 @@ class EditPhase extends Component {
         
     }
 
+    // allows admin to add input types to a task
     editOptions=()=>{
-        this.setState({edit:true})
+        this.setState({edit: !this.state.edit});
+    }
+
+    // connect task options to  a task --- to be detriemend how this is set, currently does nothing
+    saveOptions=()=>{
+        this.setState({edit: !this.state.edit});
+        this.props.dispatch({type: 'SET_TASK_OPTIONS', payload: ''})
     }
 
     handleChange=(e, propertyName)=>{
@@ -28,6 +35,7 @@ class EditPhase extends Component {
         })
     }
 
+    // checks if new or existing task, sends relevant dispatach to saga
     handleSubmit=(e, id)=>{
         e.preventDefault();
         this.setState({edit:false});
@@ -40,7 +48,7 @@ class EditPhase extends Component {
     }
 
     render() {
-
+        // holds the current workflow id between components where needed
         const wfID = this.props.wfID;
 
         return (
@@ -70,13 +78,18 @@ class EditPhase extends Component {
                 <br/> 
                 <br/>                
                 <hr width="250em"/>
+
                 {this.state.edit === true &&
+                <>
+                    <button onClick={this.saveOptions} className="btn-sml">Save Task Options</button>
                     <EditTask
                         wfID={wfID}
                         taskID={this.props.id}
                         phaseID={this.props.phaseId}
                      />
+                </>
                 }
+                <hr width="250em"/>
             </>
             }
             </>

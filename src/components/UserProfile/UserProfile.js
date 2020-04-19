@@ -110,6 +110,7 @@ class UserProfile extends Component {
           <button className="btn-sml" onClick={this.editMode}>View Profile</button>
         </form>
           
+
       </>
     )
   }

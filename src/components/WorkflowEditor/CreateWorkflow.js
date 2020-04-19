@@ -13,6 +13,7 @@ class CreateWorkflow extends Component {
         }
     }
 
+    // creates a brand new workflow, moves user to see all workflows from there
     createWorkflow=()=>{ 
         this.props.dispatch({type: 'ADD_NEW_WORKFLOW', payload: {
             name: this.state.workflow.name, description: this.state.workflow.description, time: this.state.workflow.time

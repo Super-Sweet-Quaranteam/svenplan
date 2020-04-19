@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
   
+////////////////////////////////////////////may be able to remove reducer
+///////////////////////////////////////////only used in AddPhase.js which isnt a used component
 const newPhase = (state = [], action) => {
     switch (action.type) {
         case 'ADD_PHASE':
@@ -41,11 +43,20 @@ const thisPhase = (state = [], action) => {
     }
 }
 
+// gets all task options
+const taskOptions = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_TASK_OPTIONS':
+            return action.payload;
+        default:
+            return state;
+    }
+}
 
 export default combineReducers({
     newPhase,
     allWorkflows,
     thisWorkflow,
-    thisPhase
-
+    thisPhase,
+    taskOptions
   });

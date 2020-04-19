@@ -16,6 +16,7 @@ function* workflows() {
     yield takeEvery('EDIT_PHASE_NAME', editPhaseName);
     yield takeEvery('EDIT_TASK_NAME', editTaskName);
     yield takeEvery('ADD_NEW_TASK', addNewTask);
+    yield takeEvery('GET_TASK_OPTIONS', getTaskOptions);
 }
 
 // gets all workflows from DB
@@ -23,7 +24,7 @@ function* getAllWorkflows(){
     console.log("We are here in saga GET all workflows");
     const getWorkflows = yield axios.get(`/api/workflow/all`);
     console.log('in saga - all workflows GET back with:', getWorkflows.data);
-    yield put({type: 'SET_ALL_WORKFLOWS', payload: getWorkflows.data})
+    yield put({type: 'SET_ALL_WORKFLOWS', payload: getWorkflows.data});
 }
 
 // gets requested workflow from DB
@@ -140,6 +141,14 @@ function* deleteThisWorkflow(remove) {
     } catch(error){
         console.log(error);
     }
+}
+
+// gets all task options from DB
+function* getTaskOptions(){
+    console.log("We are here in saga GET all task options");
+    const getOptions = yield axios.get(`/api/workflow/all/task/options`);
+    console.log('in saga - all task options GET back with:', getOptions.data);
+    yield put({type: 'SET_TASK_OPTIONS', payload: getOptions.data});
 }
 
 export default workflows;
