@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import ClientNav from './ClientNav';
-import CreateWorkflow from '../AdminHome/ExistingWorkflows/CreateWorkflow';
-import ExistingProjects from '../AdminHome/ExistingProjects/ExistingProjects';
-import ClientRisk from './ClientRisk';
-import CurrentWorkflow from './CurrentWorkflow';
+import CreateWorkflow from '../WorkflowEditor/CreateWorkflow';
+import ExistingProjects from '../ProjectManager/ExistingProjects';
+import ClientRisk from '../RiskChart/RiskChart';
+import CurrentWorkflow from '../ProjectManager/CurrentWorkflow';
 import UserProfile from '../UserProfile/UserProfile'
 
 const ClientHome =(props)=>{

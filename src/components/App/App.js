@@ -12,19 +12,19 @@ import LoginPage from '../LoginPage/LoginPage';
 
 import UserProfile from '../UserProfile/UserProfile';
 
-import CreateWorkflow from '../AdminHome/ExistingWorkflows/CreateWorkflow';
-import ExistingWorkflows from '../AdminHome/ExistingWorkflows/ExistingWorkflows';
-import Subscribers from '../AdminHome/ClientList/ClientList';
+import CreateWorkflow from '../WorkflowEditor/CreateWorkflow';
+import ExistingWorkflows from '../WorkflowEditor/ExistingWorkflows';
+import Subscribers from '../Subscribers/Subscribers';
 import AdminHome from '../AdminHome/AdminHome';
-import SubscriberHome from '../ClientHome/ClientHome';
-import ExistingProjects from '../AdminHome/ExistingProjects/ExistingProjects'
+import SubscriberHome from '../SubscriberHome/SubscriberHome';
+import ExistingProjects from '../ProjectManager/ExistingProjects'
 
 // THESE SEEM UNUSED
 // import AddTask from '../AddTask/AddTask';
 // import Container from '../AddTask/Container';
 // import Header from '../Header/Header';
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-// import ClientAlerts from '../AdminHome/ClientAlerts/ClientAlerts';
+// import Alerts from '../AdminHome/Alerts/Alerts';
 // {/* <Route path="/admin" component={AdminNav} /> */ }
 
 class App extends Component {
