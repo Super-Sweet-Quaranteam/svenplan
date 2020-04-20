@@ -24,8 +24,18 @@ const taskInProgress = (state = {}, action) => {
     }
 };
 
+const confirmation = (state = {}, action) => {
+    switch (action.type) {
+        case 'ADD_TASK_CONFIRM':
+            return {message: `task successfully added to default_tasks table, with an id of ${action.payload}`, id: action.payload};
+        default:
+            return state;
+    }
+};
+
 
 export default combineReducers({
     taskInProgress,
+    confirmation,
 });
 

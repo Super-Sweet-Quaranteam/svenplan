@@ -55,7 +55,7 @@ class AddTask3 extends Component {
                 </div>
                 <div>
                     <label htmlFor="descriptionInput"> text to display:
-                        <input type="text" id="descriptionInput" value={this.state.description} onChange={this.handleDescriptionInput} />
+                        <input type="text" id="descriptionInput" onChange={this.handleDescriptionInput} />
                     </label>
                     <div><button onClick={this.addLink}>add link</button></div>
                 </div>

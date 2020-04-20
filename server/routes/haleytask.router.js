@@ -66,7 +66,39 @@ router.post('/add-new-task', async (req, res) => {
             }
         //if everything goes through, then send it all through and send 'OK'
         await connection.query('COMMIT');
-        res.sendStatus(200);
+        res.send({ newTaskId: newTaskId.rows[0].id})
+        // res.sendStatus(200);
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        console.log(`Transaction Error - Rolling back transfer`, error);
+        res.sendStatus(500);
+    } finally {
+        // Always runs - both after successful try & after catch
+        // Put the client connection back in the pool
+        // This is super important! 
+        connection.release()
+    }
+});
+
+// post new task to phase
+router.post('/add-new-assigned-task', async (req, res) => {
+    console.log('req.body is:', req.body);
+    const defaultId = req.body.id;
+    const projectId = 1;
+    // We need to use the same connection for all queries... 
+    //(this is pretty much all from wk16 chien syllabus notes)
+    const connection = await pool.connect()
+    // Using basic JavaScript try/catch/finally 
+    try {
+        //insert some things into default_tasks table and get the id from it
+        const queryTextForTasksTable = `INSERT INTO "assigned_tasks" ("default_id", "project_id") VALUES ($1, $2) RETURNING id`;
+        const valuesForTasksTable = [defaultId, projectId];
+        const newTaskId = await connection.query(queryTextForTasksTable, valuesForTasksTable);
+        // console.log('newTaskId is', newTaskId);
+        console.log('newTaskId is', newTaskId.rows[0].id);
+
+        res.send({ newTaskId: newTaskId.rows[0].id })
+        // res.sendStatus(200);
     } catch (error) {
         await connection.query('ROLLBACK');
         console.log(`Transaction Error - Rolling back transfer`, error);
