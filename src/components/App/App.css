@@ -3,7 +3,7 @@
 :root{
   font-size: 16px;
   font-family: 'Raleway', 'Open Sans';
-  background-color: #FCFCFC;
+  --pure-white: #FCFCFC;
   --text-primary: #272727; 
   --text-secondary: #9B9B9B; 
   --text-tertiary: #f5f4f4;
@@ -13,16 +13,19 @@
   --sven-red: #EC1515;
   --sven-blue: #014AAD;
   --transition-speed: 600ms;
+  --transition-ease: 400ms ease-in-out;
 }
 
 body{
   margin:0;
+  background-color: var(--pure-white);
 }
 
-.button{
+/* larger button class *//* larger button class *//* larger button class *//* larger button class */
+.button, .button-delete{
   margin: 1em;
   color: var(--text-primary);
-  background-color: #FCFCFC;
+  background-color: var(--pure-white);
   padding: 1em;
   border-radius: 3em;
   transition: var(--transition-speed);
@@ -35,8 +38,39 @@ body{
   transition: var(--transition-speed);
 }
 
+/* small button class *//* small button class *//* small button class *//* small button class */
+.btn-sml, .btn-sml-delete{
+  margin: 1em;
+  color: var(--text-primary);
+  background-color: var(--pure-white);
+  padding: .5em;
+  border-radius: 3em;
+  transition: var(--transition-speed);
+  border-color: var(--bg-secondary);
+}
+
+.btn-sml:hover{
+  background: var(--sven-blue);
+  transform: scale(1.1);
+  transition: var(--transition-speed);
+}
+
+/* shine red if deleteing */
+.button-delete:hover{
+  background: var(--sven-red);
+  transform: scale(1.1);
+  transition: var(--transition-speed);
+}
+
+.btn-sml-delete:hover{
+  background: var(--sven-red);
+  transform: scale(1.1);
+  transition: var(--transition-speed);
+}
+
 .nav-wrapper{
   position: sticky;
+  height: 12vh;
   background-color: var(--bg-primary);
   overflow: hidden;
 }
@@ -54,7 +88,7 @@ body{
 .nav-link {
   display: flex;
   align-items: center;
-  padding: 1rem;
+  padding: 1em;
   color: var(--text-primary);
   text-decoration: none;
   filter: grayscale(100%) opacity(0.7);
@@ -62,24 +96,18 @@ body{
 }
 
 .nav-link:hover {
+  padding-top: 3.5em;
   filter: grayscale(0%) opacity(1);
   background: var(--bg-secondary);
   color: var(--text-tertiary);
 }
 
 .nav-logo {
-  font-weight: bold;
-  text-transform: uppercase;
   margin-right: 1rem;
-  text-align: center;
-  color: var(--text-secondary);
-  background: var(--bg-quaternary);
-  font-size: 1.5rem;
-  letter-spacing: 0.3ch;
-  transition: var(--transition-speed);
 }
 
 .nav-logo:hover{
+  padding-top: 1em;
   filter: grayscale(0%) opacity(1);
   background: var(--text-secondary);
 }
@@ -98,4 +126,172 @@ footer{
   position: fixed;
   opacity: .5;
   bottom: 0;
+}
+
+/* chnage default input syles *//* chnage default input syles *//* chnage default input syles */
+input[type=text], input[type=email], input[type=password], textarea {
+  width: 60%;
+  border: 2px solid var(--bg-secondary);
+  border-radius: .4em;
+  line-height: 1.5;
+  transition: var(--transition-speed);
+}
+
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus{
+  border: 2px solid var(--bg-tertiary);
+  transition: var(--transition-speed);
+}
+
+/* change default table style ---- WIP *//* change default table style ---- WIP *//* change default table style ---- WIP */
+table {
+  background: var(--bg-primary);
+  border-collapse: separate;
+  box-shadow: inset 0 1px 0 var(--bg-secondary);
+  font-size: 12px;
+  line-height: 24px;
+  margin: 30px auto;
+  text-align: left;
+  width: 80vw;
+  transition: var(--transition-speed);
+}   
+
+tbody{
+  transition: var(--transition-speed);
+}
+
+th {
+  background: linear-gradient(var(--sven-blue), var(--bg-secondary));
+  border-left: 1px solid #555;
+  border-right: 1px solid #777;
+  border-top: 1px solid #555;
+  border-bottom: 1px solid #333;
+  box-shadow: inset 0 1px 0 #999;
+  color: var(--pure-white);
+  font-weight: bold;
+  padding: 10px 15px;
+  position: relative;
+  text-shadow: 0 1px 0 #000;  
+}
+
+th:after {
+  background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.08));
+  content: '';
+  display: block;
+  height: 25%;
+  left: 0;
+  margin: 1px 0 0 0;
+  position: absolute;
+  top: 25%;
+  width: 100%;
+}
+
+th:first-child {
+  border-left: 1px solid var(--bg-tertiary);    
+  box-shadow: inset 1px 1px 0 var(--bg-primary);
+}
+
+th:last-child {
+  box-shadow: inset -1px 1px 0 #999;
+}
+
+td {
+  padding: 10px 15px;
+  position: relative;
+  transition: var(--transition-speed);
+}
+
+td:first-child {
+  box-shadow: inset 1px 0 0 var(--pure-white);;
+}   
+
+td:last-child {
+  border-right: 1px solid #e8e8e8;
+  box-shadow: inset -1px 0 0 var(--pure-white);;
+}   
+
+tr {
+  transition: var(--transition-speed);
+  background: var(--bg-primary); 
+}
+
+tr:nth-child(odd) td {
+  background: var(--pure-white);; 
+}
+
+tr:last-of-type td {
+  box-shadow: inset 0 -1px 0 var(--pure-white);; 
+}
+
+tr:last-of-type td:first-child {
+  box-shadow: inset 1px -1px 0 var(--pure-white);;
+}   
+
+tr:last-of-type td:last-child {
+  box-shadow: inset -1px -1px 0 var(--pure-white);;
+}   
+
+tbody:hover td {
+  color: transparent;
+  text-shadow: 0 0 1px var(--bg-tertiary);
+  transition: var(--transition-speed);
+}
+
+tbody:hover tr:hover td {
+  color: var(--text-primary);
+  text-shadow: 0 .5px 0 var(--text-primary);
+  transition: var(--transition-speed);
+}
+
+/* form design option *//* form design option *//* form design option *//* form design option */
+.form {
+  max-width:40vw;
+  margin: auto;
+  margin-top: 3px;
+  background: var(--pure-white);
+  border-radius:4px;
+}
+
+.form li{
+  text-decoration: none;
+  list-style: none;
+  padding: 9px;
+  border:2px solid var(--bg-primary);
+  margin-bottom: 30px;
+  border-radius: 3px;
+  transition: var(--transition-speed);
+}
+
+.form li:hover{
+  border-color: var(--bg-secondary);
+  transition: var(--transition-speed);
+}
+
+.form li > label {
+  display: block;
+  float: left;
+  margin-top: -19px;
+  background: var(--pure-white);
+  height: 14px;
+  padding: 2px 5px 2px 5px;
+  color: #B9B9B9;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+.form li > span{
+  background: linear-gradient(var(--text-tertiary), var(--bg-primary));
+  display: block;
+  padding: 3px;
+  margin: 0 -9px -9px -9px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.form > .button{
+  float: right;
+}
+
+.form > .btn-sml{
+  float: right;
 }

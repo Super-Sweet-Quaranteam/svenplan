@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import AddTask from './AddTask';
 
+
+/////////////currently unused component!
+
+
 class AddPhase extends Component {
 
     state={
@@ -44,9 +48,9 @@ class AddPhase extends Component {
                 :
                 <>
                 <h1>{this.state.phaseName.name}</h1>
-                {/* <button className="button" 
+                <button className="button" 
                     onClick={()=>this.setState({phaseEdit: true})}>
-                    edit</button> */}
+                    edit</button>
                 </>
                 }
                 <br/>

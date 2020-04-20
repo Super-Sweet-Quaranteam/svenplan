@@ -1,78 +1,21 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
 import './AdminHome.css'
-import AdminNav from './AdminNav/AdminNav';
-import CreateWorkflow from './CreateWorkflow/CreateWorkflow';
-import ExistingWorkflows from './ExistingWorkflows/ExistingWorkflows'
-import ExistingProjects from './ExistingProjects/ExistingProjects'
-import ClientAlerts from './ClientAlerts/ClientAlerts';
-import ClientList from './ClientList/ClientList';
-import UserProfile from '../UserProfile/UserProfile';
 
-
-
+//admin home was basically acting as half a nav, so I moved that stuff to nav
 function AdminHome(props) {
-
-
     return (
         <>       
-          
-               <AdminNav />
-            {/* {<img className="hero-image" src="/images/skyline.png" alt="skyline" />} */}
-
-            {props.reduxState.admin.adminDisplay.displayOldWorkFlow === true
-                ?
-                <ExistingWorkflows
-                />
-                :
-                null
-            }
-            {props.reduxState.admin.adminDisplay.displayNewWorkFlow === true
-                ?
-                <CreateWorkflow
-                />
-                :
-                null
-            }
-            {props.reduxState.admin.adminDisplay.displayOldProjects === true
-                ?
-                <ExistingProjects
-                />
-                :
-                null
-            }
-            {props.reduxState.admin.adminDisplay.displayAlerts === true
-                ?
-                <ClientAlerts
-                />
-                :
-                null
-            }
-            {props.reduxState.admin.adminDisplay.displayClients === true
-                ?
-                <ClientList
-                />
-                :
-                null
-            }
-            {props.reduxState.admin.adminDisplay.displayProfile === true
-                ?
-                <UserProfile
-                />
-                :
-                null
-            }
-           
-            
-       
-
-           
+            <p>this is admin home</p>
+            <p>something like....</p>
+                <h2>Welcome, {props.user.currentUser.alias}</h2>
+                <h3>here are some things you can do with an admin account (etc etc etc)</h3>
         </>
     );
 }
 
 const putReduxStateOnProps = (reduxState) => ({
-    reduxState
+    user: reduxState.user
 });
 
 export default connect(putReduxStateOnProps)(AdminHome);

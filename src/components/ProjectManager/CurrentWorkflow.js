@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import './Client.css';
+import '../SubscriberHome/Subscriber.css';
 
 class CurrentWorkflow extends Component {
     state = {
         task: null,
         taskIndex: 0
-    }
-    
+    }  
     backATask=()=>{
         this.setState({
             task: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex - 1],
@@ -50,11 +49,9 @@ class CurrentWorkflow extends Component {
                     )}
                 </div>
                 <div className="taskWindow">
-                {this.state.task && <div className="taskAtHand" key={this.state.task.id}>{this.state.task.name}
+                {this.state.task && <div className="taskAtHand" key={this.state.task.id}>{this.state.task.phase_name}
                             <br/>
-                            {this.state.task.description}
-                            <br/>
-                            Will also include checkboxes, tutorials, etc
+                            {this.state.task.phase_description}
                             <br/>
                             {this.state.taskIndex === 0 ? 
                                 <button onClick={this.forwardATask}>Next</button>
