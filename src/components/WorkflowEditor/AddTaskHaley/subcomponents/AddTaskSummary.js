@@ -5,10 +5,9 @@ import { connect } from 'react-redux';
 function AddTaskSummary(props) {
     return (
         <>
-            <h3>Summary</h3>
-            <p>Here's what the task looks like so far (in reducer, not db)</p>
-            <p>taskInProgress in taskReducer is:</p>
-            <p>{JSON.stringify(props.task)}</p>
+            <h3>Summary (from reducer)</h3>
+                {props.task.taskInProgress.title && <h4>Title: {props.task.taskInProgress.title}</h4>}
+                {props.task.taskInProgress.phaseId && <p>Phase ID: {props.task.taskInProgress.phaseId}</p>}
         </>
     );
 }
