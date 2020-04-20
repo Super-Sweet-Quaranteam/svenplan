@@ -19,6 +19,11 @@ import AdminHome from '../AdminHome/AdminHome';
 import SubscriberHome from '../SubscriberHome/SubscriberHome';
 import ExistingProjects from '../ProjectManager/ExistingProjects';
 import SupportPage from '../SupportPage/SupportPage';
+import NewProject from '../ProjectManager/NewProject';
+
+//TEMPORARY!
+import AddTaskHaley from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
+  // import AddTaskSummary from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
 
 // THESE SEEM UNUSED
 // import AddTask from '../AddTask/AddTask';
@@ -50,7 +55,9 @@ class App extends Component {
             {/* this is for subscribers (maybe also admins?) */}
             <Route exact path="/dashboard" component={SubscriberHome}/>
             <Route exact path="/projects" component={ExistingProjects}/>
+            {/* <Route exact path="/projects/new" component={COREYS NEW PROJECT COMPONENT} /> */}
             <Route exact path="/support" component={SupportPage}/>
+            <Route exact path="/projects/new" component={NewProject}/>
 
             {/* these routes should be available to admins only */}
             <Route exact path="/admin" component={AdminHome}/>
@@ -58,14 +65,18 @@ class App extends Component {
             <Route exact path="/workflows/new" component={CreateWorkflow}/>
             <Route exact path="/workflows" component={ExistingWorkflows}/>
             <Route exact path="/subscribers" component={Subscribers}/>
-                                
+
+            {/* temporary!!! */}
+            <Route path="/add-task-haley" component={AddTaskHaley} />
+              {/* <Route path={`/add-task-haley/summary`} component={AddTaskSummary} /> */}
+
             {/* 404 page creation below */}
             <Route render={() => 
               <div className="fourOfour">
                 <h1>There doesn't seem to be anything here.</h1>
                 <a href="#add-task" ><img src="/images/NEOOPartnersLogo.png" alt="neoo"/></a>
               </div>
-            } />
+            } />            
           </Switch>
         </Router>
         <Footer />
