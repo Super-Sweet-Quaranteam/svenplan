@@ -9,6 +9,10 @@ class ExistingProjects extends Component {
     componentDidMount(){
         this.props.dispatch({type: 'FETCH_EXISTING_PROJECTS'})
     }
+    continueProject(id){
+        console.log('in continueProject with id:', id);
+        
+    }
 
     render(){
     return (
@@ -33,9 +37,10 @@ class ExistingProjects extends Component {
                         {/* <td><button onClick={()=>this.continueWorkflow(project)}>Continue</button><button onClick={this.archiveProject}>Archive</button></td> */}           
                         <td>
                             {/* on btn click, user is routed to CurrentWorkflow component */}
-                            <button className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayCurrentWorkflow: true}})}>
+                            {/* <button className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayCurrentWorkflow: true}})}>
                                 <a className="nav-link" href="#/clientHome">Continue</a>
-                            </button>
+                            </button> */}
+                            <button className="nav-item" onClick={() => this.continueProject(project.id)}>Continue</button>
                             <button className="nav-item" onClick={()=>this.archiveProject(project.id)}>Archive</button>
                         </td>
                     </tr>)}
