@@ -19,6 +19,7 @@ import AdminHome from '../AdminHome/AdminHome';
 import SubscriberHome from '../SubscriberHome/SubscriberHome';
 import ExistingProjects from '../ProjectManager/ExistingProjects';
 import SupportPage from '../SupportPage/SupportPage';
+import NewProject from '../ProjectManager/NewProject';
 
 // THESE SEEM UNUSED
 // import AddTask from '../AddTask/AddTask';
@@ -51,6 +52,7 @@ class App extends Component {
             <Route exact path="/dashboard" component={SubscriberHome}/>
             <Route exact path="/projects" component={ExistingProjects}/>
             <Route exact path="/support" component={SupportPage}/>
+            <Route exact path="/projects/new" component={NewProject}/>
 
             {/* these routes should be available to admins only */}
             <Route exact path="/admin" component={AdminHome}/>
