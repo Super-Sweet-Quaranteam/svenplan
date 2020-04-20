@@ -5,7 +5,7 @@ import EditTask from './EditTask';
 class EditPhase extends Component {
 
     state={
-        edit: false,
+        taskEdit: false,
         task:{
             id: this.props.id,
             name: this.props.name,
@@ -17,12 +17,13 @@ class EditPhase extends Component {
 
     // allows admin to add input types to a task
     editOptions=()=>{
-        this.setState({edit: !this.state.edit});
+        this.setState({taskEdit: true});
+        console.log('pop!', this.state)
     }
 
     // connect task options to  a task --- to be detriemend how this is set, currently does nothing
     saveOptions=()=>{
-        this.setState({edit: !this.state.edit});
+        this.setState({edit: false});
         this.props.dispatch({type: 'SET_TASK_OPTIONS', payload: ''})
     }
 
@@ -74,12 +75,12 @@ class EditPhase extends Component {
                     <input type="submit" value="save" className="btn-sml"/>
                     <button onClick={this.editOptions} className="btn-sml">Edit Task Options</button>
                 </form>
-                <br/>
                 <br/> 
-                <br/>                
+                <br/>        
+                <br/>        
                 <hr width="250em"/>
 
-                {this.state.edit === true &&
+                {this.state.taskEdit === true &&
                 <>
                     <button onClick={this.saveOptions} className="btn-sml">Save Task Options</button>
                     <EditTask
@@ -87,9 +88,9 @@ class EditPhase extends Component {
                         taskID={this.props.id}
                         phaseID={this.props.phaseId}
                      />
+                    <hr width="250em"/>
                 </>
                 }
-                <hr width="250em"/>
             </>
             }
             </>

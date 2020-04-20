@@ -151,6 +151,8 @@ class EditWorkflow extends Component {
                                     <span>Describe your workflow here</span>
                                 </li>                
                                 <button className="button" onClick={this.saveWF}>Save</button>
+                                <br/>
+                                <br/>
                             </form>
                         </>
                         :
@@ -170,6 +172,8 @@ class EditWorkflow extends Component {
                                     <span>Describe the phase here</span>
                                 </li>                   
                                 <button className="button" onClick={this.saveNewPhase}>Save</button>
+                                <br/>
+                                <br/>
                             </form>
                         </>
                         }
@@ -207,7 +211,7 @@ class EditWorkflow extends Component {
                                             <span>Describe the phase here</span>
                                     </li>
                                     <button className="button" onClick={this.savePhase}>Save Phase</button>
-                                    <button className="button" onClick={()=>this.deletePhase(this.state.phase.name)}>Delete Phase</button>
+                                    <button className="button-delete" onClick={()=>this.deletePhase(this.state.phase.name)}>Delete Phase</button>
                                 </form>   
                                     <br/>
                                     <br/> 

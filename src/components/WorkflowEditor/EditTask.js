@@ -17,6 +17,10 @@ class EditTask extends Component {
 
         return (
             <div className="taskCard">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
                 <select className="task-option" name="task-types">
                     {taskTypes}
                 </select> 
