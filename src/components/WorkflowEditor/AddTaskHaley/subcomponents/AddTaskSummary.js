@@ -15,6 +15,7 @@ function AddTaskSummary(props) {
                     )}
                     </p>
                 }
+                {props.task.taskInProgress.description && <p>Description: {props.task.taskInProgress.description}</p>}
         </>
     );
 }

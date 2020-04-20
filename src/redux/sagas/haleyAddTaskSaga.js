@@ -8,6 +8,7 @@ function* workflows() {
     yield takeEvery('FETCH_TASK_RISK_TYPES', setTaskRiskareaOptions);
     yield takeEvery('SET_TASK_TITLE', setTaskTitle);
     yield takeEvery('SET_TASK_RISKAREAS', setTaskRiskareas);
+    yield takeEvery('SET_TASK_DESCRIPTION', setTaskDescription);
 }
 
 function* setTaskPhaseID (action) {
@@ -27,6 +28,9 @@ function* setTaskTitle(action) {
 }
 function* setTaskRiskareas(action) {
     yield put({ type: 'UPDATE_TASK_RISKAREAS', payload: action.payload });
+}
+function* setTaskDescription(action) {
+    yield put({ type: 'UPDATE_TASK_DESCRIPTION', payload: action.payload });
 }
 
 

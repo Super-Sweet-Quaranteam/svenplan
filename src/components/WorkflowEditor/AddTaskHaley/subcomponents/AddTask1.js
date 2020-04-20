@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 
 // this component sends the task name and risk areas to the reducer.
 // it gets all possible riskareas from the database using FETCH_TASK_RISK_TYPES
+// (this requires risk areas to be set elsewhere)
+// it could also be possible to set risk areas here with an 'add risk area' button
 
 class AddTask1 extends Component {
     state = {
@@ -18,7 +20,7 @@ class AddTask1 extends Component {
     nextStep = () => {
         this.props.dispatch({ type: 'SET_TASK_TITLE', payload: this.state.titleInput });
         this.props.dispatch({ type: 'SET_TASK_RISKAREAS', payload: this.state.riskareas });
-        // this.props.history.push('/add-task-haley/2')
+        this.props.history.push('/add-task-haley/2')
     }
 
     goBack = () => {
