@@ -21,7 +21,8 @@ router.get('/all', (req, res) => {
 router.get('/requested/:id', (req, res) => {
     console.log('in GET this workflow with id:', req.params.id)
     const queryText = `SELECT "phases"."name" as ph_name, "phases"."description" as ph_description, 
-    "phases"."sequence" as ph_sequence, "phases"."id" as ph_id, "workflows"."id" as wf_id
+    "phases"."sequence" as ph_sequence, "phases"."id" as ph_id, "workflows"."id" as wf_id,
+    "workflows"."name" as wf_name, "workflows"."description" as wf_desc
     FROM "workflows"
     FULL OUTER JOIN "phases" ON "phases"."workflow_id" = "workflows".id
     WHERE "workflows"."id"=$1 ORDER BY "phases"."sequence" ASC;`;
@@ -40,8 +41,8 @@ router.get('/requested/:id', (req, res) => {
 router.get('/phase/:id', (req, res) => {
     console.log('in GET this phase with id:', req.params.id)
     const queryText = `SELECT "phases"."name" as ph_name, "phases"."description" as ph_description,
-    "default_tasks"."name" as task_name, "default_tasks"."description" as task_description, "phases"."id" as ph_id,
-    "default_tasks"."sequence" as task_sequence, "default_tasks"."id" as task_id
+    "phases"."sequence" as ph_sequence, "default_tasks"."name" as task_name, "default_tasks"."description" as task_description,
+    "phases"."id" as ph_id, "default_tasks"."sequence" as task_sequence, "default_tasks"."id" as task_id
     FROM "phases"
     FULL OUTER JOIN "default_tasks" ON "default_tasks"."phase_id" = "phases"."id"
     WHERE "phases"."id"=$1 ORDER BY "default_tasks"."sequence" ASC;`;

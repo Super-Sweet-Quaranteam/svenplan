@@ -32,7 +32,10 @@ function* getThisWorkflow(wf){
     console.log("We are here in saga GET this workflow");
     const getWorkflow = yield axios.get(`/api/workflow/requested/${wf.payload.id}`);
     console.log('in saga - GET this workflow back with:', getWorkflow.data);
-    yield put({type: 'SET_THIS_WORKFLOW', payload: getWorkflow.data})
+    yield put({type: 'SET_THIS_WORKFLOW', payload: getWorkflow.data});
+    yield put({type: 'CURENT_WORKFLOW', 
+    payload: {id: getWorkflow.data[0].wf_id, name: getWorkflow.data[0].wf_name, 
+        description: getWorkflow.data[0].wf_desc}});
 }
 
 // gets requested phase from DB
@@ -41,6 +44,9 @@ function* getThisPhase(phase){
     const getPhase = yield axios.get(`/api/workflow/phase/${phase.payload.id}`);
     console.log('in saga - GET this phase back with:', getPhase.data);
     yield put({type: 'SET_THIS_PHASE', payload: getPhase.data});
+    yield put({type: 'CURENT_PHASE', 
+    payload: {id: getPhase.data[0].ph_id, name: getPhase.data[0].ph_name, 
+        description: getPhase.data[0].ph_description, sequence: getPhase.data[0].ph_sequence}});
 }
 
 // updates workflow name / description in DB
