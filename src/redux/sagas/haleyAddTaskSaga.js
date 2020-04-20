@@ -65,9 +65,17 @@ function* addTaskToSubscriberDatabase(action) {
 }
 function* fetchAssignedTask(action) {
     try {
-        const response = yield axios.get(`/api/haley-task/assigned-task/${action.payload.id}`);
-        console.log('response:', response);
-        yield put({ type: 'SET_ASSIGNED_TASK', payload: response.data });
+        let assignedTaskObject = {}
+        const firstResponse = yield axios.get(`/api/haley-task/assigned-task/${action.payload.id}`);
+        console.log('response:', firstResponse);
+        assignedTaskObject= firstResponse[0];
+        const secondResponse = yield axios.get(`/api/haley-task/assigned-task/inputs/${action.payload.id}`);
+        console.log('second response:', secondResponse);
+
+
+
+
+        // yield put({ type: 'SET_ASSIGNED_TASK', payload: response.data });
     } catch (error) {
         console.log('error with posting new task:', error);
     }
