@@ -37,7 +37,6 @@ router.post('/add-new-task', async (req, res) => {
     // We need to use the same connection for all queries... 
     //(this is pretty much all from wk16 chien syllabus notes)
     const connection = await pool.connect()
-
     // Using basic JavaScript try/catch/finally 
     try {
         await connection.query('BEGIN');
@@ -45,11 +44,16 @@ router.post('/add-new-task', async (req, res) => {
         const queryTextForTasksTable = `INSERT INTO "default_tasks" ("name", "description", "phase_id", "created") VALUES ($1, $2, $3, NOW()) RETURNING id`;
         const valuesForTasksTable = [title, description, phaseId];
         const newTaskId = await connection.query(queryTextForTasksTable, valuesForTasksTable);
-        
+        console.log('newTaskId is', newTaskId);
         console.log('newTaskId is', newTaskId.rows[0].id);
+
+        //use newTaskId to populate links table
+        //for look because there might be multiple
+        const queryTextForLinksTable = `INSERT INTO "links"("description", "url", "task_id") VALUES ($1, $2, $3);`
+        for (let i=0; i<linksArray.length; i++){
+            await connection.query(queryTextForLinksTable, [linksArray[i].description, linksArray[i].url, newTaskId.rows[0].id]);
+            }
         
-        // Use + amount & to account for deposite
-        // await connection.query(sqlText, [toId, amount]);
         await connection.query('COMMIT');
         res.sendStatus(200);
     } catch (error) {
@@ -62,16 +66,6 @@ router.post('/add-new-task', async (req, res) => {
         // This is super important! 
         connection.release()
     }
-
-
-    // // const queryText = `INSERT INTO "default_tasks" ("name", "description", "phase_id", "sequence", "created") VALUES ($1, $2, $3, $4, $5)`;
-    // // pool.query(queryText, [name, desc, phID, Number(seq), time])
-    // .then(() => { 
-    //     res.sendStatus(201)
-    // }).catch((err) => {
-    //   console.log('Error completing new task POST', err);
-    //   res.sendStatus(500);
-    // });
 });
 
 module.exports = router;
