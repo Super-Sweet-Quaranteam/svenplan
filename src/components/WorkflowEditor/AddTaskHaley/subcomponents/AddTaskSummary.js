@@ -16,6 +16,20 @@ function AddTaskSummary(props) {
                     </p>
                 }
                 {props.task.taskInProgress.description && <p>Description: {props.task.taskInProgress.description}</p>}
+                {props.task.taskInProgress.links &&
+                    <p>Links:
+                        {props.task.taskInProgress.links.map((link) =>
+                            <span><a href={link.url} target="_blank">{link.description} /</a></span>
+                        )}
+                    </p>
+                }
+                {props.task.taskInProgress.inputs &&
+                    <p>inputs:
+                        {props.task.taskInProgress.inputs.map((input) =>
+                            <p>{input.prompt} ({input.type})</p>
+                        )}
+                    </p>
+                }
         </>
     );
 }

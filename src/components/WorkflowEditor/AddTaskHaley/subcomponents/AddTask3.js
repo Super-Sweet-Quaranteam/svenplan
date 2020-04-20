@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-// this component sends a description of the task to the reducer. pretty straightforward
+// this component sends link objects to the reducer. there can me more than one.
 
 class AddTask3 extends Component {
     state = {
@@ -11,8 +11,8 @@ class AddTask3 extends Component {
     }
 
     nextStep = () => {
-        // this.props.dispatch({ type: 'SET_TASK_DESCRIPTION', payload: this.state.descriptionInput });
-        // this.props.history.push('/add-task-haley/4')
+        // links are added with add link, so all next step needs to do is switch pages
+        this.props.history.push('/add-task-haley/4')
     }
 
     goBack = () => {
