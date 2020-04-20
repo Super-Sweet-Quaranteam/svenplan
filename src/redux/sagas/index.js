@@ -7,6 +7,8 @@ import teamSaga from './teamSaga';
 import SubscriberProjects from './SubscriberProjects';
 import workflows from './workflowSaga';
 
+import taskSaga from './haleyAddTaskSaga';
+
 export default function* rootSaga() {
     yield all([
       clientList(),
@@ -16,5 +18,8 @@ export default function* rootSaga() {
       teamSaga(),
       SubscriberProjects(),
       workflows(),
+
+      taskSaga(),
+
     ]);
   }

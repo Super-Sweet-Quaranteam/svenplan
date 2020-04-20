@@ -20,6 +20,10 @@ import SubscriberHome from '../SubscriberHome/SubscriberHome';
 import ExistingProjects from '../ProjectManager/ExistingProjects';
 import SupportPage from '../SupportPage/SupportPage';
 
+//TEMPORARY!
+import AddTaskHaley from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
+  // import AddTaskSummary from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
+
 // THESE SEEM UNUSED
 // import AddTask from '../AddTask/AddTask';
 // import Container from '../AddTask/Container';
@@ -58,14 +62,18 @@ class App extends Component {
             <Route exact path="/workflows/new" component={CreateWorkflow}/>
             <Route exact path="/workflows" component={ExistingWorkflows}/>
             <Route exact path="/subscribers" component={Subscribers}/>
-                                
+
+            {/* temporary!!! */}
+            <Route path="/add-task-haley" component={AddTaskHaley} />
+              {/* <Route path={`/add-task-haley/summary`} component={AddTaskSummary} /> */}
+
             {/* 404 page creation below */}
             <Route render={() => 
               <div className="fourOfour">
                 <h1>There doesn't seem to be anything here.</h1>
                 <a href="#add-task" ><img src="/images/NEOOPartnersLogo.png" alt="neoo"/></a>
               </div>
-            } />
+            } />            
           </Switch>
         </Router>
         <Footer />
