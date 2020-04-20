@@ -1,19 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import ClientNav from './ClientNav';
-import CreateWorkflow from '../WorkflowEditor/CreateWorkflow';
-import ExistingProjects from '../ProjectManager/ExistingProjects';
-import ClientRisk from '../RiskChart/RiskChart';
-import CurrentWorkflow from '../ProjectManager/CurrentWorkflow';
-import UserProfile from '../UserProfile/UserProfile'
+// import ClientNav from './ClientNav';
+// import CreateWorkflow from '../WorkflowEditor/CreateWorkflow';
+// import ExistingProjects from '../ProjectManager/ExistingProjects';
+// import ClientRisk from '../RiskChart/RiskChart';
+// import CurrentWorkflow from '../ProjectManager/CurrentWorkflow';
+// import UserProfile from '../UserProfile/UserProfile'
 
 const ClientHome =(props)=>{
 
 
     return (
         <>
-            <h2>This is client home. it still has client nav in it. Haley was afraid of messing things up.</h2>
-            <ClientNav />
+            <h2>This is client home. Haley commented out what could probably be deleted. ClientNav is redundant at this point, I think.</h2>
+            <p>can have like a little hello or various summaries on this page, doesn't matter til other things are populated</p>
+            {/* <ClientNav />
             
             {props.reduxState.client.clientDisplay.displayProfile === true 
                 ?
@@ -49,13 +50,13 @@ const ClientHome =(props)=>{
                 /> 
                 :
                 null
-            }
+            } */}
         </>
     );
 }
 
-const putReduxStateOnProps=(reduxState)=>({
-    reduxState
-  });
+// const putReduxStateOnProps=(reduxState)=>({
+//     reduxState
+//   });
   
-export default connect(putReduxStateOnProps)(ClientHome);
+export default connect()(ClientHome);

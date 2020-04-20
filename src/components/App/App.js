@@ -50,6 +50,7 @@ class App extends Component {
             {/* this is for subscribers (maybe also admins?) */}
             <Route exact path="/dashboard" component={SubscriberHome}/>
             <Route exact path="/projects" component={ExistingProjects}/>
+            {/* <Route exact path="/projects/new" component={COREYS NEW PROJECT COMPONENT} /> */}
             <Route exact path="/support" component={SupportPage}/>
 
             {/* these routes should be available to admins only */}
