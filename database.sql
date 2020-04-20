@@ -78,17 +78,10 @@ CREATE TABLE "tasks_riskareas"
 CREATE TABLE "inputs"
 (
     "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR NOT NULL,
-    "description" VARCHAR
+    "type" VARCHAR NOT NULL,
+    "prompt" VARCHAR,
+    "task_id" INT REFERENCES "default_tasks"("id") ON DELETE CASCADE
 );
-CREATE TABLE "tasks_inputs"
-(
-    "id" SERIAL PRIMARY KEY,
-    "task_id" INT REFERENCES "default_tasks"("id") ON DELETE CASCADE,
-    "input_id" INT REFERENCES "inputs"("id") ON DELETE CASCADE,
-    "instructions" VARCHAR
-);
-
 ------------------------------
 --  SUBSCRIBER SIDE TABLES  --
 ------------------------------

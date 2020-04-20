@@ -10,6 +10,7 @@ function AdminHome(props) {
             <p>something like....</p>
                 <h2>Welcome, {props.user.currentUser.alias}</h2>
                 <h3>here are some things you can do with an admin account (etc etc etc)</h3>
+            <button onClick={() => props.history.push('/add-task-haley')}>Click Here for Task Add</button>
         </>
     );
 }
