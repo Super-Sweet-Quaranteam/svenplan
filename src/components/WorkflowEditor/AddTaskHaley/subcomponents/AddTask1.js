@@ -7,7 +7,6 @@ import { withRouter } from 'react-router-dom';
 
 class AddTask1 extends Component {
     state = {
-        addingNewRiskArea: false,
         titleInput: '',
         riskareas: [],
     }
@@ -43,7 +42,7 @@ class AddTask1 extends Component {
             })
         }
         else {
-            //if not in tagArray, add it
+            //if not in riskAreaArray, add it
             this.setState({
                 riskareas: [...this.state.riskareas, event.target.value]
             })
@@ -70,13 +69,8 @@ class AddTask1 extends Component {
                             </div>
                         )}
                         </>
-                    }
-
-                    <input type="checkbox" id="check-text" value="text" />
-                        <label htmlFor="check-text">New Risk Area</label>
-                    
+                    }                   
                 </div>
-            <br/>
             <button onClick={this.goBack}>Go Back A Step</button>
             <button onClick={this.nextStep}>next step {this.state.phaseId}</button>
         </>
