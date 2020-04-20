@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+//this component tells the reducer what phase holds the task that is being made
+
 class AddTask0 extends Component {
 
     state = {
@@ -9,7 +11,7 @@ class AddTask0 extends Component {
     }
 
     confirmPhaseID=()=>{
-        this.props.dispatch({ type:'SET_PHASE_ID', payload: this.state.phaseId })
+        this.props.dispatch({ type:'SET_TASK_PHASE_ID', payload: this.state.phaseId })
         this.props.history.push('/add-task-haley/1')
     }
 

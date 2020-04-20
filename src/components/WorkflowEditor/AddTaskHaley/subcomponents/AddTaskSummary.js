@@ -9,10 +9,12 @@ function AddTaskSummary(props) {
                 {props.task.taskInProgress.title && <h4>Title: {props.task.taskInProgress.title}</h4>}
                 {props.task.taskInProgress.phaseId && <p>Phase ID: {props.task.taskInProgress.phaseId}</p>}
                 {props.task.taskInProgress.riskareas && 
-                    props.task.taskInProgress.riskareas.map((riskarea)=>
-                        riskarea
+                    <p>Risk Areas:  
+                    {props.task.taskInProgress.riskareas.map((riskarea)=>
+                        <span> {riskarea}/ </span>
                     )}
-                {/* {JSON.stringify(props.task.taskInProgress.riskareas)} */}
+                    </p>
+                }
         </>
     );
 }

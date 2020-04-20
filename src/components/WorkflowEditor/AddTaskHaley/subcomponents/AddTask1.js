@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+// this component sends the task name and risk areas to the reducer.
+// it gets all possible riskareas from the database using FETCH_TASK_RISK_TYPES
+
 class AddTask1 extends Component {
     state = {
         addingNewRiskArea: false,
@@ -10,7 +13,7 @@ class AddTask1 extends Component {
     }
 
     componentDidMount =()=> {
-        this.props.dispatch({ type: 'FETCH_RISK_TYPES', payload: 1 });
+        this.props.dispatch({ type: 'FETCH_TASK_RISK_TYPES', payload: 1 });
     }
 
     nextStep = () => {
@@ -30,13 +33,13 @@ class AddTask1 extends Component {
     }
     
     handleRiskareas = (event) => {
-        let tagArray = this.state.riskareas;
-        if (tagArray.includes(event.target.value)) {
-            //if in tagArray, take it out
-            let indexToSpliceOut = tagArray.indexOf(event.target.value);
-            tagArray.splice(indexToSpliceOut, 1);
+        let riskAreaArray = this.state.riskareas;
+        if (riskAreaArray.includes(event.target.value)) {
+            //if in riskAreaArray, take it out
+            let indexToSpliceOut = riskAreaArray.indexOf(event.target.value);
+            riskAreaArray.splice(indexToSpliceOut, 1);
             this.setState({
-                riskareas: tagArray
+                riskareas: riskAreaArray
             })
         }
         else {
@@ -86,4 +89,4 @@ const putReduxStateOnProps = (reduxState) => ({
     task: reduxState.task
 });
 
-export default connect(putReduxStateOnProps)(AddTask1);
+export default connect(putReduxStateOnProps)(withRouter(AddTask1));
