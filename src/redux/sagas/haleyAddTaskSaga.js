@@ -71,7 +71,7 @@ function* fetchAssignedTask(action) {
         assignedTaskObject= firstResponse[0];
         const secondResponse = yield axios.get(`/api/haley-task/assigned-task/inputs/${action.payload.id}`);
         console.log('second response:', secondResponse);
-
+        //get all the things from the other tables and bundle into one task object that subscriber dom can render from 
 
 
 
