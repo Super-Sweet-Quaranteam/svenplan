@@ -24,13 +24,46 @@ router.get('/risktypes/:id', (req, res) => {
 });
 
 // post new task to phase
-router.post('/add-new-task', (req, res) => {
-    console.log('in new task POST with', req.body);
-    // // const phID = req.body.id;
-    // // const name = req.body.task.name;
-    // // const desc = req.body.task.description;
-    // // const time = req.body.task.time;
-    // // const seq = req.body.seq;
+router.post('/add-new-task', async (req, res) => {
+    const phaseId= req.body.phaseId;
+    const title= req.body.title;
+    const riskareasArray= req.body.riskareas;
+    const description= req.body.description;
+    const linksArray= req.body.links;
+    const inputsArray= req.body.inputs;
+
+    console.log('posting task info to multiple tables');
+
+    // We need to use the same connection for all queries... 
+    //(this is pretty much all from wk16 chien syllabus notes)
+    const connection = await pool.connect()
+
+    // Using basic JavaScript try/catch/finally 
+    try {
+        await connection.query('BEGIN');
+        //insert some things into default_tasks table and get the id from it
+        const queryTextForTasksTable = `INSERT INTO "default_tasks" ("name", "description", "phase_id", "created") VALUES ($1, $2, $3, NOW()) RETURNING id`;
+        const valuesForTasksTable = [title, description, phaseId];
+        const newTaskId = await connection.query(queryTextForTasksTable, valuesForTasksTable);
+        
+        console.log('newTaskId is', newTaskId.rows[0].id);
+        
+        // Use + amount & to account for deposite
+        // await connection.query(sqlText, [toId, amount]);
+        await connection.query('COMMIT');
+        res.sendStatus(200);
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        console.log(`Transaction Error - Rolling back transfer`, error);
+        res.sendStatus(500);
+    } finally {
+        // Always runs - both after successful try & after catch
+        // Put the client connection back in the pool
+        // This is super important! 
+        connection.release()
+    }
+
+
     // // const queryText = `INSERT INTO "default_tasks" ("name", "description", "phase_id", "sequence", "created") VALUES ($1, $2, $3, $4, $5)`;
     // // pool.query(queryText, [name, desc, phID, Number(seq), time])
     // .then(() => { 
