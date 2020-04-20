@@ -36,10 +36,13 @@ const router = express.Router();
     router.get('/current-workflow/phases/tasks/:phaseId', (req, res) => {   
         console.log('req.params is ', req.params.phaseId);
         let phaseId = req.params.phaseId;
-        let queryText = `SELECT * FROM "default_tasks" WHERE "phase_id"=$1`;
+        // let queryText = `SELECT * FROM "default_tasks" WHERE "phase_id"=$1`;
+        let queryText = `SELECT "default_tasks"."id","default_tasks"."name" AS "phase_name", "default_tasks"."description" AS "phase_description","inputs"."name", "inputs"."description","tasks_inputs"."instructions" FROM "default_tasks" 
+        JOIN "tasks_inputs" ON "task_id" = "default_tasks"."id"
+        JOIN "inputs" ON "inputs"."id" = "input_id" WHERE "default_tasks"."phase_id"=$1`
         pool.query(queryText,[phaseId])
             .then((response) => {
-                console.log('successful get- response.rows:', response.rows);
+                console.log('successful get- response.rows:', response);
                 res.send(response.rows);
             })
             .catch(() => {

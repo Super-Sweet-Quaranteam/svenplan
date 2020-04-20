@@ -4,16 +4,34 @@ import '../SubscriberHome/Subscriber.css';
 
 class CurrentWorkflow extends Component {
     state = {
-        task: null
+        task: null,
+        taskIndex: 0
+    }  
+    backATask=()=>{
+        this.setState({
+            task: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex - 1],
+            taskIndex: this.state.taskIndex - 1
+        })
     }
     componentDidMount(){
         this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW'})               
     }
+    forwardATask=()=>{
+        this.setState({
+            task: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex + 1],
+            taskIndex: this.state.taskIndex + 1
+        })
+    }
+    // index of task from tasksInPhase will always start at 0 (first task in list)
+    // this.state.taskIndex instead of 0 helps code remember which task we're currently on
     showTasks=(phaseId)=>{
         console.log('you clicked a phase');
         // passing function in payload so sagas can run it async.
         this.props.dispatch({type: 'FETCH_PHASES_TASKS', payload: {phaseId: phaseId, callback: () => {
-            this.setState({task: this.props.reduxState.subscriber.tasksInPhase[0]})
+            this.setState({
+                task: this.props.reduxState.subscriber.tasksInPhase[0],
+                taskIndex: 0
+            })
         }}})
     }
 
@@ -31,14 +49,24 @@ class CurrentWorkflow extends Component {
                     )}
                 </div>
                 <div className="taskWindow">
-                {this.state.task && <div className="taskAtHand" key={this.state.task.id}>{this.state.task.name}
+                {this.state.task && <div className="taskAtHand" key={this.state.task.id}>{this.state.task.phase_name}
                             <br/>
-                            {this.state.task.description}
+                            {this.state.task.phase_description}
                             <br/>
-                            Will also include checkboxes, tutorials, etc
-                            <br/>
-                            <button>Back</button>
-                            <button>Next</button>
+                            {this.state.taskIndex === 0 ? 
+                                <button onClick={this.forwardATask}>Next</button>
+                            :
+                            <>
+                                {this.state.task == this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
+                                    <button onClick={this.backATask}>Back</button>
+                                :
+                                    <>
+                                        <button onClick={this.backATask}>Back</button>
+                                        <button onClick={this.forwardATask}>Next</button>
+                                    </>
+                                }
+                            </>
+                        }
                 </div>}
                     {/* {this.props.reduxState.subscriber.tasksInPhase.map(task =>
                         <div className="taskAtHand" key={task.id}>{task.name}
