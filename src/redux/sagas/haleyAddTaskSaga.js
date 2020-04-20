@@ -5,36 +5,34 @@ import { takeEvery, put } from "redux-saga/effects";
 // these sagas take the dispatch and runs them before they get to the reducers
 function* workflows() {
     yield takeEvery('SET_PHASE_ID', setPhaseID);
+    yield takeEvery('FETCH_RISK_TYPES', setRiskTypeOptions);
+    yield takeEvery('SET_TASK_TITLE', setTaskTitle);
+    yield takeEvery('SET_TASK_RISKAREAS', setTaskRiskareas);
 
-    yield takeEvery('FETCH_RISK_TYPES', setRiskTypes);
 
-    // yield takeEvery('GET_THIS_WORKFLOW', getThisWorkflow);
-    // yield takeEvery('ADD_NEW_WORKFLOW', addNewWorkflow);
-    // yield takeEvery('EDIT_WORKFLOW_NAME', editWorkflowName);
-    // yield takeEvery('PUBLISH_THIS_WORKFLOW', publishThisWorkflow);
-    // yield takeEvery('DELETE_THIS_WORKFLOW', deleteThisWorkflow);
-    // yield takeEvery('GET_THIS_PHASE', getThisPhase);
-    // yield takeEvery('ADD_NEW_PHASE', addNewPhase);
-    // yield takeEvery('REMOVE_PHASE', removePhase);
-    // yield takeEvery('EDIT_PHASE_NAME', editPhaseName);
-    // yield takeEvery('EDIT_TASK_NAME', editTaskName);
-    // yield takeEvery('ADD_NEW_TASK', addNewTask);
-    // yield takeEvery('GET_TASK_OPTIONS', getTaskOptions);
+
 }
 
 function* setPhaseID (action) {
     yield put({type: 'UPDATE_PHASE_ID', payload: action.payload});
 }
-
-function* setRiskTypes (action) {
+function* setRiskTypeOptions(action) {
     const riskTypes = yield axios.get(`/api/haley-task/risktypes/${action.payload}`);
     let riskTypesArray = [];
-    for (let i=0; i<riskTypes.data.length; i++){
+    for (let i = 0; i < riskTypes.data.length; i++) {
         // console.log(riskTypes.data[i].riskarea)
         riskTypesArray.push(riskTypes.data[i].riskarea);
     }
     yield put({ type: 'UPDATE_RISKAREA_OPTIONS', payload: riskTypesArray });
 }
+function* setTaskTitle(action) {
+    yield put({ type: 'UPDATE_TASK_TITLE', payload: action.payload });
+}
+function* setTaskRiskareas(action) {
+    yield put({ type: 'UPDATE_TASK_RISKAREAS', payload: action.payload });
+}
+
+
 
 // // gets all workflows from DB
 // function* getAllWorkflows() {

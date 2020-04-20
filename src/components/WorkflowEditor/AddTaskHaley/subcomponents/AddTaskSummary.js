@@ -8,6 +8,11 @@ function AddTaskSummary(props) {
             <h3>Summary (from reducer)</h3>
                 {props.task.taskInProgress.title && <h4>Title: {props.task.taskInProgress.title}</h4>}
                 {props.task.taskInProgress.phaseId && <p>Phase ID: {props.task.taskInProgress.phaseId}</p>}
+                {props.task.taskInProgress.riskareas && 
+                    props.task.taskInProgress.riskareas.map((riskarea)=>
+                        riskarea
+                    )}
+                {/* {JSON.stringify(props.task.taskInProgress.riskareas)} */}
         </>
     );
 }

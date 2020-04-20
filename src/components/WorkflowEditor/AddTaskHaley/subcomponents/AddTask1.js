@@ -14,7 +14,8 @@ class AddTask1 extends Component {
     }
 
     nextStep = () => {
-        // this.props.dispatch({ type: 'SET_PHASE_ID', payload: this.state.phaseId })
+        this.props.dispatch({ type: 'SET_TASK_TITLE', payload: this.state.titleInput });
+        this.props.dispatch({ type: 'SET_TASK_RISKAREAS', payload: this.state.riskareas });
         // this.props.history.push('/add-task-haley/2')
     }
 
@@ -28,13 +29,31 @@ class AddTask1 extends Component {
         })
     }
     
+    handleRiskareas = (event) => {
+        let tagArray = this.state.riskareas;
+        if (tagArray.includes(event.target.value)) {
+            //if in tagArray, take it out
+            let indexToSpliceOut = tagArray.indexOf(event.target.value);
+            tagArray.splice(indexToSpliceOut, 1);
+            this.setState({
+                riskareas: tagArray
+            })
+        }
+        else {
+            //if not in tagArray, add it
+            this.setState({
+                riskareas: [...this.state.riskareas, event.target.value]
+            })
+        }
+    }
+
     render() {
         return (
         <>
             <p>Next, enter some basic details about the task:</p>
                 <div>
                     <label htmlFor="titleInput">
-                        Title:<input type="text" id="titleInput" onChange={this.handleTitleInput}/>
+                        Title:<input type="text" id="titleInput" value={this.props.task.taskInProgress.title} onChange={this.handleTitleInput}/>
                     </label>
                 </div>
                 <div>
@@ -43,7 +62,7 @@ class AddTask1 extends Component {
                         <>
                         {this.props.task.taskInProgress.riskareaOptions.map((riskarea)=>
                             <div>
-                                <input type="checkbox" id="check-text" value={riskarea} />
+                                <input type="checkbox" id="check-text" value={riskarea} onChange={this.handleRiskareas}/>
                                 <label htmlFor="check-text">{riskarea}</label>
                             </div>
                         )}
@@ -54,12 +73,9 @@ class AddTask1 extends Component {
                         <label htmlFor="check-text">New Risk Area</label>
                     
                 </div>
-
-            <h3>state:</h3>
-            {JSON.stringify(this.state)}
             <br/>
             <button onClick={this.goBack}>Go Back A Step</button>
-            <button onClick={this.submitNameDescription}>next step {this.state.phaseId}</button>
+            <button onClick={this.nextStep}>next step {this.state.phaseId}</button>
         </>
     );
         }
