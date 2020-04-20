@@ -48,11 +48,20 @@ router.post('/add-new-task', async (req, res) => {
         console.log('newTaskId is', newTaskId.rows[0].id);
 
         //use newTaskId to populate links table
-        //for look because there might be multiple
+        //for loop because there might be multiple
         const queryTextForLinksTable = `INSERT INTO "links"("description", "url", "task_id") VALUES ($1, $2, $3);`
         for (let i=0; i<linksArray.length; i++){
             await connection.query(queryTextForLinksTable, [linksArray[i].description, linksArray[i].url, newTaskId.rows[0].id]);
             }
+        //use newTaskId to populate inputs table
+        //for loop because there might be multiple
+        const queryTextForInputsTable = `INSERT INTO "inputs"("type", "prompt", "task_id") VALUES ($1, $2, $3);`
+        for (let i = 0; i < inputsArray.length; i++) {
+            await connection.query(queryTextForInputsTable, [inputsArray[i].type, inputsArray[i].prompt, newTaskId.rows[0].id]);
+        }
+
+
+
         
         await connection.query('COMMIT');
         res.sendStatus(200);
