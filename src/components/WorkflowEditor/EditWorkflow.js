@@ -139,33 +139,38 @@ class EditWorkflow extends Component {
                         ?
                         <>
                             <hr/>
-                            <label> Workflow Name:
-                                <br/>
-                                <input defaultValue={this.state.workflow.name} onChange={(event)=>this.handleChange(event, "name")}></input>
-                            </label> 
-                            <br/>
-                            <label> Description:
-                                <br/>
-                                <textarea rows="5" defaultValue={this.state.workflow.description} onChange={(event)=>this.handleChange(event, "description")}></textarea>
-                            </label>  
-                            <br/>                   
-                            <button className="button" onClick={this.saveWF}>Save</button>
-                            <br/>
+                            <form className="form">
+                                <li>
+                                    <label> Workflow Name:</label> 
+                                    <input defaultValue={this.state.workflow.name} onChange={(event)=>this.handleChange(event, "name")}></input>
+                                    <span>Enter your workflow name here</span>
+                                </li>
+                                <li>
+                                    <label> Description:</label>  
+                                    <textarea rows="5" defaultValue={this.state.workflow.description} onChange={(event)=>this.handleChange(event, "description")}></textarea>
+                                    <span>Describe your workflow here</span>
+                                </li>                
+                                <button className="button" onClick={this.saveWF}>Save</button>
+                            </form>
                         </>
                         :
                         <>
                             <hr/>
-                            <label> Phase Name:
-                                <br/>
-                                <input placeholder="Title New Phase" onChange={(event)=>this.handleNewPhase(event, "name")}></input>
-                            </label> 
-                            <br/>
-                            <label> Description:
-                                <br/>
-                                <input size="50" placeholder="description of new phase" onChange={(event)=>this.handleNewPhase(event, "description")}></input>
-                            </label>  
-                            <br/>                   
-                            <button className="button" onClick={this.saveNewPhase}>Save</button>
+                            <form className="form">
+                                <li>
+                                <label> Phase Name:</label> 
+                                    <br/>
+                                    <input placeholder="Title New Phase" onChange={(event)=>this.handleNewPhase(event, "name")}></input>
+                                    <span>Enter your phase name here</span>
+                                </li>
+                                <li>
+                                <label> Description:</label>  
+                                    <br/>
+                                    <textarea rows="5" placeholder="description of new phase" onChange={(event)=>this.handleNewPhase(event, "description")}></textarea>
+                                    <span>Describe the phase here</span>
+                                </li>                   
+                                <button className="button" onClick={this.saveNewPhase}>Save</button>
+                            </form>
                         </>
                         }
                     </>
@@ -190,18 +195,24 @@ class EditWorkflow extends Component {
                                 </> 
                                 :
                                 <>
-                                <form>
-                                    <label>Phase Name:
-                                        <input type="text" defaultValue={this.state.phase.name} onChange={(e)=>this.changePhase(e, 'name')} />
-                                    </label>
-                                    <br/>
-                                    <label>Description:
-                                        <input type="text" size="50" defaultValue={this.state.phase.description} onChange={(e)=>this.changePhase(e, 'description')} />
-                                    </label>
-                                    <br/>
+                                <form className="form">
+                                    <li>
+                                        <label>Phase Name:</label>
+                                            <input type="text" defaultValue={this.state.phase.name} onChange={(e)=>this.changePhase(e, 'name')} />
+                                            <span>Enter your phase name here</span>
+                                    </li>
+                                    <li>
+                                        <label>Description:</label>
+                                            <input type="text" size="50" defaultValue={this.state.phase.description} onChange={(e)=>this.changePhase(e, 'description')} />
+                                            <span>Describe the phase here</span>
+                                    </li>
                                     <button className="button" onClick={this.savePhase}>Save Phase</button>
                                     <button className="button" onClick={()=>this.deletePhase(this.state.phase.name)}>Delete Phase</button>
-                                </form>    
+                                </form>   
+                                    <br/>
+                                    <br/> 
+                                    <br/> 
+                                    <br/>
                                     <hr/>
                                 </>
                                 }
