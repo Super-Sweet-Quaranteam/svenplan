@@ -23,7 +23,7 @@ import NewProject from '../ProjectManager/NewProject';
 
 //TEMPORARY!
 import AddTaskHaley from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
-import CurrentWorkflow from '../ProjectManager/CurrentWorkflow';
+import CurrentProject from '../ProjectManager/CurrentProject';
   // import AddTaskSummary from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
 
 // THESE SEEM UNUSED
@@ -59,6 +59,7 @@ class App extends Component {
             {/* <Route exact path="/projects/new" component={COREYS NEW PROJECT COMPONENT} /> */}
             <Route exact path="/support" component={SupportPage}/>
             <Route exact path="/projects/new" component={NewProject}/>
+            <Route path="/projects/:id" component={CurrentProject} />
 
             {/* these routes should be available to admins only */}
             <Route exact path="/admin" component={AdminHome}/>
@@ -69,7 +70,6 @@ class App extends Component {
 
             {/* temporary!!! */}
             <Route path="/add-task-haley" component={AddTaskHaley} />
-            <Route path="/projects/:id" component={CurrentWorkflow} />
               {/* <Route path={`/add-task-haley/summary`} component={AddTaskSummary} /> */}
 
             {/* 404 page creation below */}

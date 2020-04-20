@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import '../ClientHome/Client.css';
+// import '../SubscriberHome/Subscriber.css';
 
 class CurrentWorkflow extends Component {
     state = {
@@ -20,6 +20,7 @@ class CurrentWorkflow extends Component {
     render() {
         return (
             <div className='CurrentWorkflow'>
+                {JSON.stringify(this.props.reduxState)}
                 {/* button to take user back to existing projects */}
                 <button className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayOldWorkFlow: true}})}>
                         <a className="nav-link" href="#/clientHome">Back</a>
