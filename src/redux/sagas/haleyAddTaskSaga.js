@@ -9,6 +9,8 @@ function* workflows() {
     yield takeEvery('SET_TASK_TITLE', setTaskTitle);
     yield takeEvery('SET_TASK_RISKAREAS', setTaskRiskareas);
     yield takeEvery('SET_TASK_DESCRIPTION', setTaskDescription);
+
+    yield takeEvery('ADD_TASK_LINK', addTaskLink);
 }
 
 function* setTaskPhaseID (action) {
@@ -31,6 +33,10 @@ function* setTaskRiskareas(action) {
 }
 function* setTaskDescription(action) {
     yield put({ type: 'UPDATE_TASK_DESCRIPTION', payload: action.payload });
+}
+function* addTaskLink(action) {
+    console.log('made it to addTaskLink');
+    yield put({ type: 'UPDATE_TASK_LINKS', payload: action.payload });
 }
 
 

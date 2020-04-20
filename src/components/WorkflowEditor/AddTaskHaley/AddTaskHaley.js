@@ -5,6 +5,7 @@ import { HashRouter as Switch, Route, useRouteMatch } from 'react-router-dom';
 import AddTask0 from './subcomponents/AddTask0';
 import AddTask1 from './subcomponents/AddTask1';
 import AddTask2 from './subcomponents/AddTask2';
+import AddTask3 from './subcomponents/AddTask3';
 import AddTaskSummary from './subcomponents/AddTaskSummary'
 
 function AddTask(props) {
@@ -16,6 +17,7 @@ function AddTask(props) {
                 <Route exact path={`${path}`}><AddTask0/></Route> 
                 <Route path={`${path}/1`} component={AddTask1} />
                 <Route path={`${path}/2`} component={AddTask2} />
+                <Route path={`${path}/3`} component={AddTask3} />
             </Switch>
             <AddTaskSummary/>
         </>

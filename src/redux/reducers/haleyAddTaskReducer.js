@@ -13,6 +13,9 @@ const taskInProgress = (state = {}, action) => {
             return {...state, riskareas: action.payload};
         case 'UPDATE_TASK_DESCRIPTION':
             return {...state, description: action.payload};
+        case 'UPDATE_TASK_LINKS':
+            if (state.links){return {...state, links: [...state.links, action.payload]}}
+            else{ return { ...state, links: [action.payload]}};
         default:
             return state;
     }
