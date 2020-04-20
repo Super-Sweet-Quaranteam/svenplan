@@ -10,62 +10,22 @@ class AddTask5 extends Component {
         promptInput:'',
     }
 
-    nextStep = () => {
-        // inputs are added with add link, so all next step needs to do is switch pages
-        this.props.history.push('/add-task-haley/5')
+    addToDatabase = () => {
+        this.props.dispatch({ type: 'ADD_TASK_TO_DATABASE', payload: this.props.task.taskInProgress });
+        this.props.history.push('/add-task-haley/6')
     }
 
     goBack = () => {
-        this.props.history.push('/add-task-haley/3')
-    }
-
-    addInput =()=> {
-        this.props.dispatch({ type: 'ADD_TASK_INPUT', payload: { type: this.state.inputInput, prompt: this.state.promptInput } });
-    }
-
-    handlePromptInput =(event)=> {
-        this.setState({
-            promptInput: event.target.value,
-        })
-    }
-
-    handleInputInput = (event) => {
-        this.setState({
-            inputInput: event.target.value,
-        })
+        this.props.history.push('/add-task-haley/4')
     }
 
     render() {
         return (
         <>
-            <p>Next, you can add inputs required to complete:</p>
-                <ul>
-                    {this.props.task.taskInProgress.inputs&&
-                        <>
-                            {this.props.task.taskInProgress.inputs.map((input)=>
-                                <p>{input.prompt} ({input.type})</p>
-                            )}
-                        </>
-                    }
-                </ul>
-                <div>
-                    <label htmlFor="urlInput"> input type:
-                        <select id="urlInput" onChange={this.handleInputInput}>
-                            <option value=""></option>
-                            <option value="text">text</option>
-                            <option value="number">number</option>
-                            <option value="button">button</option>
-                        </select> 
-                    </label>
-                </div>
-                <div>
-                    <label htmlFor="promptInput"> prompt:
-                        <input type="text" id="promptInput" onChange={this.handlePromptInput} />
-                    </label>
-                    <div><button onClick={this.addInput}>add required input</button></div>
-                </div>
+            <p>This demo doesn't really include edit/delete functionality, or being able to change the order of tasks.</p>
+            <p>Click the button below to send the task to the database</p>
             <button onClick={this.goBack}>Go Back A Step</button>
-            <button onClick={this.nextStep}>next step {this.state.phaseId}</button>
+            <button onClick={this.addToDatabase}>Add to Database</button>
         </>
     );
         }

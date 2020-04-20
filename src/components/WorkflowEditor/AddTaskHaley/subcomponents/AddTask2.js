@@ -34,7 +34,7 @@ class AddTask2 extends Component {
                     </label>
                 </div>
             <button onClick={this.goBack}>Go Back A Step</button>
-            <button onClick={this.nextStep}>next step {this.state.phaseId}</button>
+            <button onClick={this.nextStep}>next step</button>
         </>
     );
         }
