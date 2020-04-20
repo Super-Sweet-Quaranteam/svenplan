@@ -14,7 +14,7 @@ class AddTask6 extends Component {
     render() {
         return (
         <>
-            <h2>{this.props.task.confirmation.message}, {this.props.task.confirmation.id}</h2>
+            <h2>{this.props.task.confirmation.message}</h2>
             <p>There should be a confirmation message above.</p>
             <p>Click the button to create a new row in assigned_tasks that references the row in default_tasks you just made.</p>
             <button onClick={this.addToDatabase}>Add to assigned_tasks</button>

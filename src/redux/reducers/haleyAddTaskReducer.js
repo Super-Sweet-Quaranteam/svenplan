@@ -33,9 +33,19 @@ const confirmation = (state = {}, action) => {
     }
 };
 
+const assignedTask = (state = {}, action) => {
+    switch (action.type) {
+        case 'SET_ASSIGNED_TASK':
+            return action.payload;
+        default:
+            return state;
+    }
+};
+
 
 export default combineReducers({
     taskInProgress,
     confirmation,
+    assignedTask,
 });
 

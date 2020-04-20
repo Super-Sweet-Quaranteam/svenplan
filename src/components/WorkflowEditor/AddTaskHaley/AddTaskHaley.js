@@ -9,6 +9,7 @@ import AddTask3 from './subcomponents/AddTask3';
 import AddTask4 from './subcomponents/AddTask4';
 import AddTask5 from './subcomponents/AddTask5';
 import AddTask6 from './subcomponents/AddTask6';
+import AddTask7 from './subcomponents/AddTask7';
 import AddTaskSummary from './subcomponents/AddTaskSummary'
 
 function AddTask(props) {
@@ -24,6 +25,7 @@ function AddTask(props) {
                 <Route path={`${path}/4`} component={AddTask4} />
                 <Route path={`${path}/5`} component={AddTask5} />
                 <Route path={`${path}/6`} component={AddTask6} />
+                <Route path={`${path}/7`} component={AddTask7} />
             </Switch>
             <AddTaskSummary/>
         </>

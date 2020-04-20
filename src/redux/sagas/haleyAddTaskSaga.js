@@ -15,6 +15,8 @@ function* tasks() {
 
     yield takeEvery('ADD_TASK_TO_DATABASE', addTaskToDatabase);
     yield takeEvery('ADD_TASK_TO_SUBSCRIBER_DATABASE', addTaskToSubscriberDatabase);
+
+    yield takeEvery('FETCH_ASSIGNED_TASK', fetchAssignedTask);
 }
 function* setTaskPhaseID (action) {
     yield put({type: 'UPDATE_PHASE_ID', payload: action.payload});
@@ -57,6 +59,15 @@ function* addTaskToSubscriberDatabase(action) {
         const postResponse = yield axios.post(`/api/haley-task/add-new-assigned-task`, action.payload);
         console.log('postResponse:', postResponse);
         yield put({ type: 'ADD_TASK_CONFIRM', payload: postResponse.data.newTaskId });
+    } catch (error) {
+        console.log('error with posting new task:', error);
+    }
+}
+function* fetchAssignedTask(action) {
+    try {
+        const response = yield axios.get(`/api/haley-task/assigned-task/${action.payload.id}`);
+        console.log('response:', response);
+        yield put({ type: 'SET_ASSIGNED_TASK', payload: response.data });
     } catch (error) {
         console.log('error with posting new task:', error);
     }

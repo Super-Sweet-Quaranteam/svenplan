@@ -6,18 +6,23 @@ import { withRouter } from 'react-router-dom';
 
 class AddTask7 extends Component {
 
-    addToDatabase = () => {
-        this.props.dispatch({ type: 'ADD_TASK_TO_SUBSCRIBER_DATABASE', payload: {id:this.props.task.confirmation.id} });
-        this.props.history.push('/add-task-haley/7')
+    componentDidMount=()=>{
+        this.props.dispatch({ type: 'FETCH_ASSIGNED_TASK', payload: {id:this.props.task.confirmation.id} });
+    }
+
+    markComplete = () => {
+        // this.props.dispatch({ type: 'ADD_TASK_TO_SUBSCRIBER_DATABASE', payload: {id:this.props.task.confirmation.id} });
+        // this.props.history.push('/add-task-haley/7')
     }
 
     render() {
         return (
         <>
-            <h2>{this.props.task.confirmation.message}, {this.props.task.confirmation.id}</h2>
+            <h2>{this.props.task.confirmation.message}</h2>
             <p>There should be a confirmation message above.</p>
-            <p>Click the button to create a new row in assigned_tasks that references the row in default_tasks you just made.</p>
-            <button onClick={this.addToDatabase}>Add to assigned_tasks</button>
+            <p>upon loading this component fetches the assigned task info</p>
+            <h4>use sql join to get info about assigned task from default_tasks:</h4>
+            <p>(could also get riskarea, links, inputs, etc with more queries)</p>
         </>
     );
         }
