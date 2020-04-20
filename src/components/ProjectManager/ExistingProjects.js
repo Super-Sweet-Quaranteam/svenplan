@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 class ExistingProjects extends Component {
     // subscriber-side code. When 'Existing Projects' is clicked, page loads table of project, status and option for subscriber to continue or archive project
@@ -11,7 +12,9 @@ class ExistingProjects extends Component {
     }
     continueProject(id){
         console.log('in continueProject with id:', id);
-        
+        //upon click, fetch details for that project and reroute to projects/id
+        this.props.dispatch({ type: 'FETCH_SELECTED_PROJECT' })
+        this.props.history.push(`/projects/${id}`);
     }
 
     render(){
@@ -56,4 +59,4 @@ class ExistingProjects extends Component {
 const mapStateToProps = reduxState => ({
 reduxState
 });
-export default connect(mapStateToProps)(ExistingProjects);
+export default connect(mapStateToProps)(withRouter(ExistingProjects));
