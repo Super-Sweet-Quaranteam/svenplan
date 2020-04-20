@@ -52,8 +52,8 @@ app.listen(PORT, () => {
 
 // test that database is up
 const client = new Client({
-//   user: null || 'con',
-//   password: null || 'secretpass',
+  // user: null || 'con',
+  // password: null || 'secretpass',
   host: 'localhost',
   port: 5432,
 })

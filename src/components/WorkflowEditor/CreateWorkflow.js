@@ -44,18 +44,21 @@ class CreateWorkflow extends Component {
             <div className="workflowWrapper">
                 <div className="workflowInfo">
                     <hr/>
-                    <label> Workflow Name:
+                    <form className="form">
+                        <li>
+                            <label> Workflow Name:</label> 
+                            <input defaultValue={this.state.workflow.name} placeholder="title new workflow" onChange={(event)=>this.handleChange(event, "name")}></input>
+                            <span>Enter your workflow name here</span>
+                        </li>
+                        <li>
+                            <label> Description:</label> 
+                            <textarea rows="5" defaultValue={this.state.workflow.description} placeholder="describe new workflow" onChange={(event)=>this.handleChange(event, "description")}></textarea>
+                            <span>Describe your workflow here</span>
+                        </li>                     
+                        <button className="button" onClick={this.createWorkflow}>Create</button>
                         <br/>
-                        <input defaultValue={this.state.workflow.name} placeholder="title new workflow" onChange={(event)=>this.handleChange(event, "name")}></input>
-                    </label> 
-                    <br/>
-                    <label> Description:
                         <br/>
-                        <textarea rows="5" defaultValue={this.state.workflow.description} placeholder="describe new workflow" onChange={(event)=>this.handleChange(event, "description")}></textarea>
-                    </label>  
-                    <br/>                   
-                    <button className="button" onClick={this.createWorkflow}>Create</button>
-                    <br/>
+                    </form>
                 </div>  
             </div>
         );

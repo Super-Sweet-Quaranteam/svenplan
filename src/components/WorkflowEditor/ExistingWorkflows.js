@@ -79,22 +79,25 @@ class ExistingWorkflows extends Component {
                 :
                 <>
                 <h2>Existing Workflows:</h2>
-                <ul>
+                <div className="card-container">
     {/* suggest having two buttons, one that shows only if unpublished with an option to publish workflow */}
     {/* or better yet have this be displayed in two tables, on published and one not published with an option to publish */}
                     {this.props.reduxState.workflow.allWorkflows &&
                         this.props.reduxState.workflow.allWorkflows.map(flow => (
-                            <li data-id={flow.id} key={flow.id}>
-                                {flow.name}
-                                <button className="btn-sml" onClick={()=>this.viewWorkflow(flow.id, flow.name, flow.description)}>View</button>
-                                <button className="btn-sml" onClick={()=>this.deleteWorkflow(flow.id)}>Delete</button>
-                                {flow.published === false &&
-                                    <button className="btn-sml" onClick={()=>this.publishWorkflow(flow.id)}>Publish</button>
-                                }
-                            </li>
+                            
+                                <div className="card" data-id={flow.id} key={flow.id}>
+                                    <div className="card-wf">{flow.name}</div>
+                                    <button className="btn-sml" onClick={()=>this.viewWorkflow(flow.id, flow.name, flow.description)}>View</button>
+                                    <button className="btn-sml-delete" onClick={()=>this.deleteWorkflow(flow.id)}>Delete</button>
+                                    {flow.published === false &&
+                                        <button className="btn-sml publish" onClick={()=>this.publishWorkflow(flow.id)}>Publish</button>
+                                    }
+                                    <div className="sven">svenplan</div>
+                                </div>
+                            
                         ))
                     }    
-                </ul>
+                </div>
                 </>
                 }
             </>

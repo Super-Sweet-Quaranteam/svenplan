@@ -1,83 +1,234 @@
+/* styles for anything specific to workflow */
 /* keeps the content of this page uniform */
+
 .workflowWrapper{
-    margin-left: 1em;
-    margin-right: 1em;
+  height: 100vh;
+  background-color: var(--bg-secondary);
 }
 
 /* allows phase blocks to scroll side to side instead of stack */
 .phaseWrapper {
-    overflow-x: auto;
-    white-space: nowrap;
-    text-align: center;
-    justify-content: end;
-    
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-top: 1em;
+  height: auto;
 }
+
 /* can change how many divs per screen based on width % */
 .phaseBlock {
-    background-color: var(--bg-tertiary);
-    max-height: 70vh;
-    width: 34vw;
-    display: inline-block;
-    margin: .5em;
-    border-radius: 1em;
-    padding: 1em;
+  background-color: var(--bg-tertiary);
+  max-height: 70vh;
+  width: 34vw;
+  display: inline-block;
+  margin: .5em;
+  border-radius: 1em;
+  padding: 1em;
 }
+
 /* overall background for a workflow */
 .workflowInfo {
-    background-color: var(--bg-primary);
-    border-radius: 15px;
-    padding: 2.5%;
-    text-align: center;
+  background-color: var(--pure-white);
+  border-radius: 15px;
+  text-align: center;
 }
+
 /* darker gray background on description */
 .workflowDescription {
-    background-color: var(--bg-secondary);
-    border-radius: 15px;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: 1%;
-    padding-bottom: 1%;
+  background-color: var(--bg-secondary);
+  border-radius: 15px;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 2em;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 14rem;
+  overflow-x: hidden;
 }
+
 /* the larger card of new phases */
 .addPhase{
-    align-self: start;
-    max-width: 40vw;
-    padding-left: 1em;
-    padding-right: 1em;
-    color: var(--text-primary);
-    background-color: var(--bg-primary);
-    border-radius: 15px;
-  }
-  /* task card, inside phase card */
-  .taskCard{
-    padding-left: 1em;
-    padding-right: 1em;
-    color: var(--text-primary);
-    background-color: var(--bg-secondary);
-  }
-  /* sub task card, inside task card */
-  .sub{
-    max-width: 60vw;
-    padding-left: 1em;
-    padding-right: 1em;
-    color: var(--text-tertiary);
-    background-color: var(--bg-tertiary);
-  }
-  /* container for subtask card to have each scroll horizontal */
-  .taskContainer{
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-  }
-  /* how sub tasks get displayed in the card */
-  .subtask-display{
-    contain: content;
-    text-transform: uppercase;
-    font-size: small;
-    min-height: 15vmin;
-    min-width: 15vmin;
-    border: 3px var(--bg-primary) solid;
-    border-radius: 5px;
-    margin: 1vmin;
-  }
+  align-self: start;
+  max-width: 40vw;
+  padding-left: 1em;
+  padding-right: 1em;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border-radius: 15px;
+}
+
+/* task card, inside phase card */
+.taskCard{
+  padding-left: 1em;
+  padding-right: 1em;
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  width: 20vh;
+  display: inline-block;
+}
+
+/* sub task card, inside task card */
+.sub{
+  max-width: 60vw;
+  padding-left: 1em;
+  padding-right: 1em;
+  color: var(--text-tertiary);
+  background-color: var(--bg-tertiary);
+}
+
+/* container for subtask card to have each scroll horizontal */
+.taskContainer{
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+}
+
+/* how sub tasks get displayed in the card */
+.subtask-display{
+  contain: content;
+  text-transform: uppercase;
+  font-size: small;
+  min-height: 15vmin;
+  min-width: 15vmin;
+  border: 3px var(--bg-primary) solid;
+  border-radius: 5px;
+  margin: 1vmin;
+}
   
+#clientTable{
+  margin-left: auto;
+  margin-right:auto;
+  border: solid 2px var(--bg-primary);
+  text-align: center;
+}
+
+th{border:solid 2px}
+td{border:solid 1px}
+
+.sidebar-nav {
+  position: absolute;
+  background-color: var(--bg-primary);
+  border: var(--bg-secondary) 1px solid;
+  transition: width 600ms ease;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.side-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  top: 0;
+  width: 14rem;
+  height: 100vh;
+}
+
+.workflow-name{
+  background-color: var(--bg-primary);
+  font-size: larger;
+  padding-bottom: 1em;
+  text-align: center;
+}
+
+.side-item {
+  padding-left: 1em;
+  display: flex;
+  height: 5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  filter: grayscale(100%) opacity(0.7);
+  transition: var(--transition-speed);
+}
+
+.side-item:hover {
+  filter: grayscale(0%) opacity(1);
+  background: var(--bg-secondary);
+  color: var(--text-tertiary);
+}
+
+.side-item:last-child {
+  margin-top: auto;
+}
+
+.card-container{
+  position: absolute;
+  height: 30em;
+  max-width: 50em;
+  top: 20vh;
+  left: calc(50% - 45vw);
+  display: flex;
+}
+
+.card{
+  display: flex;
+  height: 26em;
+  width: 25em;
+  background-color: var(--bg-secondary);
+  border-radius: 1em;
+  box-shadow: -1rem 0 3rem #000;
+  transition: var(--transition-ease);
+  position: relative;
+}
+
+.card:not(:first-child) {
+  margin-left: -3em;
+}
+
+.card:hover {
+  transform: translateY(-2em);
+  transition: var(--transition-ease);
+}
+
+.card:hover ~ .card {
+  position: relative;
+  left: 3em;
+  transition: var(--transition-ease);
+}
+
+.card-wf {
+  color: var(--text-tertiary);
+  font-weight: 700;
+  position: absolute;
+  left: 1em;
+  top: 1em;
+}
+
+.card > .btn-sml {
+  position: absolute;
+  top: 8em;
+  height: 3em;
+  width: 10em;
+}
+
+.card > .btn-sml-delete {
+  position: absolute;
+  top: 12em;
+  height: 3em;
+  width: 10em;
+}
+
+.card > .publish {
+  position: absolute;
+  top: 22em;
+  height: 3em;
+  width: 10em;
+}
+
+.card > .sven{
+  position: absolute;
+  transform: rotate(90deg);
+  font-size: x-large;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--sven-blue);
+  animation: shine 2s infinite;
+  top: 12em;
+  left: 6em;
+}
+
+
+
+
