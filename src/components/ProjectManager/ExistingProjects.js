@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 
 class ExistingProjects extends Component {
     // subscriber-side code. When 'Existing Projects' is clicked, page loads table of project, status and option for subscriber to continue or archive project
-    archiveProject=()=>{
-        console.log('archive btn clicked');   
+    archiveProject=(id)=>{
+        console.log('archive btn clicked with id', id);   
     }
     componentDidMount(){
         this.props.dispatch({type: 'FETCH_EXISTING_PROJECTS'})
@@ -36,9 +36,7 @@ class ExistingProjects extends Component {
                             <button className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayCurrentWorkflow: true}})}>
                                 <a className="nav-link" href="#/clientHome">Continue</a>
                             </button>
-                            <button className="nav-item" onClick={this.archiveProject}>
-                                <a className="nav-link" href="#/clientHome">Archive</a>
-                            </button>
+                            <button className="nav-item" onClick={()=>this.archiveProject(project.id)}>Archive</button>
                         </td>
                     </tr>)}
                 </tbody>
