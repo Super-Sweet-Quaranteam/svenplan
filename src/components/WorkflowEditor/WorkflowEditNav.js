@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import './NewWorkflow.css'
 import Swal from 'sweetalert2';
 
 

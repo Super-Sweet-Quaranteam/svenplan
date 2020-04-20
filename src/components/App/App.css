@@ -13,6 +13,7 @@
   --sven-red: #EC1515;
   --sven-blue: #014AAD;
   --transition-speed: 600ms;
+  --transition-ease: 400ms ease-in-out;
 }
 
 body{
@@ -21,7 +22,7 @@ body{
 }
 
 /* larger button class *//* larger button class *//* larger button class *//* larger button class */
-.button{
+.button, .button-delete{
   margin: 1em;
   color: var(--text-primary);
   background-color: var(--pure-white);
@@ -38,7 +39,7 @@ body{
 }
 
 /* small button class *//* small button class *//* small button class *//* small button class */
-.btn-sml{
+.btn-sml, .btn-sml-delete{
   margin: 1em;
   color: var(--text-primary);
   background-color: var(--pure-white);
@@ -50,6 +51,19 @@ body{
 
 .btn-sml:hover{
   background: var(--sven-blue);
+  transform: scale(1.1);
+  transition: var(--transition-speed);
+}
+
+/* shine red if deleteing */
+.button-delete:hover{
+  background: var(--sven-red);
+  transform: scale(1.1);
+  transition: var(--transition-speed);
+}
+
+.btn-sml-delete:hover{
+  background: var(--sven-red);
   transform: scale(1.1);
   transition: var(--transition-speed);
 }
@@ -115,7 +129,7 @@ footer{
 }
 
 /* chnage default input syles *//* chnage default input syles *//* chnage default input syles */
-input[type=text], input[type=email], input[type=password] {
+input[type=text], input[type=email], input[type=password], textarea {
   width: 60%;
   border: 2px solid var(--bg-secondary);
   border-radius: .4em;
@@ -230,10 +244,9 @@ tbody:hover tr:hover td {
 
 /* form design option *//* form design option *//* form design option *//* form design option */
 .form {
-  display: block;
   max-width:40vw;
   margin: auto;
-  margin-top: 0;
+  margin-top: 3px;
   background: var(--pure-white);
   border-radius:4px;
 }
@@ -241,7 +254,6 @@ tbody:hover tr:hover td {
 .form li{
   text-decoration: none;
   list-style: none;
-  display: block;
   padding: 9px;
   border:2px solid var(--bg-primary);
   margin-bottom: 30px;
