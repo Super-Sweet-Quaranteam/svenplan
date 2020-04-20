@@ -3,9 +3,9 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // get all riskareas
-router.get('/risktypes/:id', (req, res) => {
-    console.log('in /haley-task/risktypes/:id get with id:', req.params.id);
-    const queryText = `SELECT "riskareas"."name" AS "riskarea"
+router.get('/riskareas/:id', (req, res) => {
+    console.log('in /haley-task/riskareas/:id get with id:', req.params.id);
+    const queryText = `SELECT "riskareas"."name" AS "riskarea", "riskareas"."id" AS "id"
                         FROM "riskareas"
                         JOIN "workflows" ON "riskareas"."workflow_id"="workflows"."id"
                         JOIN "phases" ON "phases"."workflow_id"="workflows"."id"
@@ -14,11 +14,10 @@ router.get('/risktypes/:id', (req, res) => {
     const values = [req.params.id];
     pool.query(queryText, values)
     .then( (result) => {
-        console.log(result.rows);
         res.send(result.rows);
     })
     .catch( (error) => {
-        console.log(`Error in all workflow GET ${error}`);
+        console.log(`Error in all riskarea GET ${error}`);
         res.sendStatus(500);
     });
 });
@@ -58,11 +57,14 @@ router.post('/add-new-task', async (req, res) => {
         const queryTextForInputsTable = `INSERT INTO "inputs"("type", "prompt", "task_id") VALUES ($1, $2, $3);`
         for (let i = 0; i < inputsArray.length; i++) {
             await connection.query(queryTextForInputsTable, [inputsArray[i].type, inputsArray[i].prompt, newTaskId.rows[0].id]);
-        }
-
-
-
-        
+            }
+        //use newTaskId to populate tasks_riskareas table
+        //for loop because there might be multiple
+        const queryTextForTasksRiskareasTable = `INSERT INTO "tasks_riskareas"("riskarea_id", "task_id") VALUES ($1, $2);`
+        for (let i = 0; i < riskareasArray.length; i++) {
+            await connection.query(queryTextForTasksRiskareasTable, [riskareasArray[i], newTaskId.rows[0].id]);
+            }
+        //if everything goes through, then send it all through and send 'OK'
         await connection.query('COMMIT');
         res.sendStatus(200);
     } catch (error) {

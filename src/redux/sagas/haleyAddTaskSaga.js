@@ -19,11 +19,11 @@ function* setTaskPhaseID (action) {
     yield put({type: 'UPDATE_PHASE_ID', payload: action.payload});
 }
 function* setTaskRiskareaOptions(action) {
-    const riskTypes = yield axios.get(`/api/haley-task/risktypes/${action.payload}`);
+    const riskTypes = yield axios.get(`/api/haley-task/riskareas/${action.payload}`);
     let riskTypesArray = [];
     for (let i = 0; i < riskTypes.data.length; i++) {
         // console.log(riskTypes.data[i].riskarea)
-        riskTypesArray.push(riskTypes.data[i].riskarea);
+        riskTypesArray.push(riskTypes.data[i]);
     }
     yield put({ type: 'UPDATE_RISKAREA_OPTIONS', payload: riskTypesArray });
 }
