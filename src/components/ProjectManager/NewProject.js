@@ -20,7 +20,9 @@ class NewProject extends Component {
                 <option></option>
             {this.props.reduxState.workflow.allWorkflows &&
             this.props.reduxState.workflow.allWorkflows.map(workflow=>
+                workflow.published===true &&
                 <option key={workflow.id} value={workflow.name}>{workflow.name}</option>
+                
             
             )}
 
