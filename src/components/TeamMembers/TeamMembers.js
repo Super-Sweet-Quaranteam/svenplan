@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 
-class Subscribers extends Component{
+class TeamMembers extends Component{
 
 state={ 
     
@@ -27,7 +27,7 @@ state={
     return (
         <div >
 
-            <h2>Subscribers using SvenPlans:</h2>
+            <h2>Team Members using your workflows:</h2>
             <table id="clientTable">
                 <thead>
                     <tr>
@@ -48,8 +48,6 @@ state={
                             <td>{subscriber.email}</td>
                             <td>{subscriber.phone}</td>
                             <td>{subscriber.level}:
-                            {subscriber.level === 4 &&
-                                    'Base Account'} 
                             { subscriber.level ===3 &&
                             'Team Member'}
                             {subscriber.level ===2 &&
@@ -71,4 +69,4 @@ const putReduxStateOnProps=(reduxState)=>({
     reduxState
   });
   
-export default connect(putReduxStateOnProps)(Subscribers);
+export default connect(putReduxStateOnProps)(TeamMembers);
