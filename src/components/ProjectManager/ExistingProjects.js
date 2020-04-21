@@ -8,7 +8,7 @@ class ExistingProjects extends Component {
         console.log('archive btn clicked with id', id);   
     }
     componentDidMount(){
-        this.props.dispatch({type: 'FETCH_EXISTING_PROJECTS'})
+        this.props.dispatch({type: 'FETCH_EXISTING_PROJECTS', payload: this.props.reduxState.user.currentUser.team_id})
     }
     continueProject(id){
         console.log('in continueProject with id:', id);
@@ -37,12 +37,8 @@ class ExistingProjects extends Component {
                     <tr key={project.id}>
                         <td>{project.name}</td>
                         <td>(filler) 70% complete</td>
-                        {/* <td><button onClick={()=>this.continueWorkflow(project)}>Continue</button><button onClick={this.archiveProject}>Archive</button></td> */}           
                         <td>
-                            {/* on btn click, user is routed to CurrentWorkflow component */}
-                            {/* <button className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayCurrentWorkflow: true}})}>
-                                <a className="nav-link" href="#/clientHome">Continue</a>
-                            </button> */}
+                            {/* on btn click, user is routed to ProjectDetails component */}
                             <button className="nav-item" onClick={() => this.continueProject(project.id)}>Continue</button>
                             <button className="nav-item" onClick={()=>this.archiveProject(project.id)}>Archive</button>
                         </td>
