@@ -13,14 +13,16 @@ class EditPhase extends Component {
         showTask:false
     }
 
-    //allows for adding a new phase - handled in EditPhase,js
+    //allows for adding a new Task - handled in EditTask.js
     addTask=()=>{
+        if(this.state.showTask === true){
+            this.setState({showTask: !this.state.showTask})
+        }
         this.props.dispatch({type: 'TOGGLE_ADD_TASK'});
     }
 
     // deletes selected phase, has warning before removal
     deletePhase=(name)=>{
-        this.setState({editPhase: !this.state.editPhase});
         Swal.fire({
             title: `Are you sure you want to delete ${name}?`,
             text: "You won't be able to revert this!",
@@ -37,9 +39,10 @@ class EditPhase extends Component {
                 'success'
                 );
                 this.props.dispatch({type: 'REMOVE_PHASE', payload: {
-                    id: this.state.workflow.id, 
-                    phase: this.state.phase
+                    id: this.props.reduxState.workflow.storeCurent.workflow.id, 
+                    phase: this.props.reduxState.workflow.storeCurent.phase
                 }});
+                this.props.dispatch({type: 'TOGGLE_EDIT_PHASE'});
             }
         })
     }
@@ -49,10 +52,6 @@ class EditPhase extends Component {
         this.props.dispatch({type: 'TOGGLE_EDIT_PHASE'});
     }
 
-    // allows for editing a task - handled in EditTask.js
-    editTask=()=>{
-        this.props.dispatch({type: 'TOGGLE_EDIT_TASK'});
-    }
 
     // handles state changes for forms
     handleChange=(e, propertyName)=>{
@@ -71,7 +70,6 @@ class EditPhase extends Component {
             phase: {name: this.state.name, description: this.state.description, time: this.state.time},
             sequence: nextSequence
         }});
-        this.props.dispatch({type: 'TOGGLE_ADD_PHASE'});
         this.setState({
             id: '',
             name: '',
@@ -197,6 +195,7 @@ class EditPhase extends Component {
                                     <span>Describe the Phase here</span>
                                 </li>
                                 <input type="submit" value="save" className="btn-sml"/>
+                                <button type="button" className="btn-sml-delete" onClick={()=>this.deletePhase(this.props.reduxState.workflow.storeCurent.phase.name)}>Delete Phase</button>
                             </form>
                             <br/> 
                         </div>

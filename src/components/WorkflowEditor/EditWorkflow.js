@@ -12,6 +12,9 @@ class EditWorkflow extends Component {
 
     //allows for adding a new phase - handled in EditPhase,js
     addPhase=()=>{
+        if(this.state.showPhase === true){
+            this.setState({showPhase: !this.state.showPhase})
+        }
         this.props.dispatch({type: 'TOGGLE_ADD_PHASE'});
     }
 

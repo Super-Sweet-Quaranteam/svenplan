@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Swal from 'sweetalert2'
 
@@ -14,10 +15,10 @@ class CreateWorkflow extends Component {
 
     // creates a brand new workflow, moves user to see all workflows from there
     createWorkflow=()=>{ 
-        let id = (Math.max(...this.props.reduxState.workflow.allWorkflows.map(wf=>wf.id),0)+1);
         this.props.dispatch({type: 'ADD_NEW_WORKFLOW', payload: {
             name: this.state.name, description: this.state.description, time: this.state.time
         }})
+        this.props.dispatch({type: 'GET_ALL_WORKFLOWS'})
         Swal.fire({
             title: 'Created!',
             icon: 'success',
@@ -25,10 +26,17 @@ class CreateWorkflow extends Component {
             confirmButtonText: 'OK'
           }).then((result) => {
             if (result.value) {
-                this.props.dispatch({type: 'GET_THIS_WORKFLOW', payload: {id: id}})
-                this.props.history.push('/workflows/edit')
+                let id = (Math.max(...this.props.reduxState.workflow.allWorkflows.map(wf=>wf.id),0));
+                this.props.dispatch({type: 'GET_THIS_WORKFLOW', payload: {id: id}});
+                this.props.history.push('/workflows/edit');
             }
-          })
+        })
+        this.setState({
+            id: '',
+            name: '',
+            description: '',
+            time: new Date()
+        })
     }
 
     // user warning before deleting a workflow
@@ -109,6 +117,13 @@ class CreateWorkflow extends Component {
                 this.props.dispatch({type: 'EDIT_WORKFLOW_NAME', payload: this.state})
             }
         })
+        this.setState({
+            id: '',
+            name: '',
+            description: '',
+            time: new Date()
+        })
+
     }
 
     render() {
@@ -167,4 +182,4 @@ const mapStateToProps = reduxState => ({
 });
 
 
-export default connect(mapStateToProps)(CreateWorkflow);
+export default connect(mapStateToProps)(withRouter(CreateWorkflow));

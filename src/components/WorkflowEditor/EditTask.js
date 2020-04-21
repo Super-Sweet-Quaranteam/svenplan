@@ -15,6 +15,11 @@ class EditTask extends Component {
         this.props.dispatch({type: 'GET_TASK_OPTIONS'})
     }
 
+    // allows for editing a task - handled in EditTask.js
+    editTask=()=>{
+        this.props.dispatch({type: 'TOGGLE_EDIT_TASK'});
+    }
+
     // allows admin to add input types to a task
     editOptions=()=>{
         this.setState({taskEdit: true});
@@ -44,6 +49,7 @@ class EditTask extends Component {
             {id: this.props.reduxState.workflow.storeCurent.phase.id, task:this.state, seq: nextSequence}})
             this.props.dispatch({type: 'TOGGLE_ADD_TASK'});
         }else{
+            this.setState({id:id})
             this.props.dispatch({type: 'EDIT_TASK_NAME', payload: 
             {id: this.props.reduxState.workflow.storeCurent.phase.id, task:this.state}})
             this.props.dispatch({type: 'TOGGLE_EDIT_TASK'});
@@ -114,10 +120,11 @@ class EditTask extends Component {
                         <br/> 
                     </div>
                 }
-                {this.props.reduxState.workflow.storeCurent.editTask === false && 
+                {this.props.reduxState.workflow.storeCurent.addTask === false && 
                 <>  
                     <br/>
                     <br/>
+                    <button onClick={this.editTask} className="btn-sml">Edit Task</button>
                     <button onClick={this.saveOptions} className="btn-sml">Save Task Options</button>
                     <select className="task-option" name="task-types">
                         {taskTypes}
