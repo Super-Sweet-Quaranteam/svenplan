@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import EditWorkflow from './EditWorkflow';
 import Swal from 'sweetalert2';
+import './NewWorkflow.css'
+
+
 
 class ExistingWorkflows extends Component {
 
-    state = {
-        edit: false,
-        wf: {
-            id: null,
-            name: null,
-            description: null
-        }
-    }
 
     // collects all workflows from db
     componentDidMount=()=>{
@@ -63,47 +57,38 @@ class ExistingWorkflows extends Component {
         })
     }
 
-    // identifies workflow to be viewed and displays in new dom with side nav
-    viewWorkflow=(id, name, description)=> {
-        this.setState({edit: true, wf:{id: id, name: name, description: description}});
+    // identifies workflow to be viewed and displays in new dom
+    viewWorkflow=(id)=> {
         this.props.dispatch({type: 'GET_THIS_WORKFLOW', payload: {id: id}})
+        this.props.history.push('workflows/edit')
     }
 
     render() {
         return (
             <>
-            {/* thinking this should be a tbale layout in the future */}
-                {this.state.edit
-                ?
-                <EditWorkflow wf={this.state.wf} wfID={this.state.wf.id}/>   
-                :
-                <>
                 <h2>Existing Workflows:</h2>
                 <div className="card-container">
     {/* suggest having two buttons, one that shows only if unpublished with an option to publish workflow */}
     {/* or better yet have this be displayed in two tables, on published and one not published with an option to publish */}
                     {this.props.reduxState.workflow.allWorkflows &&
                         this.props.reduxState.workflow.allWorkflows.map(flow => (
-                            
-                                <div className="card" data-id={flow.id} key={flow.id}>
-                                    <div className="card-wf">{flow.name}</div>
-                                    <button className="btn-sml" onClick={()=>this.viewWorkflow(flow.id, flow.name, flow.description)}>View</button>
-                                    <button className="btn-sml-delete" onClick={()=>this.deleteWorkflow(flow.id)}>Delete</button>
-                                    {flow.published === false &&
-                                        <button className="btn-sml publish" onClick={()=>this.publishWorkflow(flow.id)}>Publish</button>
-                                    }
-                                    <div className="sven">svenplan</div>
-                                </div>
-                            
+                            <div className="card" data-id={flow.id} key={flow.id}>
+                                <div className="card-wf">{flow.name}</div>
+                                <button className="btn-sml" onClick={()=>this.viewWorkflow(flow.id)}>View</button>
+                                <button className="btn-sml-delete" onClick={()=>this.deleteWorkflow(flow.id)}>Delete</button>
+                                {flow.published === false &&
+                                    <button className="btn-sml publish" onClick={()=>this.publishWorkflow(flow.id)}>Publish</button>
+                                }
+                                <div className="sven">svenplan</div>
+                            </div>
                         ))
                     }    
                 </div>
-                </>
-                }
             </>
         );
     }
 }
+
 
 const mapStateToProps = reduxState => ({
     reduxState

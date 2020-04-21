@@ -21,7 +21,8 @@ router.get('/all', (req, res) => {
 router.get('/requested/:id', (req, res) => {
     console.log('in GET this workflow with id:', req.params.id)
     const queryText = `SELECT "phases"."name" as ph_name, "phases"."description" as ph_description, 
-    "phases"."sequence" as ph_sequence, "phases"."id" as ph_id, "workflows"."id" as wf_id
+    "phases"."sequence" as ph_sequence, "phases"."id" as ph_id, "workflows"."id" as wf_id,
+    "workflows"."name" as wf_name, "workflows"."description" as wf_desc
     FROM "workflows"
     FULL OUTER JOIN "phases" ON "phases"."workflow_id" = "workflows".id
     WHERE "workflows"."id"=$1 ORDER BY "phases"."sequence" ASC;`;
@@ -40,8 +41,8 @@ router.get('/requested/:id', (req, res) => {
 router.get('/phase/:id', (req, res) => {
     console.log('in GET this phase with id:', req.params.id)
     const queryText = `SELECT "phases"."name" as ph_name, "phases"."description" as ph_description,
-    "default_tasks"."name" as task_name, "default_tasks"."description" as task_description, "phases"."id" as ph_id,
-    "default_tasks"."sequence" as task_sequence, "default_tasks"."id" as task_id
+    "phases"."sequence" as ph_sequence, "default_tasks"."name" as task_name, "default_tasks"."description" as task_description,
+    "phases"."id" as ph_id, "default_tasks"."sequence" as task_sequence, "default_tasks"."id" as task_id
     FROM "phases"
     FULL OUTER JOIN "default_tasks" ON "default_tasks"."phase_id" = "phases"."id"
     WHERE "phases"."id"=$1 ORDER BY "default_tasks"."sequence" ASC;`;
@@ -52,6 +53,27 @@ router.get('/phase/:id', (req, res) => {
     })
     .catch( (error) => {
         console.log(`Error GET this phase ${error}`);
+        res.sendStatus(500);
+    });
+});
+
+// get requested task
+router.get('/task/:id', (req, res) => {
+    console.log('in GET this task with id:', req.params.id)
+    const queryText = `SELECT "default_tasks"."name" as task_name, "default_tasks"."description" as task_description,
+    "default_tasks"."sequence" as task_sequence, "default_tasks"."id" as task_id,
+    "phase_id" as ph_id, "types"."name" as type_name, "types"."description" as type_description
+    FROM "types"
+    FULL OUTER JOIN "tasks_types" ON "tasks_types"."type_id" = "types"."id"
+    FULL OUTER JOIN "default_tasks" ON "default_tasks"."id" = "tasks_types"."task_id"
+    WHERE "default_tasks"."id"=$1 ORDER BY "default_tasks"."sequence" ASC;`;
+    pool.query(queryText, [req.params.id])
+    .then( (result) => {
+        console.log(result.rows);
+        res.send(result.rows);
+    })
+    .catch( (error) => {
+        console.log(`Error GET this task ${error}`);
         res.sendStatus(500);
     });
 });
@@ -190,13 +212,13 @@ router.put('/publish/:id', (req, res) => {
     });
 });
 
-// get all task options
+// get all task option types
 router.get('/all/task/options', (req, res) => {
     console.log('in task options GET all')
     const queryText = `SELECT * FROM "inputs" ORDER BY "id" ASC;`;
     pool.query(queryText)
     .then( (result) => {
-        console.log(result.rows);
+        console.table(result.rows);
         res.send(result.rows);
     })
     .catch( (error) => {
