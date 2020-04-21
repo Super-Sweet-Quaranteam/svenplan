@@ -4,6 +4,19 @@ import {connect} from 'react-redux';
 const ClientHome =(props)=>{
 
 
+    let teamName = ''
+
+    function handleChange(event) {
+        teamName = event.target.value
+        console.log(teamName)
+    }
+    function joinTeam() {
+        console.log('teamname dispatch', teamName)
+        props.dispatch({ type: 'UPDATE_USER_TEAM', payload: teamName })
+
+    }
+
+
     return (
         <>
             <h2>This is client home. Haley commented out what could probably be deleted. ClientNav is redundant at this point, I think.</h2>
@@ -12,8 +25,8 @@ const ClientHome =(props)=>{
             {props.user.currentUser.team_id === null &&
                 <>
                     <p>Join a team:</p>
-                    <input placeholder="Team Name"></input>
-                    <button>Join</button>
+                    <input onChange={handleChange} placeholder="Team Name"></input>
+                    <button onClick={joinTeam}>Join</button>
                 </>
             }
             {props.user.currentUser.team_id !== null &&
