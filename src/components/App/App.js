@@ -20,10 +20,13 @@ import SubscriberHome from '../SubscriberHome/SubscriberHome';
 import ExistingProjects from '../ProjectManager/ExistingProjects';
 import SupportPage from '../SupportPage/SupportPage';
 import NewProject from '../ProjectManager/NewProject';
+import EditWorkflow from '../WorkflowEditor/EditWorkflow';
+import TeamMembers from '../TeamMembers/TeamMembers'
 import ProjectDetails from '../ProjectManager/ProjectDetails';
 
 //TEMPORARY!
 import AddTaskHaley from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
+
   // import AddTaskSummary from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
 
 // THESE SEEM UNUSED
@@ -56,17 +59,22 @@ class App extends Component {
             {/* this is for subscribers (maybe also admins?) */}
             <Route exact path="/dashboard" component={SubscriberHome}/>
             <Route exact path="/projects" component={ExistingProjects}/>
-            {/* <Route exact path="/projects/new" component={COREYS NEW PROJECT COMPONENT} /> */}
+            <Route exact path="/projects/new" component={NewProject} />
             <Route exact path="/support" component={SupportPage}/>
+
+
             <Route exact path="/projects/new" component={NewProject}/>
             <Route exact path="/projects/:projectId" component={ProjectDetails}/>
+
 
             {/* these routes should be available to admins only */}
             <Route exact path="/admin" component={AdminHome}/>
               {/* maybe '/dashboard' as a protected route that would display AdminHome or ClientHome would be more intuitive */}
+            <Route exact path="/workflows/edit" component={EditWorkflow}/>
             <Route exact path="/workflows/new" component={CreateWorkflow}/>
             <Route exact path="/workflows" component={ExistingWorkflows}/>
             <Route exact path="/subscribers" component={Subscribers}/>
+            <Route exact path="/teammembers" component={TeamMembers}/>
 
             {/* temporary!!! */}
             <Route path="/add-task-haley" component={AddTaskHaley} />

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 
-class Subscribers extends Component{
+class TeamMembers extends Component{
 
 state={ 
     
@@ -27,7 +27,7 @@ state={
     return (
         <div >
 
-            <h2>Subscribers using SvenPlans:</h2>
+            <h2>Team Members using your workflows:</h2>
             <table id="clientTable">
                 <thead>
                     <tr>
@@ -41,7 +41,12 @@ state={
                     </tr>
                 </thead>
                 <tbody>
-                    {this.props.reduxState.admin.clientList.map(subscriber => (
+                    {this.props.user.currentUser.team_id === null ?
+                    <p>Not part of a team</p>
+                    :
+                    this.props.reduxState.admin.clientList.map(subscriber => 
+                        this.props.user.currentUser.team_id === subscriber.team_id &&
+                    
                         <tr key={subscriber.id}>
                             <td>{subscriber.company}</td>
                             <td>{subscriber.firstname} {subscriber.lastname}</td>
@@ -51,13 +56,16 @@ state={
                             { subscriber.level ===3 &&
                             'Team Member'}
                             {subscriber.level ===2 &&
-                            'Enterprise Admin'}
+                            'Workflow Access'}
                                 {subscriber.level === 1 &&
                                     'Application Administrator'}
                             </td>
-                            <td><button key={subscriber.id} onClick={() => this.accessChange(subscriber.id, subscriber.level)} name='subscriber.clientid'>Grant/Revoke Enterprise Access</button></td>
+                            <td><button key={subscriber.id} onClick={() => this.accessChange(subscriber.id, subscriber.level)} name='subscriber.clientid'>Grant/Revoke Workflow Access</button></td>
                             {/* <td>{client.address}</td> */}
-                        </tr>))}              
+                        </tr>
+                                
+                                )} 
+                                             
                 </tbody>
             </table>
         </div>
@@ -66,7 +74,8 @@ state={
 }
 
 const putReduxStateOnProps=(reduxState)=>({
-    reduxState
+    reduxState,
+    user: reduxState.user
   });
   
-export default connect(putReduxStateOnProps)(Subscribers);
+export default connect(putReduxStateOnProps)(TeamMembers);
