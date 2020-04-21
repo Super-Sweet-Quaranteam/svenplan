@@ -50,15 +50,76 @@ class CurrentWorkflow extends Component {
                     )}
                 </div>
                 <div className="taskWindow">
-                {this.state.task && <div className="taskAtHand" key={this.state.task.id}>{this.state.task.phase_name}
-                            <br/>
+                {this.state.task && <div className="taskAtHand" key={this.state.task.id}>
+                            <h3>{this.state.task.phase_name}</h3>
                             {this.state.task.phase_description}
+                            <br/>
+
+                            {this.state.task.name === 'button' ?
+                                <label>
+                                    {this.state.task.instructions}
+                                    <br/>
+                                    <input type="button"></input>
+                                </label>
+                            : this.state.task.name === 'checkbox' ?
+                                <label>
+                                    {this.state.task.instructions}
+                                    <br/>
+                                    <input type="checkbox"></input>
+                                </label>
+                            : this.state.task.name === 'radio' ?
+                                <label>
+                                    {this.state.task.instructions}
+                                    <br/>
+                                    <input type="radio"></input>
+                                </label>                            
+                            : this.state.task.name === 'number' ?
+                                <label>
+                                    {this.state.task.instructions}
+                                    <br/>
+                                    <input type="number"></input>
+                                </label>                            
+                            : this.state.task.name === 'email' ?
+                                <label>
+                                    {this.state.task.instructions}
+                                    <br/>
+                                    <input type="email"></input>
+                                </label>                            
+                            : this.state.task.name === 'tel' ?
+                                <label>
+                                    {this.state.task.instructions}
+                                    <br/>
+                                    <input type="tel"></input>
+                                </label>                            
+                            : this.state.task.name === 'text' ?
+                                <label>
+                                    {this.state.task.instructions}
+                                    <br/>
+                                    <input type="text" placeholder={this.state.task.description}></input>
+                                </label>                            
+                            : this.state.task.name === 'url' ?
+                                <label>
+                                    {this.state.task.instructions}
+                                    <br/>
+                                    <input type="url"></input>
+                                </label>
+                            : <></>
+                            }
+
+                            {/* <br/>
+                            {this.state.task.description}
+                            <br/>
+                            {this.state.task.instructions} */}
+
+
+
+
                             <br/>
                             {this.state.taskIndex === 0 ? 
                                 <button onClick={this.forwardATask}>Next</button>
                             :
                             <>
-                                {this.state.task == this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
+                                {this.state.task === this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
                                     <button onClick={this.backATask}>Back</button>
                                 :
                                     <>
