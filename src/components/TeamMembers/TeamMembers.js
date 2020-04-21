@@ -41,7 +41,7 @@ state={
                     </tr>
                 </thead>
                 <tbody>
-                    {this.props.user.currentUser.team_id !== null ?
+                    {this.props.user.currentUser.team_id === null ?
                     <p>Not part of a team</p>
                     :
                     this.props.reduxState.admin.clientList.map(subscriber => 
