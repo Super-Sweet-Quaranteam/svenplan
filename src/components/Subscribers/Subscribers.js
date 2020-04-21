@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-
+import Teams from '../Teams/Teams';
 
 class Subscribers extends Component{
 
@@ -59,6 +59,7 @@ state={
                         </tr>))}              
                 </tbody>
             </table>
+            <Teams />
         </div>
     );
 }
