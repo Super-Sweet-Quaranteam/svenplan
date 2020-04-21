@@ -8,9 +8,11 @@ function* SubscriberProjects(){
     yield takeEvery('FETCH_PHASES_TASKS', fetchPhasesTasks)
 }
 // gets all projects belonging to one user
-function* fetchExistingProjects(){
-    try {        
-        const response = yield axios.get('/subscriber/existing-projects')        
+function* fetchExistingProjects(action){
+    try { 
+        console.log('did team number come thru', action.payload);
+               
+        const response = yield axios.get('/subscriber/existing-projects/'+ action.payload)        
         yield put({type: 'SET_EXISTING_PROJECTS', payload: response.data})
     } catch (error) {
         console.log(error);

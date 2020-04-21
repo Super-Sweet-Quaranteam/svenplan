@@ -8,7 +8,7 @@ class ExistingProjects extends Component {
         console.log('archive btn clicked with id', id);   
     }
     componentDidMount(){
-        this.props.dispatch({type: 'FETCH_EXISTING_PROJECTS'})
+        this.props.dispatch({type: 'FETCH_EXISTING_PROJECTS', payload: this.props.reduxState.user.currentUser.team_id})
     }
     continueProject(id){
         console.log('in continueProject with id:', id);

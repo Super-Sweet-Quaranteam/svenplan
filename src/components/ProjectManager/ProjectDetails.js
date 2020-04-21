@@ -62,7 +62,7 @@ class CurrentWorkflow extends Component {
                                     <>
                                         <label>{this.state.task.instructions}</label>
                                         <br/>
-                                        <input type="button"></input>
+                                        <input type="button" value={this.state.task.description}></input>
                                     </>
                                 : this.state.task.name === 'checkbox' ?
                                     <>
@@ -109,13 +109,6 @@ class CurrentWorkflow extends Component {
                                 : <></>
                                 }
                             </form>
-                            {/* <br/>
-                            {this.state.task.description}
-                            <br/>
-                            {this.state.task.instructions} */}
-
-
-
 
                             <br/>
                             {this.state.taskIndex === 0 ? 
