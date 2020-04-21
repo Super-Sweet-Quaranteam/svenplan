@@ -12,6 +12,14 @@ class NewProject extends Component {
     }
 
     state={}
+
+    handleChange =(event)=>{
+        this.setState({projectName:event.target.value})
+    }
+
+    createProject =()=>{
+        this.props.dispatch({ type: 'CREATE_PROJECT', payload: this.state.projectName })
+    }
     render() {
         return (
             <div >
@@ -28,7 +36,8 @@ class NewProject extends Component {
             )}
 
             </select>
-            <button>Create Project</button>
+            <input onChange={this.handleChange} placeholder='Project Name'></input>
+            <button onClick={this.createProject}>Create Project</button>
             </div>
         );
     }

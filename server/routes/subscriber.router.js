@@ -55,4 +55,21 @@ const router = express.Router();
             })
     });
 
+
+router.post('/project', (req, res) => {
+console.log(req.body)
+    // let queryText = `SELECT "default_tasks"."sequence","default_tasks"."id","default_tasks"."name" AS "phase_name", "default_tasks"."description" AS "phase_description","inputs"."name", "inputs"."description","tasks_inputs"."instructions" FROM "default_tasks" 
+    //     JOIN "tasks_inputs" ON "task_id" = "default_tasks"."id"
+    //     JOIN "inputs" ON "inputs"."id" = "input_id" WHERE "default_tasks"."phase_id"=$1 ORDER BY "sequence","phase_id", "phase_name"`
+    // pool.query(queryText, [phaseId])
+    //     .then((response) => {
+    //         // console.log('successful get- response.rows:', response);
+    //         res.send(response.rows);
+    //     })
+    //     .catch(() => {
+    //         console.log('something went wrong in get at /');
+    //         res.sendStatus(500);
+    //     })
+});
+
 module.exports = router;
