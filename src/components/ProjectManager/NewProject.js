@@ -28,7 +28,7 @@ class NewProject extends Component {
             )}
 
             </select>
-            <button>Create Workflow</button>
+            <button>Create Project</button>
             </div>
         );
     }
