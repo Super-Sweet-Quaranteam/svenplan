@@ -66,8 +66,7 @@ class UserProfile extends Component {
               "Enterprise Admin"}
             {this.props.user.currentUser.level === 3 &&
               "Team Member"}
-            {this.props.user.currentUser.level === 4 &&
-              "Log In Created"}</p>
+              </p>
           <p><button className="btn-sml" onClick={this.editMode}>Edit Profile</button></p>
           <br></br>
             {this.props.user.currentUser.team_id

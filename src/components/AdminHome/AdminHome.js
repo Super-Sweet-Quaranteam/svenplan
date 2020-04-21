@@ -4,6 +4,18 @@ import './AdminHome.css'
 
 //admin home was basically acting as half a nav, so I moved that stuff to nav
 function AdminHome(props) {
+
+    let teamName=''
+
+    function handleChange(event){
+        teamName=event.target.value
+        console.log(teamName)
+    }
+   function createTeam(){
+       console.log('teamname dispatch', teamName)
+       props.dispatch({ type: 'CREATE_TEAM', payload:teamName })
+     
+    }
     return (
         <>       
             <p>this is admin home</p>
@@ -14,8 +26,8 @@ function AdminHome(props) {
                 {props.user.currentUser.team_id === null &&
                 <>
                 <p>Create a team:</p>
-                <input placeholder="Team Name"></input>
-                <button>Create</button>
+                <input onChange={handleChange} placeholder="Team Name"></input>
+                <button onClick={createTeam}>Create</button>
                 </>
                 }
             {props.user.currentUser.team_id !== null &&
