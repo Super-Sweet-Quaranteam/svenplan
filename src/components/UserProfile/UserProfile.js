@@ -61,16 +61,18 @@ class UserProfile extends Component {
           <p>Full Name: {this.props.user.currentUser.firstname} {this.props.user.currentUser.lastname}</p>
           <p>User ID: {this.props.user.currentUser.id}</p>
             <p>Access Level: {this.props.user.currentUser.level === 1 &&
-             "Admin"  }
+             "Application Admin"  }
             {this.props.user.currentUser.level === 2 &&
-              "Subscriber"}
+              "Enterprise Admin"}
             {this.props.user.currentUser.level === 3 &&
+              "Team Member"}
+            {this.props.user.currentUser.level === 4 &&
               "Log In Created"}</p>
           <p><button className="btn-sml" onClick={this.editMode}>Edit Profile</button></p>
           <br></br>
-            {this.props.user.selectedUser.team_id
+            {this.props.user.currentUser.team_id
                 ?
-              <p>Team: {this.props.user.selectedUser.team}</p>
+              <p>Team: {this.props.user.currentUser.team}</p>
                 :
                 <button className="btn-sml" >Add to Team</button>
               }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 
-class Subscribers extends Component{
+class TeamMembers extends Component{
 
 state={ 
     
@@ -27,7 +27,7 @@ state={
     return (
         <div >
 
-            <h2>Subscribers using SvenPlans:</h2>
+            <h2>Team Members using your workflows:</h2>
             <table id="clientTable">
                 <thead>
                     <tr>
@@ -71,4 +71,4 @@ const putReduxStateOnProps=(reduxState)=>({
     reduxState
   });
   
-export default connect(putReduxStateOnProps)(Subscribers);
+export default connect(putReduxStateOnProps)(TeamMembers);
