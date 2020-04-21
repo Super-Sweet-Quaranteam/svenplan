@@ -8,7 +8,8 @@ function* createProject(action) {
         const config = {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true,
-            teamName: action.payload
+            details: action.payload,
+            
         };
         yield axios.post('/subscriber/project', config);
   

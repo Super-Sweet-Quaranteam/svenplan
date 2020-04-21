@@ -11,32 +11,38 @@ class NewProject extends Component {
         this.props.dispatch({ type: 'GET_TEAM_WORKFLOWS', payload:this.props.user.currentUser.team_id })
     }
 
-    state={}
+    state = { team: this.props.user.currentUser.team_id}
 
-    handleChange =(event)=>{
-        this.setState({projectName:event.target.value})
+    handleChange = propertyName => (event) => {
+        this.setState({
+            [propertyName]: event.target.value,
+        });
+        console.log(this.state)
     }
 
     createProject =()=>{
-        this.props.dispatch({ type: 'CREATE_PROJECT', payload: this.state.projectName })
+        this.props.dispatch({ type: 'CREATE_PROJECT', 
+        payload:{name:this.state.name,
+                    team:this.state.team,
+                    workflow: Number(this.state.workflow)  }})
     }
     render() {
         return (
             <div >
              <h2>New Project</h2>
              <h4>Select your Workflow:</h4>
-            <select>
+            <select onChange={this.handleChange('workflow')}>
                 <option></option>
             {this.props.reduxState.workflow.teamWorkflows &&
             this.props.reduxState.workflow.teamWorkflows.map(workflow=>
                 workflow.published===true &&
-                <option key={workflow.id} value={workflow.name}>{workflow.name}</option>
+                <option key={workflow.id} value={Number(workflow.id)}>{workflow.name}</option>
                 
             
             )}
 
             </select>
-            <input onChange={this.handleChange} placeholder='Project Name'></input>
+            <input onChange={this.handleChange('name')} placeholder='Project Name'></input>
             <button onClick={this.createProject}>Create Project</button>
             </div>
         );
