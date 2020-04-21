@@ -44,6 +44,15 @@ const allWorkflows = (state = [], action) => {
             return state;
     }
 }
+// gets all team workflows
+const teamWorkflows = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_TEAM_WORKFLOWS':
+            return action.payload;
+        default:
+            return state;
+    }
+}
 
 // gets requested workflow w/ phases
 const thisWorkflow = (state = [], action) => {
@@ -91,5 +100,6 @@ export default combineReducers({
     thisWorkflow,
     thisPhase,
     thisTask,
-    taskOptions
+    taskOptions,
+    teamWorkflows
   });

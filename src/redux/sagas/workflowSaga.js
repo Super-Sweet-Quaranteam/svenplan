@@ -5,6 +5,7 @@ import {takeEvery, put} from "redux-saga/effects";
 // these sagas take the dispatch and runs them before they get to the reducers
 function* workflows() {
     yield takeEvery('GET_ALL_WORKFLOWS', getAllWorkflows);
+    yield takeEvery('GET_TEAM_WORKFLOWS', getTeamWorkflows);
     yield takeEvery('GET_THIS_WORKFLOW', getThisWorkflow);
     yield takeEvery('ADD_NEW_WORKFLOW', addNewWorkflow);
     yield takeEvery('EDIT_WORKFLOW_NAME', editWorkflowName);
@@ -26,6 +27,13 @@ function* getAllWorkflows(){
     const getWorkflows = yield axios.get(`/api/workflow/all`);
     console.log('in saga - all workflows GET back with:', getWorkflows.data);
     yield put({type: 'SET_ALL_WORKFLOWS', payload: getWorkflows.data});
+}
+//gets all team workflows
+function* getTeamWorkflows(action) {
+    console.log("We are here in saga GET team workflows", action.payload);
+    const getWorkflows = yield axios.get(`/api/workflow/team/${action.payload}`);
+    console.log('in saga - all workflows GET back with:', getWorkflows.data);
+    yield put({ type: 'SET_TEAM_WORKFLOWS', payload: getWorkflows.data });
 }
 
 // gets requested workflow from DB
