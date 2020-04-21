@@ -56,11 +56,11 @@ state={
                             { subscriber.level ===3 &&
                             'Team Member'}
                             {subscriber.level ===2 &&
-                            'Enterprise Admin'}
+                            'Workflow Access'}
                                 {subscriber.level === 1 &&
                                     'Application Administrator'}
                             </td>
-                            <td><button key={subscriber.id} onClick={() => this.accessChange(subscriber.id, subscriber.level)} name='subscriber.clientid'>Grant/Revoke Enterprise Access</button></td>
+                            <td><button key={subscriber.id} onClick={() => this.accessChange(subscriber.id, subscriber.level)} name='subscriber.clientid'>Grant/Revoke Workflow Access</button></td>
                             {/* <td>{client.address}</td> */}
                         </tr>
                                 
