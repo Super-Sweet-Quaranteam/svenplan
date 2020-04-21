@@ -14,6 +14,7 @@ class CreateWorkflow extends Component {
 
     // creates a brand new workflow, moves user to see all workflows from there
     createWorkflow=()=>{ 
+        let id = (Math.max(...this.props.reduxState.workflow.allWorkflows.map(wf=>wf.id),0)+1);
         this.props.dispatch({type: 'ADD_NEW_WORKFLOW', payload: {
             name: this.state.name, description: this.state.description, time: this.state.time
         }})
@@ -24,7 +25,8 @@ class CreateWorkflow extends Component {
             confirmButtonText: 'OK'
           }).then((result) => {
             if (result.value) {
-              this.props.history.push('/workflows')
+                this.props.dispatch({type: 'GET_THIS_WORKFLOW', payload: {id: id}})
+                this.props.history.push('/workflows/edit')
             }
           })
     }
