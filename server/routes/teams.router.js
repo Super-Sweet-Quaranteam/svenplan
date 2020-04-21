@@ -6,7 +6,7 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
-
+// get all team info (just ids and names) from teams table
 router.get('/', rejectUnauthenticated, (req, res)=>{
   const queryText= 'SELECT * FROM "teams";'
   pool.query(queryText)
@@ -15,6 +15,7 @@ router.get('/', rejectUnauthenticated, (req, res)=>{
     .catch(() => res.sendStatus(500));
 });
 
+// use join to get members from a specific team from users table
 router.get('/members/:id', rejectUnauthenticated, (req, res) => {
   const queryText = `SELECT "users"."alias" AS "user", "users"."firstname", "users"."lastname", "users"."id"
                     FROM "teams" JOIN "users"

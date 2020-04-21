@@ -8,12 +8,13 @@ const router = express.Router();
 
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
-  // Send back user object from the session (previously queried from the database)
+  // Send back user object from the session
   // console.log('req.user:', req.user);
   // console.log('req.session:', req.session);
   res.send(req.user);
 });
 
+// get user info based on their id
 router.get('/selected/:id', rejectUnauthenticated, (req, res) => {
   const queryText=`SELECT * FROM "users" WHERE "id"=$1;`;
   const values=[req.params.id];
@@ -24,6 +25,7 @@ router.get('/selected/:id', rejectUnauthenticated, (req, res) => {
     .catch(() => res.sendStatus(500));
 });
 
+// get the team name (not id, we might need it though) of the current user's team
 router.get('/team', rejectUnauthenticated, (req, res)=>{
   if (req.user.team_id){  
     const queryText = `SELECT "users"."alias" AS "user", "teams"."name" AS "team"
@@ -40,6 +42,7 @@ router.get('/team', rejectUnauthenticated, (req, res)=>{
   }
 });
 
+// get the team name (not id, we might need it though) of a specific user's team
 router.get('/team/:id', rejectUnauthenticated, (req, res) => {
   const queryText = `SELECT "users"."alias" AS "user", "teams"."name" AS "team"
                     FROM "teams" JOIN "users"

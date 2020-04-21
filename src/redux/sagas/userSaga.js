@@ -13,11 +13,12 @@ function* fetchUser() {
     // allow the server session to recognize the user
     // If a user is logged in, this will return their information
     // from the server session (req.user)
-    const response = yield axios.get('/api/user', config);
-    const teamResponse = yield axios.get('/api/user/team', config);    
+    const response = yield axios.get('/api/user', config);  
     // now that the session has given us a user object
-    // with an id and username set the client-side user object to let
-    // the client-side code know the user is logged in
+    // with an id and username, we go to the database to see which team the user belongs to
+    // this is important for which projects/options a user can see
+    const teamResponse = yield axios.get('/api/user/team', config);
+    // set the client-side user object to let the client-side code know the user is logged in
     yield put({ type: 'SET_USER', payload: {...response.data, team: teamResponse.data} });
   } catch (error) {
     console.log('User get request failed', error);
@@ -31,7 +32,7 @@ function* fetchSelectedUser(action) {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
-
+    // get user info (including team membership) from db, set in userReducer
     const response = yield axios.get(`/api/user/selected/${action.payload}`, config);
     const teamResponse = yield axios.get(`/api/user/team/${action.payload}`, config);
     yield put({ type: 'SET_SELECTED_USER', payload: { ...response.data, team: teamResponse.data } });
@@ -40,6 +41,7 @@ function* fetchSelectedUser(action) {
   }
 }
 
+//stores changes to one's own profile to db
 function* updateUser(action) {
   try {
     const config = {
@@ -49,12 +51,14 @@ function* updateUser(action) {
     };
     const response = yield axios.put(`/api/user/${action.payload.id}`, config);
     console.log(response)
+    //update the currentUser reducer
     yield put({ type: 'FETCH_CURRENT_USER'})
   } catch (error) {
     console.log('User update request failed', error);
   }
 }
 
+// this is triggered from Subscribers.js, and changes a user's access level
 function* editAccess(action) {
   console.log(action.payload, 'edit actionp')
   let sendLevel = 3
@@ -69,6 +73,7 @@ function* editAccess(action) {
     };
     const response = yield axios.put(`/api/user/access/${action.payload.id}`, config);
     console.log(response)
+    // update the list of subscribers
     yield put({ type: 'GET_CLIENT_LIST'})
   } catch (error) {
     console.log('User access update request failed', error);

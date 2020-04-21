@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-
+// this is how the client side knows there is a user and who they are
 const currentUser = (state = {}, action) => {
   switch (action.type) {
     case 'SET_USER':
@@ -12,6 +12,7 @@ const currentUser = (state = {}, action) => {
   }
 };
 
+// selectedUser would be if you wanted to see the profile of the user who isn't you
 const selectedUser = (state = {}, action) => {
   switch (action.type) {
     case 'SET_SELECTED_USER':
