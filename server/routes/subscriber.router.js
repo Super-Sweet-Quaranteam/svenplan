@@ -20,13 +20,13 @@ const router = express.Router();
             })
     });//get task names for a certain project, and whether or not they're done.
     
-    router.get('/current-workflow/phases/:teamId', (req, res) => {   
-        let teamId = req.params.teamId        
-        let queryText = `SELECT "phases"."id" AS "phase_id", "teams"."id" AS "team_id", "phases"."name" AS "phase_name", "phases"."description" AS "phases_desc", "workflows"."name" AS "workflow_name", "workflows"."description" AS "workflow_desc", "teams"."name" AS "team_name" FROM "phases"
+    router.get('/current-workflow/phases/:projectId', (req, res) => {   
+        let projectId = req.params.projectId        
+        let queryText = `SELECT "phases"."id" AS "phase_id", "phases"."name" AS "phase_name", "phases"."description" AS "phases_desc", "workflows"."name" AS "workflow_name", "workflows"."description" AS "workflow_desc" FROM "phases"
         JOIN "workflows" ON "phases"."workflow_id" = "workflows"."id"
-        JOIN "teams" ON "teams"."workflow_id" = "workflows"."id"
-        WHERE "teams"."id"=$1; `
-        pool.query(queryText, [teamId])
+        JOIN "projects" ON "projects"."workflow_id" = "workflows"."id"
+        WHERE "projects"."id"=$1; `
+        pool.query(queryText, [projectId])
             .then((response) => {
                 // console.log('successful get- response.rows:', response.rows);
                 res.send(response.rows);
