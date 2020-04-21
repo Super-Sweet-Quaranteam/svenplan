@@ -16,6 +16,20 @@ router.get('/all', (req, res) => {
         res.sendStatus(500);
     });
 });
+// get team workflows
+router.get('/team/:team', (req, res) => {
+    console.log('in workflow GET team', req.params)
+    const queryText = `SELECT * FROM "workflows" WHERE "team_id"=$1 ORDER BY "id" ASC;`;
+    pool.query(queryText, [req.params.team])
+        .then((result) => {
+            console.log(result.rows);
+            res.send(result.rows);
+        })
+        .catch((error) => {
+            console.log(`Error in all workflow GET ${error}`);
+            res.sendStatus(500);
+        });
+});
 
 // get requested workflow
 router.get('/requested/:id', (req, res) => {

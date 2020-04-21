@@ -7,7 +7,8 @@ class NewProject extends Component {
         console.log('archive btn clicked');
     }
     componentDidMount() {
-        this.props.dispatch({ type: 'GET_ALL_WORKFLOWS' })
+        console.log('mount team_id', this.props.user.currentUser.team_id)
+        this.props.dispatch({ type: 'GET_TEAM_WORKFLOWS', payload:this.props.user.currentUser.team_id })
     }
 
     state={}
@@ -18,8 +19,8 @@ class NewProject extends Component {
              <h4>Select your Workflow:</h4>
             <select>
                 <option></option>
-            {this.props.reduxState.workflow.allWorkflows &&
-            this.props.reduxState.workflow.allWorkflows.map(workflow=>
+            {this.props.reduxState.workflow.teamWorkflows &&
+            this.props.reduxState.workflow.teamWorkflows.map(workflow=>
                 workflow.published===true &&
                 <option key={workflow.id} value={workflow.name}>{workflow.name}</option>
                 
@@ -33,6 +34,7 @@ class NewProject extends Component {
     }
 }
 const mapStateToProps = reduxState => ({
-    reduxState
+    reduxState,
+    user: reduxState.user
 });
 export default connect(mapStateToProps)(NewProject);
