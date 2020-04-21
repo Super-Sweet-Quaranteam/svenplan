@@ -19,9 +19,9 @@ function* fetchExistingProjects(action){
     }
 }
 // gets specific project workflow when user chooses which among their projects to continue
-function* fetchCurrentWorkflow(){
-    try {        
-        const response = yield axios.get('/subscriber/current-workflow/phases')
+function* fetchCurrentWorkflow(action){
+    try {                
+        const response = yield axios.get('/subscriber/current-workflow/phases/'+ action.payload)
         yield put({type: 'SET_CURRENT_PROJECT', payload: response.data})
     } catch (error) {
         console.log(error);
@@ -29,8 +29,7 @@ function* fetchCurrentWorkflow(){
 }
 // gets specific tasks per phase, when phase block is clicked
 function* fetchPhasesTasks(action){
-    try {
-        yield console.log('stop trying to make fetch a thing');
+    try {        
         // pass in params to target the clicked phases' tasks
         const response = yield axios.get('/subscriber/current-workflow/phases/tasks/'+ action.payload.phaseId)
         yield console.log('response.data is ', response.data);

@@ -14,7 +14,7 @@ class CurrentWorkflow extends Component {
         })
     }
     componentDidMount(){
-        this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW'})               
+        this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW', payload: this.props.reduxState.user.currentUser.team_id})               
     }
     forwardATask=()=>{
         this.setState({
@@ -25,7 +25,7 @@ class CurrentWorkflow extends Component {
     // index of task from tasksInPhase will always start at 0 (first task in list)
     // this.state.taskIndex instead of 0 helps code remember which task we're currently on
     showTasks=(phaseId)=>{
-        console.log('you clicked a phase');
+        console.log('you clicked a phase', phaseId);
         // passing function in payload so sagas can run it async.
         this.props.dispatch({type: 'FETCH_PHASES_TASKS', payload: {phaseId: phaseId, callback: () => {
             this.setState({
@@ -46,7 +46,7 @@ class CurrentWorkflow extends Component {
                 {/* phase divs are set up as buttons for a11y. onClick, specific tasks show up */}
                 <div className="phaseOverview">
                     {this.props.reduxState.subscriber.currentProject.map(phase => 
-                        <button className="phaseOverviewItem" key={phase.id} onClick={()=>this.showTasks(phase.id)}>{phase.name}</button>
+                        <button className="phaseOverviewItem" key={phase.phase_id} onClick={()=>this.showTasks(phase.phase_id)}>{phase.phase_name}</button>
                     )}
                 </div>
                 <div className="taskWindow">
