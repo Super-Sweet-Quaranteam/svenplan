@@ -1,11 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-// import ClientNav from './ClientNav';
-// import CreateWorkflow from '../WorkflowEditor/CreateWorkflow';
-// import ExistingProjects from '../ProjectManager/ExistingProjects';
-// import ClientRisk from '../RiskChart/RiskChart';
-// import CurrentWorkflow from '../ProjectManager/CurrentWorkflow';
-// import UserProfile from '../UserProfile/UserProfile'
 
 const ClientHome =(props)=>{
 
@@ -14,49 +8,26 @@ const ClientHome =(props)=>{
         <>
             <h2>This is client home. Haley commented out what could probably be deleted. ClientNav is redundant at this point, I think.</h2>
             <p>can have like a little hello or various summaries on this page, doesn't matter til other things are populated</p>
-            {/* <ClientNav />
-            
-            {props.reduxState.client.clientDisplay.displayProfile === true 
-                ?
-                <UserProfile 
-                /> 
-                :
-                null
+           
+            {props.user.currentUser.team_id === null &&
+                <>
+                    <p>Join a team:</p>
+                    <input placeholder="Team Name"></input>
+                    <button>Join</button>
+                </>
             }
-            {props.reduxState.client.clientDisplay.displayNewWorkFlow === true 
-                ?
-                <CreateWorkflow 
-                /> 
-                :
-            null
+            {props.user.currentUser.team_id !== null &&
+                <>
+                    <p>Your team: {props.user.currentUser.team}</p>
+
+                </>
             }
-            {props.reduxState.client.clientDisplay.displayOldWorkFlow === true 
-                ?
-                <ExistingProjects
-                /> 
-                :
-                null
-            }
-            {props.reduxState.client.clientDisplay.displayRisk === true 
-                ?
-                <ClientRisk
-                /> 
-                :
-                null
-            }
-            {props.reduxState.client.clientDisplay.displayCurrentWorkflow === true 
-                ?
-                <CurrentWorkflow
-                /> 
-                :
-                null
-            } */}
         </>
     );
 }
 
-// const putReduxStateOnProps=(reduxState)=>({
-//     reduxState
-//   });
+const putReduxStateOnProps = (reduxState) => ({
+    user: reduxState.user
+});
   
-export default connect()(ClientHome);
+export default connect(putReduxStateOnProps)(ClientHome);
