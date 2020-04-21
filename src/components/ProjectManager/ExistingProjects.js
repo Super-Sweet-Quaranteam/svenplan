@@ -40,7 +40,7 @@ class ExistingProjects extends Component {
                         <td>
                             {/* on btn click, user is routed to ProjectDetails component */}
                             <button className="nav-item" onClick={() => this.continueProject(project.id)}>Continue</button>
-                            <button className="nav-item" onClick={()=>this.archiveProject(project.id)}>Archive</button>
+                            {/* <button className="nav-item" onClick={()=>this.archiveProject(project.id)}>Archive</button> */}
                         </td>
                     </tr>)}
                 </tbody>
