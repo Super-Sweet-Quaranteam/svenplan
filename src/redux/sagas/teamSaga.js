@@ -39,9 +39,26 @@ function* createTeam(action) {
   }
 }
 
+function* updateUserTeam(action) {
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+      teamName: action.payload
+    };
+    //first update the user info
+    yield axios.put('/api/teams/join', config);
+    //then update the user reducer
+    yield put({ type: 'FETCH_CURRENT_USER' });
+  } catch (error) {
+    console.log('Team get request failed', error);
+  }
+}
+
 function* teamSaga() {
   yield takeLatest('FETCH_TEAMS', fetchTeams);
   yield takeLatest('CREATE_TEAM', createTeam);
+  yield takeLatest('UPDATE_USER_TEAM', updateUserTeam)
 }
 
 export default teamSaga;
