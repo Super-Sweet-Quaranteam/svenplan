@@ -24,7 +24,8 @@ class UserProfile extends Component {
         firstname: this.props.user.currentUser.firstname,
         lastname: this.props.user.currentUser.lastname,
         alias: this.props.user.currentUser.alias,
-        id: this.props.user.currentUser.id })
+        id: this.props.user.currentUser.id,
+        team: this.props.user.currentUser.team})
     }
     else if (this.state.mode === 'edit') {
       this.setState({ mode: 'display'})
@@ -41,7 +42,10 @@ class UserProfile extends Component {
 
   updateUser=()=>{
     this.props.dispatch({ type: 'UPDATE_CURRENT_USER', payload:this.state });
-    this.editMode();
+  }
+
+  updateTeam = () => {
+    this.props.dispatch({ type: 'UPDATE_USER_TEAM', payload: this.state.team });
   }
  
   render() {
@@ -73,7 +77,7 @@ class UserProfile extends Component {
                 ?
               <p>Team: {this.props.user.currentUser.team}</p>
                 :
-                <button className="btn-sml" >Add to Team</button>
+               <p>Not part of any team</p>
               }
           </div>
       </div>
@@ -108,11 +112,24 @@ class UserProfile extends Component {
             </li>
           </ul>
           <button className="btn-sml" onClick={this.updateUser}>Save Profile</button>
-          <button className="btn-sml" onClick={this.editMode}>View Profile</button>
-        </form>
+          </form>
+          <br></br>
+          <form className="form">
+            <ul>
+              <li>
+              <label htmlFor="teamEdit">Team:</label>
+          <input type="text" id='teamEdit' onChange={this.handleInputChangeFor('team')} value={this.state.team || ""}></input>
+              <span>Enter your team here</span>
+            </li>
+          </ul>
+          <button className="btn-sml" onClick={this.updateTeam}>Save Team</button>
+         </form>
+         <br></br>
+          <button className="btn-sml" onClick={this.editMode}>Back To View</button>
+       </>
           
 
-      </>
+   
     )
   }
 }
