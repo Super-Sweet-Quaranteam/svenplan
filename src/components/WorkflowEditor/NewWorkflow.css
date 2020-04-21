@@ -39,6 +39,7 @@
 
 /* can change how many divs per screen based on width % */
 .phase-block-btn {
+  color: var(--text-secondary);
   background-color: var(--bg-tertiary);
   min-height: 10vh;
   min-width: 12vw;

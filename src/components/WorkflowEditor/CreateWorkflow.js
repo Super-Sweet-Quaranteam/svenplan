@@ -112,7 +112,7 @@ class CreateWorkflow extends Component {
     render() {
         return (
             <>
-                {this.props.edit 
+                {this.props.reduxState.workflow.storeCurent.editWorkflow === true
                 ?
                 <div className="workflowInfo">
                     <form className="form">

@@ -1,12 +1,35 @@
 import { combineReducers } from 'redux';
 
+const initialState = {
+    workflow:{},
+    editWorkflow:false,
+    phase:{},
+    editPhase:false,
+    addPhase:false,
+    task:{},
+    editTask:false,
+    addTask:false
+}
 
-const storeCurent = (state = {}, action) => {
+// stores currently viewed workflow info
+const storeCurent = (state = initialState, action) => {
     switch (action.type) {
         case 'CURENT_WORKFLOW':
             return state = {...state, workflow: action.payload};
+        case 'TOGGLE_EDIT_WORKFLOW':
+            return state = {...state, editWorkflow: !state.editWorkflow};
         case 'CURENT_PHASE':
             return state = {...state, phase: action.payload};
+        case 'TOGGLE_EDIT_PHASE':
+            return state = {...state, editPhase: !state.editPhase};
+        case 'TOGGLE_ADD_PHASE':
+            return state = {...state, addPhase: !state.addPhase};  
+        case 'CURENT_TASK':
+            return state = {...state, task: action.payload};
+        case 'TOGGLE_EDIT_TASK':
+            return state = {...state, editTask: !state.editTask};
+        case 'TOGGLE_ADD_TASK':
+            return state = {...state, addTask: !state.addTask};  
         default:
             return state;
     }
@@ -22,7 +45,7 @@ const allWorkflows = (state = [], action) => {
     }
 }
 
-// gets requested workflow
+// gets requested workflow w/ phases
 const thisWorkflow = (state = [], action) => {
     switch (action.type) {
         case 'SET_THIS_WORKFLOW':
@@ -32,10 +55,20 @@ const thisWorkflow = (state = [], action) => {
     }
 }
 
-// gets requested phase tasks
+// gets requested phase w/ tasks
 const thisPhase = (state = [], action) => {
     switch (action.type) {
         case 'SET_THIS_PHASE':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+// gets requested tasks w/ options
+const thisTask = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_THIS_TASK':
             return action.payload;
         default:
             return state;
@@ -57,5 +90,6 @@ export default combineReducers({
     allWorkflows,
     thisWorkflow,
     thisPhase,
+    thisTask,
     taskOptions
   });

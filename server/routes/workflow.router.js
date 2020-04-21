@@ -57,6 +57,27 @@ router.get('/phase/:id', (req, res) => {
     });
 });
 
+// get requested task
+router.get('/task/:id', (req, res) => {
+    console.log('in GET this task with id:', req.params.id)
+    const queryText = `SELECT "default_tasks"."name" as task_name, "default_tasks"."description" as task_description,
+    "default_tasks"."sequence" as task_sequence, "default_tasks"."id" as task_id,
+    "phase_id" as ph_id, "types"."name" as type_name, "types"."description" as type_description
+    FROM "types"
+    FULL OUTER JOIN "tasks_types" ON "tasks_types"."type_id" = "types"."id"
+    FULL OUTER JOIN "default_tasks" ON "default_tasks"."id" = "tasks_types"."task_id"
+    WHERE "default_tasks"."id"=$1 ORDER BY "default_tasks"."sequence" ASC;`;
+    pool.query(queryText, [req.params.id])
+    .then( (result) => {
+        console.log(result.rows);
+        res.send(result.rows);
+    })
+    .catch( (error) => {
+        console.log(`Error GET this task ${error}`);
+        res.sendStatus(500);
+    });
+});
+
 // set workflow name / description 
 router.put('/new-wf-name/:id', (req, res) => {
     console.log('in workflow name PUT with id:', req.params.id, req.body);
@@ -191,13 +212,13 @@ router.put('/publish/:id', (req, res) => {
     });
 });
 
-// get all task options
+// get all task option types
 router.get('/all/task/options', (req, res) => {
     console.log('in task options GET all')
     const queryText = `SELECT * FROM "inputs" ORDER BY "id" ASC;`;
     pool.query(queryText)
     .then( (result) => {
-        console.log(result.rows);
+        console.table(result.rows);
         res.send(result.rows);
     })
     .catch( (error) => {
