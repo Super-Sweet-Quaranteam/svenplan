@@ -20,6 +20,7 @@ import SubscriberHome from '../SubscriberHome/SubscriberHome';
 import ExistingProjects from '../ProjectManager/ExistingProjects';
 import SupportPage from '../SupportPage/SupportPage';
 import NewProject from '../ProjectManager/NewProject';
+import ProjectDetails from '../ProjectManager/ProjectDetails';
 
 //TEMPORARY!
 import AddTaskHaley from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
@@ -58,6 +59,7 @@ class App extends Component {
             {/* <Route exact path="/projects/new" component={COREYS NEW PROJECT COMPONENT} /> */}
             <Route exact path="/support" component={SupportPage}/>
             <Route exact path="/projects/new" component={NewProject}/>
+            <Route exact path="/projects/:projectId" component={ProjectDetails}/>
 
             {/* these routes should be available to admins only */}
             <Route exact path="/admin" component={AdminHome}/>
