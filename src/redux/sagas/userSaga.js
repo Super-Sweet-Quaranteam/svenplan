@@ -57,7 +57,7 @@ function* updateUser(action) {
 
 function* editAccess(action) {
   let sendLevel = 3
-  if(action.payload.level ===3 || 4){
+  if(action.payload.level === (3)){
     sendLevel=2
   };
   try {

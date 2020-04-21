@@ -48,8 +48,6 @@ state={
                             <td>{subscriber.email}</td>
                             <td>{subscriber.phone}</td>
                             <td>{subscriber.level}:
-                            {subscriber.level === 4 &&
-                                    'Base Account'} 
                             { subscriber.level ===3 &&
                             'Team Member'}
                             {subscriber.level ===2 &&
