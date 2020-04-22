@@ -9,6 +9,7 @@ function* tasks() {
     yield takeEvery('SET_TASK_TITLE', setTaskTitle);
     yield takeEvery('SET_TASK_RISKAREAS', setTaskRiskareas);
     yield takeEvery('SET_TASK_DESCRIPTION', setTaskDescription);
+    yield takeEvery('SET_TASK_SEQUENCE', setTaskSequence);
 
     yield takeEvery('ADD_TASK_LINK', addTaskLink);
     yield takeEvery('ADD_TASK_INPUT', addTaskInput);
@@ -38,6 +39,9 @@ function* setTaskRiskareas(action) {
 }
 function* setTaskDescription(action) {
     yield put({ type: 'UPDATE_TASK_DESCRIPTION', payload: action.payload });
+}
+function* setTaskSequence(action){
+    yield put({ type: 'UPDATE_TASK_SEQUENCE', payload: action.payload})
 }
 function* addTaskLink(action) {
     yield put({ type: 'UPDATE_TASK_LINKS', payload: action.payload });

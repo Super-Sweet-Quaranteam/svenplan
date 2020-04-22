@@ -20,11 +20,14 @@ class AddTask1 extends Component {
     nextStep = () => {
         this.props.dispatch({ type: 'SET_TASK_TITLE', payload: this.state.titleInput });
         this.props.dispatch({ type: 'SET_TASK_RISKAREAS', payload: this.state.riskareas });
-        this.props.history.push('/add-task-haley/2')
+        this.props.dispatch({ type: 'SET_TASK_SEQUENCE', payload: (Math.max(...this.props.workflow.thisPhase.map(task => task.task_sequence), 0) + 1)})
+        this.props.dispatch({ type: 'NEXT_TASK_STEP'});
+        // this.props.history.push('/add-task-haley/2')
     }
 
     goBack = () => {
-        this.props.history.push('/add-task-haley')
+        this.props.dispatch({ type: 'PREVIOUS_TASK_STEP' });
+        // this.props.history.push('/add-task-haley')
     }
 
     handleTitleInput =(event)=> {
@@ -73,8 +76,13 @@ class AddTask1 extends Component {
                         </>
                     }                   
                 </div>
-            <button onClick={this.goBack}>Go Back A Step</button>
+            {/* <button onClick={this.goBack}>Go Back A Step</button> */}
             <button onClick={this.nextStep}>next step {this.state.phaseId}</button>
+            <br/>
+                <br />
+
+                <br />
+
         </>
     );
         }
@@ -82,7 +90,8 @@ class AddTask1 extends Component {
 
 const putReduxStateOnProps = (reduxState) => ({
     user: reduxState.user,
-    task: reduxState.task
+    task: reduxState.task, 
+    workflow: reduxState.workflow
 });
 
 export default connect(putReduxStateOnProps)(withRouter(AddTask1));

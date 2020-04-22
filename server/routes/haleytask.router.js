@@ -66,6 +66,7 @@ router.post('/add-new-task', async (req, res) => {
     const phaseId= req.body.phaseId;
     const title= req.body.title;
     const riskareasArray= req.body.riskareas;
+    const sequence = req.body.sequence;
     const description= req.body.description;
     const linksArray= req.body.links;
     const inputsArray= req.body.inputs;
@@ -79,8 +80,8 @@ router.post('/add-new-task', async (req, res) => {
     try {
         await connection.query('BEGIN');
         //insert some things into default_tasks table and get the id from it
-        const queryTextForTasksTable = `INSERT INTO "default_tasks" ("name", "description", "phase_id", "created") VALUES ($1, $2, $3, NOW()) RETURNING id`;
-        const valuesForTasksTable = [title, description, phaseId];
+        const queryTextForTasksTable = `INSERT INTO "default_tasks" ("name", "description", "phase_id", "sequence", "created") VALUES ($1, $2, $3, $4, NOW()) RETURNING id`;
+        const valuesForTasksTable = [title, description, phaseId, sequence];
         const newTaskId = await connection.query(queryTextForTasksTable, valuesForTasksTable);
         console.log('newTaskId is', newTaskId);
         console.log('newTaskId is', newTaskId.rows[0].id);
