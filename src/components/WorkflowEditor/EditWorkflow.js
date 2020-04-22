@@ -55,18 +55,9 @@ class EditWorkflow extends Component {
                         }
                         </>
                     }
-                    {this.props.reduxState.workflow.storeCurent.editWorkflow === true &&
-                        <CreateWorkflow
-                        />
-                    }
-                    {this.props.reduxState.workflow.storeCurent.addPhase === true &&
-                        <EditPhase
-                        />
-                    }
-                    {this.state.showPhase === true &&
-                        <EditPhase
-                        />
-                    }
+                    {this.props.reduxState.workflow.storeCurent.editWorkflow === true && <CreateWorkflow/>}
+                    {this.props.reduxState.workflow.storeCurent.addPhase === true && <EditPhase/>}
+                    {this.state.showPhase === true && <EditPhase/>}
                 </>
                 }
             </div>
