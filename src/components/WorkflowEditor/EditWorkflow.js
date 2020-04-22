@@ -26,6 +26,8 @@ class EditWorkflow extends Component {
     // gets current phase by id to be displayed below - handled in EditPhase.js
     viewPhase=(id)=>{
         this.props.dispatch({type: 'GET_THIS_PHASE', payload:{id:id}});
+        //this is the same as above, just taken from haleys code because it's already working with other parts- should consolidate
+        this.props.dispatch({ type: 'SET_TASK_PHASE_ID', payload: id })
         this.setState({showPhase: !this.state.showPhase})
     }
 

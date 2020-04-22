@@ -12,10 +12,11 @@ class AddTask5 extends Component {
 
     addToDatabase = () => {
         this.props.dispatch({ type: 'ADD_TASK_TO_DATABASE', payload: this.props.task.taskInProgress });
-        this.props.history.push('/add-task-haley/6')
+        // this.props.history.push('/add-task-haley/6')
     }
 
     goBack = () => {
+        this.props.dispatch({ type: 'PREVIOUS_TASK_STEP' });
         this.props.history.push('/add-task-haley/4')
     }
 

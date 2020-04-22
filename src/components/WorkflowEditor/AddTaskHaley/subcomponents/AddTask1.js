@@ -77,6 +77,11 @@ class AddTask1 extends Component {
                 </div>
             {/* <button onClick={this.goBack}>Go Back A Step</button> */}
             <button onClick={this.nextStep}>next step {this.state.phaseId}</button>
+            <br/>
+                <br />
+
+                <br />
+
         </>
     );
         }
