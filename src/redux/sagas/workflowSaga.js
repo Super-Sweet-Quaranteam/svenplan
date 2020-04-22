@@ -19,6 +19,7 @@ function* workflows() {
     yield takeEvery('EDIT_TASK_NAME', editTaskName);
     yield takeEvery('ADD_NEW_TASK', addNewTask);
     yield takeEvery('GET_TASK_OPTIONS', getTaskOptions);
+    yield takeEvery('REMOVE_TASK', removeTask);
 }
 
 // gets all workflows from DB
@@ -145,6 +146,18 @@ function* removePhase(remove) {
         yield axios.delete(`/api/workflow/remove/phase/${remove.payload.phase.id}`);
         yield put({type: 'GET_THIS_WORKFLOW', payload: remove.payload});
         yield put({type: 'TOGGLE_EDIT_PHASE'});
+    } catch(error){
+        console.log(error);
+    }
+}
+
+// remove task from phase
+function* removeTask(remove) {
+    console.log("in saga phase DELETE with: ", remove.payload);
+    try {
+        yield axios.delete(`/api/workflow/remove/task/${remove.payload.task.id}`);
+        yield put({type: 'GET_THIS_PHASE', payload: remove.payload});
+        yield put({type: 'TOGGLE_EDIT_TASK'});
     } catch(error){
         console.log(error);
     }
