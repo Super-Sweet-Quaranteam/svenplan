@@ -24,7 +24,8 @@ class NewProject extends Component {
         this.props.dispatch({ type: 'CREATE_PROJECT', 
         payload:{name:this.state.name,
                     team:this.state.team,
-                    workflow: Number(this.state.workflow)  }})
+                    workflow: Number(this.state.workflow)  }});
+        this.props.history.push('/projects');           
     }
     render() {
         return (
