@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 class Subscribers extends Component{
 
     state={ 
-            query: ['search by first name']
+            query: ['search by name']
         }
 
     componentDidMount=()=>{
@@ -30,14 +30,13 @@ class Subscribers extends Component{
         const firstNameList = this.props.reduxState.admin.clientList.map(subscriber=>{
             return (subscriber.firstname + ", ");
         })
-        // const lastNameList = this.props.reduxState.admin.clientList.map(subscriber=>{
-        //     return (subscriber.lastname + ", ");
-        // })
+        const lastNameList = this.props.reduxState.admin.clientList.map(subscriber=>{
+            return (subscriber.lastname + ", ");
+        })
+        const combined = firstNameList.concat(lastNameList)
           if (value.length > 0) {
-            let filteredList = firstNameList.filter(name => name.toLowerCase().indexOf(value.toLowerCase()) !== -1);
+            let filteredList = combined.filter(name => name.toLowerCase().indexOf(value.toLowerCase()) !== -1);
             this.setState({query: filteredList});
-            // let filteredLNList = lastNameList.filter(name => name.toLowerCase().indexOf(value.toLowerCase()) !== -1);
-            // this.setState({...this.state, query:filteredLNList});
         }
         if (value.length === 0) {
             this.setState({
