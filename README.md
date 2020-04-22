@@ -24,34 +24,35 @@ This version uses:
 
 A full list of dependencies can be found in `package.json`.
 
-
 ## Installation
-
-How do you get your application up and running? This is a step by step list for how another developer could get this project up and running. The good target audience in terms of knowledge, would be a fellow Primer from another cohort being able to spin up this project. Note that you do not need a paragraph here to intro Installation. It should be step-by-step.
 
 If your application has secret keys (for example --  Twilio), make sure you tell them how to set that up, both in getting the key and then what to call it in the `.env` file.
 
-1. Create a database named `your database name`,
-2. The queries in the `tables.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries, 
+1. Create a database named `svenplan_db`,
+2. The queries in the `database.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries. 
 3. Open up your editor of choice and run an `npm install`
 4. Run `npm run server` in your terminal
 5. Run `npm run client` in your terminal
 6. The `npm run client` command will open up a new browser tab for you!
 
 ## Usage
-How does someone use this application? Tell a user story here.
 
-1. xxx
-2. xxx
-3. xxx
-4. xxx
-5. xxx
-6. xxx
+**Application Admin - Level 1**
+A level 1, Application Admin, has the greatest amount of access. 
+1. Upon log in, they are able to see all of the accounts registered with the app in the *Subscribers* tab on the navigation bar. In the *Subscribers* tab, they are also able to change the level of access each user has by clicking the button in the *Permissions* column.
+2. The *Create Workflow* tab in the navigation bar allows this level user to create a guided business plan, also known as a workflow. As soon as they confirm a plan title and description, they will be routed to the *Existing Workflows* tab in the navigation bar where they can then build out the steps of that workflow.
+3. In the *Existing Workflows* tab, workflow creation first looks at larger level *phases* which group similar *tasks*. The user is then walked through *task* creation, where they will be asked for a task title, task description, input type, a link to a tutorial showing how the task is to be completed, etc. Once the workflow is complete, the user will be able to publish it in order to make it available to level 2 and 3 users that have been granted access to it.
 
+**Team Admin/Team Lead - Level 2**
+A level 2, Team Admin/Team Lead, has a moderate amount of access.
+1. Much like a level 1 Application Admin, this user has access to workflow creation, editing, and publishing.
+2. Instead of being able to see all of the application's users, the level 2 user is able to see all of their level 3 Team Members.
 
-## License
-
-_Note, include this only if you have a license file. GitHub will generate one for you if you want!_
+**Team Member - Level 3**
+A level 3, Team Member, has the least amount of access.
+1. Upon login, they are able to create a new project, which is an instance of a workflow, or they can continue working on a project that already exists.
+2. To create a new project, they would click the *New Project* tab in the navigation bar. This presents them with a drop-down box, which contains the workflows created by their level 1 or 2 admin, and an input box, where they would name their new project. Once they have chosen a workflow and project name, clicking the *Create Project* button will route them to the *Projects* tab in the navigation bar
+3. The *Projects* tab allows the user to see an overview of their different projects, and by clicking the *Continue* button, they will be taken into that project's specific workflow, where they will be guiding themselves through the project's tasks, as laid out by their level 1 or 2 admin.
 
 ## Authors
 
