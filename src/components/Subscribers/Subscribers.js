@@ -6,14 +6,14 @@ import Swal from 'sweetalert2'
 class Subscribers extends Component{
 
     state={ 
-            query: []
+            query: ['search by first name']
         }
 
     componentDidMount=()=>{
         this.props.dispatch({type: 'GET_CLIENT_LIST'});
-        this.setState({
-            query:this.props.reduxState.admin.clientList
-        })
+        // this.setState({
+        //     query:this.props.reduxState.admin.clientList
+        // })
     }
 
     accessChange=(id, level)=>{
@@ -27,22 +27,30 @@ class Subscribers extends Component{
     }
        
     getPredictions=(value)=>{
-          const list = this.props.reduxState.admin.clientList.map(subscriber=>{
-            return (subscriber.firstname + ", ") 
+        const firstNameList = this.props.reduxState.admin.clientList.map(subscriber=>{
+            return (subscriber.firstname + ", ");
         })
+        // const lastNameList = this.props.reduxState.admin.clientList.map(subscriber=>{
+        //     return (subscriber.lastname + ", ");
+        // })
           if (value.length > 0) {
-            let filteredList = list.filter(name => name.toLowerCase().indexOf(value.toLowerCase()) !== -1);
-            this.setState({query: filteredList})
+            let filteredList = firstNameList.filter(name => name.toLowerCase().indexOf(value.toLowerCase()) !== -1);
+            this.setState({query: filteredList});
+            // let filteredLNList = lastNameList.filter(name => name.toLowerCase().indexOf(value.toLowerCase()) !== -1);
+            // this.setState({...this.state, query:filteredLNList});
         }
+        if (value.length === 0) {
+            this.setState({
+                query: ['search by first name']
+            })
+        }
+        console.log(this.state)
     }
   
     handleChange=()=>{
         const value = this.search.value
-        this.setState({query: value})
-        const predictions = this.getPredictions(value);
-            this.setState({
-                predictions
-            });
+        this.setState({prediction: value})
+        this.getPredictions(value);
     }
 
 
@@ -55,8 +63,8 @@ class Subscribers extends Component{
                         <label> Search</label>
                         <input type="text" placeholder="search subscriber list" 
                         ref={input => this.search = input} onChange={this.handleChange}/>
-                        <span><input className="btn-sml"type="submit" value="Submit Query"/></span>
-                        <p>{this.state.query}</p>
+                        {/* <span><input className="btn-sml"type="submit" value="Submit Query"/></span> */}
+                        <span><h2>{this.state.query}</h2></span>
                     </li>
                 </form>
                 <table id="clientTable">
