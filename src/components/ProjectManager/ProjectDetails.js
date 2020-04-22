@@ -14,7 +14,7 @@ class CurrentWorkflow extends Component {
         })
     }
     componentDidMount(){
-        this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW', payload: this.props.reduxState.user.currentUser.team_id})               
+        this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW', payload: this.props.reduxState.subscriber.projectId})               
     }
     forwardATask=()=>{
         this.setState({

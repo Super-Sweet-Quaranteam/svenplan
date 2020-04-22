@@ -18,6 +18,16 @@ const currentProject = (state=[], action) => {
     }
 }
 
+const projectId = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_PROJECT_ID':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+
 const tasksInPhase = (state=[], action) => {
     switch (action.type) {
       case 'SET_TASKS_IN_PHASE':
@@ -31,4 +41,5 @@ export default combineReducers({
     existingProjects,
     currentProject,
     tasksInPhase,
+    projectId
   });

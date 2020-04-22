@@ -13,7 +13,7 @@ class ExistingProjects extends Component {
     continueProject(id){
         console.log('in continueProject with id:', id);
         //upon click, fetch details for that project and reroute to projects/id
-        this.props.dispatch({ type: 'FETCH_SELECTED_PROJECT' })
+        this.props.dispatch({ type: 'SET_PROJECT_ID', payload:id })
         this.props.history.push(`/projects/${id}`);
     }
 
