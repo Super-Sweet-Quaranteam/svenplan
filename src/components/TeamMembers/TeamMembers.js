@@ -60,7 +60,13 @@ state={
                                 {subscriber.level === 1 &&
                                     'Application Administrator'}
                             </td>
-                            <td><button key={subscriber.id} onClick={() => this.accessChange(subscriber.id, subscriber.level)} name='subscriber.clientid'>Grant/Revoke Workflow Access</button></td>
+                            {(this.props.reduxState.user.currentUser.id !== subscriber.id) 
+                            ?
+                                <td><button key={subscriber.id} onClick={() => this.accessChange(subscriber.id, subscriber.level)} 
+                                    name='subscriber.clientid'>Grant/Revoke Workflow Access</button></td>
+                            :
+                                <td>Cannot Change Personal Access Level</td>
+                            }
                             {/* <td>{client.address}</td> */}
                         </tr>
                                 
