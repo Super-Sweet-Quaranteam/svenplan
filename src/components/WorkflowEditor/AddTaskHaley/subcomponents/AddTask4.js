@@ -41,31 +41,35 @@ class AddTask4 extends Component {
         return (
         <>
             <p>Next, you can add inputs required to complete:</p>
-                <ul>
-                    {this.props.task.taskInProgress.inputs&&
-                        <>
-                            {this.props.task.taskInProgress.inputs.map((input)=>
-                                <p key={Math.random()}>{input.prompt} ({input.type})</p>
-                            )}
-                        </>
-                    }
-                </ul>
-                <div>
-                    <label htmlFor="urlInput"> input type:
-                        <select id="urlInput" onChange={this.handleInputInput}>
-                            <option value=""></option>
-                            <option value="text">text</option>
-                            <option value="number">number</option>
-                            <option value="button">button</option>
-                        </select> 
-                    </label>
-                </div>
-                <div>
-                    <label htmlFor="promptInput"> prompt:
-                        <input type="text" id="promptInput" onChange={this.handlePromptInput} />
-                    </label>
-                    <div><button onClick={this.addInput}>add required input</button></div>
-                </div>
+            <ul>
+                {this.props.task.taskInProgress.inputs &&
+                    <>
+                        {this.props.task.taskInProgress.inputs.map((input)=>
+                            <p key={Math.random()}>{input.prompt} ({input.type})</p>
+                        )}
+                    </>
+                }
+            </ul>
+            <div className="taskCard">
+                <label htmlFor="urlInput"> input type:
+                    <select id="urlInput" onChange={this.handleInputInput}>
+                        <option value=""></option>
+                        <option value="text">text</option>
+                        <option value="number">number</option>
+                        <option value="button">button</option>
+                    </select> 
+                </label>
+            </div>
+            <form className="form">
+                <li>
+                    <label htmlFor="promptInput">prompt</label>
+                    <input type="text" id="promptInput" onChange={this.handlePromptInput} />
+                    <span>enter prompt</span>
+                </li>
+            </form>
+            <button onClick={this.addInput}>add required input</button>
+            <br/>
+            <br/>
             <button onClick={this.goBack}>Go Back A Step</button>
             <button onClick={this.nextStep}>next step</button>
         </>
