@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import EditTask from './EditTask';
+// import EditTask from './EditTask';
 import Swal from 'sweetalert2';
+import AddTask from './AddTaskHaley/AddTaskHaley';
 
 class EditPhase extends Component {
 
@@ -202,9 +203,12 @@ class EditPhase extends Component {
                         }
                     </>
                     }
-                    {this.props.reduxState.workflow.storeCurent.editTask === true && <EditTask/>}
+                    {/* {this.props.reduxState.workflow.storeCurent.editTask === true && <EditTask/>}
                     {this.props.reduxState.workflow.storeCurent.addTask === true && <EditTask/>}
-                    {this.state.showTask === true && <EditTask/>}
+                    {this.state.showTask === true && <EditTask/>} */}
+                    {this.props.reduxState.workflow.storeCurent.editTask === true && <AddTask />}
+                    {this.props.reduxState.workflow.storeCurent.addTask === true && <AddTask />}
+                    {this.state.showTask === true && <AddTask />}
                 </>
             </>
         );
