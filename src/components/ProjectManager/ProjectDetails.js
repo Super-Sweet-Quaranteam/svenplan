@@ -8,6 +8,7 @@ class CurrentWorkflow extends Component {
         taskIndex: 0
     }  
     backATask=()=>{
+        this.props.dispatch({ type: 'FETCH_INFORMATION_TO_DISPLAY', payload: { defaultTaskId: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex - 1].id } }) 
         this.setState({
             task: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex - 1],
             taskIndex: this.state.taskIndex - 1
@@ -16,9 +17,10 @@ class CurrentWorkflow extends Component {
     componentDidMount(){
         this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW', payload: this.props.reduxState.subscriber.projectId.id});
         // this fetch assumes all that's needed to fetch the right things to display is the default task Id -hardcoded currently
-        this.props.dispatch({ type: 'FETCH_INFORMATION_TO_DISPLAY', payload: { defaultTaskId: 72 }})               
+        // this.props.dispatch({ type: 'FETCH_INFORMATION_TO_DISPLAY', payload: { defaultTaskId: 17 }})               
     }
     forwardATask=()=>{
+        this.props.dispatch({ type: 'FETCH_INFORMATION_TO_DISPLAY', payload: { defaultTaskId: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex+1].id } }) 
         this.setState({
             task: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex + 1],
             taskIndex: this.state.taskIndex + 1
@@ -30,6 +32,7 @@ class CurrentWorkflow extends Component {
         console.log('you clicked a phase', phaseId);
         // passing function in payload so sagas can run it async.
         this.props.dispatch({type: 'FETCH_PHASES_TASKS', payload: {phaseId: phaseId, callback: () => {
+            this.props.dispatch({ type: 'FETCH_INFORMATION_TO_DISPLAY', payload: { defaultTaskId: this.props.reduxState.subscriber.tasksInPhase[0].id } }) 
             this.setState({
                 task: this.props.reduxState.subscriber.tasksInPhase[0],
                 taskIndex: 0
@@ -40,7 +43,7 @@ class CurrentWorkflow extends Component {
     render() {
         return (
             <div className='CurrentWorkflow'>
-                <h3>task details on reduxstate: {JSON.stringify(this.props.reduxState.project.taskDetails)}</h3>
+
                 <h2>{this.props.reduxState.subscriber.projectId.name}</h2>
                 {/* button to take user back to existing projects */}
                 <button className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayOldWorkFlow: true}})}>
@@ -54,65 +57,72 @@ class CurrentWorkflow extends Component {
                 </div>
                 <div className="taskWindow">
                 {this.state.task && <div className="taskAtHand" key={this.state.task.id}>
-                            <h3>{this.state.task.phase_name}</h3>
-                            {this.state.task.phase_description}
+                        <h3>{this.props.reduxState.project.taskDetails.name}</h3>
+                        {this.props.reduxState.project.taskDetails.description}
                             <br/>
 
 
-                            
-                            <form>
-                                {this.state.task.name === 'button' ?
+
+                     <form>
+                        {this.props.reduxState.project.taskDetails.inputs &&
+                            this.props.reduxState.project.taskDetails.inputs.map(input=>
+                                
+                           <>
+                           {
+                                input.inputType === 'button' ?
                                     <>
                                         <label>{this.state.task.instructions}</label>
                                         <br/>
                                         <input type="button" value={this.state.task.description}></input>
                                     </>
-                                : this.state.task.name === 'checkbox' ?
+                                : input.inputType === 'checkbox' ?
                                     <>
                                         <label>{this.state.task.instructions}</label>
                                         <br/>
                                         <input type="checkbox"></input>
                                     </>
-                                : this.state.task.name === 'radio' ?
+                                : input.inputType === 'radio' ?
                                     <>
                                         <label>{this.state.task.instructions}</label>
                                         <br/>
                                         <input type="radio"></input>
                                     </>                            
-                                : this.state.task.name === 'number' ?
+                                : input.inputType === 'number' ?
                                     <>
                                         <label>{this.state.task.instructions}</label>
                                         <br/>
                                         <input type="number"></input>
                                     </>                            
-                                : this.state.task.name === 'email' ?
+                                : input.inputType === 'email' ?
                                     <>
                                         <label>{this.state.task.instructions}</label>
                                         <br/>
                                         <input type="email"></input>
                                     </>                            
-                                : this.state.task.name === 'tel' ?
+                                : input.inputType === 'tel' ?
                                     <>
                                         <label>{this.state.task.instructions}</label>
                                         <br/>
                                         <input type="tel"></input>
                                     </>                            
-                                : this.state.task.name === 'text' ?
+                                : input.inputType === 'text' ?
                                     <>
                                         <label>{this.state.task.instructions}</label>                            
                                         <br/>
                                         <input type="text" placeholder={this.state.task.description}></input>
                                     </>
-                                : this.state.task.name === 'url' ?
+                                : input.inputType === 'url' ?
                                     <>
                                         <label>{this.state.task.instructions}</label>
                                         <br/>
                                         <input type="url"></input>
                                     </>
                                 : <></>
-                                }
-                            </form>
-
+                                
+                           }
+                            </>
+                            )}
+                        </form>
                             <br/>
                             {this.state.taskIndex === 0 ? 
                                 <button onClick={this.forwardATask}>Next</button>
