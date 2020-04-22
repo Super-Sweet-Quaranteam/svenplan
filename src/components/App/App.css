@@ -149,7 +149,7 @@ table {
   background: var(--pure-white);
   box-shadow: -1rem 0 1.5rem var(--bg-secondary);
   margin: 1em auto;
-  width: 80vw;
+  width: 85vw;
   max-height: 65vh;
   transition: var(--transition-speed);
   text-align: center;

@@ -6,11 +6,14 @@ import Swal from 'sweetalert2'
 class Subscribers extends Component{
 
     state={ 
-        
+            query: []
         }
 
     componentDidMount=()=>{
-        this.props.dispatch({type: 'GET_CLIENT_LIST'})
+        this.props.dispatch({type: 'GET_CLIENT_LIST'});
+        this.setState({
+            query:this.props.reduxState.admin.clientList
+        })
     }
 
     accessChange=(id, level)=>{
@@ -23,17 +26,37 @@ class Subscribers extends Component{
         }
     }
        
+    getPredictions=(value)=>{
+          const list = this.props.reduxState.admin.clientList.map(subscriber=>{
+            return (subscriber.firstname + ", ") 
+        })
+          if (value.length > 0) {
+            let filteredList = list.filter(name => name.toLowerCase().indexOf(value.toLowerCase()) !== -1);
+            this.setState({query: filteredList})
+        }
+    }
+  
+    handleChange=()=>{
+        const value = this.search.value
+        this.setState({query: value})
+        const predictions = this.getPredictions(value);
+            this.setState({
+                predictions
+            });
+    }
+
 
     render(){
         return (
             <div >
-
                 <h2>Subscribers using SvenPlans:</h2>
                 <form className="form">
                     <li>
                         <label> Search</label>
-                        <input type="text" placeholder="search subscriber list" />
+                        <input type="text" placeholder="search subscriber list" 
+                        ref={input => this.search = input} onChange={this.handleChange}/>
                         <span><input className="btn-sml"type="submit" value="Submit Query"/></span>
+                        <p>{this.state.query}</p>
                     </li>
                 </form>
                 <table id="clientTable">
