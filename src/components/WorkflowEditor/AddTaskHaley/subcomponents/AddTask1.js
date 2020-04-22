@@ -68,7 +68,7 @@ class AddTask1 extends Component {
                     {this.props.task.taskInProgress.riskareaOptions&&
                         <>
                         {this.props.task.taskInProgress.riskareaOptions.map((riskarea)=>
-                            <div>
+                            <div key={riskarea.id}>
                                 <input type="checkbox" id="check-text" value={riskarea.id} onChange={this.handleRiskareas}/>
                                 <label htmlFor="check-text">{riskarea.riskarea}({riskarea.id})</label>
                             </div>

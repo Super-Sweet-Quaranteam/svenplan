@@ -29,7 +29,7 @@ class AddTask5 extends Component {
                 {this.props.task.taskInProgress.riskareas &&
                 <p>Risk Areas:
                 {this.props.task.taskInProgress.riskareas.map((riskarea) =>
-                    <span> {riskarea}/ </span>
+                    <span key={Math.random()}> {riskarea}/ </span>
                 )}
                 </p>
             }
@@ -37,14 +37,14 @@ class AddTask5 extends Component {
                 {this.props.task.taskInProgress.links &&
                 <p>Links:
                     {this.props.task.taskInProgress.links.map((link) =>
-                    <span><a href={link.url} target="_blank">{link.description} /</a></span>
+                    <span><a href={link.url} rel="noopener noreferrer" target="_blank">{link.description} /</a></span>
                 )}
                 </p>
             }
                 {this.props.task.taskInProgress.inputs &&
                 <p>inputs:
                     {this.props.task.taskInProgress.inputs.map((input) =>
-                    <p>{input.prompt} ({input.type})</p>
+                    <p key={Math.random()}>{input.prompt} ({input.type})</p>
                 )}
                 </p>
             }

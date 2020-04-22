@@ -45,7 +45,7 @@ class AddTask3 extends Component {
                     {this.props.task.taskInProgress.links&&
                         <>
                             {this.props.task.taskInProgress.links.map((link)=>
-                                <li><a href={link.url} target="_blank">{link.description}</a></li>
+                                <li><a href={link.url} rel="noopener noreferrer" target="_blank">{link.description}</a></li>
                                 )}
                         </>
                     }
