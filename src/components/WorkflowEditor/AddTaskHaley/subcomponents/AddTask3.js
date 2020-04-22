@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+
 // this component sends link objects to the reducer. there can me more than one.
 
 class AddTask3 extends Component {
