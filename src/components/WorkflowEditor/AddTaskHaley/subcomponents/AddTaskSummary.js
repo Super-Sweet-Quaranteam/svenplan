@@ -11,7 +11,7 @@ function AddTaskSummary(props) {
                 {props.task.taskInProgress.riskareas && 
                     <p>Risk Areas:  
                     {props.task.taskInProgress.riskareas.map((riskarea)=>
-                        <span> {riskarea}/ </span>
+                        <span key={Math.random()}> {riskarea}/ </span>
                     )}
                     </p>
                 }
@@ -19,14 +19,14 @@ function AddTaskSummary(props) {
                 {props.task.taskInProgress.links &&
                     <p>Links:
                         {props.task.taskInProgress.links.map((link) =>
-                            <span><a href={link.url} target="_blank">{link.description} /</a></span>
+                            <span key={Math.random()}><a href={link.url} rel="noopener noreferrer" target="_blank">{link.description} /</a></span>
                         )}
                     </p>
                 }
                 {props.task.taskInProgress.inputs &&
                     <p>inputs:
                         {props.task.taskInProgress.inputs.map((input) =>
-                            <p>{input.prompt} ({input.type})</p>
+                            <p key={Math.random()}>{input.prompt} ({input.type})</p>
                         )}
                     </p>
                 }

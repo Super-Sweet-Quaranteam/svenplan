@@ -45,7 +45,7 @@ class AddTask4 extends Component {
                     {this.props.task.taskInProgress.inputs&&
                         <>
                             {this.props.task.taskInProgress.inputs.map((input)=>
-                                <p>{input.prompt} ({input.type})</p>
+                                <p key={Math.random()}>{input.prompt} ({input.type})</p>
                             )}
                         </>
                     }
