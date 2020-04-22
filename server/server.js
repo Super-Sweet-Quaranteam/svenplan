@@ -50,10 +50,10 @@ app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
 
-// test that database is up
+// test that database is up - remove this fully once we deploy to heroku
 const client = new Client({
-  // user: null || 'con',
-  // password: null || 'secretpass',
+  user: null || 'con',
+  password: null || 'secretpass',
   host: 'localhost',
   port: 5432,
 })

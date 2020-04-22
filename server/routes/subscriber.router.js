@@ -33,7 +33,7 @@ const router = express.Router();
                 res.send(response.rows);
             })
             .catch(() => {
-                console.log('something went wrong in get at /');
+                console.log('something went wrong in get at /current-workflow/phases/:projectId');
                 res.sendStatus(500);
             })
     });
@@ -52,7 +52,7 @@ const router = express.Router();
                 res.send(response.rows);
             })
             .catch(() => {
-                console.log('something went wrong in get at /');
+                console.log('something went wrong in get at /current-workflow/phases/tasks/:phaseId');
                 res.sendStatus(500);
             })
     });

@@ -13,7 +13,7 @@ class Teams extends Component {
   }//this gets team info upon loading
 
   getSelectedUser(id) {
-    console.log('in getSelectedUser with id:', id);
+    // console.log('in getSelectedUser with id:', id);
     this.props.dispatch({ type: 'FETCH_SELECTED_USER', payload: id });
   }
   

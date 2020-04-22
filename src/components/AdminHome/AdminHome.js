@@ -9,10 +9,10 @@ function AdminHome(props) {
 
     function handleChange(event){
         teamName=event.target.value
-        console.log(teamName)
+        // console.log(teamName)
     }
    function createTeam(){
-       console.log('teamname dispatch', teamName)
+    //    console.log('teamname dispatch', teamName)
        props.dispatch({ type: 'CREATE_TEAM', payload:teamName })
      
     }
