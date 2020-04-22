@@ -129,16 +129,26 @@ class CurrentWorkflow extends Component {
                             )}
                         </form>
                             <br/>
-                            {this.state.taskIndex === 0 ? 
-                                <button onClick={this.forwardATask}>Next</button>
+                        {this.state.taskIndex === 0 & this.props.reduxState.subscriber.tasksInPhase.length === 1  ? 
+                              <></>
                             :
                             <>
-                                {this.state.task === this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
-                                    <button onClick={this.backATask}>Back</button>
+                                {this.state.taskIndex === 0 ?
+                                // this.state.task === this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
+                                    <button onClick={this.forwardATask}>Next</button>
+                                    // <button onClick={this.backATask}>Back</button>
                                 :
                                     <>
-                                        <button onClick={this.backATask}>Back</button>
-                                        <button onClick={this.forwardATask}>Next</button>
+                                        {
+                                         this.state.task === this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
+                                            // <button onClick={this.forwardATask}>Next</button>
+                                            <button onClick={this.backATask}>Back</button>
+                                            :
+                                            <>
+                                                <button onClick={this.backATask}>Back</button>
+                                                <button onClick={this.forwardATask}>Next</button>
+                                            </>
+                                        }
                                     </>
                                 }
                             </>
