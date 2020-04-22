@@ -34,27 +34,11 @@ function* fetchInformationToDisplay(action) {
         //then get input info
         const infoFromInputsTable = yield axios.get(`/api/project/task/input-info/${defaultTaskId}`);
         taskDetailsObject = { ...taskDetailsObject, inputs: infoFromInputsTable.data }
-
-
-
-
-        // console.log('infoFromLinksTable:', infoFromLinksTable.data);
-
-
-
-        console.log('taskDetailsObject:', taskDetailsObject);
-
-        
-
-
-        // assignedTaskObject = firstResponse[0];
-        // const secondResponse = yield axios.get(`/api/haley-task/assigned-task/inputs/${action.payload.id}`);
-        // console.log('second response:', secondResponse);
-        //get all the things from the other tables and bundle into one task object that subscriber dom can render from 
-
-
-
-        // yield put({ type: 'SET_ASSIGNED_TASK', payload: response.data });
+        //then get risk info (if any)
+        const infoFromRiskTables = yield axios.get(`/api/project/task/risk-info/${defaultTaskId}`);
+        taskDetailsObject = { ...taskDetailsObject, riskareas: infoFromRiskTables.data }
+        //then put in reducer
+        yield put({ type: 'SET_TASK_DETAILS', payload: taskDetailsObject });
     } catch (error) {
         console.log('error with getting task info:', error);
     }

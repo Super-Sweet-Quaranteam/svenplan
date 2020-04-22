@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux';
 
 
-const projectDetails = (state = {}, action) => {
+const taskDetails = (state = {}, action) => {
   switch (action.type) {
-    case 'UNSET_PROJECT_DETAILS':
+    case 'UNSET_TASK_DETAILS':
       return {};
-    case 'UNSET_USER':
-      return {};
+    case 'SET_TASK_DETAILS':
+      return action.payload;
     default:
       return state;
   }
 };
 
 export default combineReducers({
-  projectDetails,
+  taskDetails,
 });
 
