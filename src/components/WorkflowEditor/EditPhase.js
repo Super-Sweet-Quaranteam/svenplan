@@ -202,18 +202,9 @@ class EditPhase extends Component {
                         }
                     </>
                     }
-                    {this.props.reduxState.workflow.storeCurent.editTask === true &&
-                        <EditTask
-                        />
-                    }
-                    {this.props.reduxState.workflow.storeCurent.addTask === true &&
-                        <EditTask
-                        />
-                    }
-                    {this.state.showTask === true &&
-                        <EditTask
-                        />
-                    }
+                    {this.props.reduxState.workflow.storeCurent.editTask === true && <EditTask/>}
+                    {this.props.reduxState.workflow.storeCurent.addTask === true && <EditTask/>}
+                    {this.state.showTask === true && <EditTask/>}
                 </>
             </>
         );
