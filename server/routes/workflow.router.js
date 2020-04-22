@@ -187,6 +187,19 @@ router.post('/add/workflow', (req, res) => {
     });
 });
 
+// delete task from db
+router.delete('/remove/task/:id', (req, res) => {
+    console.log('in task DELETE', req.params.id);
+    const queryText = `DELETE FROM "default_tasks" WHERE id=$1`;
+    pool.query(queryText, [Number(req.params.id)])
+    .then(() => {
+      res.sendStatus(200);
+    }).catch(err => {
+        console.log("Error deleting task", err);
+        res.sendStatus(500);
+      });
+  });
+
 // delete phase from db
 router.delete('/remove/phase/:id', (req, res) => {
     console.log('in phase DELETE', req.params.id);

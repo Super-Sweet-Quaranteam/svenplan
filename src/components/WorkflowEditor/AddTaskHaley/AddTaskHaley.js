@@ -36,7 +36,7 @@ function AddTask(props) {
                 );
                 props.dispatch({type: 'REMOVE_TASK', payload: {
                     id: props.phase.id, 
-                    task: props.task
+                    task: props.taskID
                 }});
                 props.dispatch({type: 'TOGGLE_ADD_TASK'});
                 props.dispatch({ type: 'GO_HOME_STEP' });
@@ -76,7 +76,8 @@ const mapStateToProps = state => ({
     user: state.user,
     task: state.task.taskInProgress,
     taskStep: state.task.stepOfTaskCreation,
-    phase: state.workflow.storeCurent.phase
+    phase: state.workflow.storeCurent.phase,
+    taskID: state.workflow.storeCurent.task
 });
 
 export default connect(mapStateToProps)(AddTask);
