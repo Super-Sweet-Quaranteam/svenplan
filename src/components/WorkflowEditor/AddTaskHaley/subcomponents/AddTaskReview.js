@@ -12,13 +12,18 @@ class AddTask5 extends Component {
     }
 
     addToDatabase = () => {
-        Swal.fire('Created!')
-        this.props.dispatch({ type: 'ADD_TASK_TO_DATABASE', payload: this.props.task.taskInProgress });
-        this.props.dispatch({type: 'GET_THIS_PHASE', payload:{id: this.props.phase.id}});
-        this.props.dispatch({type: 'TOGGLE_ADD_TASK'});
-        // this.props.dispatch({type: 'TOGGLE_SHOW_PHASE'});
-        this.props.dispatch({ type: 'GO_HOME_STEP' });
-        // this.props.history.push('/add-task-haley/6')
+        if(this.props.edit === true){
+            Swal.fire('Edit Successful');
+            this.props.dispatch({type: 'TOGGLE_EDIT_TASK'});
+            this.props.dispatch({ type: 'GO_HOME_STEP' });
+        }else {
+            Swal.fire('Created!')
+            this.props.dispatch({ type: 'ADD_TASK_TO_DATABASE', payload: this.props.task.taskInProgress });
+            this.props.dispatch({type: 'GET_THIS_PHASE', payload:{id: this.props.phase.id}});
+            this.props.dispatch({type: 'TOGGLE_ADD_TASK'});
+            this.props.dispatch({ type: 'GO_HOME_STEP' });
+        }
+        
     }
 
     goBack = () => {
@@ -43,16 +48,16 @@ class AddTask5 extends Component {
                 {this.props.task.taskInProgress.links &&
                 <p>Links:
                     {this.props.task.taskInProgress.links.map((link) =>
-                    <span><a href={link.url} rel="noopener noreferrer" target="_blank">{link.description} /</a></span>
+                    <span key={Math.random()}><a href={link.url} rel="noopener noreferrer" target="_blank">{link.description} /</a></span>
                 )}
                 </p>
             }
                 {this.props.task.taskInProgress.inputs &&
-                <p>inputs:
+                <div>inputs:
                     {this.props.task.taskInProgress.inputs.map((input) =>
                     <p key={Math.random()}>{input.prompt} ({input.type})</p>
                 )}
-                </p>
+                </div>
             }
             <p>This demo doesn't really include edit/delete functionality, or being able to change the order of tasks.</p>
             <p>Click the button below to send the task to the database</p>
@@ -66,7 +71,8 @@ class AddTask5 extends Component {
 const putReduxStateOnProps = (reduxState) => ({
     user: reduxState.user,
     task: reduxState.task,
-    phase: reduxState.workflow.storeCurent.phase
+    phase: reduxState.workflow.storeCurent.phase,
+    edit: reduxState.workflow.storeCurent.editTask
 });
 
 export default connect(putReduxStateOnProps)(withRouter(AddTask5));
