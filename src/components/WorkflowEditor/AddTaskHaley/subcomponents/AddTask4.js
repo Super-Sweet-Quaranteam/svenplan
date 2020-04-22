@@ -67,11 +67,11 @@ class AddTask4 extends Component {
                     <span>enter prompt</span>
                 </li>
             </form>
-            <button onClick={this.addInput}>add required input</button>
+            <button className="btn-sml" onClick={this.addInput}>add required input</button>
             <br/>
             <br/>
-            <button onClick={this.goBack}>Go Back A Step</button>
-            <button onClick={this.nextStep}>next step</button>
+            <button className="btn-sml" onClick={this.goBack}>Go Back A Step</button>
+            <button className="btn-sml" onClick={this.nextStep}>Next Step</button>
         </>
     );
         }
