@@ -14,7 +14,9 @@ class CurrentWorkflow extends Component {
         })
     }
     componentDidMount(){
-        this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW', payload: this.props.reduxState.subscriber.projectId.id})               
+        this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW', payload: this.props.reduxState.subscriber.projectId.id});
+        // this fetch assumes all that's needed to fetch the right things to display is the default task Id -hardcoded currently
+        this.props.dispatch({ type: 'FETCH_INFORMATION_TO_DISPLAY', payload: { defaultTaskId: 72 }})               
     }
     forwardATask=()=>{
         this.setState({
@@ -38,6 +40,7 @@ class CurrentWorkflow extends Component {
     render() {
         return (
             <div className='CurrentWorkflow'>
+                <h3>task details on reduxstate: {JSON.stringify(this.props.reduxState.project.taskDetails)}</h3>
                 <h2>{this.props.reduxState.subscriber.projectId.name}</h2>
                 {/* button to take user back to existing projects */}
                 <button className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayOldWorkFlow: true}})}>

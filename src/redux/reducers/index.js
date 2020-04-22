@@ -6,6 +6,7 @@ import user from './userReducer';
 import teams from './teamReducer';
 import workflow from './workflowReducer';
 import errors from './errorsReducer';
+import project from './projectReducer';
 
 import task from './haleyAddTaskReducer';
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
 // sweetalerts,
     workflow,
     errors,
+    project,
 
     task,
 

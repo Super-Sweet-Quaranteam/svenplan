@@ -71,4 +71,18 @@ console.log(req.body.details)
         })
 });
 
+
+router.post('/project', (req, res) => {
+    console.log(req.body.details)
+    let queryText = `INSERT INTO "projects" ("name", "team_id", "workflow_id") VALUES ($1, $2, $3);`
+    pool.query(queryText, [req.body.details.name, req.body.details.team, req.body.details.workflow])
+        .then((response) => {
+            res.sendStatus(200);
+        })
+        .catch(() => {
+            console.log('something went wrong in get at /');
+            res.sendStatus(500);
+        })
+});
+
 module.exports = router;
