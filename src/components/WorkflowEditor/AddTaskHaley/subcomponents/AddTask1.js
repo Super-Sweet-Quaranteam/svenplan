@@ -20,7 +20,8 @@ class AddTask1 extends Component {
     nextStep = () => {
         this.props.dispatch({ type: 'SET_TASK_TITLE', payload: this.state.titleInput });
         this.props.dispatch({ type: 'SET_TASK_RISKAREAS', payload: this.state.riskareas });
-        this.props.history.push('/add-task-haley/2')
+        this.props.dispatch({ type: 'NEXT_TASK_STEP'});
+        // this.props.history.push('/add-task-haley/2')
     }
 
     goBack = () => {

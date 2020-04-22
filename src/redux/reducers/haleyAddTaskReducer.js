@@ -24,6 +24,17 @@ const taskInProgress = (state = {}, action) => {
     }
 };
 
+const stepOfTaskCreation = (state = 1, action) => {
+    switch (action.type) {
+        case 'NEXT_TASK_STEP':
+            return state+1;
+        case 'PREVIOUS_TASK_STEP':
+            return state-1;
+        default:
+            return state;
+    }
+};
+
 const confirmation = (state = {}, action) => {
     switch (action.type) {
         case 'ADD_TASK_CONFIRM':
@@ -47,5 +58,6 @@ export default combineReducers({
     taskInProgress,
     confirmation,
     assignedTask,
+    stepOfTaskCreation,
 });
 
