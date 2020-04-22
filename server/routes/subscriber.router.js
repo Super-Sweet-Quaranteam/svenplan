@@ -22,7 +22,8 @@ const router = express.Router();
     
     router.get('/current-workflow/phases/:projectId', (req, res) => {   
         let projectId = req.params.projectId        
-        let queryText = `SELECT "phases"."id" AS "phase_id", "phases"."name" AS "phase_name", "phases"."description" AS "phases_desc", "workflows"."name" AS "workflow_name", "workflows"."description" AS "workflow_desc" FROM "phases"
+        let queryText = `SELECT "phases"."id" AS "phase_id", "phases"."name" AS "phase_name", "phases"."description" AS "phases_desc", 
+        "workflows"."name" AS "workflow_name", "workflows"."description" AS "workflow_desc" FROM "phases"
         JOIN "workflows" ON "phases"."workflow_id" = "workflows"."id"
         JOIN "projects" ON "projects"."workflow_id" = "workflows"."id"
         WHERE "projects"."id"=$1; `
