@@ -1,7 +1,16 @@
 import { combineReducers } from 'redux';
 
 
-const taskInProgress = (state = {}, action) => {
+const taskInProgress = (state = {
+    phaseId: null,
+    riskareaOptions: [],
+    title: '',
+    sequence: null,
+    riskareas: [],
+    description: '',
+    links: [],
+    inputs: []
+}, action) => {
     switch (action.type) {
         case 'UPDATE_PHASE_ID':
             return {...state, phaseId: action.payload}
