@@ -144,58 +144,34 @@ input[type=text]:focus, input[type=email]:focus, input[type=password]:focus{
 
 /* change default table style ---- WIP *//* change default table style ---- WIP *//* change default table style ---- WIP */
 table {
-  background: var(--bg-primary);
-  border-collapse: separate;
-  box-shadow: inset 0 1px 0 var(--bg-secondary);
-  font-size: 12px;
-  line-height: 24px;
-  margin: 30px auto;
-  text-align: left;
-  width: 80vw;
+  display: block;
+  position: relative;
+  background: var(--pure-white);
+  box-shadow: -1rem 0 1.5rem var(--bg-secondary);
+  margin: 1em auto;
+  width: 85vw;
+  max-height: 70vh;
   transition: var(--transition-speed);
+  text-align: center;
+  overflow-y: scroll;
 }   
 
-tbody{
-  transition: var(--transition-speed);
+thead th { 
+  position: sticky; 
+  top: 0; 
+  z-index: 11;
 }
 
 th {
   background: linear-gradient(var(--sven-blue), var(--bg-secondary));
-  border-left: 1px solid #555;
-  border-right: 1px solid #777;
-  border-top: 1px solid #555;
-  border-bottom: 1px solid #333;
-  box-shadow: inset 0 1px 0 #999;
   color: var(--pure-white);
-  font-weight: bold;
-  padding: 10px 15px;
-  position: relative;
-  text-shadow: 0 1px 0 #000;  
-}
-
-th:after {
-  background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.08));
-  content: '';
-  display: block;
-  height: 25%;
-  left: 0;
-  margin: 1px 0 0 0;
-  position: absolute;
-  top: 25%;
-  width: 100%;
-}
-
-th:first-child {
-  border-left: 1px solid var(--bg-tertiary);    
-  box-shadow: inset 1px 1px 0 var(--bg-primary);
-}
-
-th:last-child {
-  box-shadow: inset -1px 1px 0 #999;
+  font-weight: 900;
+  padding: 2em .5em;
+  text-shadow: 0 .1em 0 var(--text-secondary);  
 }
 
 td {
-  padding: 10px 15px;
+  padding: .5em 1em;
   position: relative;
   transition: var(--transition-speed);
 }
@@ -205,7 +181,7 @@ td:first-child {
 }   
 
 td:last-child {
-  border-right: 1px solid #e8e8e8;
+  border-right: 1px solid var(--pure-white);
   box-shadow: inset -1px 0 0 var(--pure-white);;
 }   
 
@@ -215,11 +191,11 @@ tr {
 }
 
 tr:nth-child(odd) td {
-  background: var(--pure-white);; 
+  background: var(--text-tertiary);
 }
 
 tr:last-of-type td {
-  box-shadow: inset 0 -1px 0 var(--pure-white);; 
+  box-shadow: inset 0 -1px 0 var(--pure-white);
 }
 
 tr:last-of-type td:first-child {
@@ -231,14 +207,15 @@ tr:last-of-type td:last-child {
 }   
 
 tbody:hover td {
-  color: transparent;
-  text-shadow: 0 0 1px var(--bg-tertiary);
+  /* color: transparent;
+  text-shadow: 0 0 .1em var(--text-primary); */
   transition: var(--transition-speed);
 }
 
 tbody:hover tr:hover td {
-  color: var(--text-primary);
-  text-shadow: 0 .5px 0 var(--text-primary);
+  background-color: var(--bg-tertiary);
+  color: var(--pure-white);
+  text-shadow: 0 .1em 0 var(--text-primary);
   transition: var(--transition-speed);
 }
 

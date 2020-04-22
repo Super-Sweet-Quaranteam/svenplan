@@ -114,7 +114,8 @@ class UserProfile extends Component {
           </ul>
           <button className="btn-sml" onClick={this.updateUser}>Save Profile</button>
           </form>
-          <br></br>
+          <br/>
+          <br/>
           <form className="form">
             <ul>
               <li>

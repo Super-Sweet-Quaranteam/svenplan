@@ -128,16 +128,7 @@
   border-radius: 5px;
   margin: 1vmin;
 }
-  
-#clientTable{
-  margin-left: auto;
-  margin-right:auto;
-  border: solid 2px var(--bg-primary);
-  text-align: center;
-}
 
-th{border:solid 2px}
-td{border:solid 1px}
 
 .sidebar-nav {
   position: absolute;
