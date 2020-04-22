@@ -16,6 +16,7 @@ class AddTask5 extends Component {
         this.props.dispatch({ type: 'ADD_TASK_TO_DATABASE', payload: this.props.task.taskInProgress });
         this.props.dispatch({type: 'GET_THIS_PHASE', payload:{id: this.props.phase.id}});
         this.props.dispatch({type: 'TOGGLE_ADD_TASK'});
+        this.props.dispatch({ type: 'GO_HOME_STEP' });
         // this.props.history.push('/add-task-haley/6')
     }
 
