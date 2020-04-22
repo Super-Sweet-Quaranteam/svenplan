@@ -15,8 +15,8 @@ class EditPhase extends Component {
 
     //allows for adding a new Task - handled in EditTask.js
     addTask=()=>{
-        if(this.props.reduxState.workflow.storeCurent.showTask === true){
-            this.props.dispatch({type: 'TOGGLE_SHOW_TASK'});
+        if(this.props.reduxState.workflow.storeCurent.editTask === true){
+            this.props.dispatch({type: 'TOGGLE_EDIT_TASK'});
         }
         this.props.dispatch({type: 'TOGGLE_ADD_TASK'});
     }
@@ -114,7 +114,7 @@ class EditPhase extends Component {
     // gets current Task by id to be displayed below - handled in EditTask.js
     viewTask=(id)=>{
         this.props.dispatch({type: 'GET_THIS_TASK', payload:{id:id}});
-        this.props.dispatch({type: 'TOGGLE_SHOW_TASK'});
+        this.props.dispatch({type: 'TOGGLE_EDIT_TASK'});
     }
 
 
@@ -206,9 +206,13 @@ class EditPhase extends Component {
                     {/* {this.props.reduxState.workflow.storeCurent.editTask === true && <EditTask/>}
                     {this.props.reduxState.workflow.storeCurent.addTask === true && <EditTask/>}
                     {this.state.showTask === true && <EditTask/>} */}
-                    {this.props.reduxState.workflow.storeCurent.editTask === true && <AddTask />}
-                    {this.props.reduxState.workflow.storeCurent.addTask === true && <AddTask />}
-                    {this.props.reduxState.workflow.storeCurent.showTask === true && <AddTask />}
+                    
+                        
+                        {(this.props.reduxState.workflow.storeCurent.addTask === true 
+                        || 
+                        this.props.reduxState.workflow.storeCurent.editTask === true) &&
+                        <AddTask />
+                        }                    
                 </>
             </>
         );

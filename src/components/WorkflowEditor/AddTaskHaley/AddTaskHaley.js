@@ -47,7 +47,9 @@ function AddTask(props) {
     return (
         <>
             <h2>Add Task To Phase</h2>
-            <div className="side-button" onClick={deleteTask}><button className="btn-sml-delete">Delete Task</button></div>
+           {props.edit === true && 
+                <div className="side-button" onClick={deleteTask}><button className="btn-sml-delete">Delete Task</button></div>
+           }
             
             {props.taskStep === 1 && <AddTask1 />}
             {props.taskStep === 2 && <AddTask2 />}
@@ -77,7 +79,8 @@ const mapStateToProps = state => ({
     task: state.task.taskInProgress,
     taskStep: state.task.stepOfTaskCreation,
     phase: state.workflow.storeCurent.phase,
-    taskID: state.workflow.storeCurent.task
+    taskID: state.workflow.storeCurent.task,
+    edit: state.workflow.storeCurent.editTask
 });
 
 export default connect(mapStateToProps)(AddTask);
