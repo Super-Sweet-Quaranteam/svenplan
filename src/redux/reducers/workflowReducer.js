@@ -6,9 +6,11 @@ const initialState = {
     phase:{},
     editPhase:false,
     addPhase:false,
+    showPhase: false,
     task:{},
     editTask:false,
-    addTask:false
+    addTask:false,
+    showTask:false
 }
 
 // stores currently viewed workflow info
@@ -24,12 +26,16 @@ const storeCurent = (state = initialState, action) => {
             return state = {...state, editPhase: !state.editPhase};
         case 'TOGGLE_ADD_PHASE':
             return state = {...state, addPhase: !state.addPhase};  
+        case 'TOGGLE_SHOW_PHASE':
+            return state = {...state, showPhase: !state.showPhase}; 
         case 'CURENT_TASK':
             return state = {...state, task: action.payload};
         case 'TOGGLE_EDIT_TASK':
             return state = {...state, editTask: !state.editTask};
         case 'TOGGLE_ADD_TASK':
-            return state = {...state, addTask: !state.addTask};  
+            return state = {...state, addTask: !state.addTask};
+        case 'TOGGLE_SHOW_TASK':
+            return state = {...state, showTask: !state.showTask};   
         default:
             return state;
     }

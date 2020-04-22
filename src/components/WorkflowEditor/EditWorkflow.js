@@ -7,13 +7,12 @@ import CreateWorkflow from './CreateWorkflow';
 class EditWorkflow extends Component {
 
     state={
-        showPhase:false
     }
 
     //allows for adding a new phase - handled in EditPhase,js
     addPhase=()=>{
-        if(this.state.showPhase === true){
-            this.setState({showPhase: !this.state.showPhase})
+        if(this.props.reduxState.workflow.storeCurent.showPhase === true){
+            this.props.dispatch({type: 'TOGGLE_SHOW_PHASE'});
         }
         this.props.dispatch({type: 'TOGGLE_ADD_PHASE'});
     }
@@ -28,7 +27,7 @@ class EditWorkflow extends Component {
         this.props.dispatch({type: 'GET_THIS_PHASE', payload:{id:id}});
         //this is the same as above, just taken from haleys code because it's already working with other parts- should consolidate
         this.props.dispatch({ type: 'SET_TASK_PHASE_ID', payload: id })
-        this.setState({showPhase: !this.state.showPhase})
+        this.props.dispatch({type: 'TOGGLE_SHOW_PHASE'});
     }
 
     render() {
@@ -59,7 +58,7 @@ class EditWorkflow extends Component {
                     }
                     {this.props.reduxState.workflow.storeCurent.editWorkflow === true && <CreateWorkflow/>}
                     {this.props.reduxState.workflow.storeCurent.addPhase === true && <EditPhase/>}
-                    {this.state.showPhase === true && <EditPhase/>}
+                    {this.props.reduxState.workflow.storeCurent.showPhase === true && <EditPhase/>}
                 </>
                 }
             </div>
