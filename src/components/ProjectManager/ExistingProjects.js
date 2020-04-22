@@ -10,10 +10,10 @@ class ExistingProjects extends Component {
     componentDidMount(){
         this.props.dispatch({type: 'FETCH_EXISTING_PROJECTS', payload: this.props.reduxState.user.currentUser.team_id})
     }
-    continueProject(id){
+    continueProject(id,name){
         console.log('in continueProject with id:', id);
         //upon click, fetch details for that project and reroute to projects/id
-        this.props.dispatch({ type: 'SET_PROJECT_ID', payload:id })
+        this.props.dispatch({ type: 'SET_PROJECT_ID', payload:{id:id, name:name }})
         this.props.history.push(`/projects/${id}`);
     }
 
@@ -39,7 +39,7 @@ class ExistingProjects extends Component {
                         <td>(filler) 70% complete</td>
                         <td>
                             {/* on btn click, user is routed to ProjectDetails component */}
-                            <button className="nav-item" onClick={() => this.continueProject(project.id)}>Continue</button>
+                            <button className="nav-item" onClick={() => this.continueProject(project.id, project.name)}>Continue</button>
                             {/* <button className="nav-item" onClick={()=>this.archiveProject(project.id)}>Archive</button> */}
                         </td>
                     </tr>)}
