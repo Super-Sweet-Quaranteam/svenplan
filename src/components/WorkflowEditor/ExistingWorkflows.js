@@ -10,7 +10,7 @@ class ExistingWorkflows extends Component {
 
     // collects all workflows from db
     componentDidMount=()=>{
-        this.props.dispatch({type: 'GET_ALL_WORKFLOWS'})
+        this.props.dispatch({ type: 'GET_TEAM_WORKFLOWS', payload: this.props.user.currentUser.team_id })
     }
 
     // user warning before deleting a workflow
@@ -70,8 +70,8 @@ class ExistingWorkflows extends Component {
                 <div className="card-container">
     {/* suggest having two buttons, one that shows only if unpublished with an option to publish workflow */}
     {/* or better yet have this be displayed in two tables, on published and one not published with an option to publish */}
-                    {this.props.reduxState.workflow.allWorkflows &&
-                        this.props.reduxState.workflow.allWorkflows.map(flow => (
+                    {this.props.reduxState.workflow.teamWorkflows &&
+                        this.props.reduxState.workflow.teamWorkflows.map(flow => (
                             <div className="card" data-id={flow.id} key={flow.id}>
                                 <div className="card-wf">{flow.name}</div>
                                 <button className="btn-sml" onClick={()=>this.viewWorkflow(flow.id)}>View</button>
@@ -91,6 +91,7 @@ class ExistingWorkflows extends Component {
 
 
 const mapStateToProps = reduxState => ({
-    reduxState
+    reduxState,
+    user: reduxState.user
 });
 export default connect(mapStateToProps)(ExistingWorkflows);
