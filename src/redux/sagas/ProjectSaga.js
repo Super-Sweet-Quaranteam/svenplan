@@ -21,9 +21,25 @@ function* createProject(action) {
 
 function* fetchInformationToDisplay(action) {
     let defaultTaskId= action.payload.defaultTaskId;
-    //we'll bundle all info up into an object for the reducer
-    let projectDetailsObject = {}
-    //use that id to first get basic info, and add it to the details object
+  
+    try {
+        //we'll bundle all info up into an object for the reducer
+        let projectDetailsObject = {}
+        //use that id to first get basic info, and add it to the details object
+        const infoFromProjectsTable = yield axios.get(`/api/project/projects-table-info/${defaultTaskId}`);
+        console.log('response:', infoFromProjectsTable);
+
+        // assignedTaskObject = firstResponse[0];
+        // const secondResponse = yield axios.get(`/api/haley-task/assigned-task/inputs/${action.payload.id}`);
+        // console.log('second response:', secondResponse);
+        //get all the things from the other tables and bundle into one task object that subscriber dom can render from 
+
+
+
+        // yield put({ type: 'SET_ASSIGNED_TASK', payload: response.data });
+    } catch (error) {
+        console.log('error with posting new task:', error);
+    }
     
 }
 
