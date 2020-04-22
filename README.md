@@ -60,6 +60,7 @@ A level 3, Team Member, has the least amount of access.
 * [Megan Henry](https://github.com/meghen)
 
 ## Acknowledgement
-* Thank you to [Prime Digital Academy](www.primeacademy.io) who equipped us with the tools needed to make this application a reality. 
+* Thank you to [Prime Digital Academy](https://primeacademy.io/) who equipped us with the tools needed to make this application a reality. 
 
-* Thank you to D'Angelos Svenkeson with [Neoo Partners](www.neoopartners.com) who gave us the opportunity to create this app.
+* Thank you to D'Angelos Svenkeson with [Neoo Partners](https://www.neoopartners.com/) who gave us the opportunity to create this app.
+
