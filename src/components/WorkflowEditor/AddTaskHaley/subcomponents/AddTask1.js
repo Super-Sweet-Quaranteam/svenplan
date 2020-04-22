@@ -25,7 +25,8 @@ class AddTask1 extends Component {
     }
 
     goBack = () => {
-        this.props.history.push('/add-task-haley')
+        this.props.dispatch({ type: 'PREVIOUS_TASK_STEP' });
+        // this.props.history.push('/add-task-haley')
     }
 
     handleTitleInput =(event)=> {
@@ -74,7 +75,7 @@ class AddTask1 extends Component {
                         </>
                     }                   
                 </div>
-            <button onClick={this.goBack}>Go Back A Step</button>
+            {/* <button onClick={this.goBack}>Go Back A Step</button> */}
             <button onClick={this.nextStep}>next step {this.state.phaseId}</button>
         </>
     );

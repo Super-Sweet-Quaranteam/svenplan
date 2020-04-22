@@ -7,11 +7,13 @@ import AddTask1 from './subcomponents/AddTask1';
 import AddTask2 from './subcomponents/AddTask2';
 import AddTask3 from './subcomponents/AddTask3';
 import AddTask4 from './subcomponents/AddTask4';
-import AddTask5 from './subcomponents/AddTask5';
-import AddTask6 from './subcomponents/AddTask6';
-import AddTask7 from './subcomponents/AddTask7';
-import AddTask8 from './subcomponents/AddTask8';
-import AddTaskSummary from './subcomponents/AddTaskSummary'
+import AddTaskReview from './subcomponents/AddTaskReview';
+
+// import AddTask5 from './subcomponents/AddTask5';
+// import AddTask6 from './subcomponents/AddTask6'; 
+// import AddTask7 from './subcomponents/AddTask7';
+// import AddTask8 from './subcomponents/AddTask8';
+// import AddTaskSummary from './subcomponents/AddTaskSummary'
 
 function AddTask(props) {
     // let { path, url } = useRouteMatch();
@@ -19,13 +21,11 @@ function AddTask(props) {
         <>
             <h2>Add Task Simulator</h2>
 
-            <p>step: {props.taskStep}</p>
-
-            {props.taskStep===1 && <AddTask1/>}
+            {props.taskStep === 1 && <AddTask1 />}
             {props.taskStep === 2 && <AddTask2 />}
-
-
-
+            {props.taskStep === 3 && <AddTask3 />}
+            {props.taskStep === 4 && <AddTask4 />}
+            {props.taskStep === 5 && <AddTaskReview />}
 
             {/* <Switch>
                 <Route exact path={`${path}`}><AddTask0/></Route> 
@@ -46,6 +46,7 @@ function AddTask(props) {
 
 const mapStateToProps = state => ({
     user: state.user,
+    task: state.task.taskInProgress,
     taskStep: state.task.stepOfTaskCreation
 });
 
