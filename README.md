@@ -54,10 +54,10 @@ A level 3, Team Member, has the least amount of access.
 
 ## Authors
 
-* [**Corey Barr**](https://github.com/cjbarr)
-* [**David Kantor**](https://github.com/demkantor)
-* [**Haley Ryan**][haley-r](https://github.com/haley-r)
-* [**Megan Henry**](https://github.com/meghen)
+* [Corey Barr](https://github.com/cjbarr)
+* [David Kantor](https://github.com/demkantor)
+* [Haley Ryan](https://github.com/haley-r)
+* [Megan Henry](https://github.com/meghen)
 
 ## Acknowledgement
 * Thank you to [Prime Digital Academy](www.primeacademy.io) who equipped us with the tools needed to make this application a reality. 
