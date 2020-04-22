@@ -2,13 +2,11 @@
 
 ## Description
 
-_Duration: 2 Week Sprint_
+_Duration: 3 Week Sprint_
 
-Directly above this is how long it took you to develop the project. Your project description goes here. What problem did you solve? How did you solve it? 
+The Svenplan app helps enterprises build customized business plans and track those business plans' progress with more transparency and accountability. Enterprises are able to add members to their team, and those team members are then able to choose among the business plans created by their overseeing enterprise, and guide themselves through the process. 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam at massa in faucibus. Etiam volutpat, risus non mollis convallis, velit nisi pulvinar mi, eu faucibus orci nisi eget nibh. Integer a velit pretium, volutpat arcu eleifend, fringilla elit. Cras erat sapien, convallis venenatis tellus vitae, feugiat dictum felis.
-
-Suspendisse euismod volutpat aliquet. Maecenas vulputate mauris in pellentesque facilisis. Phasellus varius malesuada semper. Cras sollicitudin diam mollis maximus aliquam.
+The purpose of this beta version of the app is to develop a robust business plan, or workflow, generator on the enterprises' ‘admin’ side, and an intuitive workflow completion path on the team members' ‘user’ side.
 
 To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
 
