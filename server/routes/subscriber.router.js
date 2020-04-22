@@ -42,8 +42,8 @@ const router = express.Router();
         // console.log('req.params is ', req.params.phaseId);
         let phaseId = req.params.phaseId;
         // let queryText = `SELECT * FROM "default_tasks" WHERE "phase_id"=$1`;
-        let queryText = `SELECT "default_tasks"."sequence","default_tasks"."id","default_tasks"."name", "default_tasks"."description", "inputs"."type", "inputs"."prompt" FROM "default_tasks" 
-        JOIN "inputs" ON "task_id" = "default_tasks"."id"  WHERE "default_tasks"."phase_id"=($1) ORDER BY "sequence"`
+        let queryText = `SELECT DISTINCT "default_tasks"."id" FROM "default_tasks" 
+        WHERE "default_tasks"."phase_id"=($1) ORDER BY "id";`
         pool.query(queryText,[phaseId])
             .then((response) => {
                 // console.log('successful get- response.rows:', response);
