@@ -32,7 +32,7 @@ class AddTask2 extends Component {
             <p>Next, enter a description of the task:</p>
                 <div>
                     <label htmlFor="descriptionInput">
-                        <textarea id="descriptionInput" value={this.props.task.taskInProgress.description} onChange={this.handleDescriptionInput}/>
+                        <textarea id="descriptionInput" defaultValue={this.props.task.taskInProgress.description || ""} onChange={this.handleDescriptionInput}/>
                     </label>
                 </div>
             <button onClick={this.goBack}>Go Back A Step</button>

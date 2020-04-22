@@ -101,7 +101,6 @@ class CreateWorkflow extends Component {
             this.setState({name: this.props.reduxState.workflow.storeCurent.workflow.name})}
         if(this.state.description === ''){
             this.setState({description: this.props.reduxState.workflow.storeCurent.workflow.description})}
-        this.setState({edit:false});
         Swal.fire({
             title: `Keep the changes?`,
             text: `name: ${this.state.name}, description: ${this.state.description}`,
@@ -119,14 +118,14 @@ class CreateWorkflow extends Component {
                 );
                 this.props.dispatch({type: 'EDIT_WORKFLOW_NAME', payload: this.state})
             }
+        }).then(()=>{
+            this.setState({
+                id: '',
+                name: '',
+                description: '',
+                time: new Date()
+            })
         })
-        this.setState({
-            id: '',
-            name: '',
-            description: '',
-            time: new Date()
-        })
-
     }
 
     render() {

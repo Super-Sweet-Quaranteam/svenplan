@@ -27,7 +27,7 @@ class Teams extends Component {
           <>
             <h3 key={team.id}>{team.name}</h3>
               {team.members.map(member =>
-                <li>{member.firstname}
+                <li key={Math.random()}>{member.firstname}
                   <button onClick={() => this.getSelectedUser(member.id)}>See Profile</button>
                 </li>
                 )}
