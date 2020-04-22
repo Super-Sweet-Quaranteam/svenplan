@@ -26,6 +26,9 @@ class CreateWorkflow extends Component {
             confirmButtonText: 'OK'
           }).then((result) => {
             if (result.value) {
+                // would probably be better to get id returned from add new workflow
+                // and use it to set current workflow reducer from workflow saga. 
+                // but probably won't matter at beta scale
                 let id = (Math.max(...this.props.reduxState.workflow.allWorkflows.map(wf=>wf.id),0));
                 this.props.dispatch({type: 'GET_THIS_WORKFLOW', payload: {id: id}});
                 this.props.history.push('/workflows/edit');
