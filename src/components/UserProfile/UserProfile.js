@@ -72,7 +72,8 @@ class UserProfile extends Component {
               "Team Member"}
               </p>
           <p><button className="btn-sml" onClick={this.editMode}>Edit Profile</button></p>
-          <br></br>
+              <br/>
+              <br/>
             {this.props.user.currentUser.team_id
                 ?
               <p>Team: {this.props.user.currentUser.team}</p>

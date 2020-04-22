@@ -102,7 +102,7 @@ CREATE TABLE "users"
     "phone" VARCHAR,
     "company" VARCHAR,
     "password" VARCHAR NOT NULL,
-    "level" INT DEFAULT 1,
+    "level" INT DEFAULT 3,
     "team_id" INT REFERENCES "teams"("id") ON DELETE CASCADE
 );
 CREATE TABLE "projects"
