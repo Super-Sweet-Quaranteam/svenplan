@@ -14,7 +14,6 @@ class Subscribers extends Component{
         // this.setState({
         //     query:this.props.reduxState.admin.clientList
         // })
-        console.log("current user id", this.props.reduxState.user.currentUser.id)
     }
 
     accessChange=(id, level)=>{
@@ -96,10 +95,10 @@ class Subscribers extends Component{
                                 </td>
                                 {(this.props.reduxState.user.currentUser.id !== subscriber.id) 
                                 ?
-                                <td><button className="btn-sml" key={subscriber.id} onClick={() => this.accessChange(subscriber.id, subscriber.level)} 
-                                    name='subscriber.clientid'>Grant/Revoke Enterprise Access</button></td>
+                                    <td><button className="btn-sml" key={subscriber.id} onClick={() => this.accessChange(subscriber.id, subscriber.level)} 
+                                        name='subscriber.clientid'>Grant/Revoke Enterprise Access</button></td>
                                 :
-                                <td>Cannot Change Personal Access Level</td>
+                                    <td>Cannot Change Personal Access Level</td>
                                 }
                                 {/* <td>{client.address}</td> */}
                             </tr>))}              
