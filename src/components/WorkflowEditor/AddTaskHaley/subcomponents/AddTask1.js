@@ -58,17 +58,19 @@ class AddTask1 extends Component {
         return (
         <>
             <p>Next, enter some basic details about the task:</p>
-                <div>
-                    <label htmlFor="titleInput">
-                        Title:<input type="text" id="titleInput" onChange={this.handleTitleInput}/>
-                    </label>
-                </div>
+            <form className="form">
+                <li>
+                    <label htmlFor="titleInput">Title</label>
+                    <input type="text" id="titleInput" onChange={this.handleTitleInput}/>
+                    <span>enter task title</span>
+                </li>
+            </form>
                 <div>
                     <p>Risk Area (select all that apply):</p>
                     {this.props.task.taskInProgress.riskareaOptions&&
                         <>
                         {this.props.task.taskInProgress.riskareaOptions.map((riskarea)=>
-                            <div key={riskarea.id}>
+                            <div className="taskCard" key={riskarea.id}>
                                 <input type="checkbox" id="check-text" value={riskarea.id} onChange={this.handleRiskareas}/>
                                 <label htmlFor="check-text">{riskarea.riskarea}({riskarea.id})</label>
                             </div>
@@ -77,7 +79,7 @@ class AddTask1 extends Component {
                     }                   
                 </div>
             {/* <button onClick={this.goBack}>Go Back A Step</button> */}
-            <button onClick={this.nextStep}>next step {this.state.phaseId}</button>
+            <button className="btn-sml" onClick={this.nextStep}>next step {this.state.phaseId}</button>
             <br/>
                 <br />
 

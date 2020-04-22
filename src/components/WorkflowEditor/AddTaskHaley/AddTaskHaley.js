@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // import { HashRouter as Switch, Route, useRouteMatch } from 'react-router-dom';
+import Swal from "sweetalert2"
 
 // import AddTask0 from './subcomponents/AddTask0';
 import AddTask1 from './subcomponents/AddTask1';
@@ -17,10 +18,37 @@ import AddTaskReview from './subcomponents/AddTaskReview';
 
 function AddTask(props) {
     // let { path, url } = useRouteMatch();
+    const deleteTask=()=>{
+        Swal.fire({
+            title: `Are you sure you want to delete this task?`,
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                'Deleted!',
+                `This Task has been removed from this Phase`,
+                'success'
+                );
+                props.dispatch({type: 'REMOVE_TASK', payload: {
+                    id: props.phase.id, 
+                    task: props.task
+                }});
+                props.dispatch({type: 'TOGGLE_ADD_TASK'});
+                props.dispatch({ type: 'GO_HOME_STEP' });
+            }
+        })
+    }
+
     return (
         <>
-            <h2>Add Task Simulator</h2>
-
+            <h2>Add Task To Phase</h2>
+            <div className="side-button" onClick={deleteTask}><button className="btn-sml-delete">Delete Task</button></div>
+            
             {props.taskStep === 1 && <AddTask1 />}
             {props.taskStep === 2 && <AddTask2 />}
             {props.taskStep === 3 && <AddTask3 />}
@@ -47,7 +75,8 @@ function AddTask(props) {
 const mapStateToProps = state => ({
     user: state.user,
     task: state.task.taskInProgress,
-    taskStep: state.task.stepOfTaskCreation
+    taskStep: state.task.stepOfTaskCreation,
+    phase: state.workflow.storeCurent.phase
 });
 
 export default connect(mapStateToProps)(AddTask);

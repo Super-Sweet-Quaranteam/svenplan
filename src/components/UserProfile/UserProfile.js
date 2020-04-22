@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './UserProfile.css';
+import Swal from 'sweetalert2'
 
 class UserProfile extends Component {
 
@@ -37,15 +38,17 @@ class UserProfile extends Component {
     this.setState({
       [propertyName]: event.target.value,
     });
-    console.log(this.state)
   }
 
   updateUser=()=>{
     this.props.dispatch({ type: 'UPDATE_CURRENT_USER', payload:this.state });
+    Swal.fire('Success!')
+    this.setState({ mode: 'display'})
   }
 
   updateTeam = () => {
     this.props.dispatch({ type: 'UPDATE_USER_TEAM', payload: this.state.team });
+    Swal.fire('Success!')
   }
  
   render() {

@@ -5,13 +5,13 @@ import { withRouter } from 'react-router-dom';
 class ExistingProjects extends Component {
     // subscriber-side code. When 'Existing Projects' is clicked, page loads table of project, status and option for subscriber to continue or archive project
     archiveProject=(id)=>{
-        console.log('archive btn clicked with id', id);   
+        // console.log('archive btn clicked with id', id);   
     }
     componentDidMount(){
         this.props.dispatch({type: 'FETCH_EXISTING_PROJECTS', payload: this.props.reduxState.user.currentUser.team_id})
     }
     continueProject(id,name){
-        console.log('in continueProject with id:', id);
+        // console.log('in continueProject with id:', id);
         //upon click, fetch details for that project and reroute to projects/id
         this.props.dispatch({ type: 'SET_PROJECT_ID', payload:{id:id, name:name }})
         this.props.history.push(`/projects/${id}`);

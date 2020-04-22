@@ -23,7 +23,7 @@ class EditTask extends Component {
     // allows admin to add input types to a task
     editOptions=()=>{
         this.setState({taskEdit: true});
-        console.log('pop!', this.state)
+        // console.log('pop!', this.state)
     }
     
     // handles state changes for forms

@@ -39,32 +39,38 @@ class AddTask3 extends Component {
     }
 
     render() {
-        return (
-        <>
+        return (  
+        <div className="workflowDescription">
             <p>Next, you can add links:</p>
-                <ul>
-                    {this.props.task.taskInProgress.links&&
-                        <>
-                            {this.props.task.taskInProgress.links.map((link)=>
-                                <li><a href={link.url} rel="noopener noreferrer" target="_blank">{link.description}</a></li>
-                                )}
-                        </>
-                    }
-                </ul>
-                <div>
-                    <label htmlFor="urlInput"> url:
-                        <input type="text" id="urlInput" placeholder="make sure it starts with http://..." value={this.state.urlInput} onChange={this.handleUrlInput}/>
-                    </label>
-                </div>
-                <div>
-                    <label htmlFor="descriptionInput"> text to display:
-                        <input type="text" id="descriptionInput" onChange={this.handleDescriptionInput} />
-                    </label>
-                    <div><button onClick={this.addLink}>add link</button></div>
-                </div>
-            <button onClick={this.goBack}>Go Back A Step</button>
-            <button onClick={this.nextStep}>next step</button>
-        </>
+            <ul className="">
+                {this.props.task.taskInProgress.links&&
+                    <>
+                        {this.props.task.taskInProgress.links.map((link)=>
+                            <li key={Math.random()}><a href={link.url} rel="noopener noreferrer" target="_blank">{link.description}</a></li>
+                            )}
+                    </>
+                }
+            </ul>
+            <form className="form">
+                <li>
+                    <label htmlFor="urlInput">url</label>
+                    <input type="text" id="urlInput" placeholder="enter url" value={this.state.urlInput} onChange={this.handleUrlInput}/>
+                    <span>make sure it starts with http://...</span>
+                </li>
+            </form>
+            <form className="form">
+                <li>
+                    <label htmlFor="descriptionInput">text to display</label>
+                    <input type="text" id="descriptionInput" onChange={this.handleDescriptionInput} />
+                    <span>text to display when viewing link</span>
+                </li>
+            </form>
+            <button className="btn-sml" onClick={this.addLink}>add link</button>
+            <br/>
+            <br/>
+            <button className="btn-sml" onClick={this.goBack}>Go Back A Step</button>
+            <button className="btn-sml" onClick={this.nextStep}>next step</button>
+        </div>
     );
         }
 }
