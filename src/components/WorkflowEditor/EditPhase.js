@@ -158,7 +158,7 @@ class EditPhase extends Component {
                                                 Add New Task
                                             </li>
                                                 {this.props.reduxState.workflow.thisPhase.map(task=>
-                                                    <li key={task.task_sequence} data-id={task.task_id} className="phase-block" 
+                                                    <li key={task.task_id} data-id={task.task_id} className="phase-block" 
                                                         onClick={()=>this.viewTask(task.task_id)}>
                                                         <div className="phase-text">{task.task_name}</div>
                                                         <br/>
