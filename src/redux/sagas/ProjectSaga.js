@@ -24,10 +24,28 @@ function* fetchInformationToDisplay(action) {
   
     try {
         //we'll bundle all info up into an object for the reducer
-        let projectDetailsObject = {}
+        let taskDetailsObject = {}
         //use that id to first get basic info, and add it to the details object
-        const infoFromProjectsTable = yield axios.get(`/api/project/projects-table-info/${defaultTaskId}`);
-        console.log('response:', infoFromProjectsTable);
+        const infoFromDefaultTable = yield axios.get(`/api/project/task/default-info/${defaultTaskId}`);
+        taskDetailsObject = infoFromDefaultTable.data[0];
+        //then get link info
+        const infoFromLinksTable = yield axios.get(`/api/project/task/link-info/${defaultTaskId}`);
+        taskDetailsObject={...taskDetailsObject, links: infoFromLinksTable.data}
+        //then get input info
+        const infoFromInputsTable = yield axios.get(`/api/project/task/input-info/${defaultTaskId}`);
+        taskDetailsObject = { ...taskDetailsObject, inputs: infoFromInputsTable.data }
+
+
+
+
+        // console.log('infoFromLinksTable:', infoFromLinksTable.data);
+
+
+
+        console.log('taskDetailsObject:', taskDetailsObject);
+
+        
+
 
         // assignedTaskObject = firstResponse[0];
         // const secondResponse = yield axios.get(`/api/haley-task/assigned-task/inputs/${action.payload.id}`);
@@ -38,7 +56,7 @@ function* fetchInformationToDisplay(action) {
 
         // yield put({ type: 'SET_ASSIGNED_TASK', payload: response.data });
     } catch (error) {
-        console.log('error with posting new task:', error);
+        console.log('error with getting task info:', error);
     }
     
 }
