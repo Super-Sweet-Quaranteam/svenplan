@@ -43,10 +43,6 @@ class CurrentWorkflow extends Component {
     render() {
         return (
             <div className='CurrentWorkflow'>
-                <h3>{JSON.stringify(this.props.reduxState.project.taskDetails)}</h3>
-                <h3>{JSON.stringify(this.props.reduxState.subscriber.tasksInPhase)}</h3>
-                this.props.reduxState.subscriber.tasksInPhase
-                <p>{this.state.taskIndex}</p>
                 <h2>{this.props.reduxState.subscriber.projectId.name}</h2>
                 {/* button to take user back to existing projects */}
                 <button className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayOldWorkFlow: true}})}>
