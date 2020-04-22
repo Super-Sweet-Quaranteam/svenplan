@@ -14,12 +14,16 @@ To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.he
 
 Include one or two screen shots of your project here (optional). Remove if unused.
 
-### Prerequisites
+### Technologies
+This version uses:
 
-Link to software that is required to install the app (e.g. node).
-
+- [React.js](https://reactjs.org/)
+- [Express](https://expressjs.com/) 
 - [Node.js](https://nodejs.org/en/)
-- List other prerequisites here
+- [PostgreSQL](https://www.postgresql.org/download/)
+
+A full list of dependencies can be found in `package.json`.
+
 
 ## Installation
 
@@ -45,15 +49,18 @@ How does someone use this application? Tell a user story here.
 6. xxx
 
 
-## Built With
-
-List technologies and frameworks here
-
 ## License
 
 _Note, include this only if you have a license file. GitHub will generate one for you if you want!_
 
-## Acknowledgement
-Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped us to make this application a reality. 
+## Authors
 
-Thanks to [Neoo Partners](www.neoopartners.com) who gave us the opportunity to create this app.
+* **Corey Barr** - [cjbarr](https://github.com/cjbarr)
+* **David Kantor** - [demkantor](https://github.com/demkantor)
+* **Haley Ryan** - [haley-r](https://github.com/haley-r)
+* **Megan Henry** - [meghen](https://github.com/meghen)
+
+## Acknowledgement
+* Thank you to [Prime Digital Academy](www.primeacademy.io) who equipped us with the tools needed to make this application a reality. 
+
+* Thank you to D'Angelos Svenkeson with [Neoo Partners](www.neoopartners.com) who gave us the opportunity to create this app.
