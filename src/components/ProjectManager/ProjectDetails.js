@@ -14,7 +14,7 @@ class CurrentWorkflow extends Component {
         })
     }
     componentDidMount(){
-        this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW', payload: this.props.reduxState.subscriber.projectId})               
+        this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW', payload: this.props.reduxState.subscriber.projectId.id})               
     }
     forwardATask=()=>{
         this.setState({
@@ -38,10 +38,10 @@ class CurrentWorkflow extends Component {
     render() {
         return (
             <div className='CurrentWorkflow'>
-                <h2>this isn't doing anything because I just copied it from Currentworkflow without updating the reducers. was planning on using this.props.match.params.projectId to fetch selected project. the variable 'projectId' comes from the route path in App.js, and its value comes from the 'Continue' button clicked in ExistingProjects</h2>
+                <h2>{this.props.reduxState.subscriber.projectId.name}</h2>
                 {/* button to take user back to existing projects */}
                 <button className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayOldWorkFlow: true}})}>
-                        <a className="nav-link" href="#/clientHome">Back</a>
+                        <a className="nav-link" href="#/projects">Back</a>
                 </button>
                 {/* phase divs are set up as buttons for a11y. onClick, specific tasks show up */}
                 <div className="phaseOverview">
