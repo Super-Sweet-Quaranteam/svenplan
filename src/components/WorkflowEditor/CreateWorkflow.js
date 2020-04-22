@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
+// import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Swal from 'sweetalert2'
 
@@ -16,7 +16,7 @@ class CreateWorkflow extends Component {
     // creates a brand new workflow, moves user to see all workflows from there
     createWorkflow=()=>{ 
         this.props.dispatch({type: 'ADD_NEW_WORKFLOW', payload: {
-            name: this.state.name, description: this.state.description, time: this.state.time
+            name: this.state.name, description: this.state.description, time: this.state.time, team_id: this.props.reduxState.user.currentUser.team_id
         }})
         this.props.dispatch({type: 'GET_ALL_WORKFLOWS'})
         Swal.fire({
@@ -26,6 +26,9 @@ class CreateWorkflow extends Component {
             confirmButtonText: 'OK'
           }).then((result) => {
             if (result.value) {
+                // would probably be better to get id returned from add new workflow
+                // and use it to set current workflow reducer from workflow saga. 
+                // but probably won't matter at beta scale
                 let id = (Math.max(...this.props.reduxState.workflow.allWorkflows.map(wf=>wf.id),0));
                 this.props.dispatch({type: 'GET_THIS_WORKFLOW', payload: {id: id}});
                 this.props.history.push('/workflows/edit');
@@ -182,4 +185,4 @@ const mapStateToProps = reduxState => ({
 });
 
 
-export default connect(mapStateToProps)(withRouter(CreateWorkflow));
+export default connect(mapStateToProps)(CreateWorkflow);

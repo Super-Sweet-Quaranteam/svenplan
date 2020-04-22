@@ -176,8 +176,9 @@ router.post('/add/workflow', (req, res) => {
     const name = req.body.name;
     const desc = req.body.description;
     const time = req.body.time;
-    const queryText = `INSERT INTO "workflows" ("name", "description", "created") VALUES ($1, $2, $3)`;
-    pool.query(queryText, [name, desc, time])
+    const teamId = req.body.team_id;
+    const queryText = `INSERT INTO "workflows" ("name", "description", "created", "team_id") VALUES ($1, $2, $3, $4)`;
+    pool.query(queryText, [name, desc, time, teamId])
     .then(() => { 
         res.sendStatus(201)
     }).catch((err) => {
