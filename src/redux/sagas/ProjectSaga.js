@@ -19,8 +19,18 @@ function* createProject(action) {
     }
 }
 
+function* fetchInformationToDisplay(action) {
+    let defaultTaskId= action.payload.defaultTaskId;
+    //we'll bundle all info up into an object for the reducer
+    let projectDetailsObject = {}
+    //use that id to first get basic info, and add it to the details object
+    
+}
+
 function* ProjectSaga() {
     yield takeLatest('CREATE_PROJECT', createProject);
+
+    yield takeLatest('FETCH_INFORMATION_TO_DISPLAY', fetchInformationToDisplay);
 }
 
 export default ProjectSaga;

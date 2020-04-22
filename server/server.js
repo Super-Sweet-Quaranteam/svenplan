@@ -14,6 +14,7 @@ const userRouter = require('./routes/user.router');
 const teamRouter = require('./routes/teams.router');
 const subscriberRouter = require('./routes/subscriber.router');
 const workflowRouter = require('./routes/workflow.router');
+const projectRouter = require('./routes/project.router');
 
 const haleyTaskRouter = require('./routes/haleytask.router');
 
@@ -35,6 +36,7 @@ app.use('/api/user', userRouter);
 app.use('/api/teams', teamRouter);
 app.use('/subscriber', subscriberRouter);
 app.use('/api/workflow', workflowRouter);
+app.use('/api/project/', projectRouter);
 
 app.use('/api/haley-task', haleyTaskRouter);
 
