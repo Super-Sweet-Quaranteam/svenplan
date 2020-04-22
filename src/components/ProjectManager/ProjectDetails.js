@@ -43,7 +43,10 @@ class CurrentWorkflow extends Component {
     render() {
         return (
             <div className='CurrentWorkflow'>
-
+                <h3>{JSON.stringify(this.props.reduxState.project.taskDetails)}</h3>
+                <h3>{JSON.stringify(this.props.reduxState.subscriber.tasksInPhase)}</h3>
+                this.props.reduxState.subscriber.tasksInPhase
+                <p>{this.state.taskIndex}</p>
                 <h2>{this.props.reduxState.subscriber.projectId.name}</h2>
                 {/* button to take user back to existing projects */}
                 <button className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayOldWorkFlow: true}})}>
@@ -61,7 +64,7 @@ class CurrentWorkflow extends Component {
                         {this.props.reduxState.project.taskDetails.description}
                             <br/>
 
-
+                            <br/>
 
                      <form>
                         {this.props.reduxState.project.taskDetails.inputs &&
@@ -71,55 +74,57 @@ class CurrentWorkflow extends Component {
                            {
                                 input.inputType === 'button' ?
                                     <>
-                                        <label>{this.state.task.instructions}</label>
+                                        <label>{input.prompt}</label>
                                         <br/>
-                                        <input type="button" value={this.state.task.description}></input>
+                                                <input type="button" value={input.prompt}></input>
                                     </>
                                 : input.inputType === 'checkbox' ?
                                     <>
-                                        <label>{this.state.task.instructions}</label>
+                                        <label>{input.prompt}</label>
                                         <br/>
                                         <input type="checkbox"></input>
                                     </>
                                 : input.inputType === 'radio' ?
                                     <>
-                                        <label>{this.state.task.instructions}</label>
+                                                        <label>{input.prompt}</label>
                                         <br/>
                                         <input type="radio"></input>
                                     </>                            
                                 : input.inputType === 'number' ?
                                     <>
-                                        <label>{this.state.task.instructions}</label>
+                                                            <label>{input.prompt}</label>
                                         <br/>
                                         <input type="number"></input>
                                     </>                            
                                 : input.inputType === 'email' ?
                                     <>
-                                        <label>{this.state.task.instructions}</label>
+                                                                <label>{input.prompt}</label>
                                         <br/>
                                         <input type="email"></input>
                                     </>                            
                                 : input.inputType === 'tel' ?
                                     <>
-                                        <label>{this.state.task.instructions}</label>
+                                                                    <label>{input.prompt}</label>
                                         <br/>
                                         <input type="tel"></input>
                                     </>                            
                                 : input.inputType === 'text' ?
                                     <>
-                                        <label>{this.state.task.instructions}</label>                            
+                                                                        <label>{input.prompt}</label>                            
                                         <br/>
-                                        <input type="text" placeholder={this.state.task.description}></input>
+                                                                        <input type="text" placeholder={input.prompt}></input>
                                     </>
                                 : input.inputType === 'url' ?
                                     <>
-                                        <label>{this.state.task.instructions}</label>
+                                                                            <label>{input.prompt}</label>
                                         <br/>
                                         <input type="url"></input>
                                     </>
                                 : <></>
                                 
                            }
+                           <br/>
+                           <br/>
                             </>
                             )}
                         </form>
