@@ -22,7 +22,7 @@ function Navbar(props) {
             {props.user.currentUser.level === 2 &&
                 <ul className="nav">
                     <li className="nav-item"><Link to='/admin' className="nav-link nav-logo"><img src="/images/square-logo.png" alt="logo" height="80px" /></Link></li>
-                    <li className="nav-item"><Link to='workflows/new' className="nav-link">Create Workflow</Link></li>
+                    <li className="nav-item"><Link to='/workflows/new' className="nav-link">Create Workflow</Link></li>
                     <li className="nav-item"><Link to='/workflows' className="nav-link">Existing Workflows</Link></li>
                     <li className="nav-item"><Link to='/teammembers' className="nav-link">Team Members</Link></li>
                     <li className="nav-item"><Link to='/profile' className="nav-link">My Profile</Link></li>
