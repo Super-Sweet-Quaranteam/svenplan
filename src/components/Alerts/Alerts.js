@@ -9,7 +9,7 @@ class Alerts extends Component {
    }
 
    markResolved=(id)=>{
-       this.props.dispatch({type: 'MARK_RESOLVED', payload: id})
+       this.props.dispatch({type: 'MARK_RESOLVED', payload: id});
    }
 
     render() {

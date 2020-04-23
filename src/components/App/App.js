@@ -28,11 +28,8 @@ import ProjectDetails from '../ProjectManager/ProjectDetails';
 import AddTaskHaley from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
 
 
-  // import AddTaskSummary from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
-
 // THESE SEEM UNUSED
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-// import Alerts from '../AdminHome/Alerts/Alerts';
 // {/* <Route path="/admin" component={AdminNav} /> */ }
 
 class App extends Component {
