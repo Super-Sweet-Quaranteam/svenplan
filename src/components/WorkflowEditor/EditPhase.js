@@ -52,7 +52,6 @@ class EditPhase extends Component {
         this.props.dispatch({type: 'TOGGLE_EDIT_PHASE'});
     }
 
-
     // handles state changes for forms
     handleChange=(e, propertyName)=>{
         this.setState({

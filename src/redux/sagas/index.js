@@ -1,4 +1,5 @@
 import { all } from 'redux-saga/effects';
+
 import clientList from './clientListSaga';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
@@ -8,6 +9,10 @@ import SubscriberProjects from './SubscriberProjects';
 import workflows from './workflowSaga';
 import ProjectSaga from './ProjectSaga';
 import taskSaga from './haleyAddTaskSaga';
+import alerts from './alertSupportSaga';
+
+
+
 
 export default function* rootSaga() {
     yield all([
@@ -19,7 +24,7 @@ export default function* rootSaga() {
       SubscriberProjects(),
       workflows(),
       ProjectSaga(),
-
+      alerts(),
       taskSaga(),
 
     ]);
