@@ -69,6 +69,20 @@ console.log(req.body.details)
         })
 });
 
+router.get('/project/data/:projectId', (req, res) => {
+    let projectId = req.params.projectId
+    let queryText = `SELECT * FROM "capturedValues" WHERE "project_id"= $1 ORDER BY "input_id" `;
+    pool.query(queryText, [projectId])
+        .then((response) => {
+            // console.log('successful get- response.rows:', response.rows);
+            res.send(response.rows);
+        })
+        .catch(() => {
+            console.log('something went wrong in get at /');
+            res.sendStatus(500);
+        })
+});//get task names for a certain project, and whether or not they're done.
+
 
 router.post('/project', (req, res) => {
     console.log(req.body.details)

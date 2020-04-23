@@ -17,10 +17,18 @@ class ExistingProjects extends Component {
         this.props.history.push(`/projects/${id}`);
     }
 
+
+    projectData(id, name) {
+        // console.log('in continueProject with id:', id);
+        //upon click, fetch details for that project and reroute to projects/id
+        this.props.dispatch({ type: 'SET_PROJECT_ID', payload: { id: id, name: name } })
+        this.props.dispatch({ type: 'FETCH_PROJECT_DATA', payload: id})
+        this.props.history.push(`/projects/data/${id}`);
+    }
+
     render(){
     return (
         <div >
-            <p>Existing Projects </p>
 
             <h2>Your Current Projects:</h2>
             {/* table below displays all projects belonging to one user */}
@@ -30,6 +38,7 @@ class ExistingProjects extends Component {
                         <th>Project Name</th>
                         <th>Status</th>
                         <th></th>
+                        <th>Project Data</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +51,7 @@ class ExistingProjects extends Component {
                             <button className="nav-item" onClick={() => this.continueProject(project.id, project.name)}>Continue</button>
                             {/* <button className="nav-item" onClick={()=>this.archiveProject(project.id)}>Archive</button> */}
                         </td>
+                        <td><button className="nav-item" onClick={() => this.projectData(project.id, project.name)}>Data</button></td>
                     </tr>)}
                 </tbody>
             </table>
