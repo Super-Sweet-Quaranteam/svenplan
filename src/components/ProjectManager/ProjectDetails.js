@@ -105,21 +105,21 @@ class CurrentWorkflow extends Component {
                                     <>
                                         <label>{input.prompt}</label>
                                         <br/>
-                                                <input onChange={(event) => this.handleChange(event, this.props.reduxState.project.taskDetails.id)} name={input.inputId} type="button" value={input.prompt}></input>
+                                                <input onChange={(event) => this.handleChange(event, this.props.reduxState.project.taskDetails.id)} value={this.state[input.inputId] || ''} name={input.inputId} type="button" value={input.prompt}></input>
                                     </>
                              
                                 : input.inputType === 'number' ?
                                     <>
                                                             <label>{input.prompt}</label>
                                         <br/>
-                                                    <input onChange={(event) => this.handleChange(event, this.props.reduxState.project.taskDetails.id)} name={input.inputId} type="number"></input>
+                                                    <input onChange={(event) => this.handleChange(event, this.props.reduxState.project.taskDetails.id)} value={this.state[input.inputId] || ''} name={input.inputId} type="number"></input>
                                     </>                            
                                
                                 : input.inputType === 'text' ?
                                     <>
                                                                         <label>{input.prompt}</label>                            
                                         <br/>
-                                                                        <input onChange={(event)=>this.handleChange(event, this.props.reduxState.project.taskDetails.id)} name={input.inputId} type="text" placeholder={input.prompt}></input>
+                                                                        <input onChange={(event)=>this.handleChange(event, this.props.reduxState.project.taskDetails.id)} value={this.state[input.inputId] || ''} name={input.inputId} type="text" placeholder={input.prompt}></input>
                                     </>
                                 : <></>
                                 
