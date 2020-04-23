@@ -13,6 +13,10 @@ class CurrentWorkflow extends Component {
             task: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex - 1],
             taskIndex: this.state.taskIndex - 1
         })
+        this.props.dispatch({
+            type: 'SAVE_INPUTS', payload: this.state
+            
+        })
     }
     componentDidMount(){
         this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW', payload: this.props.reduxState.subscriber.projectId.id});
@@ -25,14 +29,24 @@ class CurrentWorkflow extends Component {
             task: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex + 1],
             taskIndex: this.state.taskIndex + 1
         })
+        this.props.dispatch({type: 'SAVE_INPUTS', payload: this.state
+    })
+    }
+
+    saveButton=()=>{
+        this.props.dispatch({
+            type: 'SAVE_INPUTS', payload: this.state
+        })
     }
 
     handleChange=(event, id)=>{
+        let valueId=Number(event.target.name)
         this.setState({taskId:id,
-                        value:event.target.value,
-                        inputNumber:Number(event.target.name)})
-                        console.log(this.state)
+            [valueId]:event.target.value})
+                    console.log(this.state)
     }
+
+
     // index of task from tasksInPhase will always start at 0 (first task in list)
     // this.state.taskIndex instead of 0 helps code remember which task we're currently on
     showTasks=(phaseId)=>{
@@ -120,6 +134,7 @@ class CurrentWorkflow extends Component {
                             </>
                             )}
                         </form>
+                        <button onClick={this.saveButton}>Save</button>
                             <br/>
                         {this.state.taskIndex === 0 & this.props.reduxState.subscriber.tasksInPhase.length === 1  ? 
                               <></>

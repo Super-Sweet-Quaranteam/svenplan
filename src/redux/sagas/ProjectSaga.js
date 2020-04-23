@@ -19,6 +19,24 @@ function* createProject(action) {
     }
 }
 
+
+function* saveProject(action) {
+    try {
+
+        const config = {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+            details: action.payload,
+
+        };
+        yield axios.post('/subscriber/project/values', config);
+
+    } catch (error) {
+        console.log('Error create project:', error);
+
+    }
+}
+
 function* fetchInformationToDisplay(action) {
     let defaultTaskId= action.payload.defaultTaskId;
   
@@ -47,7 +65,7 @@ function* fetchInformationToDisplay(action) {
 
 function* ProjectSaga() {
     yield takeLatest('CREATE_PROJECT', createProject);
-
+    yield takeLatest('SAVE_INPUTS', saveProject);
     yield takeLatest('FETCH_INFORMATION_TO_DISPLAY', fetchInformationToDisplay);
 }
 
