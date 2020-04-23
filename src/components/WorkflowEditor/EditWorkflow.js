@@ -9,7 +9,7 @@ class EditWorkflow extends Component {
     state={
     }
 
-    //allows for adding a new phase - handled in EditPhase,js
+    // allows for adding a new phase - handled in EditPhase,js
     addPhase=()=>{
         if(this.props.reduxState.workflow.storeCurent.showPhase === true){
             this.props.dispatch({type: 'TOGGLE_SHOW_PHASE'});
@@ -20,6 +20,12 @@ class EditWorkflow extends Component {
     //allows for editing a workflow - handled in CreateWorkflow,js
     editWorkflow=()=>{
         this.props.dispatch({type: 'TOGGLE_EDIT_WORKFLOW'});
+        if(this.props.reduxState.workflow.storeCurent.showPhase === true){
+            this.props.dispatch({type: 'TOGGLE_SHOW_PHASE'});
+        }
+        if(this.props.reduxState.workflow.storeCurent.editPhase === true){
+            this.props.dispatch({type: 'TOGGLE_EDIT_PHASE'});
+        }
     }
 
     // gets current phase by id to be displayed below - handled in EditPhase.js
@@ -56,6 +62,7 @@ class EditWorkflow extends Component {
                         }
                         </>
                     }
+                    {/* renders add / edit phase, and edit workflow*/}
                     {this.props.reduxState.workflow.storeCurent.editWorkflow === true && <CreateWorkflow/>}
                     {this.props.reduxState.workflow.storeCurent.addPhase === true && <EditPhase/>}
                     {this.props.reduxState.workflow.storeCurent.showPhase === true && <EditPhase/>}

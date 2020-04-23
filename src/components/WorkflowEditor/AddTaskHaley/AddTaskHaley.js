@@ -38,8 +38,8 @@ function AddTask(props) {
                     id: props.phase.id, 
                     task: props.taskID
                 }});
-                props.dispatch({type: 'TOGGLE_ADD_TASK'});
                 props.dispatch({ type: 'GO_HOME_STEP' });
+                props.dispatch({type: 'TOGGLE_ADD_TASK'});
             }
         })
     }
