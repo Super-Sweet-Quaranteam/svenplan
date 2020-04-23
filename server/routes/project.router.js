@@ -33,7 +33,7 @@ router.get('/task/link-info/:id', rejectUnauthenticated, (req, res) => {
 
 router.get('/task/input-info/:id', rejectUnauthenticated, (req, res) => {
     let taskId = req.params.id
-    const queryText = 'SELECT "inputs"."type" AS "inputType", "inputs"."prompt" AS "prompt" FROM "inputs" WHERE "task_id"=$1;'
+    const queryText = 'SELECT "inputs"."type" AS "inputType", "inputs"."prompt" AS "prompt", "inputs"."id" AS "inputId" FROM "inputs" WHERE "task_id"=$1;'
     pool.query(queryText, [taskId])
         .then((response) => {
             res.send(response.rows);

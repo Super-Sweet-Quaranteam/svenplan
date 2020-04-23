@@ -36,7 +36,7 @@ class ExistingProjects extends Component {
                 {this.props.reduxState.subscriber.existingProjects.map(project =>
                     <tr key={project.id}>
                         <td>{project.name}</td>
-                        <td>(filler) 70% complete</td>
+                        <td>In Progress</td>
                         <td>
                             {/* on btn click, user is routed to ProjectDetails component */}
                             <button className="nav-item" onClick={() => this.continueProject(project.id, project.name)}>Continue</button>

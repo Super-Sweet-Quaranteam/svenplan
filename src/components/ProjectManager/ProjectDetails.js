@@ -26,6 +26,22 @@ class CurrentWorkflow extends Component {
             taskIndex: this.state.taskIndex + 1
         })
     }
+
+    saveButton=()=>{
+        this.props.dispatch({
+            type: 'SAVE_INPUTS', payload: this.state
+        })
+    }
+
+    handleChange=(event, id)=>{
+        let valueId=Number(event.target.name)
+        this.setState({taskId:id,
+            projectId: this.props.reduxState.subscriber.projectId.id,
+            [valueId]:event.target.value})
+                    console.log(this.state)
+    }
+
+
     // index of task from tasksInPhase will always start at 0 (first task in list)
     // this.state.taskIndex instead of 0 helps code remember which task we're currently on
     showTasks=(phaseId)=>{
@@ -81,7 +97,7 @@ class CurrentWorkflow extends Component {
                             <br/>
                         
                         {this.props.reduxState.project.taskDetails.inputs &&
-                            this.props.reduxState.project.taskDetails.inputs.map(input=>
+                            this.props.reduxState.project.taskDetails.inputs.map((input, i)=>
                                 
                            <>
                            {
@@ -89,49 +105,21 @@ class CurrentWorkflow extends Component {
                                     <>
                                         <label>{input.prompt}</label>
                                         <br/>
-                                                <input type="button" value={input.prompt}></input>
+                                                <input onClick={(event) => this.handleChange(event, this.props.reduxState.project.taskDetails.id)} value={this.state[input.inputId] || ''} name={input.inputId} type="button" value={'Mark Complete'}></input>
                                     </>
-                                : input.inputType === 'checkbox' ?
-                                    <>
-                                        <label>{input.prompt}</label>
-                                        <br/>
-                                        <input type="checkbox"></input>
-                                    </>
-                                : input.inputType === 'radio' ?
-                                    <>
-                                                        <label>{input.prompt}</label>
-                                        <br/>
-                                        <input type="radio"></input>
-                                    </>                            
+                             
                                 : input.inputType === 'number' ?
                                     <>
                                                             <label>{input.prompt}</label>
                                         <br/>
-                                        <input type="number"></input>
+                                                    <input onChange={(event) => this.handleChange(event, this.props.reduxState.project.taskDetails.id)} value={this.state[input.inputId] || ''} name={input.inputId} type="number"></input>
                                     </>                            
-                                : input.inputType === 'email' ?
-                                    <>
-                                                                <label>{input.prompt}</label>
-                                        <br/>
-                                        <input type="email"></input>
-                                    </>                            
-                                : input.inputType === 'tel' ?
-                                    <>
-                                                                    <label>{input.prompt}</label>
-                                        <br/>
-                                        <input type="tel"></input>
-                                    </>                            
+                               
                                 : input.inputType === 'text' ?
                                     <>
                                                                         <label>{input.prompt}</label>                            
                                         <br/>
-                                                                        <input type="text" placeholder={input.prompt}></input>
-                                    </>
-                                : input.inputType === 'url' ?
-                                    <>
-                                                                            <label>{input.prompt}</label>
-                                        <br/>
-                                        <input type="url"></input>
+                                                                        <input onChange={(event)=>this.handleChange(event, this.props.reduxState.project.taskDetails.id)} value={this.state[input.inputId] || ''} name={input.inputId} type="text" placeholder={input.prompt}></input>
                                     </>
                                 : <></>
                                 
@@ -154,8 +142,10 @@ class CurrentWorkflow extends Component {
                                     <>
                                         {
                                          this.state.task === this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
-                                            // <button onClick={this.forwardATask}>Next</button>
+                                            <>
                                             <button onClick={this.backATask}>Back</button>
+                                                <button onClick={this.saveButton}>Save</button>
+                                                    </>
                                             :
                                             <>
                                                 <button onClick={this.backATask}>Back</button>
