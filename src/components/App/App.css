@@ -220,6 +220,13 @@ tbody:hover tr:hover td {
   transition: var(--transition-speed);
 }
 
+.tbl-sml{
+  display: table;
+}
+
+.tbl-lg{
+  max-width: max-content;
+}
 /* form design option *//* form design option *//* form design option *//* form design option */
 .form {
   max-width:40vw;

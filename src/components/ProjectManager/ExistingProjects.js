@@ -32,7 +32,7 @@ class ExistingProjects extends Component {
 
             <h2>Your Current Projects:</h2>
             {/* table below displays all projects belonging to one user */}
-            <table>
+            <table className="tbl-sml">
                 <thead>
                     <tr>
                         <th>Project Name</th>
