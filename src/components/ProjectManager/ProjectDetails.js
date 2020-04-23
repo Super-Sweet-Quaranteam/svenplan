@@ -13,10 +13,6 @@ class CurrentWorkflow extends Component {
             task: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex - 1],
             taskIndex: this.state.taskIndex - 1
         })
-        this.props.dispatch({
-            type: 'SAVE_INPUTS', payload: this.state
-            
-        })
     }
     componentDidMount(){
         this.props.dispatch({type: 'FETCH_CURRENT_WORKFLOW', payload: this.props.reduxState.subscriber.projectId.id});
@@ -29,8 +25,6 @@ class CurrentWorkflow extends Component {
             task: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex + 1],
             taskIndex: this.state.taskIndex + 1
         })
-        this.props.dispatch({type: 'SAVE_INPUTS', payload: this.state
-    })
     }
 
     saveButton=()=>{
@@ -135,7 +129,6 @@ class CurrentWorkflow extends Component {
                             </>
                             )}
                         </form>
-                        <button onClick={this.saveButton}>Save</button>
                             <br/>
                         {this.state.taskIndex === 0 & this.props.reduxState.subscriber.tasksInPhase.length === 1  ? 
                               <></>
@@ -149,8 +142,10 @@ class CurrentWorkflow extends Component {
                                     <>
                                         {
                                          this.state.task === this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
-                                            // <button onClick={this.forwardATask}>Next</button>
+                                            <>
                                             <button onClick={this.backATask}>Back</button>
+                                                <button onClick={this.saveButton}>Save</button>
+                                                    </>
                                             :
                                             <>
                                                 <button onClick={this.backATask}>Back</button>
