@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-// import EditTask from './EditTask';
 import Swal from 'sweetalert2';
 import AddTask from './AddTaskHaley/AddTaskHaley';
 
@@ -203,11 +202,7 @@ class EditPhase extends Component {
                         }
                     </>
                     }
-                    {/* {this.props.reduxState.workflow.storeCurent.editTask === true && <EditTask/>}
-                    {this.props.reduxState.workflow.storeCurent.addTask === true && <EditTask/>}
-                    {this.state.showTask === true && <EditTask/>} */}
-                    
-                        
+                    {/* renders the edit or add task section */}
                         {(this.props.reduxState.workflow.storeCurent.addTask === true 
                         || 
                         this.props.reduxState.workflow.storeCurent.editTask === true) &&

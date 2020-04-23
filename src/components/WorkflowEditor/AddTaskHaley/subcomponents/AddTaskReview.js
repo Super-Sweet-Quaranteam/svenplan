@@ -33,39 +33,37 @@ class AddTask5 extends Component {
 
     render() {
         return (
-        <>
-            <h3>Summary (from reducer)</h3>
-                {this.props.task.taskInProgress.title && <h4>Title: {this.props.task.taskInProgress.title}</h4>}
-                {this.props.task.taskInProgress.phaseId && <p>Phase ID: {this.props.task.taskInProgress.phaseId}</p>}
-                {this.props.task.taskInProgress.riskareas &&
-                <p>Risk Areas:
-                {this.props.task.taskInProgress.riskareas.map((riskarea) =>
-                    <span key={Math.random()}> {riskarea}/ </span>
-                )}
-                </p>
-            }
-                {this.props.task.taskInProgress.description && <p>Description: {this.props.task.taskInProgress.description}</p>}
-                {this.props.task.taskInProgress.links &&
-                <p>Links:
-                    {this.props.task.taskInProgress.links.map((link) =>
-                    <span key={Math.random()}><a href={link.url} rel="noopener noreferrer" target="_blank">{link.description} /</a></span>
-                )}
-                </p>
-            }
-                {this.props.task.taskInProgress.inputs &&
-                <div>inputs:
-                    {this.props.task.taskInProgress.inputs.map((input) =>
-                    <p key={Math.random()}>{input.prompt} ({input.type})</p>
-                )}
-                </div>
-            }
-            <p>This demo doesn't really include edit/delete functionality, or being able to change the order of tasks.</p>
-            <p>Click the button below to send the task to the database</p>
-            <button className="btn-sml" onClick={this.goBack}>Go Back A Step</button>
-            <button className="btn-sml" onClick={this.addToDatabase}>Add to Database</button>
-        </>
-    );
-        }
+            <>
+                <h3>Summary</h3>
+                    {this.props.task.taskInProgress.title && <h4>Title: {this.props.task.taskInProgress.title}</h4>}
+                    {this.props.task.taskInProgress.phaseId && <p>Phase ID: {this.props.task.taskInProgress.phaseId}</p>}
+                    {this.props.task.taskInProgress.riskareas &&
+                    <p>Risk Areas:
+                    {this.props.task.taskInProgress.riskareas.map((riskarea) =>
+                        <span key={Math.random()}> {riskarea}/ </span>
+                    )}
+                    </p>
+                }
+                    {this.props.task.taskInProgress.description && <p>Description: {this.props.task.taskInProgress.description}</p>}
+                    {this.props.task.taskInProgress.links &&
+                    <p>Links:
+                        {this.props.task.taskInProgress.links.map((link) =>
+                        <span key={Math.random()}><a href={link.url} rel="noopener noreferrer" target="_blank">{link.description} /</a></span>
+                    )}
+                    </p>
+                }
+                    {this.props.task.taskInProgress.inputs &&
+                    <div>inputs:
+                        {this.props.task.taskInProgress.inputs.map((input) =>
+                        <p key={Math.random()}>{input.prompt} ({input.type})</p>
+                    )}
+                    </div>
+                }
+                <button className="btn-sml" onClick={this.goBack}>Go Back A Step</button>
+                <button className="btn-sml" onClick={this.addToDatabase}>Add to Database</button>
+            </>
+        );
+    }
 }
 
 const putReduxStateOnProps = (reduxState) => ({
