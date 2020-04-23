@@ -57,12 +57,29 @@ class CurrentWorkflow extends Component {
                 <div className="taskWindow">
                 {this.state.task && <div className="taskAtHand" key={this.state.task.id}>
                         <h3>{this.props.reduxState.project.taskDetails.name}</h3>
-                        {this.props.reduxState.project.taskDetails.description}
+                        <h4>{this.props.reduxState.project.taskDetails.description}</h4>
                             <br/>
 
-                            <br/>
 
                      <form>
+                            {this.props.reduxState.project.taskDetails.links &&
+                            <>
+                                {this.props.reduxState.project.taskDetails.links.length !== 0 &&
+                                <>
+                            <h4>Relevant Links:</h4>
+                                {this.props.reduxState.project.taskDetails.links.map(link =>
+                                <>
+                                    <a href={link.url}>{link.textToShow}</a>
+                                    <br/>
+                                    </>
+                                )}
+                                </>
+                                }
+    
+                                    </>
+                            }   
+                            <br/>
+                        
                         {this.props.reduxState.project.taskDetails.inputs &&
                             this.props.reduxState.project.taskDetails.inputs.map(input=>
                                 
