@@ -6,6 +6,7 @@ function* SubscriberProjects(){
     yield takeEvery('FETCH_EXISTING_PROJECTS', fetchExistingProjects)
     yield takeEvery('FETCH_CURRENT_WORKFLOW', fetchCurrentWorkflow)
     yield takeEvery('FETCH_PHASES_TASKS', fetchPhasesTasks)
+    yield takeEvery('FETCH_PROJECT_DATA', fetchProjectData)
 }
 // gets all projects belonging to one user
 function* fetchExistingProjects(action){
@@ -38,6 +39,15 @@ function* fetchPhasesTasks(action){
         // when ran, the function sets the local state of the component it belongs in
         // using info passed to reduxState from code directly above 
         yield action.payload.callback()
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function* fetchProjectData(action) {
+    try {
+        const response = yield axios.get('/subscriber/project/data/' + action.payload)
+        yield put({ type: 'SET_PROJECT_DATA', payload: response.data })
     } catch (error) {
         console.log(error);
     }

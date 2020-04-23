@@ -23,6 +23,7 @@ import NewProject from '../ProjectManager/NewProject';
 import EditWorkflow from '../WorkflowEditor/EditWorkflow';
 import TeamMembers from '../TeamMembers/TeamMembers'
 import ProjectDetails from '../ProjectManager/ProjectDetails';
+import ProjectData from '../ProjectManager/ProjectData';
 
 //TEMPORARY!
 import AddTaskHaley from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
@@ -63,6 +64,7 @@ class App extends Component {
 
             <Route exact path="/projects/new" component={NewProject}/>
             <Route exact path="/projects/:projectId" component={ProjectDetails}/>
+            <Route exact path="/projects/data/:projectId" component={ProjectData}/>
 
 
             {/* these routes should be available to admins only */}
