@@ -11,7 +11,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 
 import UserProfile from '../UserProfile/UserProfile';
-
+import Alerts from '../Alerts/Alerts';
 import CreateWorkflow from '../WorkflowEditor/CreateWorkflow';
 import ExistingWorkflows from '../WorkflowEditor/ExistingWorkflows';
 import Subscribers from '../Subscribers/Subscribers';
@@ -27,12 +27,10 @@ import ProjectDetails from '../ProjectManager/ProjectDetails';
 //TEMPORARY!
 import AddTaskHaley from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
 
+
   // import AddTaskSummary from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
 
 // THESE SEEM UNUSED
-// import AddTask from '../AddTask/AddTask';
-// import Container from '../AddTask/Container';
-// import Header from '../Header/Header';
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 // import Alerts from '../AdminHome/Alerts/Alerts';
 // {/* <Route path="/admin" component={AdminNav} /> */ }
@@ -55,13 +53,13 @@ class App extends Component {
             <Route exact path="/logIn" component ={LoginPage} />
             {/* these routes should be available when logged in as subscriber or admin */}
             <Route exact path="/profile" component={UserProfile}/>
+            <Route exact path="/support" component={SupportPage}/>
 
             {/* this is for subscribers (maybe also admins?) */}
             <Route exact path="/dashboard" component={SubscriberHome}/>
             <Route exact path="/projects" component={ExistingProjects}/>
             <Route exact path="/projects/new" component={NewProject} />
-            <Route exact path="/support" component={SupportPage}/>
-
+            <Route exact path="/alerts" component={Alerts}/>
 
             <Route exact path="/projects/new" component={NewProject}/>
             <Route exact path="/projects/:projectId" component={ProjectDetails}/>

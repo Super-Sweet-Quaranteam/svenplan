@@ -14,6 +14,7 @@ function Navbar(props) {
                     <li className="nav-item"><Link to='/workflows' className="nav-link">Existing Workflows</Link></li>
                     <li className="nav-item"><Link to='/subscribers' className="nav-link">Subscribers</Link></li>
                     <li className="nav-item"><Link to='/profile' className="nav-link">My Profile</Link></li>
+                    <li className="nav-item"><Link to='/alerts' className="nav-link">Subscriber Alerts</Link></li>
                     <li className="nav-item">
                         <button className="btn-sml" onClick={() => {props.dispatch({ type: 'LOGOUT' }); props.history.push('/login')}}>Log Out</button>
                     </li>
