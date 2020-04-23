@@ -31,6 +31,7 @@ class ExistingWorkflows extends Component {
                 'success'
                 );
                 this.props.dispatch({type: 'DELETE_THIS_WORKFLOW', payload: {id: id}})
+                this.props.dispatch({ type: 'GET_TEAM_WORKFLOWS', payload: this.props.user.currentUser.team_id })
             }
         })
     }
@@ -53,7 +54,9 @@ class ExistingWorkflows extends Component {
                 'success'
                 );
                 this.props.dispatch({type: 'PUBLISH_THIS_WORKFLOW', payload: {id: id}})
+                this.props.dispatch({ type: 'GET_TEAM_WORKFLOWS', payload: this.props.user.currentUser.team_id })
             }
+            
         })
     }
 
