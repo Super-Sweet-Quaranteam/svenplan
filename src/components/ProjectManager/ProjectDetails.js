@@ -105,7 +105,7 @@ class CurrentWorkflow extends Component {
                                     <>
                                         <label>{input.prompt}</label>
                                         <br/>
-                                                <input onClick={(event) => this.handleChange(event, this.props.reduxState.project.taskDetails.id)} value={this.state[input.inputId] || ''} name={input.inputId} type="button" value={'Mark Complete'}></input>
+                                                <input onClick={(event) => this.handleChange(event, this.props.reduxState.project.taskDetails.id)} value={this.state[input.inputId] || ''} name={input.inputId} type="button"></input>
                                     </>
                              
                                 : input.inputType === 'number' ?

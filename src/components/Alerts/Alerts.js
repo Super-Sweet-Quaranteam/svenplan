@@ -8,6 +8,9 @@ class Alerts extends Component {
        this.props.dispatch({type: 'GET_ALERT_LIST'});
    }
 
+   markResolved=(id)=>{
+       this.props.dispatch({type: 'MARK_RESOLVED', payload: id})
+   }
 
     render() {
         return (
@@ -36,12 +39,13 @@ class Alerts extends Component {
                             <tr key={alert.id}>
                                 {/* <td>{alert.firstname} {alert.lastname}</td> */}
                                 <td>Name Here</td>
+                                {/* <td>{alert.team}</td> */}
                                 <td>Team Here</td>
                                 <td>{alert.description}</td>
                                 <td>{alert.created}</td>
-                                {(this.props.reduxState.alerts.alertList.resolved === false)
+                                {(alert.resolved === false)
                                 ?
-                                    <td><button onClick={() => this.markResolved(alert.id)} 
+                                    <td><button onClick={()=>this.markResolved(alert.id)} 
                                         className='btn-sml'>Mark Resolved</button></td>
                                 :
                                     <td>Resolved</td>
