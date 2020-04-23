@@ -22,16 +22,17 @@ function* createProject(action) {
 
 function* saveProject(action) {
     try {
-
+        console.log(action.payload, 'this is my action.payload')
+        Object.keys(action.payload.values).map(key => {
         const config = {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true,
-            details: action.payload,
+            details: {id:action.payload.projectId, key:Number(key), value: action.payload.values[key] }
 
         };
-        yield axios.post('/subscriber/project/values', config);
-
-    } catch (error) {
+     axios.post('/subscriber/project/values', config);
+    })
+        } catch (error) {
         console.log('Error create project:', error);
 
     }

@@ -87,15 +87,15 @@ router.post('/project', (req, res) => {
 
 router.post('/project/values', (req, res) => {
     console.log(req.body.details)
-    // let queryText = `INSERT INTO "projects" ("name", "team_id", "workflow_id") VALUES ($1, $2, $3);`
-    // pool.query(queryText, [req.body.details.name, req.body.details.team, req.body.details.workflow])
-    //     .then((response) => {
-    //         res.sendStatus(200);
-    //     })
-    //     .catch(() => {
-    //         console.log('something went wrong in get at /');
-    //         res.sendStatus(500);
-    //     })
+       let queryText = `INSERT INTO "capturedValues" ("project_id", "input_id", "value") VALUES ($1, $2, $3);`
+    pool.query(queryText, [req.body.details.id, req.body.details.key, req.body.details.value])
+        .then((response) => {
+            res.sendStatus(200);
+        })
+        .catch(() => {
+            console.log('something went wrong in get at /');
+            res.sendStatus(500);
+        })
 });
 
 module.exports = router;

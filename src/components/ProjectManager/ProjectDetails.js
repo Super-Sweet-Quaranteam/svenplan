@@ -5,7 +5,8 @@ import '../SubscriberHome/Subscriber.css';
 class CurrentWorkflow extends Component {
     state = {
         task: null,
-        taskIndex: 0
+        taskIndex: 0,
+        values:[]
     }  
     backATask=()=>{
         this.props.dispatch({ type: 'FETCH_INFORMATION_TO_DISPLAY', payload: { defaultTaskId: this.props.reduxState.subscriber.tasksInPhase[this.state.taskIndex - 1].id } }) 
@@ -37,7 +38,11 @@ class CurrentWorkflow extends Component {
         let valueId=Number(event.target.name)
         this.setState({taskId:id,
             projectId: this.props.reduxState.subscriber.projectId.id,
-            [valueId]:event.target.value})
+            [valueId]: event.target.value,
+            values: {...this.state.values,
+                [valueId]:event.target.value}
+        })
+                    console.log(valueId, event.target.value)
                     console.log(this.state)
     }
 
@@ -105,7 +110,7 @@ class CurrentWorkflow extends Component {
                                     <>
                                         <label>{input.prompt}</label>
                                         <br/>
-                                                <input onClick={(event) => this.handleChange(event, this.props.reduxState.project.taskDetails.id)} value={this.state[input.inputId] || ''} name={input.inputId} type="button" value={'Mark Complete'}></input>
+                                                <input onClick={(event) => this.handleChange(event, this.props.reduxState.project.taskDetails.id)} value={'Mark Complete'} name={input.inputId} type="button"></input>
                                     </>
                              
                                 : input.inputType === 'number' ?
