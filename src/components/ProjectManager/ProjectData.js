@@ -14,11 +14,12 @@ class ProjectData extends Component {
     render() {
         return (
             <div >
-
                 <h2>{this.props.reduxState.subscriber.projectId.name} Data</h2>
                 <table>
                     <thead>
                         <tr>
+                            <th>Phase</th>
+                            <th>Task</th>
                             <th>Input</th>
                             <th>Value</th>
                             
@@ -28,7 +29,9 @@ class ProjectData extends Component {
                         {this.props.reduxState.subscriber.projectData  &&
                         this.props.reduxState.subscriber.projectData.map(data =>
                             <tr key={data.id}>
-                                <td>{data.input_id}</td>
+                                <td>{data.phaseName}</td>
+                                <td>{data.taskName}</td>
+                                <td>{data.inputPrompt}</td>
                                 <td>{data.value}</td>
                                
                             </tr>)}

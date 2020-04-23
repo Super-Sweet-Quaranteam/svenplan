@@ -71,11 +71,13 @@ console.log(req.body.details)
 
 router.get('/project/data/:projectId', (req, res) => {
     let projectId = req.params.projectId
-    let queryText = `SELECT "default_tasks"."name" as "taskName", "inputs"."prompt" as "inputPrompt", "capturedValues"."fulfilled" as "fulfillmentStatus", "capturedValues"."value"
+    let queryText = `SELECT "phases"."name" AS "phaseName", "default_tasks"."name" as "taskName", "inputs"."prompt" as "inputPrompt", "capturedValues"."fulfilled" as "fulfillmentStatus", "capturedValues"."value"
                     FROM "capturedValues" 
                     JOIN "inputs" ON "inputs"."id"="capturedValues"."input_id"
                     JOIN "default_tasks" ON "default_tasks"."id"="inputs"."task_id"
+                    JOIN "phases" ON "default_tasks"."phase_id"="phases"."id"
                     WHERE "project_id"= $1 ORDER BY "input_id";`;
+                    //maybe this should be ordered by task sequence instead. input id works for most cases though.
     pool.query(queryText, [projectId])
         .then((response) => {
             // console.log('successful get- response.rows:', response.rows);
