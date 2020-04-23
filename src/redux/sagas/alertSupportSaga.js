@@ -6,6 +6,7 @@ import {takeEvery, put} from "redux-saga/effects";
 function* alerts() {
     yield takeEvery('GET_ALERT_LIST', getAlertList);
     yield takeEvery('MARK_RESOLVED', markResolved);
+    yield takeEvery('SUBMIT_ALERT', submitAlert);
 }
 
 
@@ -29,6 +30,15 @@ function* markResolved(alert){
     }
 }
 
+// submit new alert to db
+function* submitAlert(alert) {
+    console.log("in saga submit alert POST with: ", alert.payload);
+    try {
+        yield axios.post(`/api/alert/new`, alert.payload);
+    } catch(error){
+        console.log(error);
+    }
+}
 
 
 export default alerts;

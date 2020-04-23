@@ -16,9 +16,6 @@ class Alerts extends Component {
         return (
             <div >
                 <h1>Subscriber Alerts</h1>
-
-                <h2>Alerts:</h2>
-
                 <table>
                     <thead>
                         <tr>
@@ -37,10 +34,8 @@ class Alerts extends Component {
                         <>
                         {this.props.reduxState.alerts.alertList.map(alert => 
                             <tr key={alert.id}>
-                                {/* <td>{alert.firstname} {alert.lastname}</td> */}
-                                <td>Name Here</td>
-                                {/* <td>{alert.team}</td> */}
-                                <td>Team Here</td>
+                                <td>{alert.firstname} {alert.lastname}</td>
+                                <td>{alert.teamname}</td>
                                 <td>{alert.description}</td>
                                 <td>{alert.created}</td>
                                 {(alert.resolved === false)
