@@ -42,6 +42,7 @@ class CurrentWorkflow extends Component {
     handleChange=(event, id)=>{
         let valueId=Number(event.target.name)
         this.setState({taskId:id,
+            projectId: this.props.reduxState.subscriber.projectId.id,
             [valueId]:event.target.value})
                     console.log(this.state)
     }
