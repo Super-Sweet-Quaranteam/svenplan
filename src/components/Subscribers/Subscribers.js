@@ -63,7 +63,7 @@ class Subscribers extends Component{
                         <span><h2>{this.state.query}</h2></span>
                     </li>
                 </form>
-                <table id="clientTable">
+                <table id="clientTable" className="tbl-lg">
                     <thead className="sticky">
                         <tr>
                             <th className="sticky">Company</th>
