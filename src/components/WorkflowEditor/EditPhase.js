@@ -50,6 +50,12 @@ class EditPhase extends Component {
     // allows for editing a phase - conditionally rendered below
     editPhase=()=>{
         this.props.dispatch({type: 'TOGGLE_EDIT_PHASE'});
+        if(this.props.reduxState.workflow.storeCurent.editTask === true){
+            this.props.dispatch({type: 'TOGGLE_EDIT_TASK'});
+        }
+        if(this.props.reduxState.workflow.storeCurent.addTask === true){
+            this.props.dispatch({type: 'TOGGLE_ADD_TASK'});
+        }
     }
 
     // handles state changes for forms

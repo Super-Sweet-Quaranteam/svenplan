@@ -39,7 +39,12 @@ function AddTask(props) {
                     task: props.taskID
                 }});
                 props.dispatch({ type: 'GO_HOME_STEP' });
-                props.dispatch({type: 'TOGGLE_ADD_TASK'});
+                if(this.props.reduxState.workflow.storeCurent.editTask === true){
+                    this.props.dispatch({type: 'TOGGLE_EDIT_TASK'});
+                }
+                if(this.props.reduxState.workflow.storeCurent.addTask === true){
+                    this.props.dispatch({type: 'TOGGLE_ADD_TASK'});
+                }
             }
         })
     }
