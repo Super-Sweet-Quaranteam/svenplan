@@ -26,6 +26,9 @@ class EditWorkflow extends Component {
         if(this.props.reduxState.workflow.storeCurent.editPhase === true){
             this.props.dispatch({type: 'TOGGLE_EDIT_PHASE'});
         }
+        if(this.props.reduxState.workflow.storeCurent.addPhase === true){
+            this.props.dispatch({type: 'TOGGLE_ADD_PHASE'});
+        }
     }
 
     // gets current phase by id to be displayed below - handled in EditPhase.js
