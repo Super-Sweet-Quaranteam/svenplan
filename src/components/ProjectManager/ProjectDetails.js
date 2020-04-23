@@ -30,7 +30,7 @@ class CurrentWorkflow extends Component {
     handleChange=(event, id)=>{
         this.setState({taskId:id,
                         value:event.target.value,
-                        inputNumber:event.target.name})
+                        inputNumber:Number(event.target.name)})
                         console.log(this.state)
     }
     // index of task from tasksInPhase will always start at 0 (first task in list)
@@ -132,7 +132,7 @@ class CurrentWorkflow extends Component {
                                     <>
                                                                         <label>{input.prompt}</label>                            
                                         <br/>
-                                                                        <input onChange={(event)=>this.handleChange(event, this.props.reduxState.project.taskDetails.id)} name={i} type="text" placeholder={input.prompt}></input>
+                                                                        <input onChange={(event)=>this.handleChange(event, this.props.reduxState.project.taskDetails.id)} name={input.inputId} type="text" placeholder={input.prompt}></input>
                                     </>
                                 : input.inputType === 'url' ?
                                     <>
