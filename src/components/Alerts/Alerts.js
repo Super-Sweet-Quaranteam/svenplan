@@ -33,19 +33,26 @@ class Alerts extends Component {
                         :
                         <>
                         {this.props.reduxState.alerts.alertList.map(alert => 
-                            <tr key={alert.id}>
-                                <td>{alert.firstname} {alert.lastname}</td>
-                                <td>{alert.teamname}</td>
-                                <td>{alert.description}</td>
-                                <td>{alert.created}</td>
-                                {(alert.resolved === false)
-                                ?
-                                    <td><button onClick={()=>this.markResolved(alert.id)} 
-                                        className='btn-sml'>Mark Resolved</button></td>
-                                :
-                                    <td>Resolved</td>
-                                }
-                            </tr>
+                        <>
+                            {this.props.reduxState.user.currentUser.team_id === alert.team_id 
+                            &&
+                            <>
+                                <tr key={alert.id}>
+                                    <td>{alert.firstname} {alert.lastname}</td>
+                                    <td>{alert.teamname}</td>
+                                    <td>{alert.description}</td>
+                                    <td>{alert.created}</td>
+                                    {(alert.resolved === false)
+                                    ?
+                                        <td><button onClick={()=>this.markResolved(alert.id)} 
+                                            className='btn-sml'>Mark Resolved</button></td>
+                                    :
+                                        <td>Resolved</td>
+                                    }
+                                </tr>
+                            </>
+                            }
+                            </>
                             )}
                         </>
                         }                 

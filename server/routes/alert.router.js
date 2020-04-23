@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/list/all', (req, res) => {
     console.log('in alert GET all alerts:')
     const queryText = `SELECT "alerts"."id", "description", "user_id", TO_CHAR("created", 'FMDay, FMMonth FMDD FMYYYY HH12:MI am') as created,
-    "resolved", "users"."firstname" as firstname, "users"."lastname" as lastname, "teams"."name" as teamname
+    "resolved", "users"."firstname" as firstname, "users"."lastname" as lastname, "teams"."name" as teamname, "teams"."id" as team_id
     FROM "alerts" 
     join "users" on "users"."id" = "alerts"."user_id"
     join "teams" on "teams"."id" = "users"."team_id"

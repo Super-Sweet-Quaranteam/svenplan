@@ -50,7 +50,7 @@ class CurrentWorkflow extends Component {
     // index of task from tasksInPhase will always start at 0 (first task in list)
     // this.state.taskIndex instead of 0 helps code remember which task we're currently on
     showTasks=(phaseId)=>{
-        console.log('you clicked a phase', phaseId);
+        // console.log('you clicked a phase', phaseId);
         // passing function in payload so sagas can run it async.
         this.props.dispatch({type: 'FETCH_PHASES_TASKS', payload: {phaseId: phaseId, callback: () => {
             this.props.dispatch({ type: 'FETCH_INFORMATION_TO_DISPLAY', payload: { defaultTaskId: this.props.reduxState.subscriber.tasksInPhase[0].id } }) 
@@ -111,7 +111,7 @@ class CurrentWorkflow extends Component {
                                         <label>{input.prompt}</label>
                                         <br/>
 
-                                                <input onClick={(event) => this.handleChange(event, this.props.reduxState.project.taskDetails.id)} value={'Complete'} name={input.inputId} type="button"></input>
+                                                <input className="btn-sml" onClick={(event) => this.handleChange(event, this.props.reduxState.project.taskDetails.id)} value={'Complete'} name={input.inputId} type="button"></input>
 
 
                                     </>
@@ -139,12 +139,12 @@ class CurrentWorkflow extends Component {
                         </form>
                             <br/>
                         {this.state.taskIndex === 0 & this.props.reduxState.subscriber.tasksInPhase.length === 1  ? 
-                            <button onClick={this.saveButton}>Save</button>
+                            <button className="btn-sml" onClick={this.saveButton}>Save</button>
                             :
                             <>
                                 {this.state.taskIndex === 0 ?
                                 // this.state.task === this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
-                                    <button onClick={this.forwardATask}>Next</button>
+                                    <button  onClick={this.forwardATask}>Next</button>
                                     // <button onClick={this.backATask}>Back</button>
                                 :
                                     <>
@@ -152,12 +152,12 @@ class CurrentWorkflow extends Component {
                                          this.state.task === this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
                                             <>
                                             <button onClick={this.backATask}>Back</button>
-                                                <button onClick={this.saveButton}>Save</button>
+                                                <button className="btn-sml" onClick={this.saveButton}>Save</button>
                                                     </>
                                             :
                                             <>
                                                 <button onClick={this.backATask}>Back</button>
-                                                <button onClick={this.forwardATask}>Next</button>
+                                                <button className="btn-sml" onClick={this.forwardATask}>Next</button>
                                             </>
                                         }
                                     </>
