@@ -71,7 +71,11 @@ console.log(req.body.details)
 
 router.get('/project/data/:projectId', (req, res) => {
     let projectId = req.params.projectId
-    let queryText = `SELECT * FROM "capturedValues" WHERE "project_id"= $1 ORDER BY "input_id" `;
+    let queryText = `SELECT "default_tasks"."name" as "taskName", "inputs"."prompt" as "inputPrompt", "capturedValues"."fulfilled" as "fulfillmentStatus", "capturedValues"."value"
+                    FROM "capturedValues" 
+                    JOIN "inputs" ON "inputs"."id"="capturedValues"."input_id"
+                    JOIN "default_tasks" ON "default_tasks"."id"="inputs"."task_id"
+                    WHERE "project_id"= $1 ORDER BY "input_id";`;
     pool.query(queryText, [projectId])
         .then((response) => {
             // console.log('successful get- response.rows:', response.rows);
