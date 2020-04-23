@@ -96,49 +96,21 @@ class CurrentWorkflow extends Component {
                                     <>
                                         <label>{input.prompt}</label>
                                         <br/>
-                                                <input type="button" value={input.prompt}></input>
+                                                <input onChange={(event) => this.handleChange(event, this.props.reduxState.project.taskDetails.id)} name={input.inputId} type="button" value={input.prompt}></input>
                                     </>
-                                : input.inputType === 'checkbox' ?
-                                    <>
-                                        <label>{input.prompt}</label>
-                                        <br/>
-                                        <input type="checkbox"></input>
-                                    </>
-                                : input.inputType === 'radio' ?
-                                    <>
-                                                        <label>{input.prompt}</label>
-                                        <br/>
-                                        <input type="radio"></input>
-                                    </>                            
+                             
                                 : input.inputType === 'number' ?
                                     <>
                                                             <label>{input.prompt}</label>
                                         <br/>
-                                        <input type="number"></input>
+                                                    <input onChange={(event) => this.handleChange(event, this.props.reduxState.project.taskDetails.id)} name={input.inputId} type="number"></input>
                                     </>                            
-                                : input.inputType === 'email' ?
-                                    <>
-                                                                <label>{input.prompt}</label>
-                                        <br/>
-                                        <input type="email"></input>
-                                    </>                            
-                                : input.inputType === 'tel' ?
-                                    <>
-                                                                    <label>{input.prompt}</label>
-                                        <br/>
-                                        <input type="tel"></input>
-                                    </>                            
+                               
                                 : input.inputType === 'text' ?
                                     <>
                                                                         <label>{input.prompt}</label>                            
                                         <br/>
                                                                         <input onChange={(event)=>this.handleChange(event, this.props.reduxState.project.taskDetails.id)} name={input.inputId} type="text" placeholder={input.prompt}></input>
-                                    </>
-                                : input.inputType === 'url' ?
-                                    <>
-                                                                            <label>{input.prompt}</label>
-                                        <br/>
-                                        <input type="url"></input>
                                     </>
                                 : <></>
                                 
