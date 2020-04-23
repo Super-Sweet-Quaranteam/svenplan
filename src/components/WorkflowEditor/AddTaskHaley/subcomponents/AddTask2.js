@@ -33,7 +33,7 @@ class AddTask2 extends Component {
             <form className="form">
                 <li>
                     <label htmlFor="descriptionInput">Description</label>
-                    <textarea id="descriptionInput" defaultValue={this.props.task.taskInProgress.description || ""} onChange={this.handleDescriptionInput}/>
+                    <textarea id="descriptionInput" defaultValue={this.state.descriptionInput || ""} onChange={this.handleDescriptionInput}/>
                     <span>enter task descrtiption</span>
                 </li>
             </form>

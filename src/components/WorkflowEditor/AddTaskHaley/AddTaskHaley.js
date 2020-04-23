@@ -39,11 +39,11 @@ function AddTask(props) {
                     task: props.taskID
                 }});
                 props.dispatch({ type: 'GO_HOME_STEP' });
-                if(this.props.reduxState.workflow.storeCurent.editTask === true){
-                    this.props.dispatch({type: 'TOGGLE_EDIT_TASK'});
+                if(props.edit === true){
+                    props.dispatch({type: 'TOGGLE_EDIT_TASK'});
                 }
-                if(this.props.reduxState.workflow.storeCurent.addTask === true){
-                    this.props.dispatch({type: 'TOGGLE_ADD_TASK'});
+                if(props.add === true){
+                    props.dispatch({type: 'TOGGLE_ADD_TASK'});
                 }
             }
         })
@@ -85,7 +85,8 @@ const mapStateToProps = state => ({
     taskStep: state.task.stepOfTaskCreation,
     phase: state.workflow.storeCurent.phase,
     taskID: state.workflow.storeCurent.task,
-    edit: state.workflow.storeCurent.editTask
+    edit: state.workflow.storeCurent.editTask,
+    add: state.workflow.storeCurent.addTask 
 });
 
 export default connect(mapStateToProps)(AddTask);
