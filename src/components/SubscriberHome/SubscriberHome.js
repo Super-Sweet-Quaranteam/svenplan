@@ -41,8 +41,7 @@ const ClientHome =(props)=>{
             <br/>
             <br/>
             <br/>
-            <h2>This is client home. Haley commented out what could probably be deleted. ClientNav is redundant at this point, I think.</h2>
-            <p>can have like a little hello or various summaries on this page, doesn't matter til other things are populated</p>
+            
         </>
     );
 }

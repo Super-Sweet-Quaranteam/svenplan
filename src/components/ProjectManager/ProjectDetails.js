@@ -139,7 +139,7 @@ class CurrentWorkflow extends Component {
                         </form>
                             <br/>
                         {this.state.taskIndex === 0 & this.props.reduxState.subscriber.tasksInPhase.length === 1  ? 
-                              <></>
+                            <button onClick={this.saveButton}>Save</button>
                             :
                             <>
                                 {this.state.taskIndex === 0 ?
