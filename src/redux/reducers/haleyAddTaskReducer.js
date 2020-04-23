@@ -30,7 +30,10 @@ const taskInProgress = (state = {
         case 'UPDATE_TASK_INPUTS':
             if (state.inputs) { return { ...state, inputs: [...state.inputs, action.payload] } }
             else { return { ...state, inputs: [action.payload] } };
-        default:
+        case 'CLEAR_TASK_FIELDS':
+            return state = {...state.phaseId, riskareaOptions: [], title: '', sequence: null, 
+            riskareas: [], description: '',links: [], inputs: []}
+        default: 
             return state;
     }
 };
