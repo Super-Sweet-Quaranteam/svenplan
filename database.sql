@@ -161,6 +161,16 @@ CREATE TABLE "actions"
     "timestamp" TIMESTAMPTZ
 );
 
+CREATE TABLE "alerts"
+(
+    "id" SERIAL PRIMARY KEY,
+    "type" VARCHAR,
+    "description" VARCHAR,
+    "created" TIMESTAMPTZ DEFAULT NOW(),
+    "resolved" BOOLEAN DEFAULT false,
+    "user_id" INT REFERENCES "users"("id") ON DELETE CASCADE
+);
+
 ----------------------------------
 --INSERTION QUERIES/EXAMPLE DATA--
 ----------------------------------
@@ -424,6 +434,14 @@ INSERT INTO "notes"
     ("task_id", "user_id", "text", "timestamp")
 VALUES
     (45, 23, 'it is when you trigger a project', NOW());
+
+
+INSERT INTO "alerts"
+    ("type", "description", "user_id")
+VALUES
+    ('text', 'Help me i am stuck!', 1),
+    ('text', 'So where do i go from here?', 2),
+    ('text', 'Can you help with this task', 3);
 
 -------------------
 --  GET QUERIES  --

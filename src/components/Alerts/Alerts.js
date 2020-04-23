@@ -8,14 +8,14 @@ class Alerts extends Component {
        this.props.dispatch({type: 'GET_ALERT_LIST'});
    }
 
+   markResolved=(id)=>{
+       this.props.dispatch({type: 'MARK_RESOLVED', payload: id})
+   }
 
     render() {
         return (
             <div >
                 <h1>Subscriber Alerts</h1>
-
-                <h2>Alerts:</h2>
-
                 <table>
                     <thead>
                         <tr>
@@ -34,14 +34,13 @@ class Alerts extends Component {
                         <>
                         {this.props.reduxState.alerts.alertList.map(alert => 
                             <tr key={alert.id}>
-                                {/* <td>{alert.firstname} {alert.lastname}</td> */}
-                                <td>Name Here</td>
-                                <td>Team Here</td>
+                                <td>{alert.firstname} {alert.lastname}</td>
+                                <td>{alert.teamname}</td>
                                 <td>{alert.description}</td>
                                 <td>{alert.created}</td>
-                                {(this.props.reduxState.alerts.alertList.resolved === false)
+                                {(alert.resolved === false)
                                 ?
-                                    <td><button onClick={() => this.markResolved(alert.id)} 
+                                    <td><button onClick={()=>this.markResolved(alert.id)} 
                                         className='btn-sml'>Mark Resolved</button></td>
                                 :
                                     <td>Resolved</td>
