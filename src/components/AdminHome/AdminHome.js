@@ -2,42 +2,42 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './AdminHome.css'
 
-//admin home was basically acting as half a nav, so I moved that stuff to nav
+// landing place for admins, currently can view team name or create if dont have one
 function AdminHome(props) {
 
     let teamName=''
 
     function handleChange(event){
-        teamName=event.target.value
-        // console.log(teamName)
+        teamName = event.target.value
     }
    function createTeam(){
-    //    console.log('teamname dispatch', teamName)
        props.dispatch({ type: 'CREATE_TEAM', payload:teamName })
      
     }
     return (
         <>       
-            <p>this is admin home</p>
-            <p>something like....</p>
+            <img className="hero-image" src="/images/skyline.png" alt="skyline"/>
                 <h2>Welcome, {props.user.currentUser.alias}</h2>
-                <h3>here are some things you can do with an admin account (etc etc etc)</h3>
 
                 {props.user.currentUser.team_id === null &&
                 <>
-                <p>Create a team:</p>
-                <input onChange={handleChange} placeholder="Team Name"></input>
-                <button onClick={createTeam}>Create</button>
+                <p>:</p>
+                <form className='form' onClick={createTeam}>
+                    <li>
+                        <label>Create A Team</label>
+                        <input type="text" onChange={handleChange} placeholder="Team Name"/>
+                        <span>choose a team name</span>
+                    </li>
+                    <input className="btn-sml" type="submit" value="create"/>
+                </form>
                 </>
                 }
             {props.user.currentUser.team_id !== null &&
                 <>
-                <p>Your team: {props.user.currentUser.team}</p>
-                    
+                <br/>
+                <h2>Your team: {props.user.currentUser.team}</h2>
                 </>
             }
-
-            <button onClick={() => props.history.push('/add-task-haley')}>Click Here for Task Add</button>
         </>
     );
 }

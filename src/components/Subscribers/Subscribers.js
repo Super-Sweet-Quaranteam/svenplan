@@ -11,9 +11,6 @@ class Subscribers extends Component{
 
     componentDidMount=()=>{
         this.props.dispatch({type: 'GET_CLIENT_LIST'});
-        // this.setState({
-        //     query:this.props.reduxState.admin.clientList
-        // })
     }
 
     accessChange=(id, level)=>{

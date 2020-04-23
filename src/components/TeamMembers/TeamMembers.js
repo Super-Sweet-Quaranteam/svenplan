@@ -68,10 +68,8 @@ state={
                                 <td>Cannot Change Personal Access Level</td>
                             }
                             {/* <td>{client.address}</td> */}
-                        </tr>
-                                
-                                )} 
-                                             
+                        </tr>    
+                    )}               
                 </tbody>
             </table>
         </div>
