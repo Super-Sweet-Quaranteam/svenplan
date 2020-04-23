@@ -15,7 +15,7 @@ class Alerts extends Component {
     render() {
         return (
             <div >
-                <h1>Subscriber Alerts</h1>
+                <h2>Team Member Alerts</h2>
                 <table className="tbl-sml">
                     <thead>
                         <tr>
