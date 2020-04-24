@@ -77,7 +77,7 @@ class CurrentWorkflow extends Component {
                 </div>
                 <div className="taskWindow">
                 {this.state.task && <div className="taskAtHand" key={this.state.task.id}>
-                    <div className="seq">{this.props.reduxState.project.taskDetails.sequence}</div>
+                    <div className="seq">{this.props.reduxState.project.taskDetails.phaseSequence}.{this.props.reduxState.project.taskDetails.taskSequence}</div>
                         <h3>{this.props.reduxState.project.taskDetails.name}</h3>
                         <h4>{this.props.reduxState.project.taskDetails.description}</h4>
                             <br/>
