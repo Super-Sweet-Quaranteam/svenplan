@@ -21,11 +21,11 @@ const ClientHome =(props)=>{
         <>
             <img className="hero-image" src="/images/skyline.png" alt="skyline"/>
             {props.user.currentUser.team_id === null &&
-                <form clasName="form">
+                <form className="form">
                     <li>
                         <label>Join A Workflow Group</label>
                         <input type="text" onChange={handleChange} placeholder="Access Code"/>
-                        <span>enter access code</span>
+                        <span>enter access code associated with a workflow group</span>
                     </li>
                     <button className="btn-sml" onClick={joinTeam}>Join</button>
                 </form>
