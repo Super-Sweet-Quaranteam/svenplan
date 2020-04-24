@@ -7,7 +7,8 @@ const router = express.Router();
 
 router.get('/task/default-info/:id', rejectUnauthenticated, (req, res) => {
     let taskId=req.params.id
-    const queryText = 'SELECT * FROM "default_tasks" WHERE "id"=$1;'
+    const queryText = `SELECT "default_tasks"."id", "default_tasks"."name", "default_tasks"."description", "default_tasks"."phase_id", "default_tasks"."sequence" AS "taskSequence", "default_tasks"."created", "default_tasks"."edited", "phases"."sequence" AS "phaseSequence" FROM "default_tasks" 
+    JOIN "phases" ON "phases"."id" = "default_tasks"."phase_id" WHERE "default_tasks"."id" = $1;`
     pool.query(queryText, [taskId])
         .then((response) => {
             res.send(response.rows);
