@@ -66,8 +66,8 @@ class CurrentWorkflow extends Component {
             <div className='CurrentWorkflow'>
                 <h2>{this.props.reduxState.subscriber.projectId.name}</h2>
                 {/* button to take user back to existing projects */}
-                <button className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayOldWorkFlow: true}})}>
-                        <a className="nav-link" href="#/projects">Back</a>
+                <button className="button" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayOldWorkFlow: true}})}>
+                        <a className="no-link" href="#/projects">Back</a>
                 </button>
                 {/* phase divs are set up as buttons for a11y. onClick, specific tasks show up */}
                 <div className="phaseOverview">
@@ -144,19 +144,19 @@ class CurrentWorkflow extends Component {
                             <>
                                 {this.state.taskIndex === 0 ?
                                 // this.state.task === this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
-                                    <button  onClick={this.forwardATask}>Next</button>
+                                    <button className="btn-sml" onClick={this.forwardATask}>Next</button>
                                     // <button onClick={this.backATask}>Back</button>
                                 :
                                     <>
                                         {
                                          this.state.task === this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
                                             <>
-                                            <button onClick={this.backATask}>Back</button>
+                                            <button className="btn-sml" onClick={this.backATask}>Back</button>
                                                 <button className="btn-sml" onClick={this.saveButton}>Save</button>
                                                     </>
                                             :
                                             <>
-                                                <button onClick={this.backATask}>Back</button>
+                                                <button className="btn-sml" onClick={this.backATask}>Back</button>
                                                 <button className="btn-sml" onClick={this.forwardATask}>Next</button>
                                             </>
                                         }

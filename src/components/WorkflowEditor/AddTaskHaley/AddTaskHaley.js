@@ -51,9 +51,14 @@ function AddTask(props) {
 
     return (
         <>
-            <h2>Add Task To Phase</h2>
-           {props.edit === true && 
+           {props.edit === true 
+           ?
+            <>
+                <h2>Edit Task</h2> 
                 <div className="side-button" onClick={deleteTask}><button className="btn-sml-delete">Delete Task</button></div>
+            </>
+            :
+            <h2>Add Task To Phase</h2>
            }
             
             {props.taskStep === 1 && <AddTask1 />}

@@ -66,7 +66,7 @@ class UserProfile extends Component {
           <p>Email: {this.props.user.currentUser.email}</p>
           <p>Display Name: {this.props.user.currentUser.alias}</p>
           <p>Full Name: {this.props.user.currentUser.firstname} {this.props.user.currentUser.lastname}</p>
-          <p>User ID: {this.props.user.currentUser.id}</p>
+          {/* <p>User ID: {this.props.user.currentUser.id}</p> */}
             <p>Access Level: {this.props.user.currentUser.level === 1 &&
              "Application Admin"  }
             {this.props.user.currentUser.level === 2 &&
@@ -79,9 +79,9 @@ class UserProfile extends Component {
               <br/>
             {this.props.user.currentUser.team_id
                 ?
-              <p>Team: {this.props.user.currentUser.team}</p>
+              <h2>Team: {this.props.user.currentUser.team}</h2>
                 :
-               <p>Not part of any team</p>
+               <h2>Not part of any team</h2>
               }
           </div>
       </div>
