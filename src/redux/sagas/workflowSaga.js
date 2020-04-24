@@ -175,7 +175,7 @@ function* publishThisWorkflow(id){
     }
 }
 
-// remove workflow from dbyield put({type: 'GET_TEAM_WORKFLOWS', payload: remove.payload.team});
+// remove workflow from db
 function* deleteThisWorkflow(remove) {
     console.log("in saga workflow DELETE with: ", remove.payload);
     try {
