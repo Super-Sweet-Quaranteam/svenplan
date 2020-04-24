@@ -169,6 +169,7 @@ function* publishThisWorkflow(id){
         const publishWF = yield axios.put(`/api/workflow/publish/${id.payload.id}`);
         console.log('in SAGA returning from publish workflow PUT', publishWF);
         yield put({type: 'GET_ALL_WORKFLOWS'});
+        yield put({type: 'GET_TEAM_WORKFLOWS', payload: id.payload.team});
     } catch(error){
         console.log('error in saga /workflow/publish/wf:', error);
     }
@@ -180,6 +181,7 @@ function* deleteThisWorkflow(remove) {
     try {
         yield axios.delete(`/api/workflow/remove/workflow/${remove.payload.id}`);
         yield put({type: 'GET_ALL_WORKFLOWS'});
+        yield put({type: 'GET_TEAM_WORKFLOWS', payload: remove.payload.team});
     } catch(error){
         console.log(error);
     }

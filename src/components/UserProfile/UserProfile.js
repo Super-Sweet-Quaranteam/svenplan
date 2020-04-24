@@ -66,7 +66,7 @@ class UserProfile extends Component {
           <p>Email: {this.props.user.currentUser.email}</p>
           <p>Display Name: {this.props.user.currentUser.alias}</p>
           <p>Full Name: {this.props.user.currentUser.firstname} {this.props.user.currentUser.lastname}</p>
-          <p>User ID: {this.props.user.currentUser.id}</p>
+          {/* <p>User ID: {this.props.user.currentUser.id}</p> */}
             <p>Access Level: {this.props.user.currentUser.level === 1 &&
              "Application Admin"  }
             {this.props.user.currentUser.level === 2 &&
@@ -79,9 +79,11 @@ class UserProfile extends Component {
               <br/>
             {this.props.user.currentUser.team_id
                 ?
+
               <p>Workflow Group: {this.props.user.currentUser.team}</p>
                 :
                <p>Not part of any workflow group</p>
+
               }
           </div>
       </div>

@@ -66,17 +66,18 @@ class CurrentWorkflow extends Component {
             <div className='CurrentWorkflow'>
                 <h2>{this.props.reduxState.subscriber.projectId.name}</h2>
                 {/* button to take user back to existing projects */}
-                <button className="nav-item" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayOldWorkFlow: true}})}>
-                        <a className="nav-link" href="#/projects">Back</a>
+                <button className="button" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayOldWorkFlow: true}})}>
+                        <a className="no-link" href="#/projects">Back</a>
                 </button>
                 {/* phase divs are set up as buttons for a11y. onClick, specific tasks show up */}
                 <div className="phaseOverview">
                     {this.props.reduxState.subscriber.currentProject.map(phase => 
-                        <button className="phaseOverviewItem" key={phase.phase_id} onClick={()=>this.showTasks(phase.phase_id)}>{phase.phase_name}</button>
+                        <div className="phaseOverviewItem" key={phase.phase_id} onClick={()=>this.showTasks(phase.phase_id)}><div className="seq">{phase.phase_seq}</div>{phase.phase_name}</div>
                     )}
                 </div>
                 <div className="taskWindow">
                 {this.state.task && <div className="taskAtHand" key={this.state.task.id}>
+                    <div className="seq">{this.props.reduxState.project.taskDetails.sequence}</div>
                         <h3>{this.props.reduxState.project.taskDetails.name}</h3>
                         <h4>{this.props.reduxState.project.taskDetails.description}</h4>
                             <br/>
@@ -88,9 +89,9 @@ class CurrentWorkflow extends Component {
                                 {this.props.reduxState.project.taskDetails.links.length !== 0 &&
                                 <>
                             <h4>Relevant Links:</h4>
-                                {this.props.reduxState.project.taskDetails.links.map(link =>
+                                {this.props.reduxState.project.taskDetails.links.map((link, i )=>
                                 <>
-                                    <a href={link.url}>{link.textToShow}</a>
+                                    <a key={i} href={link.url}>{link.textToShow}</a>
                                     <br/>
                                     </>
                                 )}
@@ -144,19 +145,19 @@ class CurrentWorkflow extends Component {
                             <>
                                 {this.state.taskIndex === 0 ?
                                 // this.state.task === this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
-                                    <button  onClick={this.forwardATask}>Next</button>
+                                    <button className="btn-sml" onClick={this.forwardATask}>Next</button>
                                     // <button onClick={this.backATask}>Back</button>
                                 :
                                     <>
                                         {
                                          this.state.task === this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
                                             <>
-                                            <button onClick={this.backATask}>Back</button>
+                                            <button className="btn-sml" onClick={this.backATask}>Back</button>
                                                 <button className="btn-sml" onClick={this.saveButton}>Save</button>
                                                     </>
                                             :
                                             <>
-                                                <button onClick={this.backATask}>Back</button>
+                                                <button className="btn-sml" onClick={this.backATask}>Back</button>
                                                 <button className="btn-sml" onClick={this.forwardATask}>Next</button>
                                             </>
                                         }
