@@ -88,9 +88,9 @@ class CurrentWorkflow extends Component {
                                 {this.props.reduxState.project.taskDetails.links.length !== 0 &&
                                 <>
                             <h4>Relevant Links:</h4>
-                                {this.props.reduxState.project.taskDetails.links.map(link =>
+                                {this.props.reduxState.project.taskDetails.links.map((link, i )=>
                                 <>
-                                    <a href={link.url}>{link.textToShow}</a>
+                                    <a key={i} href={link.url}>{link.textToShow}</a>
                                     <br/>
                                     </>
                                 )}
