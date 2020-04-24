@@ -84,9 +84,9 @@ class Subscribers extends Component{
                                 <td>{subscriber.phone}</td>
                                 <td>{subscriber.level}:
                                 { subscriber.level ===3 &&
-                                'Team Member'}
+                                'Project User'}
                                 {subscriber.level ===2 &&
-                                'Enterprise Admin'}
+                                'Workflow Creator'}
                                     {subscriber.level === 1 &&
                                         'Application Administrator'}
                                 </td>

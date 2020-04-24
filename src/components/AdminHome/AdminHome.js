@@ -24,9 +24,9 @@ function AdminHome(props) {
                 <p>:</p>
                 <form className='form' onClick={createTeam}>
                     <li>
-                        <label>Create A Team</label>
-                        <input type="text" onChange={handleChange} placeholder="Team Name"/>
-                        <span>choose a team name</span>
+                        <label>Create A Workflow Group</label>
+                        <input type="text" onChange={handleChange} placeholder="Enter Access Code"/>
+                        <span>(This is the code users will access your workflows with)</span>
                     </li>
                     <input className="btn-sml" type="submit" value="create"/>
                 </form>
@@ -35,7 +35,7 @@ function AdminHome(props) {
             {props.user.currentUser.team_id !== null &&
                 <>
                 <br/>
-                <h2>Your team: {props.user.currentUser.team}</h2>
+                <h2>Your Workflow Group: {props.user.currentUser.team}</h2>
                 </>
             }
         </>
