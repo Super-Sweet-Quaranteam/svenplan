@@ -17,7 +17,6 @@ class NewProject extends Component {
         this.setState({
             [propertyName]: event.target.value,
         });
-        console.log(this.state)
     }
 
     createProject =()=>{
@@ -29,23 +28,33 @@ class NewProject extends Component {
     }
     render() {
         return (
-            <div >
-             <h2>New Project</h2>
-             <h4>Select your Workflow:</h4>
-            <select onChange={this.handleChange('workflow')}>
-                <option></option>
-            {this.props.reduxState.workflow.teamWorkflows &&
-            this.props.reduxState.workflow.teamWorkflows.map(workflow=>
-                workflow.published===true &&
-                <option key={workflow.id} value={Number(workflow.id)}>{workflow.name}</option>
-                
-            
-            )}
-
-            </select>
-            <input onChange={this.handleChange('name')} placeholder='Project Name'></input>
-            <button onClick={this.createProject}>Create Project</button>
-            </div>
+            <>
+                <h2>New Project</h2>
+                <br/>
+                <br/>
+                <form className="form">
+                    <label>Select Workflow</label>
+                    <select onChange={this.handleChange('workflow')}>
+                        <option></option>
+                    {this.props.reduxState.workflow.teamWorkflows &&
+                    this.props.reduxState.workflow.teamWorkflows.map(workflow=>
+                        workflow.published===true &&
+                        <option key={workflow.id} value={Number(workflow.id)}>{workflow.name}</option>
+                     )}
+                    </select>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <li>
+                        <label>Project Name</label>
+                        <input type="text" onChange={this.handleChange('name')} placeholder='Project Name'/>
+                        <span>Title Project</span>
+                    </li>
+                    <button className="btn-sml" onClick={this.createProject}>Create Project</button>
+                </form>
+            </>
         );
     }
 }

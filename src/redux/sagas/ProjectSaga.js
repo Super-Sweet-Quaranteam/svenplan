@@ -22,7 +22,7 @@ function* createProject(action) {
 
 function* saveProject(action) {
     try {
-        console.log(action.payload, 'this is my action.payload')
+        yield console.log(action.payload, 'this is my action.payload')
         Object.keys(action.payload.values).map(key => {
         const config = {
             headers: { 'Content-Type': 'application/json' },

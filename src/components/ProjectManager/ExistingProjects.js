@@ -48,10 +48,10 @@ class ExistingProjects extends Component {
                         <td>In Progress</td>
                         <td>
                             {/* on btn click, user is routed to ProjectDetails component */}
-                            <button className="nav-item" onClick={() => this.continueProject(project.id, project.name)}>Continue</button>
+                            <button className="btn-sml" onClick={() => this.continueProject(project.id, project.name)}>Continue</button>
                             {/* <button className="nav-item" onClick={()=>this.archiveProject(project.id)}>Archive</button> */}
                         </td>
-                        <td><button className="nav-item" onClick={() => this.projectData(project.id, project.name)}>Data</button></td>
+                        <td><button className="btn-sml" onClick={() => this.projectData(project.id, project.name)}>View Data</button></td>
                     </tr>)}
                 </tbody>
             </table>

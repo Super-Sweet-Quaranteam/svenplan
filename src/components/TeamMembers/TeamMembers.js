@@ -28,7 +28,7 @@ state={
         <div >
 
             <h2>Team Members using your workflows:</h2>
-            <table id="clientTable">
+            <table id="clientTable" className="tbl-sml">
                 <thead>
                     <tr>
                         <th>Company</th>
@@ -62,7 +62,7 @@ state={
                             </td>
                             {(this.props.reduxState.user.currentUser.id !== subscriber.id) 
                             ?
-                                <td><button key={subscriber.id} onClick={() => this.accessChange(subscriber.id, subscriber.level)} 
+                                <td><button className="btn-sml" key={subscriber.id} onClick={() => this.accessChange(subscriber.id, subscriber.level)} 
                                     name='subscriber.clientid'>Grant/Revoke Workflow Access</button></td>
                             :
                                 <td>Cannot Change Personal Access Level</td>

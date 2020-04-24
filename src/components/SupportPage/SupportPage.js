@@ -6,7 +6,8 @@ import Swal from 'sweetalert2';
 class SupportPage extends Component {
 
     state={
-        alert: ''
+        alert: '',
+        display: true
     }
 
     handleChange=(e)=>{
@@ -21,13 +22,16 @@ class SupportPage extends Component {
             description: this.state.alert
             }
         });
-        this.setState({alert: ''});
+        this.setState({alert: '', display: false});
     }
   
     render() {
         return (
             <>
-                <h1>SvenPlans Support</h1>
+            {this.state.display === true
+            ?
+            <>
+                <h1>SvenPlan Support</h1>
                 <br/>
                 <br/>
                 <form className="form" onSubmit={this.handleSubmit}>
@@ -41,7 +45,16 @@ class SupportPage extends Component {
                 <br/>
                 <br/>
                 <h4>For immediate help with any questions or concerns please contact your SvenPlans point of contact.</h4>
-
+            </>
+            :
+            <>
+                <br/>
+                <br/>
+                <h2>Your team lead will get with you shortly!</h2>
+                <br/>
+                <h4>For immediate help with any questions or concerns please contact your SvenPlan point of contact.</h4>
+            </>
+            }
             </>
         );
     }

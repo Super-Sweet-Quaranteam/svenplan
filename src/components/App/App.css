@@ -164,11 +164,10 @@ thead th {
 }
 
 th {
-  background: linear-gradient(var(--sven-blue), var(--bg-secondary));
+  background: var(--sven-blue);
   color: var(--pure-white);
-  font-weight: 900;
-  padding: 2em .5em;
-  text-shadow: 0 .1em 0 var(--text-secondary);  
+  font-weight: bolder;
+  padding: 2em .5em; 
 }
 
 td {

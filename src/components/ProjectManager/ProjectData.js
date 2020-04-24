@@ -15,7 +15,7 @@ class ProjectData extends Component {
         return (
             <div >
                 <h2>{this.props.reduxState.subscriber.projectId.name} Data</h2>
-                <table>
+                <table className="tbl-sml">
                     <thead>
                         <tr>
                             <th>Phase</th>
