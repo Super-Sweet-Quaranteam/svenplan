@@ -134,7 +134,7 @@ body{
   height: 25px;
   width: 25px;
   position: relative;
-  left: 1em;
+  padding: .1em;
 }
 
 .completed{

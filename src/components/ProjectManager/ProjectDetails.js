@@ -72,11 +72,12 @@ class CurrentWorkflow extends Component {
                 {/* phase divs are set up as buttons for a11y. onClick, specific tasks show up */}
                 <div className="phaseOverview">
                     {this.props.reduxState.subscriber.currentProject.map(phase => 
-                        <button className="phaseOverviewItem" key={phase.phase_id} onClick={()=>this.showTasks(phase.phase_id)}>{phase.phase_name}</button>
+                        <div className="phaseOverviewItem" key={phase.phase_id} onClick={()=>this.showTasks(phase.phase_id)}><div className="seq">{phase.phase_seq}</div>{phase.phase_name}</div>
                     )}
                 </div>
                 <div className="taskWindow">
                 {this.state.task && <div className="taskAtHand" key={this.state.task.id}>
+                    <div className="seq">{this.props.reduxState.project.taskDetails.sequence}</div>
                         <h3>{this.props.reduxState.project.taskDetails.name}</h3>
                         <h4>{this.props.reduxState.project.taskDetails.description}</h4>
                             <br/>

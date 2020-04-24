@@ -9,14 +9,16 @@
 .phaseOverviewItem {
     background-color: var(--bg-tertiary);
     color: var(--text-tertiary);
-    max-height: 70vh;
+    height: 8vh;
     width: 20vw;
-    display: inline-block;
+    display: inline-grid;
     margin: .5em;
     border-radius: 1em;
     padding: 1em;
+    box-shadow: -.5rem 0 1rem var(--text-primary);
 }
 .taskWindow {
+    margin: 2em;
     text-align: center;
 }
 .taskAtHand {
@@ -27,4 +29,5 @@
     margin: .5em;
     border-radius: 1em;
     padding: 1em;
+    box-shadow: -.5rem 0 1rem var(--text-primary);
 }
