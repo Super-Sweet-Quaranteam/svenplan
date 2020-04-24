@@ -1,18 +1,15 @@
 --database is named "svenplan_db"
---everything in database connects- but there are 2 distinctive sections: subscriber and admin
---these instructions start with admin side, then subscriber side
---at the end there are some potentially useful queries (starting with insertion/sample data)
 
-
--------------------------
---  ADMIN SIDE TABLES  --
--------------------------
+-----------------
+--CREATE TABLES--
+-----------------
 
 CREATE TABLE "workflows"
 (
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR NOT NULL,
     "description" VARCHAR,
+    "team_id" INT REFERENCES "teams"."id" ON DELETE CASCADE,
     "created" TIMESTAMPTZ,
     "edited" TIMESTAMPTZ,
     "published" BOOLEAN DEFAULT FALSE
@@ -45,20 +42,6 @@ CREATE TABLE "links"
     "url" VARCHAR,
     "task_id" INT REFERENCES "default_tasks"("id") ON DELETE CASCADE
 );
-CREATE TABLE "types"
-(
-    "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR NOT NULL,
-    "description" VARCHAR,
-    "created" TIMESTAMPTZ,
-    "edited" TIMESTAMPTZ
-);
-CREATE TABLE "tasks_types"
-(
-    "id" SERIAL PRIMARY KEY,
-    "task_id" INT REFERENCES "default_tasks"("id") ON DELETE CASCADE,
-    "type_id" INT REFERENCES "types"("id") ON DELETE CASCADE
-);
 
 CREATE TABLE "riskareas"
 (
@@ -82,9 +65,6 @@ CREATE TABLE "inputs"
     "prompt" VARCHAR,
     "task_id" INT REFERENCES "default_tasks"("id") ON DELETE CASCADE
 );
-------------------------------
---  SUBSCRIBER SIDE TABLES  --
-------------------------------
 
 CREATE TABLE "teams"
 (
@@ -110,57 +90,12 @@ CREATE TABLE "projects"
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR (255) UNIQUE NOT NULL,
     "team_id" INT REFERENCES "teams"("id") ON DELETE CASCADE,
+    "workflow_id" INT REFERENCES "workflows"("id") ON DELETE CASCADE,
     "description" VARCHAR,
     "due" TIMESTAMPTZ,
     "created" TIMESTAMPTZ,
     "edited" TIMESTAMPTZ
 );
-CREATE TABLE "assigned_tasks"
-(
-    "id" SERIAL PRIMARY KEY,
-    "default_id" INT REFERENCES "default_tasks"("id") ON DELETE CASCADE,
-    "project_id" INT REFERENCES "projects"("id") ON DELETE CASCADE,
-    "completed" BOOLEAN DEFAULT false,
-    "due" TIMESTAMPTZ,
-    "updated" TIMESTAMPTZ
-);
-CREATE TABLE "notes"
-(
-    "id" SERIAL PRIMARY KEY,
-    "task_id" INT REFERENCES "assigned_tasks"("id") ON DELETE CASCADE,
-    "user_id" INT REFERENCES "users"("id") ON DELETE CASCADE,
-    "text" VARCHAR,
-    "timestamp" TIMESTAMPTZ
-);
-CREATE TABLE "assignments"
-(
-    "id" SERIAL PRIMARY KEY,
-    "task_id" INT REFERENCES "assigned_tasks"("id") ON DELETE CASCADE,
-    "user_id" INT REFERENCES "users"("id") ON DELETE CASCADE,
-    "timestamp" TIMESTAMPTZ
-);
-CREATE TABLE "subtasks"
-(
-    "id" SERIAL PRIMARY KEY,
-    "task_id" INT REFERENCES "assigned_tasks"("id") ON DELETE CASCADE,
-    "user_id" INT REFERENCES "users"("id") ON DELETE CASCADE,
-    "timestamp" TIMESTAMPTZ
-);
-CREATE TABLE "actiontypes"
-(
-    "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR NOT NULL
-);
-
-CREATE TABLE "actions"
-(
-    "id" SERIAL PRIMARY KEY,
-    "task_id" INT REFERENCES "assigned_tasks"("id") ON DELETE CASCADE,
-    "user_id" INT REFERENCES "users"("id") ON DELETE CASCADE,
-    "type_id" INT REFERENCES "actiontypes"("id") ON DELETE CASCADE,
-    "timestamp" TIMESTAMPTZ
-);
-
 CREATE TABLE "alerts"
 (
     "id" SERIAL PRIMARY KEY,
@@ -170,6 +105,15 @@ CREATE TABLE "alerts"
     "resolved" BOOLEAN DEFAULT false,
     "user_id" INT REFERENCES "users"("id") ON DELETE CASCADE
 );
+CREATE TABLE "capturedValues"
+(
+    "id" SERIAL PRIMARY KEY,
+    "input_id" INT REFERENCES "inputs"("id") ON DELETE CASCADE,
+    "project_id" INT REFERENCES "projects"("id") ON DELETE CASCADE,
+    "fulfilled" BOOLEAN DEFAULT false,
+    "value" varchar
+);
+
 
 ----------------------------------
 --INSERTION QUERIES/EXAMPLE DATA--
