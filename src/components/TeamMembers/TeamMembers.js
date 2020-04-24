@@ -63,7 +63,7 @@ state={
                             {(this.props.reduxState.user.currentUser.id !== subscriber.id) 
                             ?
                                 <td><button className="btn-sml" key={subscriber.id} onClick={() => this.accessChange(subscriber.id, subscriber.level)} 
-                                    name='subscriber.clientid'>Grant/Revoke Workflow Access</button></td>
+                                    name='subscriber.clientid'>Grant/Revoke Workflow Admin Access</button></td>
                             :
                                 <td>Cannot Change Personal Access Level</td>
                             }

@@ -25,8 +25,8 @@ function AdminHome(props) {
                 <form className='form' onClick={createTeam}>
                     <li>
                         <label>Create A Workflow Group</label>
-                        <input type="text" onChange={handleChange} placeholder="Access Code"/>
-                        <span>create an access code</span>
+                        <input type="text" onChange={handleChange} placeholder="Enter Access Code"/>
+                        <span>(This is the code users will access your workflows with)</span>
                     </li>
                     <input className="btn-sml" type="submit" value="create"/>
                 </form>
