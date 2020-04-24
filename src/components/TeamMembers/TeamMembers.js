@@ -27,7 +27,7 @@ state={
     return (
         <div >
 
-            <h2>Team Members using your workflows:</h2>
+            <h2>Users using your workflows:</h2>
             <table id="clientTable" className="tbl-sml">
                 <thead>
                     <tr>
@@ -42,7 +42,7 @@ state={
                 </thead>
                 <tbody>
                     {this.props.user.currentUser.team_id === null ?
-                    <p>Not part of a team</p>
+                    <p>Not part of a workflow group</p>
                     :
                     this.props.reduxState.admin.clientList.map(subscriber => 
                         this.props.user.currentUser.team_id === subscriber.team_id &&
@@ -54,9 +54,9 @@ state={
                             <td>{subscriber.phone}</td>
                             <td>{subscriber.level}:
                             { subscriber.level ===3 &&
-                            'Team Member'}
+                            'Project User'}
                             {subscriber.level ===2 &&
-                            'Workflow Access'}
+                            'Workflow Creator'}
                                 {subscriber.level === 1 &&
                                     'Application Administrator'}
                             </td>
