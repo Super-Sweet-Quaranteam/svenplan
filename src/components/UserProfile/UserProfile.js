@@ -70,18 +70,18 @@ class UserProfile extends Component {
             <p>Access Level: {this.props.user.currentUser.level === 1 &&
              "Application Admin"  }
             {this.props.user.currentUser.level === 2 &&
-              "Enterprise Admin"}
+              "Workflow Creator"}
             {this.props.user.currentUser.level === 3 &&
-              "Team Member"}
+              "Project User"}
               </p>
           <p><button className="btn-sml" onClick={this.editMode}>Edit Profile</button></p>
               <br/>
               <br/>
             {this.props.user.currentUser.team_id
                 ?
-              <p>Team: {this.props.user.currentUser.team}</p>
+              <p>Workflow Group: {this.props.user.currentUser.team}</p>
                 :
-               <p>Not part of any team</p>
+               <p>Not part of any workflow group</p>
               }
           </div>
       </div>
@@ -122,12 +122,12 @@ class UserProfile extends Component {
           <form className="form">
             <ul>
               <li>
-              <label htmlFor="teamEdit">Team:</label>
+              <label htmlFor="teamEdit">Workflow Group:</label>
           <input type="text" id='teamEdit' onChange={this.handleInputChangeFor('team')} value={this.state.team || ""}></input>
-              <span>Enter your team here</span>
+              <span>Enter your access code here</span>
             </li>
           </ul>
-          <button className="btn-sml" onClick={this.updateTeam}>Save Team</button>
+          <button className="btn-sml" onClick={this.updateTeam}>Save Workflow Group</button>
          </form>
          <br></br>
           <button className="btn-sml" onClick={this.editMode}>Back To View</button>

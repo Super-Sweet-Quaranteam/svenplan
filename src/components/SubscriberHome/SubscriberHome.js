@@ -23,9 +23,9 @@ const ClientHome =(props)=>{
             {props.user.currentUser.team_id === null &&
                 <form clasName="form">
                     <li>
-                        <label>Join A Team</label>
-                        <input type="text" onChange={handleChange} placeholder="Team Name"/>
-                        <span>enter team name</span>
+                        <label>Join A Workflow Group</label>
+                        <input type="text" onChange={handleChange} placeholder="Access Code"/>
+                        <span>enter access code</span>
                     </li>
                     <button className="btn-sml" onClick={joinTeam}>Join</button>
                 </form>
@@ -34,7 +34,7 @@ const ClientHome =(props)=>{
                 <>
                     <br/>
                     <br/>
-                    <h2>Your team: {props.user.currentUser.team}</h2>
+                    <h2>Your Workflow Group: {props.user.currentUser.team}</h2>
                 </>
             }
             <br/>
