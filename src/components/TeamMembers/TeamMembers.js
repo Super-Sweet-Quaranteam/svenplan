@@ -28,7 +28,7 @@ state={
         <div >
 
             <h2>Users using your workflows:</h2>
-            <table id="clientTable" className="tbl-sml">
+            <table id="clientTable" className="tbl-lg">
                 <thead>
                     <tr>
                         <th>Company</th>

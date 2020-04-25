@@ -16,7 +16,7 @@ class Alerts extends Component {
         return (
             <div >
                 <h2>Team Member Alerts</h2>
-                <table className="tbl-sml">
+                <table className="tbl-lg">
                     <thead>
                         <tr>
                             <th>Name</th>
