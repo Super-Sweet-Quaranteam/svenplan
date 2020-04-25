@@ -66,10 +66,24 @@
   transition: var(--transition-speed);
 }
 
-.phase-block:hover, .phase-block-btn:hover {
+.phase-block:hover, .phase-block-btn:hover{
   background: var(--sven-blue);
   transform: scale(1.1);
   transition: var(--transition-speed);
+}
+
+.active-phase-block{
+  background: var(--sven-blue);
+  transform: scale(1.1);
+  transition: var(--transition-speed);
+  min-height: 10vh;
+  min-width: 34vw;
+  display: inline-block;
+  margin: .5em;
+  border-radius: 1em;
+  padding: 1em;
+  padding-bottom: 2em;
+  box-shadow: -1rem 0 3rem var(--text-primary);
 }
 
 /* text inside the phase blocks */
