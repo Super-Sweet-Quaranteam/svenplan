@@ -54,6 +54,7 @@ state={
         <div >
 
             <h2>Users using your workflows:</h2>
+
             <form className="form">
                 <li>
                     <label> Search</label>
@@ -64,6 +65,7 @@ state={
                 </li>
             </form>
             <table id="clientTable" className="tbl-sml">
+
                 <thead>
                     <tr>
                         <th>Company</th>

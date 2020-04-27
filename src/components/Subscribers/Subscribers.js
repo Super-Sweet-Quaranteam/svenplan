@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 class Subscribers extends Component{
 
     state={ 
-            query: ['search by name']
+            query: ['search by first or last name']
         }
 
     componentDidMount=()=>{
@@ -37,7 +37,7 @@ class Subscribers extends Component{
         }
         if (value.length === 0) {
             this.setState({
-                query: ['search by first name']
+                query: ['search by first or last name']
             })
         }
         console.log(this.state)
