@@ -43,7 +43,8 @@ class LoginPage extends Component {
           password: this.state.password,
         },
       });
-      this.props.history.push({ pathname: '/' })
+      this.props.history.push('/home');
+      // this.props.history.push({ pathname: '/' })
       // if (this.props.user.currentUser.level === 1) {
       //   this.props.history.push({ pathname: '/' })
       // }

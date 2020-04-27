@@ -24,13 +24,14 @@ import EditWorkflow from '../WorkflowEditor/EditWorkflow';
 import TeamMembers from '../TeamMembers/TeamMembers'
 import ProjectDetails from '../ProjectManager/ProjectDetails';
 import ProjectData from '../ProjectManager/ProjectData';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+
 
 //TEMPORARY!
 import AddTaskHaley from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
 
 
 // THESE SEEM UNUSED
-// import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 // {/* <Route path="/admin" component={AdminNav} /> */ }
 
 class App extends Component {
@@ -72,6 +73,9 @@ class App extends Component {
             <Route exact path="/workflows" component={ExistingWorkflows}/>
             <Route exact path="/subscribers" component={Subscribers}/>
             <Route exact path="/teammembers" component={TeamMembers}/>
+
+            {/* protected route */}
+            <ProtectedRoute exact path="/home" component={AdminHome}/>
 
             {/* temporary!!! */}
             <Route path="/add-task-haley" component={AddTaskHaley} />
