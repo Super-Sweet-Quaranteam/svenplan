@@ -4,13 +4,11 @@
 
 _Duration: 3 Week Sprint_
 
-The Svenplan app helps enterprises build customized business plans and track those business plans' progress with more transparency and accountability. Enterprises are able to add members to their team, and those team members are then able to choose among the business plans created by their overseeing enterprise, and guide themselves through the process. 
+The Svenplan app helps enterprises build customized business workflows and track those workflows' progress with more transparency and accountability. Enterprises are able to add members to their team, and those team members are then able to choose among the workflows created by their overseeing enterprise, and guide themselves through the process. 
 
-The purpose of this beta version of the app is to develop a robust business plan, or workflow, generator on the enterprises' ‘admin’ side, and an intuitive workflow completion path on the team members' ‘user’ side.
+The purpose of the beta version of this app is to develop a robust multi-step process, or workflow, generator on the enterprises' ‘admin’ side, and an intuitive workflow completion path on the team members' ‘user’ side.
 
 To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
-
-Include one or two screen shots of your project here (optional). Remove if unused.
 
 ## Technologies
 This version uses:
@@ -23,9 +21,6 @@ This version uses:
 A full list of dependencies can be found in `package.json`.
 
 ## Installation
-
-If your application has secret keys (for example --  Twilio), make sure you tell them how to set that up, both in getting the key and then what to call it in the `.env` file.
-
 1. Create a database named `svenplan_db`,
 2. The queries in the `database.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries. 
 3. Open up your editor of choice and run an `npm install`
@@ -38,7 +33,7 @@ If your application has secret keys (for example --  Twilio), make sure you tell
 **Application Admin - Level 1**  
 A level 1, Application Admin, has the greatest amount of access. 
 1. Upon log in, they are able to see all of the accounts registered with the app in the *Subscribers* tab on the navigation bar. In the *Subscribers* tab, they are also able to change the level of access each user has by clicking the button in the *Permissions* column.
-2. The *Create Workflow* tab in the navigation bar allows this level user to create a guided business plan, also known as a workflow. As soon as they confirm a plan title and description, they will be routed to the *Existing Workflows* tab in the navigation bar where they can then build out the steps of that workflow.
+2. The *Create Workflow* tab in the navigation bar allows this level user to create a guided commercial process, also known as a workflow. As soon as they confirm a plan title and description, they will be routed to the *Existing Workflows* tab in the navigation bar where they can then build out the steps of that workflow.
 3. In the *Existing Workflows* tab, workflow creation first looks at larger level *phases* which group similar *tasks*. The user is then walked through *task* creation, where they will be asked for a task title, task description, input type, a link to a tutorial showing how the task is to be completed, etc. Once the workflow is complete, the user will be able to publish it in order to make it available to level 2 and 3 users that have been granted access to it.
 
 **Team Admin/Team Lead - Level 2**  
