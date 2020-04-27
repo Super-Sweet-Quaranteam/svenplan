@@ -6,7 +6,7 @@
     text-align: center;    
 }
 /* can change how many divs per screen based on width % */
-.phaseOverviewItem {
+.phaseOverviewItem{
     background-color: var(--bg-tertiary);
     color: var(--text-tertiary);
     height: 8vh;
@@ -31,11 +31,18 @@
     word-wrap: break-word;
 }
 
-.start{
+.phaseOverviewItem-start{
+    background-color: var(--bg-tertiary);
+    color: var(--text-tertiary);
     width: 6vw;
     height: 3vh;
     transform: rotate(-90deg);
     display: initial;
+    margin: .5em;
+    border-radius: 1em;
+    padding: 1em;
+    padding-bottom: 2em;
+    box-shadow: -.5rem 0 1rem var(--text-primary);
 }
 
 .taskWindow {
