@@ -387,45 +387,7 @@ VALUES
     ('text', 'So where do i go from here?', 2),
     ('text', 'Can you help with this task', 3);
 
--------------------
---  GET QUERIES  --
--------------------
 
---get task names for a certain project, and whether or not they're done.
-SELECT "default_tasks"."name" AS "task_name", "assigned_tasks"."completed"
-FROM "default_tasks" JOIN "assigned_tasks" ON
-"default_tasks"."id"="assigned_tasks"."default_id"
-WHERE  "assigned_tasks"."project_id"=1;
-
---get the number of risk areas per workflow (this will be how many radial axes in risk chart)
-SELECT "workflows"."name" AS "workflow", COUNT(*) AS "number_of_risk_areas"
-FROM "workflows" JOIN "riskareas"
-    ON "riskareas"."workflow_id"="workflows"."id"
-GROUP BY "workflows"."name";
-
---get the number of tasks per risk area per workflow (this will help calculate how much risk is removed with completion of a task in a certian risk category)
-SELECT "riskareas"."name" AS "riskarea", COUNT(*) AS "number_of_tasks"
-FROM "riskareas"
-    JOIN "tasks_riskareas" ON "tasks_riskareas"."riskarea_id"="riskareas"."id"
-    JOIN "default_tasks" ON "default_tasks"."id"="tasks_riskareas"."task_id"
-GROUP BY "riskareas"."name";
-
---(once populated with data) get comments and who left them and at what time from oldest to newest, on a certain task
-SELECT "notes"."text" AS "note", "users"."firstname" AS "user", "notes"."timestamp" AS "time"
-FROM "notes" JOIN "users"
-    ON "notes"."user_id"="users"."id"
-WHERE "notes"."task_id"=1
-ORDER BY "timestamp";
-
----------------------
---  OTHER QUERIES  --
----------------------
-
---mark a task complete (decide how to skip later...)
-UPDATE "assigned_tasks" SET "completed"=true WHERE "id"=5;
-
---change a user's level (eg from subscriber to admin)
-UPDATE "users" SET "level"=100 WHERE "firstname"='DAngelos';
 
 
 
