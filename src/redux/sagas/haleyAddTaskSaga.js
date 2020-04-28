@@ -51,9 +51,11 @@ function* addTaskInput(action) {
 }
 function* addTaskToDatabase(action) {
     try {
-        const postResponse = yield axios.post(`/api/haley-task/add-new-task`, action.payload);
+        const postResponse = yield axios.post(`/api/haley-task/add-new-task`, action.payload.task);
         console.log('postResponse:', postResponse);
         yield put({ type: 'ADD_TASK_CONFIRM', payload: postResponse.data.newTaskId });
+        yield put({type: 'GET_THIS_PHASE', payload: action.payload});
+        yield put({type: 'SET_TASK_PHASE_ID', payload: action.payload.id});
     } catch (error) {
         console.log('error with posting new task:', error);
     }
