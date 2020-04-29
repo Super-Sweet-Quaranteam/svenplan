@@ -1,6 +1,5 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
-import './AdminHome.css'
 
 // landing place for admins, currently can view team name or create if dont have one
 function AdminHome(props) {

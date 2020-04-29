@@ -20,13 +20,19 @@ This version uses:
 
 A full list of dependencies can be found in `package.json`.
 
-## Installation
+## Database
+
 1. Create a database named `svenplan_db`,
 2. The queries in the `database.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries. 
-3. Open up your editor of choice and run an `npm install`
-4. Run `npm run server` in your terminal
-5. Run `npm run client` in your terminal
-6. The `npm run client` command will open up a new browser tab for you!
+In the end your databse should look like this:
+![Database](/public/images/database.png?raw=true "database setup")
+
+## Instalation
+
+1. Open up your editor of choice and run an `npm install`
+2. Run `npm run server` in your terminal
+3. Run `npm run client` in your terminal
+4. The `npm run client` command will open up a new browser tab for you!
 
 ## Usage
 
@@ -46,6 +52,10 @@ A level 3, Team Member, has the least amount of access.
 1. Upon login, they are able to create a new project, which is an instance of a workflow, or they can continue working on a project that already exists.
 2. To create a new project, they would click the *New Project* tab in the navigation bar. This presents them with a drop-down box, which contains the workflows created by their level 1 or 2 admin, and an input box, where they would name their new project. Once they have chosen a workflow and project name, clicking the *Create Project* button will route them to the *Projects* tab in the navigation bar
 3. The *Projects* tab allows the user to see an overview of their different projects, and by clicking the *Continue* button, they will be taken into that project's specific workflow, where they will be guiding themselves through the project's tasks, as laid out by their level 1 or 2 admin.
+
+## Visual Walk-through
+
+![Screenshot](/public/images/walkthrough.gif?raw=true "walkthrough gif")
 
 ## Authors
 
