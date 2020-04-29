@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Swal from 'sweetalert2';
-import AddTask from './AddTaskHaley/AddTaskHaley';
+import AddTask from './AddTask/AddTask';
 
 class EditPhase extends Component {
 

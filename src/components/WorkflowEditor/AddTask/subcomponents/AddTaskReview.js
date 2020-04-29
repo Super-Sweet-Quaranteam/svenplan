@@ -29,7 +29,6 @@ class AddTask5 extends Component {
 
     goBack = () => {
         this.props.dispatch({ type: 'PREVIOUS_TASK_STEP' });
-        this.props.history.push('/add-task-haley/4')
     }
 
     render() {
@@ -69,7 +68,7 @@ class AddTask5 extends Component {
 
 const putReduxStateOnProps = (reduxState) => ({
     user: reduxState.user,
-    task: reduxState.task,
+    task: reduxState.workflow,
     phase: reduxState.workflow.storeCurent.phase,
     edit: reduxState.workflow.storeCurent.editTask
 });

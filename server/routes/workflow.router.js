@@ -257,7 +257,7 @@ router.get('/all/task/options', (req, res) => {
 
 // get all riskareas
 router.get('/riskareas/:id', (req, res) => {
-    console.log('in /haley-task/riskareas/:id get with id:', req.params.id);
+    console.log('in /riskareas/:id get with id:', req.params.id);
     const queryText = `SELECT "riskareas"."name" AS "riskarea", "riskareas"."id" AS "id"
                         FROM "riskareas"
                         JOIN "workflows" ON "riskareas"."workflow_id"="workflows"."id"
@@ -276,7 +276,7 @@ router.get('/riskareas/:id', (req, res) => {
 });
 
 router.get('/assigned-task/:id', (req, res) => {
-    console.log('in /haley-task/assigned-task/:id get with id:', req.params.id);
+    console.log('in /assigned-task/:id get with id:', req.params.id);
     const queryText = `SELECT "default_tasks"."name" AS "task_name", 
                         "default_tasks"."description" AS "task_description",
                         "assigned_tasks"."completed" 
@@ -297,7 +297,7 @@ router.get('/assigned-task/:id', (req, res) => {
 
 // get all riskareas
 router.get('/assigned-task/inputs/:id', (req, res) => {
-    console.log('in /haley-task/riskareas/:id get with id:', req.params.id);
+    console.log('in /riskareas/:id get with id:', req.params.id);
     const queryText = `SELECT "inputs"."type" AS "inputType", "inputs"."prompt" AS "prompt"
                         FROM "inputs"
                         JOIN "assigned_tasks" ON "inputs"."task_id"="assigned_tasks"."id"

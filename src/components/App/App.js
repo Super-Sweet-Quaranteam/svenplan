@@ -27,13 +27,6 @@ import ProjectData from '../ProjectManager/ProjectData';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 
-//TEMPORARY!
-import AddTaskHaley from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
-
-
-// THESE SEEM UNUSED
-// {/* <Route path="/admin" component={AdminNav} /> */ }
-
 class App extends Component {
   //sets the user, if there is one, in redux (even tho this component isn't connected to store)
   componentDidMount() {
@@ -77,10 +70,7 @@ class App extends Component {
             {/* protected route */}
             <ProtectedRoute exact path="/home" component={AdminHome}/>
 
-            {/* temporary!!! */}
-            <Route path="/add-task-haley" component={AddTaskHaley} />
-              {/* <Route path={`/add-task-haley/summary`} component={AddTaskSummary} /> */}
-
+      
             {/* 404 page creation below */}
             <Route render={() => 
               <div className="fourOfour">

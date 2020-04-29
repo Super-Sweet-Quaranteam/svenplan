@@ -66,7 +66,7 @@ router.get('/task/risk-info/:id', rejectUnauthenticated, (req, res) => {
 
 
 router.get('/riskareas/:id', (req, res) => {
-    console.log('in /haley-task/riskareas/:id get with id:', req.params.id);
+    console.log('in /riskareas/:id get with id:', req.params.id);
     const queryText = `SELECT "riskareas"."name" AS "riskarea", "riskareas"."id" AS "id"
                         FROM "riskareas"
                         JOIN "workflows" ON "riskareas"."workflow_id"="workflows"."id"
