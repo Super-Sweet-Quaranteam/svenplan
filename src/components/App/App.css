@@ -16,6 +16,23 @@
   --transition-ease: 400ms ease-in-out;
 }
 
+/* these colors are not pretty, but play with this */
+/* :root{ 
+  font-size: 16px;
+  font-family: 'Raleway', 'Open Sans';
+  --pure-white: #FCF8FB;
+  --text-primary: #272727; 
+  --text-secondary: #FCF8FB; 
+  --text-tertiary: #FF9D64;
+  --bg-primary: #DA55B9;
+  --bg-secondary: #C40023;
+  --bg-tertiary: #9F0078;
+  --sven-red: #CB0024;
+  --sven-blue: #9F0078;
+  --transition-speed: 600ms;
+  --transition-ease: 400ms ease-in-out;
+} */
+
 body{
   margin:0;
   background-color: var(--pure-white);
@@ -173,7 +190,7 @@ table {
   max-height: 70vh;
   transition: var(--transition-speed);
   text-align: center;
-  overflow-y: scroll;
+  overflow-y: auto;
 }   
 
 thead th { 

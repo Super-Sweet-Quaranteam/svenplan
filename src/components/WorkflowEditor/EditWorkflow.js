@@ -7,6 +7,7 @@ import CreateWorkflow from './CreateWorkflow';
 class EditWorkflow extends Component {
 
     state={
+        active: false
     }
 
     // allows for adding a new phase - handled in EditPhase,js
@@ -32,11 +33,12 @@ class EditWorkflow extends Component {
     }
 
     // gets current phase by id to be displayed below - handled in EditPhase.js
-    viewPhase=(id)=>{
+    viewPhase=(e, id)=>{
         this.props.dispatch({type: 'GET_THIS_PHASE', payload:{id:id}});
-        //this is the same as above, just taken from haleys code because it's already working with other parts- should consolidate
+        //this is the same as above - should consolidate
         this.props.dispatch({ type: 'SET_TASK_PHASE_ID', payload: id })
         this.props.dispatch({type: 'TOGGLE_SHOW_PHASE'});
+
     }
 
     render() {
@@ -55,7 +57,7 @@ class EditWorkflow extends Component {
                                     Add New Phase
                                 </li>
                                     {this.props.reduxState.workflow.thisWorkflow.map(phase=>
-                                        <li key={phase.ph_sequence} data-id={phase.ph_id} className="phase-block" onClick={()=>this.viewPhase(phase.ph_id)}>
+                                        <li key={phase.ph_sequence} data-id={phase.ph_id} className={"phase-block"} onClick={(e)=>this.viewPhase(e, phase.ph_id)}>
                                             <div className="phase-text"><div className="seq">{phase.ph_sequence}</div>{phase.ph_name}</div>
                                             <br/>
                                             <div className="phase-text">{phase.ph_description}</div>

@@ -1,18 +1,19 @@
 --database is named "svenplan_db"
---everything in database connects- but there are 2 distinctive sections: subscriber and admin
---these instructions start with admin side, then subscriber side
---at the end there are some potentially useful queries (starting with insertion/sample data)
 
-
--------------------------
---  ADMIN SIDE TABLES  --
--------------------------
-
+-----------------
+--CREATE TABLES--
+-----------------
+CREATE TABLE "teams"
+(
+    "id" SERIAL PRIMARY KEY,
+    "name" VARCHAR (80) UNIQUE NOT NULL
+);
 CREATE TABLE "workflows"
 (
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR NOT NULL,
     "description" VARCHAR,
+    "team_id" INT REFERENCES "teams"."id" ON DELETE CASCADE,
     "created" TIMESTAMPTZ,
     "edited" TIMESTAMPTZ,
     "published" BOOLEAN DEFAULT FALSE
@@ -45,20 +46,6 @@ CREATE TABLE "links"
     "url" VARCHAR,
     "task_id" INT REFERENCES "default_tasks"("id") ON DELETE CASCADE
 );
-CREATE TABLE "types"
-(
-    "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR NOT NULL,
-    "description" VARCHAR,
-    "created" TIMESTAMPTZ,
-    "edited" TIMESTAMPTZ
-);
-CREATE TABLE "tasks_types"
-(
-    "id" SERIAL PRIMARY KEY,
-    "task_id" INT REFERENCES "default_tasks"("id") ON DELETE CASCADE,
-    "type_id" INT REFERENCES "types"("id") ON DELETE CASCADE
-);
 
 CREATE TABLE "riskareas"
 (
@@ -82,16 +69,6 @@ CREATE TABLE "inputs"
     "prompt" VARCHAR,
     "task_id" INT REFERENCES "default_tasks"("id") ON DELETE CASCADE
 );
-------------------------------
---  SUBSCRIBER SIDE TABLES  --
-------------------------------
-
-CREATE TABLE "teams"
-(
-    "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR (80) UNIQUE NOT NULL
-);
-
 CREATE TABLE "users"
 (
     "id" SERIAL PRIMARY KEY,
@@ -110,57 +87,12 @@ CREATE TABLE "projects"
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR (255) UNIQUE NOT NULL,
     "team_id" INT REFERENCES "teams"("id") ON DELETE CASCADE,
+    "workflow_id" INT REFERENCES "workflows"("id") ON DELETE CASCADE,
     "description" VARCHAR,
     "due" TIMESTAMPTZ,
     "created" TIMESTAMPTZ,
     "edited" TIMESTAMPTZ
 );
-CREATE TABLE "assigned_tasks"
-(
-    "id" SERIAL PRIMARY KEY,
-    "default_id" INT REFERENCES "default_tasks"("id") ON DELETE CASCADE,
-    "project_id" INT REFERENCES "projects"("id") ON DELETE CASCADE,
-    "completed" BOOLEAN DEFAULT false,
-    "due" TIMESTAMPTZ,
-    "updated" TIMESTAMPTZ
-);
-CREATE TABLE "notes"
-(
-    "id" SERIAL PRIMARY KEY,
-    "task_id" INT REFERENCES "assigned_tasks"("id") ON DELETE CASCADE,
-    "user_id" INT REFERENCES "users"("id") ON DELETE CASCADE,
-    "text" VARCHAR,
-    "timestamp" TIMESTAMPTZ
-);
-CREATE TABLE "assignments"
-(
-    "id" SERIAL PRIMARY KEY,
-    "task_id" INT REFERENCES "assigned_tasks"("id") ON DELETE CASCADE,
-    "user_id" INT REFERENCES "users"("id") ON DELETE CASCADE,
-    "timestamp" TIMESTAMPTZ
-);
-CREATE TABLE "subtasks"
-(
-    "id" SERIAL PRIMARY KEY,
-    "task_id" INT REFERENCES "assigned_tasks"("id") ON DELETE CASCADE,
-    "user_id" INT REFERENCES "users"("id") ON DELETE CASCADE,
-    "timestamp" TIMESTAMPTZ
-);
-CREATE TABLE "actiontypes"
-(
-    "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR NOT NULL
-);
-
-CREATE TABLE "actions"
-(
-    "id" SERIAL PRIMARY KEY,
-    "task_id" INT REFERENCES "assigned_tasks"("id") ON DELETE CASCADE,
-    "user_id" INT REFERENCES "users"("id") ON DELETE CASCADE,
-    "type_id" INT REFERENCES "actiontypes"("id") ON DELETE CASCADE,
-    "timestamp" TIMESTAMPTZ
-);
-
 CREATE TABLE "alerts"
 (
     "id" SERIAL PRIMARY KEY,
@@ -170,6 +102,15 @@ CREATE TABLE "alerts"
     "resolved" BOOLEAN DEFAULT false,
     "user_id" INT REFERENCES "users"("id") ON DELETE CASCADE
 );
+CREATE TABLE "capturedValues"
+(
+    "id" SERIAL PRIMARY KEY,
+    "input_id" INT REFERENCES "inputs"("id") ON DELETE CASCADE,
+    "project_id" INT REFERENCES "projects"("id") ON DELETE CASCADE,
+    "fulfilled" BOOLEAN DEFAULT false,
+    "value" varchar
+);
+
 
 ----------------------------------
 --INSERTION QUERIES/EXAMPLE DATA--
@@ -177,10 +118,10 @@ CREATE TABLE "alerts"
 
 
 INSERT INTO "workflows"
-    ("name", "description", "created")
+    ("name", "description", "team_id", "created")
 VALUES
-    ('Small Business/Nonprofit Development', 'a plan for small businesses and local nonprofits getting into the world of developing', NOW()),
-    ('Restaurant Buildout', 'a plan for interior designers working on a restaurant buildout', NOW());
+    ('Small Business/Nonprofit Development', 'a plan for small businesses and local nonprofits getting into the world of developing', 1, NOW()),
+    ('Restaurant Buildout', 'a plan for interior designers working on a restaurant buildout', 1, NOW());
 
 INSERT INTO "phases"
     ("name", "description", "workflow_id", "sequence", "created")
@@ -227,7 +168,7 @@ VALUES
 ;
 
 INSERT INTO "links"
-    ("type","description", "url", "task_id")
+    ("type", "description", "url", "task_id")
 VALUES
     ('example', 'an example of how to do this step', 'https://www.youtube.com/watch?v=29hDInnNcDM', 1),
     ('example', 'an example of how to do this step', 'https://www.youtube.com/watch?v=29hDInnNcDM', 2),
@@ -240,32 +181,6 @@ VALUES
     ('tutorial', 'a tutorial of how to do this step', 'https://www.youtube.com/watch?v=29hDInnNcDM', 8),
     ('tutorial', 'a tutorial of how to do this step', 'https://www.youtube.com/watch?v=29hDInnNcDM', 8),
     ('tutorial', 'a tutorial of how to do this step', 'https://www.youtube.com/watch?v=29hDInnNcDM', 12);
-
-INSERT INTO "types"
-    ("name", "description", "created")
-VALUES
-    ('Communication', 'description of this task type', NOW()),
-    ('To-Do', 'description of this task type', NOW()),
-    ('Third-Party', 'description of this task type', NOW()),
-    ('Calculation', 'description of this task type', NOW()),
-    ('Internal Decision Making', 'description of this task type', NOW());
-
-INSERT INTO "tasks_types"
-    ("task_id", "type_id")
-VALUES
-    ( 1, 2 ),
-    ( 2, 2 ),
-    ( 2, 1 ),
-    ( 3, 4 ),
-    ( 4, 2 ),
-    ( 5, 5 ),
-    ( 6, 2 ),
-    ( 6, 1 ),
-    ( 7, 2 ),
-    ( 8, 3 ),
-    ( 9, 1 ),
-    ( 10, 4 ),
-    ( 11, 5 );
 
 
 INSERT INTO "riskareas"
@@ -317,124 +232,72 @@ VALUES
     ( 10, 15 ),
     ( 11, 6 );
 
-
 INSERT INTO "inputs"
-    ("name", "description")
+    ("task_id", "type", "prompt")
 VALUES
-    ('button', 'click a button'),
-    ('checkbox', 'select all that apply'),
-    ('radio', 'select one'),
-    ('number', 'enter a number'),
-    ('email', 'enter an email'),
-    ('tel', 'enter a phone number'),
-    ('text', 'type something'),
-    ('url', 'enter a url');
-
-INSERT INTO "tasks_inputs"
-    ("input_id", "task_id", "instructions")
-VALUES
-    (7, 1, 'leave a note'),
-    (7, 3, 'leave a note'),
-    (7, 5, 'leave a note'),
-    (7, 7, 'leave a note'),
-    (7, 9, 'leave a note'),
-    (7, 11, 'leave a note'),
-    (7, 13, 'leave a note'),
-    (7, 15, 'leave a note'),
-    (7, 17, 'leave a note'),
-    (7, 19, 'leave a note'),
-    (7, 21, 'leave a note'),
-    (7, 22, 'leave a note'),
-    (1, 1, 'click submit'),
-    (1, 2, 'click submit'),
-    (1, 3, 'click submit'),
-    (1, 4, 'click submit'),
-    (1, 5, 'click submit'),
-    (1, 6, 'click submit'),
-    (1, 7, 'click submit'),
-    (1, 8, 'click submit'),
-    (1, 9, 'click submit'),
-    (1, 10, 'click submit'),
-    (1, 11, 'click submit'),
-    (1, 12, 'click submit'),
-    (1, 13, 'click submit'),
-    (1, 14, 'click submit'),
-    (1, 15, 'click submit'),
-    (1, 16, 'click submit'),
-    (1, 17, 'click submit'),
-    (1, 18, 'click submit'),
-    (1, 19, 'click submit'),
-    (1, 20, 'click submit'),
-    (1, 21, 'click submit'),
-    (1, 22, 'click submit');
+    ( 1, 'text', 'leave a note'),
+    ( 3, 'text', 'leave a note'),
+    ( 5, 'text', 'leave a note'),
+    ( 7, 'text', 'leave a note'),
+    ( 9, 'text', 'leave a note'),
+    ( 11, 'text', 'leave a note'),
+    ( 13, 'text', 'leave a note'),
+    ( 15, 'text', 'leave a note'),
+    ( 17, 'text', 'leave a note'),
+    ( 19, 'text', 'leave a note'),
+    ( 21, 'text', 'leave a note'),
+    ( 22, 'text', 'leave a note'),
+    ( 1, 'number', 'enter a number'),
+    ( 2, 'number', 'enter a number'),
+    ( 3, 'number', 'enter a number'),
+    ( 4, 'number', 'enter a number'),
+    ( 5, 'number', 'enter a number'),
+    ( 6, 'number', 'enter a number'),
+    ( 7, 'number', 'enter a number'),
+    ( 8, 'number', 'enter a number'),
+    ( 9, 'number', 'enter a number'),
+    ( 10, 'button', 'click submit'),
+    ( 11, 'button', 'click submit'),
+    ( 12, 'button', 'click submit'),
+    ( 13, 'button', 'click submit'),
+    ( 14, 'button', 'click submit'),
+    ( 15, 'button', 'click submit'),
+    ( 16, 'button', 'click submit'),
+    ( 17, 'button', 'click submit'),
+    ( 18, 'button', 'click submit'),
+    ( 19, 'button', 'click submit'),
+    ( 20, 'button', 'click submit'),
+    ( 21, 'button', 'click submit'),
+    ( 22, 'button', 'click submit');
 
 INSERT INTO "teams"
     ("name")
 VALUES
     ('NEOO Partners'),
-    ('Super Sweet Quaranteam'),
+    ('SvenTeam'),
     ('Interior Design Team');
 
 INSERT INTO "users"
-    ("firstname", "email", "password", "team_id")
+    ("alias", "firstname", "lastname", "email", "password", "team_id")
 VALUES
-    ('DAngelos', 'dangelos@gmail.com', 'password123', 1),
-    ('Todd', 'todd@gmail.com', 'password123', 1),
-    ('Denetrick', 'denetrick@gmail.com', 'password123', 1),
-    ('Haley', 'haley@gmail.com', 'password123', 2),
-    ('David', 'david@gmail.com', 'password123', 2),
-    ('Megan', 'megan@gmail.com', 'password123', 2),
-    ('Corey', 'corey@gmail.com', 'password123', 2),
-    ('John', 'john@gmail.com', 'password123', 3),
-    ('Emily', 'emily@gmail.com', 'password123', 3),
-    ('Nate', 'nate@gmail.com', 'password123', 3);
-
+    ('DAngelos', 'DAngelos', 'Svenkeson', 'dangelos@gmail.com', 'password123', 1),
+    ('Todd', 'Todd Micaiah', 'Austin', 'todd@gmail.com', 'password123', 1),
+    ('Denetrick', 'Denetrick', 'Powers', 'denetrick@gmail.com', 'password123', 1),
+    ('Haley', 'Haley', 'Ryan', 'haley@gmail.com', 'password123', 2),
+    ('David', 'David', 'Kantor', 'david@gmail.com', 'password123', 2),
+    ('Megan', 'Megan', 'Henry', 'megan@gmail.com', 'password123', 2),
+    ('Corey', 'Corey', 'Barr', 'corey@gmail.com', 'password123', 2),
+    ('Jon', 'Jonathan', 'Johnson', 'john@gmail.com', 'password123', 3),
+    ('Emy', 'Emily', 'Emilyson', 'emily@gmail.com', 'password123', 3),
+    ('Nate', 'Nathan', 'Nathan', 'nate@gmail.com', 'password123', 3);
 
 INSERT INTO "projects"
-    ("name", "team_id", "description", "created")
+    ("name", "team_id", "workflow_id", "description", "created")
 VALUES
-    ('Duck Donuts', 1, 'a short or long description of the project', NOW()),
-    ('Regional Acceleration Center', 1, 'a short or long description of the project', NOW()),
-    ('Svenplans.com', 2, 'a short or long description of the project', NOW()),
-    ('Skyway Remodel', 3, 'a short or long description of the project', NOW());
-
-
-INSERT INTO "assigned_tasks"
-    ("default_id", "project_id")
-VALUES
-    ( 1, 9 ),
-    ( 2, 9),
-    ( 3, 9),
-    ( 4, 9 ),
-    ( 5, 9 ),
-    ( 6, 9 ),
-    ( 7, 9 ),
-    ( 8, 9 ),
-    ( 9, 9),
-    ( 10, 10 ),
-    ( 11, 10 ),
-    ( 12, 10),
-    ( 13, 10),
-    ( 14, 10 ),
-    ( 15, 10),
-    ( 16, 10 ),
-    ( 17, 10),
-    ( 18, 10),
-    ( 19, 10 ),
-    ( 20, 10),
-    ( 21, 10 ),
-    ( 22, 10);
-
-INSERT INTO "notes"
-    ("task_id", "user_id", "text", "timestamp")
-VALUES
-    (45, 21, 'can someone explain to me what project trigger means?', NOW());
-
-INSERT INTO "notes"
-    ("task_id", "user_id", "text", "timestamp")
-VALUES
-    (45, 23, 'it is when you trigger a project', NOW());
-
+    ('Duck Donuts', 1, 1, 'a short or long description of the project', NOW()),
+    ('Regional Acceleration Center', 1, 1, 'a short or long description of the project', NOW()),
+    ('Svenplans.com', 2, 1, 'a short or long description of the project', NOW()),
+    ('Skyway Remodel', 3, 2, 'a short or long description of the project', NOW());
 
 INSERT INTO "alerts"
     ("type", "description", "user_id")
@@ -443,45 +306,7 @@ VALUES
     ('text', 'So where do i go from here?', 2),
     ('text', 'Can you help with this task', 3);
 
--------------------
---  GET QUERIES  --
--------------------
 
---get task names for a certain project, and whether or not they're done.
-SELECT "default_tasks"."name" AS "task_name", "assigned_tasks"."completed"
-FROM "default_tasks" JOIN "assigned_tasks" ON
-"default_tasks"."id"="assigned_tasks"."default_id"
-WHERE  "assigned_tasks"."project_id"=1;
-
---get the number of risk areas per workflow (this will be how many radial axes in risk chart)
-SELECT "workflows"."name" AS "workflow", COUNT(*) AS "number_of_risk_areas"
-FROM "workflows" JOIN "riskareas"
-    ON "riskareas"."workflow_id"="workflows"."id"
-GROUP BY "workflows"."name";
-
---get the number of tasks per risk area per workflow (this will help calculate how much risk is removed with completion of a task in a certian risk category)
-SELECT "riskareas"."name" AS "riskarea", COUNT(*) AS "number_of_tasks"
-FROM "riskareas"
-    JOIN "tasks_riskareas" ON "tasks_riskareas"."riskarea_id"="riskareas"."id"
-    JOIN "default_tasks" ON "default_tasks"."id"="tasks_riskareas"."task_id"
-GROUP BY "riskareas"."name";
-
---(once populated with data) get comments and who left them and at what time from oldest to newest, on a certain task
-SELECT "notes"."text" AS "note", "users"."firstname" AS "user", "notes"."timestamp" AS "time"
-FROM "notes" JOIN "users"
-    ON "notes"."user_id"="users"."id"
-WHERE "notes"."task_id"=1
-ORDER BY "timestamp";
-
----------------------
---  OTHER QUERIES  --
----------------------
-
---mark a task complete (decide how to skip later...)
-UPDATE "assigned_tasks" SET "completed"=true WHERE "id"=5;
-
---change a user's level (eg from subscriber to admin)
-UPDATE "users" SET "level"=100 WHERE "firstname"='DAngelos';
 
 
 

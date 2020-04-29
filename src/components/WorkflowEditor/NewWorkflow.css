@@ -3,14 +3,14 @@
 
 .workflowWrapper{
   height: 100vh;
-  background-color: var(--bg-secondary);
+  background-color: var(--pure-white);
   text-align: center;
   margin:0;
 }
 
 /* darker gray background on description */
 .workflowDescription {
-  background-color: var(--bg-secondary);
+  background-color: var(--pure-white);
   border-radius: 15px;
   text-align: center;
   margin-top: 0;
@@ -24,6 +24,7 @@
 .workflowInfo {
   background-color: var(--pure-white);
   text-align: center;
+  padding-top: .5em;
   display: flex;
   white-space: nowrap;
   overflow-x: auto;
@@ -60,14 +61,29 @@
   margin: .5em;
   border-radius: 1em;
   padding: 1em;
+  padding-bottom: 2em;
   box-shadow: -1rem 0 3rem var(--text-primary);
   transition: var(--transition-speed);
 }
 
-.phase-block:hover, .phase-block-btn:hover {
+.phase-block:hover, .phase-block-btn:hover{
   background: var(--sven-blue);
   transform: scale(1.1);
   transition: var(--transition-speed);
+}
+
+.active-phase-block{
+  background: var(--sven-blue);
+  transform: scale(1.1);
+  transition: var(--transition-speed);
+  min-height: 10vh;
+  min-width: 34vw;
+  display: inline-block;
+  margin: .5em;
+  border-radius: 1em;
+  padding: 1em;
+  padding-bottom: 2em;
+  box-shadow: -1rem 0 3rem var(--text-primary);
 }
 
 /* text inside the phase blocks */
@@ -93,7 +109,7 @@
   padding-left: 1em;
   padding-right: 1em;
   color: var(--text-primary);
-  background-color: var(--bg-secondary);
+  background-color: var(--pure-white);
   width: 20vh;
   display: inline-block;
 }
@@ -182,6 +198,7 @@
 
 .card-container{
   margin: 0;
+  margin-bottom: 1em;
   position: absolute;
   padding: 4em;
   min-height: 30em;
@@ -194,6 +211,7 @@
 }
 
 .card{
+  margin-top: 1.5em;
   display: flex;
   height: 26em;
   min-width: 14.5em;

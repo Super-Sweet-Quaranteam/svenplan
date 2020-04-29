@@ -6,7 +6,7 @@
     text-align: center;    
 }
 /* can change how many divs per screen based on width % */
-.phaseOverviewItem {
+.phaseOverviewItem{
     background-color: var(--bg-tertiary);
     color: var(--text-tertiary);
     height: 8vh;
@@ -15,8 +15,36 @@
     margin: .5em;
     border-radius: 1em;
     padding: 1em;
+    padding-bottom: 2em;
+    box-shadow: -.5rem 0 1rem var(--text-primary);
+    transition: var(--transition-speed);
+}
+
+.phaseOverviewItem:hover{
+    transition: var(--transition-speed);
+    background: var(--sven-blue);
+    transform: scale(1.1);
+}
+
+.text{
+    white-space:normal;
+    word-wrap: break-word;
+}
+
+.phaseOverviewItem-start{
+    background-color: var(--bg-tertiary);
+    color: var(--text-tertiary);
+    width: 6vw;
+    height: 3vh;
+    transform: rotate(-90deg);
+    display: initial;
+    margin: .5em;
+    border-radius: 1em;
+    padding: 1em;
+    padding-bottom: 2em;
     box-shadow: -.5rem 0 1rem var(--text-primary);
 }
+
 .taskWindow {
     margin: 2em;
     text-align: center;
@@ -25,9 +53,14 @@
     background-color: var(--bg-secondary);
     color: var(--text-tertiary);
     display: inline-block;
+    height: 45vh;
     width: 90vw;
     margin: .5em;
     border-radius: 1em;
     padding: 1em;
     box-shadow: -.5rem 0 1rem var(--text-primary);
+}
+
+.bottom{
+    position: relative;
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../SubscriberHome/Subscriber.css';
+import Swal from 'sweetalert2';
 
 class CurrentWorkflow extends Component {
     state = {
@@ -31,7 +32,8 @@ class CurrentWorkflow extends Component {
     saveButton=()=>{
         this.props.dispatch({
             type: 'SAVE_INPUTS', payload: this.state
-        })
+        });
+        Swal.fire('Phase Complete!')
     }
 
     handleChange=(event, id)=>{
@@ -71,8 +73,11 @@ class CurrentWorkflow extends Component {
                 </button>
                 {/* phase divs are set up as buttons for a11y. onClick, specific tasks show up */}
                 <div className="phaseOverview">
+                <div className="phaseOverviewItem-start">Phases</div>
                     {this.props.reduxState.subscriber.currentProject.map(phase => 
-                        <div className="phaseOverviewItem" key={phase.phase_id} onClick={()=>this.showTasks(phase.phase_id)}><div className="seq">{phase.phase_seq}</div>{phase.phase_name}</div>
+                        <div className="phaseOverviewItem" key={phase.phase_id} onClick={()=>this.showTasks(phase.phase_id)}>
+                            <div className="seq">{phase.phase_seq}</div>
+                            <div className="text">{phase.phase_name}</div></div>
                     )}
                 </div>
                 <div className="taskWindow">
@@ -145,21 +150,23 @@ class CurrentWorkflow extends Component {
                             <>
                                 {this.state.taskIndex === 0 ?
                                 // this.state.task === this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
-                                    <button className="btn-sml" onClick={this.forwardATask}>Next</button>
-                                    // <button onClick={this.backATask}>Back</button>
+                                    <div className="bottom">
+                                        <button className="button" onClick={this.forwardATask}>Next</button>
+                                    </div>
+                                        // <button onClick={this.backATask}>Back</button>
                                 :
                                     <>
                                         {
                                          this.state.task === this.props.reduxState.subscriber.tasksInPhase[this.props.reduxState.subscriber.tasksInPhase.length-1] ?
-                                            <>
-                                            <button className="btn-sml" onClick={this.backATask}>Back</button>
-                                                <button className="btn-sml" onClick={this.saveButton}>Save</button>
-                                                    </>
+                                            <div className="bottom">
+                                                <button className="button" onClick={this.backATask}>Back</button>
+                                                <button className="button" onClick={this.saveButton}>Save</button>
+                                            </div>
                                             :
-                                            <>
-                                                <button className="btn-sml" onClick={this.backATask}>Back</button>
-                                                <button className="btn-sml" onClick={this.forwardATask}>Next</button>
-                                            </>
+                                            <div className="bottom">
+                                                <button className="button" onClick={this.backATask}>Back</button>
+                                                <button className="button" onClick={this.forwardATask}>Next</button>
+                                            </div>
                                         }
                                     </>
                                 }

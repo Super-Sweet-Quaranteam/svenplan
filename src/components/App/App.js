@@ -24,14 +24,8 @@ import EditWorkflow from '../WorkflowEditor/EditWorkflow';
 import TeamMembers from '../TeamMembers/TeamMembers'
 import ProjectDetails from '../ProjectManager/ProjectDetails';
 import ProjectData from '../ProjectManager/ProjectData';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-//TEMPORARY!
-import AddTaskHaley from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
-
-
-// THESE SEEM UNUSED
-// import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-// {/* <Route path="/admin" component={AdminNav} /> */ }
 
 class App extends Component {
   //sets the user, if there is one, in redux (even tho this component isn't connected to store)
@@ -73,10 +67,10 @@ class App extends Component {
             <Route exact path="/subscribers" component={Subscribers}/>
             <Route exact path="/teammembers" component={TeamMembers}/>
 
-            {/* temporary!!! */}
-            <Route path="/add-task-haley" component={AddTaskHaley} />
-              {/* <Route path={`/add-task-haley/summary`} component={AddTaskSummary} /> */}
+            {/* protected route */}
+            <ProtectedRoute exact path="/home" component={AdminHome}/>
 
+      
             {/* 404 page creation below */}
             <Route render={() => 
               <div className="fourOfour">

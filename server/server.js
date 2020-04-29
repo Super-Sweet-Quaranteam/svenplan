@@ -17,8 +17,6 @@ const workflowRouter = require('./routes/workflow.router');
 const projectRouter = require('./routes/project.router');
 const alertRouter = require('./routes/alert.router');
 
-const haleyTaskRouter = require('./routes/haleytask.router');
-
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,7 +37,6 @@ app.use('/subscriber', subscriberRouter);
 app.use('/api/workflow', workflowRouter);
 app.use('/api/project/', projectRouter);
 app.use('/api/alert/', alertRouter);
-app.use('/api/haley-task', haleyTaskRouter);
 
 
 // Serve static files

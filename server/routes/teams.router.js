@@ -48,7 +48,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     //insert team into db
     const queryText1 = 'INSERT INTO "teams" ("name") VALUES ($1) RETURNING "id";';
     const createTeamGetId = await connection.query(queryText1, [req.body.teamName]);
-    newTeamId = createTeamGetId.rows[0].id;
+    const newTeamId = createTeamGetId.rows[0].id;
     //update user info
     const queryText2 = `UPDATE "users" SET "team_id" = $1 WHERE "id"=$2;`
     await connection.query(queryText2, [newTeamId, req.user.id]);
@@ -76,7 +76,7 @@ router.put('/join', rejectUnauthenticated, async (req, res) => {
     //insert team into db
     const queryText1 = 'SELECT "id" FROM "teams" WHERE "name"=$1;';
     const getId = await connection.query(queryText1, [req.body.teamName]);
-    teamId = getId.rows[0].id;
+    const teamId = getId.rows[0].id;
     //update user info
     const queryText2 = `UPDATE "users" SET "team_id" = $1 WHERE "id"=$2;`
     await connection.query(queryText2, [teamId, req.user.id]);

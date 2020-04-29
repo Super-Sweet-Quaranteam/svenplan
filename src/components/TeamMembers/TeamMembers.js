@@ -23,12 +23,49 @@ state={
         }
        
 
+    getPredictions = (value) => {
+        const firstNameList = this.props.reduxState.admin.clientList.map(subscriber => {
+            return (subscriber.firstname + ", ");
+        })
+        const lastNameList = this.props.reduxState.admin.clientList.map(subscriber => {
+            return (subscriber.lastname + ", ");
+        })
+        const combined = firstNameList.concat(lastNameList)
+        if (value.length > 0) {
+            let filteredList = combined.filter(name => name.toLowerCase().indexOf(value.toLowerCase()) !== -1);
+            this.setState({ query: filteredList });
+        }
+        if (value.length === 0) {
+            this.setState({
+                query: ['search by first name']
+            })
+        }
+        console.log(this.state)
+    }
+
+    handleChange = () => {
+        const value = this.search.value
+        this.setState({ prediction: value })
+        this.getPredictions(value);
+    }
+
     render(){
     return (
         <div >
 
             <h2>Users using your workflows:</h2>
+
+            <form className="form">
+                <li>
+                    <label> Search</label>
+                    <input type="text" placeholder="search subscriber list"
+                        ref={input => this.search = input} onChange={this.handleChange} />
+                    {/* <span><input className="btn-sml"type="submit" value="Submit Query"/></span> */}
+                    <span><h2>{this.state.query}</h2></span>
+                </li>
+            </form>
             <table id="clientTable" className="tbl-sml">
+
                 <thead>
                     <tr>
                         <th>Company</th>
