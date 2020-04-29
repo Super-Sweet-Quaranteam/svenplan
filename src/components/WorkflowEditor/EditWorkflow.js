@@ -38,7 +38,6 @@ class EditWorkflow extends Component {
         //this is the same as above - should consolidate
         this.props.dispatch({ type: 'SET_TASK_PHASE_ID', payload: id })
         this.props.dispatch({type: 'TOGGLE_SHOW_PHASE'});
-
     }
 
     render() {

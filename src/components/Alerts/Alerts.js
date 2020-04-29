@@ -14,7 +14,7 @@ class Alerts extends Component {
 
     render() {
         return (
-            <div >
+            <>
                 <h2>Team Member Alerts</h2>
                 <table className="tbl-lg">
                     <thead>
@@ -56,7 +56,7 @@ class Alerts extends Component {
                         }                 
                     </tbody>
                 </table>
-            </div>
+            </>
         );
     }
 }

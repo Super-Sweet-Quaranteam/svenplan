@@ -1,8 +1,7 @@
 const express = require('express');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
-const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
-const userStrategy = require('../strategies/user.strategy');
+
 
 const router = express.Router();
 
@@ -30,7 +29,7 @@ router.get('/members/:id', rejectUnauthenticated, (req, res) => {
 
 //this is for when a user creates their team 
 router.post('/', rejectUnauthenticated, async (req, res) => {
-  console.log(req.user);
+  // console.log(req.user);
   // initiate connection
   const connection = await pool.connect()
   // Using basic JavaScript try/catch/finally 
@@ -58,7 +57,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
 //this is for when a user joins a team (very similar to above)
 router.put('/join', rejectUnauthenticated, async (req, res) => {
-  console.log(req.user);
+  // console.log(req.user);
   // initiate connection
   const connection = await pool.connect()
   // Using basic JavaScript try/catch/finally 

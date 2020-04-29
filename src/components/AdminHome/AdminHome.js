@@ -18,7 +18,6 @@ function AdminHome(props) {
         <>       
             <img className="hero-image" src="/images/skyline.png" alt="skyline"/>
                 <h2>Welcome, {props.user.currentUser.alias}</h2>
-
                 {props.user.currentUser.team_id === null &&
                 <>
                 <p>:</p>

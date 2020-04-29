@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Swal from "sweetalert2"
 
-
 import AddTask1 from './subcomponents/AddTask1';
 import AddTask2 from './subcomponents/AddTask2';
 import AddTask3 from './subcomponents/AddTask3';
@@ -10,8 +9,9 @@ import AddTask4 from './subcomponents/AddTask4';
 import AddTaskReview from './subcomponents/AddTaskReview';
 
 
-
+// brings the user through creation steps for a new task 
 function AddTask(props) {
+    // only show delete button if task exists
     const deleteTask=()=>{
         Swal.fire({
             title: `Are you sure you want to delete this task?`,

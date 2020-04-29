@@ -11,7 +11,7 @@ import rootSaga from './redux/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
-
+// removes logger for development
 const middlewareList = process.env.NODE_ENV === 'development' ?
   [sagaMiddleware, logger] :
   [sagaMiddleware];

@@ -8,12 +8,10 @@ const ClientHome =(props)=>{
 
     function handleChange(event) {
         teamName = event.target.value
-        console.log(teamName)
     }
-    function joinTeam() {
-        console.log('teamname dispatch', teamName)
-        props.dispatch({ type: 'UPDATE_USER_TEAM', payload: teamName })
 
+    function joinTeam() {
+        props.dispatch({ type: 'UPDATE_USER_TEAM', payload: teamName })
     }
 
 
@@ -41,7 +39,6 @@ const ClientHome =(props)=>{
             <br/>
             <br/>
             <br/>
-            
         </>
     );
 }

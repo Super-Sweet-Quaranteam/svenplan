@@ -3,6 +3,7 @@ import logo from '../Logo/svenplan-logo2.png'
 import "./LandingPage.css"
 
 
+// changing landing page to user home routes, this will be deleteable
 function LandingPage(props) {
     function Admin(event) {props.history.push({ pathname: '/admin' })}
     function Client(event) { props.history.push({ pathname: '/dashboard' })}

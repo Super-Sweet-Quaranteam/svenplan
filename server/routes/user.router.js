@@ -101,8 +101,8 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.put('/access/:id', rejectUnauthenticated, (req, res) => {
-  console.log(req.params)
-  console.log(req.body, 'body')
+  // console.log(req.params)
+  // console.log(req.body, 'body')
   const queryText = `UPDATE "users" SET "level" = $1 WHERE "id"=$2`;
   const values = [req.body.level, req.params.id];
   pool.query(queryText, values)

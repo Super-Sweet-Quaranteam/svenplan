@@ -4,7 +4,6 @@ import {withRouter} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 function Navbar(props) {
-    // let { path, url } = useRouteMatch();
     return (
         <nav className="nav-wrapper">
             {props.user.currentUser.level===1 &&

@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class NewProject extends Component {
-    // subscriber-side code. When 'Existing Projects' is clicked, page loads table of project, status and option for subscriber to continue or archive project
-    archiveProject = () => {
-        console.log('archive btn clicked');
+    // subscriber-side code. When 'Existing Projects' is clicked, page loads table of project, 
+    // status and option for subscriber to continue or archive project
+
+    state = { 
+        team: this.props.user.currentUser.team_id
     }
+
     componentDidMount() {
         console.log('mount team_id', this.props.user.currentUser.team_id)
         this.props.dispatch({ type: 'GET_TEAM_WORKFLOWS', payload:this.props.user.currentUser.team_id })
     }
-
-    state = { team: this.props.user.currentUser.team_id}
 
     handleChange = propertyName => (event) => {
         this.setState({
@@ -23,9 +24,11 @@ class NewProject extends Component {
         this.props.dispatch({ type: 'CREATE_PROJECT', 
         payload:{name:this.state.name,
                     team:this.state.team,
-                    workflow: Number(this.state.workflow)  }});
+                    workflow: Number(this.state.workflow)  
+                }});
         this.props.history.push('/projects');           
     }
+
     render() {
         return (
             <>
@@ -58,8 +61,10 @@ class NewProject extends Component {
         );
     }
 }
+
 const mapStateToProps = reduxState => ({
     reduxState,
     user: reduxState.user
 });
+
 export default connect(mapStateToProps)(NewProject);

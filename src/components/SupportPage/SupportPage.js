@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import './SupportPage.css'
 import Swal from 'sweetalert2';
 
 
@@ -44,7 +45,7 @@ class SupportPage extends Component {
                 </form>
                 <br/>
                 <br/>
-                <h4>For immediate help with any questions or concerns please contact your SvenPlans point of contact.</h4>
+                <h4 className="help">For immediate help with any questions or concerns please contact your SvenPlans point of contact.</h4>
             </>
             :
             <>
@@ -52,7 +53,7 @@ class SupportPage extends Component {
                 <br/>
                 <h2>Your team lead will get with you shortly!</h2>
                 <br/>
-                <h4>For immediate help with any questions or concerns please contact your SvenPlan point of contact.</h4>
+                <p className="help">For immediate help with any questions or concerns please contact your SvenPlan point of contact.</p>
             </>
             }
             </>

@@ -3,17 +3,13 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 class ProjectData extends Component {
-    // subscriber-side code. When 'Existing Projects' is clicked, page loads table of project, status and option for subscriber to continue or archive project
+    // subscriber-side code. When 'Existing Projects' is clicked, page loads table of project, 
+    // status and option for subscriber to continue or archive project
   
-
-
-
-
-
 
     render() {
         return (
-            <div >
+            <>
                 <h2>{this.props.reduxState.subscriber.projectId.name} Data</h2>
                 <table className="tbl-sml">
                     <thead>
@@ -33,18 +29,16 @@ class ProjectData extends Component {
                                 <td>{data.taskName}</td>
                                 <td>{data.inputPrompt}</td>
                                 <td>{data.value}</td>
-                               
                             </tr>)}
                     </tbody>
                 </table>
-                <ul>
-                </ul>
-
-            </div>
+            </>
         );
     }
 }
+
 const mapStateToProps = reduxState => ({
     reduxState
 });
+
 export default connect(mapStateToProps)(withRouter(ProjectData));

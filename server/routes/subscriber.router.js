@@ -55,8 +55,10 @@ const router = express.Router();
     });
 
 
+
 router.post('/project', rejectUnauthenticated, (req, res) => {
 console.log(req.body.details)
+
     let queryText = `INSERT INTO "projects" ("name", "team_id", "workflow_id") VALUES ($1, $2, $3);`
     pool.query(queryText, [req.body.details.name, req.body.details.team, req.body.details.workflow])
         .then((response) => {
@@ -89,8 +91,10 @@ router.get('/project/data/:projectId', rejectUnauthenticated, (req, res) => {
 });//get task names for a certain project, and whether or not they're done.
 
 
+
 router.post('/project', rejectUnauthenticated, (req, res) => {
     console.log(req.body.details)
+
     let queryText = `INSERT INTO "projects" ("name", "team_id", "workflow_id") VALUES ($1, $2, $3);`
     pool.query(queryText, [req.body.details.name, req.body.details.team, req.body.details.workflow])
         .then((response) => {

@@ -20,6 +20,7 @@ class AddTask3 extends Component {
         this.props.dispatch({ type: 'PREVIOUS_TASK_STEP' });
     }
 
+    // each click adds a new link and description from current state
     addLink =()=> {
         this.props.dispatch({ type: 'ADD_TASK_LINK', payload: { url: this.state.urlInput, description: this.state.descriptionInput } });
     }
