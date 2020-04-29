@@ -13,12 +13,10 @@ class AddTask4 extends Component {
     nextStep = () => {
         // inputs are added with add input, so all next step needs to do is switch pages
         this.props.dispatch({ type: 'NEXT_TASK_STEP' });
-        // this.props.history.push('/add-task-haley/5')
     }
 
     goBack = () => {
         this.props.dispatch({ type: 'PREVIOUS_TASK_STEP' });
-        // this.props.history.push('/add-task-haley/3')
     }
 
     addInput =()=> {

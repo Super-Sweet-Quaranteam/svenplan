@@ -29,7 +29,6 @@ class AddTask5 extends Component {
 
     goBack = () => {
         this.props.dispatch({ type: 'PREVIOUS_TASK_STEP' });
-        this.props.history.push('/add-task-haley/4')
     }
 
     render() {

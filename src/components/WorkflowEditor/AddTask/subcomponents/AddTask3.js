@@ -14,12 +14,10 @@ class AddTask3 extends Component {
     nextStep = () => {
         // links are added with add link, so all next step needs to do is switch pages
         this.props.dispatch({ type: 'NEXT_TASK_STEP' });
-        // this.props.history.push('/add-task-haley/4')
     }
 
     goBack = () => {
         this.props.dispatch({ type: 'PREVIOUS_TASK_STEP' });
-        // this.props.history.push('/add-task-haley/2')
     }
 
     addLink =()=> {

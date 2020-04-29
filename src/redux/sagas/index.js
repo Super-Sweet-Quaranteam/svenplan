@@ -8,7 +8,6 @@ import teamSaga from './teamSaga';
 import SubscriberProjects from './SubscriberProjects';
 import workflows from './workflowSaga';
 import ProjectSaga from './ProjectSaga';
-import taskSaga from './haleyAddTaskSaga';
 import alerts from './alertSupportSaga';
 
 
@@ -24,8 +23,7 @@ export default function* rootSaga() {
       SubscriberProjects(),
       workflows(),
       ProjectSaga(),
-      alerts(),
-      taskSaga(),
+      alerts()
 
     ]);
   }

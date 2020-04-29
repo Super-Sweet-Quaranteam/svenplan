@@ -35,19 +35,10 @@ class EditWorkflow extends Component {
     // gets current phase by id to be displayed below - handled in EditPhase.js
     viewPhase=(e, id)=>{
         this.props.dispatch({type: 'GET_THIS_PHASE', payload:{id:id}});
-        //this is the same as above, just taken from haleys code because it's already working with other parts- should consolidate
+        //this is the same as above - should consolidate
         this.props.dispatch({ type: 'SET_TASK_PHASE_ID', payload: id })
         this.props.dispatch({type: 'TOGGLE_SHOW_PHASE'});
-        // const block = document.querySelectorAll(".phase-block");
-        // block.forEach(square =>{
-        //     square.classList.remove('active-phase-block');
-        //     console.log(square)
-        //     });
-        // for(let i=0; i<block.length; i++){
-        //     if(Number(block[i].dataset.id) === Number(id)){
-        //         block[i].classList.add('active-phase-block')
-        //     }
-        // }
+
     }
 
     render() {
