@@ -1,8 +1,7 @@
 const express = require('express');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
-const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
-const userStrategy = require('../strategies/user.strategy');
+
 
 const router = express.Router();
 
@@ -27,19 +26,9 @@ router.get('/members/:id', rejectUnauthenticated, (req, res) => {
     .catch(() => res.sendStatus(500));
 });
 
-// COREYS UNEDITED POST FOR CREATING A TEAM
-// router.post('/', rejectUnauthenticated, (req, res) => {
-//   const queryText = 'INSERT INTO "teams" ("name") VALUES ($1);'
-//   pool.query(queryText, [req.body.teamName])
-//     .then((response) => {
-//       res.send(response.rows);
-//     })
-//     .catch(() => res.sendStatus(500));
-// });
-
 //this is for when a user creates their team 
 router.post('/', rejectUnauthenticated, async (req, res) => {
-  console.log(req.user);
+  // console.log(req.user);
   // initiate connection
   const connection = await pool.connect()
   // Using basic JavaScript try/catch/finally 
@@ -67,7 +56,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
 //this is for when a user joins a team (very similar to above)
 router.put('/join', rejectUnauthenticated, async (req, res) => {
-  console.log(req.user);
+  // console.log(req.user);
   // initiate connection
   const connection = await pool.connect()
   // Using basic JavaScript try/catch/finally 
@@ -92,8 +81,6 @@ router.put('/join', rejectUnauthenticated, async (req, res) => {
     connection.release()
   }
 });
-
-// PUT routes needed for changing user level or editing a profile in general
 
 
 module.exports = router;

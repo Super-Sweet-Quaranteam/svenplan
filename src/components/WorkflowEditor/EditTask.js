@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-
+// currently edit task is being handled in add task section
+// due to errors edit task needs to be brought into this component
 class EditTask extends Component {
 
     state={

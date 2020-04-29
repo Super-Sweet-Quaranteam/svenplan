@@ -54,7 +54,6 @@ class ExistingWorkflows extends Component {
                 );
                 this.props.dispatch({type: 'PUBLISH_THIS_WORKFLOW', payload: {id: id, team: this.props.user.currentUser.team_id}})
             }
-            
         })
     }
 

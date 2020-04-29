@@ -12,7 +12,6 @@ class AddTask2 extends Component {
     nextStep = () => {
         this.props.dispatch({ type: 'SET_TASK_DESCRIPTION', payload: this.state.descriptionInput });
         this.props.dispatch({ type: 'NEXT_TASK_STEP' });
-
     }
 
     goBack = () => {

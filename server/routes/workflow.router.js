@@ -4,11 +4,11 @@ const router = express.Router();
 
 // get all workflows
 router.get('/all', (req, res) => {
-    console.log('in workflow GET all')
+    // console.log('in workflow GET all')
      const queryText = `SELECT * FROM "workflows" ORDER BY "id" ASC;`;
     pool.query(queryText)
     .then( (result) => {
-        console.log(result.rows);
+        // console.log(result.rows);
         res.send(result.rows);
     })
     .catch( (error) => {
@@ -16,13 +16,14 @@ router.get('/all', (req, res) => {
         res.sendStatus(500);
     });
 });
+
 // get team workflows
 router.get('/team/:team', (req, res) => {
-    console.log('in workflow GET team', req.params)
+    // console.log('in workflow GET team', req.params)
     const queryText = `SELECT * FROM "workflows" WHERE "team_id"=$1 ORDER BY "id" ASC;`;
     pool.query(queryText, [req.params.team])
         .then((result) => {
-            console.log(result.rows);
+            // console.log(result.rows);
             res.send(result.rows);
         })
         .catch((error) => {
@@ -33,7 +34,7 @@ router.get('/team/:team', (req, res) => {
 
 // get requested workflow
 router.get('/requested/:id', (req, res) => {
-    console.log('in GET this workflow with id:', req.params.id)
+    // console.log('in GET this workflow with id:', req.params.id)
     const queryText = `SELECT "phases"."name" as ph_name, "phases"."description" as ph_description, 
     "phases"."sequence" as ph_sequence, "phases"."id" as ph_id, "workflows"."id" as wf_id,
     "workflows"."name" as wf_name, "workflows"."description" as wf_desc
@@ -42,7 +43,7 @@ router.get('/requested/:id', (req, res) => {
     WHERE "workflows"."id"=$1 ORDER BY "phases"."sequence" ASC;`;
     pool.query(queryText, [req.params.id])
     .then( (result) => {
-        console.log(result.rows);
+        // console.log(result.rows);
         res.send(result.rows);
     })
     .catch( (error) => {
@@ -53,7 +54,7 @@ router.get('/requested/:id', (req, res) => {
 
 // get requested phase
 router.get('/phase/:id', (req, res) => {
-    console.log('in GET this phase with id:', req.params.id)
+    // console.log('in GET this phase with id:', req.params.id)
     const queryText = `SELECT "phases"."name" as ph_name, "phases"."description" as ph_description,
     "phases"."sequence" as ph_sequence, "default_tasks"."name" as task_name, "default_tasks"."description" as task_description,
     "phases"."id" as ph_id, "default_tasks"."sequence" as task_sequence, "default_tasks"."id" as task_id
@@ -62,7 +63,7 @@ router.get('/phase/:id', (req, res) => {
     WHERE "phases"."id"=$1 ORDER BY "default_tasks"."sequence" ASC;`;
     pool.query(queryText, [req.params.id])
     .then( (result) => {
-        console.log(result.rows);
+        // console.log(result.rows);
         res.send(result.rows);
     })
     .catch( (error) => {
@@ -257,7 +258,7 @@ router.get('/all/task/options', (req, res) => {
 
 // get all riskareas
 router.get('/riskareas/:id', (req, res) => {
-    console.log('in /riskareas/:id get with id:', req.params.id);
+    // console.log('in /riskareas/:id get with id:', req.params.id);
     const queryText = `SELECT "riskareas"."name" AS "riskarea", "riskareas"."id" AS "id"
                         FROM "riskareas"
                         JOIN "workflows" ON "riskareas"."workflow_id"="workflows"."id"
@@ -276,7 +277,7 @@ router.get('/riskareas/:id', (req, res) => {
 });
 
 router.get('/assigned-task/:id', (req, res) => {
-    console.log('in /assigned-task/:id get with id:', req.params.id);
+    // console.log('in /assigned-task/:id get with id:', req.params.id);
     const queryText = `SELECT "default_tasks"."name" AS "task_name", 
                         "default_tasks"."description" AS "task_description",
                         "assigned_tasks"."completed" 
@@ -297,7 +298,7 @@ router.get('/assigned-task/:id', (req, res) => {
 
 // get all riskareas
 router.get('/assigned-task/inputs/:id', (req, res) => {
-    console.log('in /riskareas/:id get with id:', req.params.id);
+    // console.log('in /riskareas/:id get with id:', req.params.id);
     const queryText = `SELECT "inputs"."type" AS "inputType", "inputs"."prompt" AS "prompt"
                         FROM "inputs"
                         JOIN "assigned_tasks" ON "inputs"."task_id"="assigned_tasks"."id"
@@ -375,7 +376,7 @@ router.post('/add-new-task', async (req, res) => {
 
 // post new task to phase
 router.post('/add-new-assigned-task', async (req, res) => {
-    console.log('req.body is:', req.body);
+    // console.log('req.body is:', req.body);
     const defaultId = req.body.id;
     const projectId = 1;
     // We need to use the same connection for all queries... 

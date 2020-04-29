@@ -19,6 +19,7 @@ class AddTask4 extends Component {
         this.props.dispatch({ type: 'PREVIOUS_TASK_STEP' });
     }
 
+    // can store multiple inputs, stores a new input of current state with each click
     addInput =()=> {
         this.props.dispatch({ type: 'ADD_TASK_INPUT', payload: { type: this.state.inputInput, prompt: this.state.promptInput } });
     }

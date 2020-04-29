@@ -4,14 +4,16 @@ import {connect} from 'react-redux';
 
 class TeamMembers extends Component{
 
-state={ 
-    
+    // currently predictive text is only based of first and last name
+    state={
+        query: ['search by name']
     }
 
     componentDidMount=()=>{
         this.props.dispatch({type: 'GET_CLIENT_LIST'})
     }
 
+    // change team members access level
     accessChange=(id, level)=>{
         if (level === 1) {
             alert('Admin Access cannot be changed')
@@ -20,9 +22,9 @@ state={
         else{
             this.props.dispatch({type:"EDIT_ACCESS", payload:{id,level}})
         }
-        }
+    }
        
-
+    // grabs predictive values, need to incorporate this into displaying team table by search
     getPredictions = (value) => {
         const firstNameList = this.props.reduxState.admin.clientList.map(subscriber => {
             return (subscriber.firstname + ", ");
@@ -37,7 +39,7 @@ state={
         }
         if (value.length === 0) {
             this.setState({
-                query: ['search by first name']
+                query: ['search by name']
             })
         }
         console.log(this.state)
@@ -50,68 +52,62 @@ state={
     }
 
     render(){
-    return (
-        <div >
-
-            <h2>Users using your workflows:</h2>
-
-            <form className="form">
-                <li>
-                    <label> Search</label>
-                    <input type="text" placeholder="search subscriber list"
-                        ref={input => this.search = input} onChange={this.handleChange} />
-                    {/* <span><input className="btn-sml"type="submit" value="Submit Query"/></span> */}
-                    <span><h2>{this.state.query}</h2></span>
-                </li>
-            </form>
-            <table id="clientTable" className="tbl-sml">
-
-                <thead>
-                    <tr>
-                        <th>Company</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Access Level</th>
-                        <th>Permissions</th>
-                        {/* <th>Address</th> */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.props.user.currentUser.team_id === null ?
-                    <p>Not part of a workflow group</p>
-                    :
-                    this.props.reduxState.admin.clientList.map(subscriber => 
-                        this.props.user.currentUser.team_id === subscriber.team_id &&
-                    
-                        <tr key={subscriber.id}>
-                            <td>{subscriber.company}</td>
-                            <td>{subscriber.firstname} {subscriber.lastname}</td>
-                            <td>{subscriber.email}</td>
-                            <td>{subscriber.phone}</td>
-                            <td>{subscriber.level}:
-                            { subscriber.level ===3 &&
-                            'Project User'}
-                            {subscriber.level ===2 &&
-                            'Workflow Creator'}
-                                {subscriber.level === 1 &&
-                                    'Application Administrator'}
-                            </td>
-                            {(this.props.reduxState.user.currentUser.id !== subscriber.id) 
-                            ?
-                                <td><button className="btn-sml" key={subscriber.id} onClick={() => this.accessChange(subscriber.id, subscriber.level)} 
-                                    name='subscriber.clientid'>Grant/Revoke Workflow Admin Access</button></td>
-                            :
-                                <td>Cannot Change Personal Access Level</td>
-                            }
-                            {/* <td>{client.address}</td> */}
-                        </tr>    
-                    )}               
-                </tbody>
-            </table>
-        </div>
-    );
-}
+        return (
+            <>
+                <h2>Users using your workflows:</h2>
+                <form className="form">
+                    <li>
+                        <label>Search</label>
+                        <input type="text" placeholder="search subscriber list"
+                            ref={input => this.search = input} onChange={this.handleChange} />
+                        {/* <span><input className="btn-sml"type="submit" value="Submit Query"/></span> */}
+                        <span><h2>{this.state.query}</h2></span>
+                    </li>
+                </form>
+                <table id="clientTable" className="tbl-sml">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Access Level</th>
+                            <th>Permissions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.props.user.currentUser.team_id === null ?
+                        <p>Not part of a workflow group</p>
+                        :
+                        this.props.reduxState.admin.clientList.map(subscriber => 
+                            this.props.user.currentUser.team_id === subscriber.team_id &&
+                            <tr key={subscriber.id}>
+                                <td>{subscriber.company}</td>
+                                <td>{subscriber.firstname} {subscriber.lastname}</td>
+                                <td>{subscriber.email}</td>
+                                <td>{subscriber.phone}</td>
+                                <td>{subscriber.level}:
+                                { subscriber.level ===3 &&
+                                'Project User'}
+                                {subscriber.level ===2 &&
+                                'Workflow Creator'}
+                                    {subscriber.level === 1 &&
+                                        'Application Administrator'}
+                                </td>
+                                {(this.props.reduxState.user.currentUser.id !== subscriber.id) 
+                                ?
+                                    <td><button className="btn-sml" key={subscriber.id} onClick={() => this.accessChange(subscriber.id, subscriber.level)} 
+                                        name='subscriber.clientid'>Grant/Revoke Workflow Admin Access</button></td>
+                                :
+                                    <td>Cannot Change Personal Access Level</td>
+                                }
+                            </tr>    
+                        )}               
+                    </tbody>
+                </table>
+            </>
+        );
+    }
 }
 
 const putReduxStateOnProps=(reduxState)=>({

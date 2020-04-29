@@ -207,7 +207,7 @@ class EditPhase extends Component {
                         }
                     </>
                     }
-                    {/* renders the edit or add task section */}
+                    {/* renders the edit or add task section - will need to have edit task go to its own route*/}
                         {(this.props.reduxState.workflow.storeCurent.addTask === true 
                         || 
                         this.props.reduxState.workflow.storeCurent.editTask === true) &&

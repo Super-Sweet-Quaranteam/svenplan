@@ -95,6 +95,7 @@ class CreateWorkflow extends Component {
         })
     }
 
+    // this handle will save an edited workflow
     saveWF=()=>{
         this.setState({id:this.props.reduxState.workflow.storeCurent.workflow.id});
         if(this.state.name === ''){

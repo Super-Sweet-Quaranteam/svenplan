@@ -5,6 +5,7 @@ import UserProfile from '../UserProfile/UserProfile';
 
 
 class LoginPage extends Component {
+
   state = {
     mode: 'login',
     email: '',
@@ -19,12 +20,9 @@ class LoginPage extends Component {
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_CURRENT_USER' });
-    
-
   }//this gets user info, upon reload
 
   login = (event) => {
-    //don't reload page on submit
     event.preventDefault();
     //if all the things you need are filled for the current mode (this may change) dispatch the state to a saga
     //otherwise, let the user know what they did wrong 
@@ -172,7 +170,6 @@ class LoginPage extends Component {
     );
   }
 }
-
 
 
 const mapStateToProps = state => ({

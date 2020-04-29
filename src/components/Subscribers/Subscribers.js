@@ -13,6 +13,7 @@ class Subscribers extends Component{
         this.props.dispatch({type: 'GET_CLIENT_LIST'});
     }
 
+    // edit users access level
     accessChange=(id, level)=>{
         if (level === 1) {
             Swal.fire('Admin Access Cannot Be Changed')
@@ -23,6 +24,7 @@ class Subscribers extends Component{
         }
     }
        
+    // currently predictive text only follows first and last name, need to have table conditionally render by this
     getPredictions=(value)=>{
         const firstNameList = this.props.reduxState.admin.clientList.map(subscriber=>{
             return (subscriber.firstname + ", ");
@@ -40,7 +42,6 @@ class Subscribers extends Component{
                 query: ['search by first or last name']
             })
         }
-        console.log(this.state)
     }
   
     handleChange=()=>{
@@ -52,7 +53,7 @@ class Subscribers extends Component{
 
     render(){
         return (
-            <div >
+            <>
                 <h2>Subscribers using SvenPlans:</h2>
                 <form className="form">
                     <li>
@@ -72,7 +73,6 @@ class Subscribers extends Component{
                             <th className="sticky">Phone</th>
                             <th className="sticky">Access Level</th>
                             <th className="sticky">Permissions</th>
-                            {/* <th className="sticky">Address</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -97,11 +97,10 @@ class Subscribers extends Component{
                                 :
                                     <td>Cannot Change Personal Access Level</td>
                                 }
-                                {/* <td>{client.address}</td> */}
                             </tr>))}              
                     </tbody>
                 </table>
-            </div>
+            </>
         );
     }
 }

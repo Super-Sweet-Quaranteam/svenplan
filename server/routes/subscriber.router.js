@@ -58,7 +58,7 @@ const router = express.Router();
 
 
 router.post('/project', (req, res) => {
-console.log(req.body.details)
+    // console.log(req.body.details)
     let queryText = `INSERT INTO "projects" ("name", "team_id", "workflow_id") VALUES ($1, $2, $3);`
     pool.query(queryText, [req.body.details.name, req.body.details.team, req.body.details.workflow])
         .then((response) => {
@@ -92,7 +92,7 @@ router.get('/project/data/:projectId', (req, res) => {
 
 
 router.post('/project', (req, res) => {
-    console.log(req.body.details)
+    // console.log(req.body.details)
     let queryText = `INSERT INTO "projects" ("name", "team_id", "workflow_id") VALUES ($1, $2, $3);`
     pool.query(queryText, [req.body.details.name, req.body.details.team, req.body.details.workflow])
         .then((response) => {
