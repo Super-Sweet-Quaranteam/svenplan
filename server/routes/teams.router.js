@@ -26,6 +26,7 @@ router.get('/members/:id', rejectUnauthenticated, (req, res) => {
     .catch(() => res.sendStatus(500));
 });
 
+
 //this is for when a user creates their team 
 router.post('/', rejectUnauthenticated, async (req, res) => {
   // console.log(req.user);
@@ -81,6 +82,5 @@ router.put('/join', rejectUnauthenticated, async (req, res) => {
     connection.release()
   }
 });
-
 
 module.exports = router;

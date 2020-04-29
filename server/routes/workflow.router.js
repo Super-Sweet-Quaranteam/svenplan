@@ -1,10 +1,13 @@
 const express = require('express');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
 // get all workflows
-router.get('/all', (req, res) => {
-    // console.log('in workflow GET all')
+
+router.get('/all', rejectUnauthenticated, (req, res) => {
+    console.log('in workflow GET all')
+
      const queryText = `SELECT * FROM "workflows" ORDER BY "id" ASC;`;
     pool.query(queryText)
     .then( (result) => {
@@ -18,8 +21,11 @@ router.get('/all', (req, res) => {
 });
 
 // get team workflows
-router.get('/team/:team', (req, res) => {
-    // console.log('in workflow GET team', req.params)
+
+
+router.get('/team/:team', rejectUnauthenticated, (req, res) => {
+    console.log('in workflow GET team', req.params)
+
     const queryText = `SELECT * FROM "workflows" WHERE "team_id"=$1 ORDER BY "id" ASC;`;
     pool.query(queryText, [req.params.team])
         .then((result) => {
@@ -33,8 +39,10 @@ router.get('/team/:team', (req, res) => {
 });
 
 // get requested workflow
-router.get('/requested/:id', (req, res) => {
-    // console.log('in GET this workflow with id:', req.params.id)
+
+router.get('/requested/:id', rejectUnauthenticated, (req, res) => {
+    console.log('in GET this workflow with id:', req.params.id)
+
     const queryText = `SELECT "phases"."name" as ph_name, "phases"."description" as ph_description, 
     "phases"."sequence" as ph_sequence, "phases"."id" as ph_id, "workflows"."id" as wf_id,
     "workflows"."name" as wf_name, "workflows"."description" as wf_desc
@@ -53,8 +61,10 @@ router.get('/requested/:id', (req, res) => {
 });
 
 // get requested phase
-router.get('/phase/:id', (req, res) => {
-    // console.log('in GET this phase with id:', req.params.id)
+
+router.get('/phase/:id', rejectUnauthenticated, (req, res) => {
+    console.log('in GET this phase with id:', req.params.id)
+
     const queryText = `SELECT "phases"."name" as ph_name, "phases"."description" as ph_description,
     "phases"."sequence" as ph_sequence, "default_tasks"."name" as task_name, "default_tasks"."description" as task_description,
     "phases"."id" as ph_id, "default_tasks"."sequence" as task_sequence, "default_tasks"."id" as task_id
@@ -73,7 +83,7 @@ router.get('/phase/:id', (req, res) => {
 });
 
 // get requested task
-router.get('/task/:id', (req, res) => {
+router.get('/task/:id', rejectUnauthenticated, (req, res) => {
     console.log('in GET this task with id:', req.params.id)
     const queryText = `SELECT "default_tasks"."name" as task_name, "default_tasks"."description" as task_description,
     "default_tasks"."sequence" as task_sequence, "default_tasks"."id" as task_id,
@@ -94,7 +104,7 @@ router.get('/task/:id', (req, res) => {
 });
 
 // set workflow name / description 
-router.put('/new-wf-name/:id', (req, res) => {
+router.put('/new-wf-name/:id', rejectUnauthenticated, (req, res) => {
     console.log('in workflow name PUT with id:', req.params.id, req.body);
     const queryText = `UPDATE "workflows" SET "name"=$1, "description"=$2, "edited"=$3 WHERE "id"=$4;`;
     pool.query(queryText, [req.body.name, req.body.description, req.body.time, Number(req.params.id)])
@@ -108,7 +118,7 @@ router.put('/new-wf-name/:id', (req, res) => {
 });
 
 // set phase name / description 
-router.put('/new-phase-name/:id', (req, res) => {
+router.put('/new-phase-name/:id', rejectUnauthenticated, (req, res) => {
     console.log('in phase name PUT with id:', req.body);
     const queryText = `UPDATE "phases" SET "name"=$1, "description"=$2, "edited"=$3 WHERE "id"=$4;`;
     pool.query(queryText, [req.body.phase.name, req.body.phase.description, req.body.phase.time, Number(req.body.phase.id)])
@@ -122,7 +132,7 @@ router.put('/new-phase-name/:id', (req, res) => {
 });
 
 // set task name / description 
-router.put('/new-task-name/:id', (req, res) => {
+router.put('/new-task-name/:id', rejectUnauthenticated, (req, res) => {
     console.log('in task name PUT with id:', req.body);
     const queryText = `UPDATE "default_tasks" SET "name"=$1, "description"=$2, "phase_id"=$3,"edited"=$4 WHERE "id"=$5;`;
     pool.query(queryText, [req.body.task.name, req.body.task.description, Number(req.body.id), req.body.task.time, Number(req.body.task.id)])
@@ -136,7 +146,7 @@ router.put('/new-task-name/:id', (req, res) => {
 });
 
 // post new phase to workflow
-router.post('/add/phase', (req, res) => {
+router.post('/add/phase', rejectUnauthenticated, (req, res) => {
     console.log('in new phase POST with', req.body);
     const wfID = req.body.id;
     const name = req.body.phase.name;
@@ -154,7 +164,7 @@ router.post('/add/phase', (req, res) => {
 });
 
 // post new task to phase
-router.post('/add/task', (req, res) => {
+router.post('/add/task', rejectUnauthenticated, (req, res) => {
     console.log('in new task POST with', req.body);
     const phID = req.body.id;
     const name = req.body.task.name;
@@ -172,7 +182,7 @@ router.post('/add/task', (req, res) => {
 });
 
 // post new workflow to db
-router.post('/add/workflow', (req, res) => {
+router.post('/add/workflow', rejectUnauthenticated, (req, res) => {
     console.log('in new workflow POST with', req.body);
     const name = req.body.name;
     const desc = req.body.description;
@@ -189,7 +199,7 @@ router.post('/add/workflow', (req, res) => {
 });
 
 // delete task from db
-router.delete('/remove/task/:id', (req, res) => {
+router.delete('/remove/task/:id', rejectUnauthenticated, (req, res) => {
     console.log('in task DELETE', req.params.id);
     const queryText = `DELETE FROM "default_tasks" WHERE id=$1`;
     pool.query(queryText, [Number(req.params.id)])
@@ -202,7 +212,7 @@ router.delete('/remove/task/:id', (req, res) => {
   });
 
 // delete phase from db
-router.delete('/remove/phase/:id', (req, res) => {
+router.delete('/remove/phase/:id', rejectUnauthenticated, (req, res) => {
     console.log('in phase DELETE', req.params.id);
     const queryText = `DELETE FROM "phases" WHERE id=$1`;
     pool.query(queryText, [Number(req.params.id)])
@@ -215,7 +225,7 @@ router.delete('/remove/phase/:id', (req, res) => {
   });
 
 // delete workflow from db
-router.delete('/remove/workflow/:id', (req, res) => {
+router.delete('/remove/workflow/:id', rejectUnauthenticated, (req, res) => {
     console.log('in workflow DELETE', req.params.id);
     const queryText = `DELETE FROM "workflows" WHERE id=$1`;
     pool.query(queryText, [Number(req.params.id)])
@@ -228,7 +238,7 @@ router.delete('/remove/workflow/:id', (req, res) => {
   });
 
 // set workflow to published
-router.put('/publish/:id', (req, res) => {
+router.put('/publish/:id', rejectUnauthenticated, (req, res) => {
     console.log('in workflow publish PUT with id:', req.params.id);
     const queryText = `UPDATE "workflows" SET "published"=true WHERE "id"=$1;`;
     pool.query(queryText, [Number(req.params.id)])
@@ -242,7 +252,7 @@ router.put('/publish/:id', (req, res) => {
 });
 
 // get all task option types
-router.get('/all/task/options', (req, res) => {
+router.get('/all/task/options', rejectUnauthenticated, (req, res) => {
     console.log('in task options GET all')
     const queryText = `SELECT * FROM "inputs" ORDER BY "id" ASC;`;
     pool.query(queryText)
@@ -257,8 +267,10 @@ router.get('/all/task/options', (req, res) => {
 });
 
 // get all riskareas
-router.get('/riskareas/:id', (req, res) => {
-    // console.log('in /riskareas/:id get with id:', req.params.id);
+
+router.get('/riskareas/:id', rejectUnauthenticated, (req, res) => {
+    console.log('in /riskareas/:id get with id:', req.params.id);
+
     const queryText = `SELECT "riskareas"."name" AS "riskarea", "riskareas"."id" AS "id"
                         FROM "riskareas"
                         JOIN "workflows" ON "riskareas"."workflow_id"="workflows"."id"
@@ -276,8 +288,10 @@ router.get('/riskareas/:id', (req, res) => {
     });
 });
 
-router.get('/assigned-task/:id', (req, res) => {
-    // console.log('in /assigned-task/:id get with id:', req.params.id);
+
+router.get('/assigned-task/:id', rejectUnauthenticated, (req, res) => {
+    console.log('in /assigned-task/:id get with id:', req.params.id);
+
     const queryText = `SELECT "default_tasks"."name" AS "task_name", 
                         "default_tasks"."description" AS "task_description",
                         "assigned_tasks"."completed" 
@@ -297,8 +311,10 @@ router.get('/assigned-task/:id', (req, res) => {
 });
 
 // get all riskareas
-router.get('/assigned-task/inputs/:id', (req, res) => {
-    // console.log('in /riskareas/:id get with id:', req.params.id);
+
+router.get('/assigned-task/inputs/:id', rejectUnauthenticated, (req, res) => {
+    console.log('in /riskareas/:id get with id:', req.params.id);
+
     const queryText = `SELECT "inputs"."type" AS "inputType", "inputs"."prompt" AS "prompt"
                         FROM "inputs"
                         JOIN "assigned_tasks" ON "inputs"."task_id"="assigned_tasks"."id"
@@ -316,7 +332,7 @@ router.get('/assigned-task/inputs/:id', (req, res) => {
 });
 
 // post new task to phase
-router.post('/add-new-task', async (req, res) => {
+router.post('/add-new-task', rejectUnauthenticated, async (req, res) => {
     const phaseId= req.body.phaseId;
     const title= req.body.title;
     const riskareasArray= req.body.riskareas;
@@ -375,8 +391,10 @@ router.post('/add-new-task', async (req, res) => {
 });
 
 // post new task to phase
-router.post('/add-new-assigned-task', async (req, res) => {
-    // console.log('req.body is:', req.body);
+
+router.post('/add-new-assigned-task', rejectUnauthenticated, async (req, res) => {
+    console.log('req.body is:', req.body);
+
     const defaultId = req.body.id;
     const projectId = 1;
     // We need to use the same connection for all queries... 

@@ -1,10 +1,10 @@
 const express = require('express');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-
 // GET Alert List
-router.get('/list/all', (req, res) => {
+router.get('/list/all', rejectUnauthenticated, (req, res) => {
     // console.log('in alert GET all alerts:')
     const queryText = `SELECT "alerts"."id", "description", "user_id", TO_CHAR("created", 'FMDay, FMMonth FMDD FMYYYY HH12:MI am') as created,
     "resolved", "users"."firstname" as firstname, "users"."lastname" as lastname, "teams"."name" as teamname, "teams"."id" as team_id
@@ -24,7 +24,7 @@ router.get('/list/all', (req, res) => {
 });
 
 // SET alert resolved 
-router.put('/resolve/:id', (req, res) => {
+router.put('/resolve/:id', rejectUnauthenticated, (req, res) => {
     // console.log('in resolve alert PUT with id:', req.params.id);
     const queryText = `UPDATE "alerts" SET "resolved"=true WHERE "id"=$1;`;
     pool.query(queryText, [Number(req.params.id)])
@@ -38,7 +38,7 @@ router.put('/resolve/:id', (req, res) => {
 });
 
 // post new alert to db
-router.post('/new', (req, res) => {
+router.post('/new', rejectUnauthenticated, (req, res) => {
     // console.log('in submit alert POST with', req.body);
     const id = req.body.id;
     const desc = req.body.description;
