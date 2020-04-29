@@ -23,7 +23,7 @@ function* setTaskPhaseID (action) {
     yield put({type: 'UPDATE_PHASE_ID', payload: action.payload});
 }
 function* setTaskRiskareaOptions(action) {
-    const riskTypes = yield axios.get(`/api/haley-task/riskareas/${action.payload}`);
+    const riskTypes = yield axios.get(`/api/workflow/riskareas/${action.payload}`);
     let riskTypesArray = [];
     for (let i = 0; i < riskTypes.data.length; i++) {
         // console.log(riskTypes.data[i].riskarea)
@@ -51,7 +51,7 @@ function* addTaskInput(action) {
 }
 function* addTaskToDatabase(action) {
     try {
-        const postResponse = yield axios.post(`/api/haley-task/add-new-task`, action.payload.task);
+        const postResponse = yield axios.post(`/api/workflow/add-new-task`, action.payload.task);
         console.log('postResponse:', postResponse);
         yield put({ type: 'ADD_TASK_CONFIRM', payload: postResponse.data.newTaskId });
         yield put({type: 'GET_THIS_PHASE', payload: action.payload});
@@ -62,7 +62,7 @@ function* addTaskToDatabase(action) {
 }
 function* addTaskToSubscriberDatabase(action) {
     try {
-        const postResponse = yield axios.post(`/api/haley-task/add-new-assigned-task`, action.payload);
+        const postResponse = yield axios.post(`/api/workflow/add-new-assigned-task`, action.payload);
         console.log('postResponse:', postResponse);
         yield put({ type: 'ADD_TASK_CONFIRM', payload: postResponse.data.newTaskId });
     } catch (error) {
@@ -72,10 +72,10 @@ function* addTaskToSubscriberDatabase(action) {
 function* fetchAssignedTask(action) {
     try {
         // let assignedTaskObject = {}
-        const firstResponse = yield axios.get(`/api/haley-task/assigned-task/${action.payload.id}`);
+        const firstResponse = yield axios.get(`/api/workflow/assigned-task/${action.payload.id}`);
         console.log('response:', firstResponse);
         // assignedTaskObject= firstResponse[0];
-        const secondResponse = yield axios.get(`/api/haley-task/assigned-task/inputs/${action.payload.id}`);
+        const secondResponse = yield axios.get(`/api/workflow/assigned-task/inputs/${action.payload.id}`);
         console.log('second response:', secondResponse);
         //get all the things from the other tables and bundle into one task object that subscriber dom can render from 
 
