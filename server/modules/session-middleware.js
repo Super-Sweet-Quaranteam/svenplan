@@ -10,7 +10,7 @@ const warnings = require('../constants/warnings');
   something the server can confirm, and then we know that we have the right user.
 
   You can see this string that gets passed back and forth in the
-  `application` ->  `storage` -> `cookies` section of the chrome debugger
+  `application` ->  `storage` -> `cookies` section of the browser debugger
 */
 
 const serverSessionSecret = () => {
