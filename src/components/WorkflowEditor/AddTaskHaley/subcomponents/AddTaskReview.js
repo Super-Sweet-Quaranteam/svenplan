@@ -69,7 +69,7 @@ class AddTask5 extends Component {
 
 const putReduxStateOnProps = (reduxState) => ({
     user: reduxState.user,
-    task: reduxState.task,
+    task: reduxState.workflow,
     phase: reduxState.workflow.storeCurent.phase,
     edit: reduxState.workflow.storeCurent.editTask
 });

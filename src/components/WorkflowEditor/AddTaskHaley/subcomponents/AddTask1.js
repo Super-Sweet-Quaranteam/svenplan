@@ -22,12 +22,10 @@ class AddTask1 extends Component {
         this.props.dispatch({ type: 'SET_TASK_RISKAREAS', payload: this.state.riskareas });
         this.props.dispatch({ type: 'SET_TASK_SEQUENCE', payload: (Math.max(...this.props.workflow.thisPhase.map(task => task.task_sequence), 0) + 1)})
         this.props.dispatch({ type: 'NEXT_TASK_STEP'});
-        // this.props.history.push('/add-task-haley/2')
     }
 
     goBack = () => {
         this.props.dispatch({ type: 'PREVIOUS_TASK_STEP' });
-        // this.props.history.push('/add-task-haley')
     }
 
     handleTitleInput =(event)=> {
@@ -67,9 +65,9 @@ class AddTask1 extends Component {
             </form>
                 <div>
                     <p>Risk Area (select all that apply):</p>
-                    {this.props.task.taskInProgress.riskareaOptions&&
+                    {this.props.workflow.taskInProgress.riskareaOptions&&
                         <>
-                        {this.props.task.taskInProgress.riskareaOptions.map((riskarea)=>
+                        {this.props.workflow.taskInProgress.riskareaOptions.map((riskarea)=>
                             <div className="taskCard" key={riskarea.id}>
                                 <input type="checkbox" id="check-text" value={riskarea.id} onChange={this.handleRiskareas}/>
                                 <label htmlFor="check-text">{riskarea.riskarea}({riskarea.id})</label>
@@ -92,7 +90,6 @@ class AddTask1 extends Component {
 
 const putReduxStateOnProps = (reduxState) => ({
     user: reduxState.user,
-    task: reduxState.task, 
     workflow: reduxState.workflow
 });
 

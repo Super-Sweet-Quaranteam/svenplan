@@ -8,7 +8,6 @@ import workflow from './workflowReducer';
 import errors from './errorsReducer';
 import project from './projectReducer';
 import alerts from './alertReducer';
-import task from './haleyAddTaskReducer';
 
 
 const rootReducer = combineReducers({
@@ -20,9 +19,7 @@ const rootReducer = combineReducers({
     alerts,
     workflow,
     errors,
-    project,
-
-    task,
+    project
 
   });
   

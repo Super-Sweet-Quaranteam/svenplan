@@ -79,7 +79,7 @@ class AddTask4 extends Component {
 
 const putReduxStateOnProps = (reduxState) => ({
     user: reduxState.user,
-    task: reduxState.task
+    task: reduxState.workflow
 });
 
 export default connect(putReduxStateOnProps)(withRouter(AddTask4));

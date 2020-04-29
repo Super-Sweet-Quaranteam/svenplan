@@ -14,6 +14,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+// gets specific user by id
 router.get('/selected/:id', rejectUnauthenticated, (req, res) => {
   const queryText=`SELECT * FROM "users" WHERE "id"=$1;`;
   const values=[req.params.id];
@@ -24,6 +25,7 @@ router.get('/selected/:id', rejectUnauthenticated, (req, res) => {
     .catch(() => res.sendStatus(500));
 });
 
+// gets team info for specific user
 router.get('/team', rejectUnauthenticated, (req, res)=>{
   if (req.user.team_id){  
     const queryText = `SELECT "users"."alias" AS "user", "teams"."name" AS "team"
@@ -40,6 +42,7 @@ router.get('/team', rejectUnauthenticated, (req, res)=>{
   }
 });
 
+// gets team info for specific user
 router.get('/team/:id', rejectUnauthenticated, (req, res) => {
   const queryText = `SELECT "users"."alias" AS "user", "teams"."name" AS "team"
                     FROM "teams" JOIN "users"

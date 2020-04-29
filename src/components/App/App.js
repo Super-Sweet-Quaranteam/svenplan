@@ -31,8 +31,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AddTaskHaley from '../WorkflowEditor/AddTaskHaley/AddTaskHaley';
 
 
-// THESE SEEM UNUSED
-// {/* <Route path="/admin" component={AdminNav} /> */ }
 
 class App extends Component {
   //sets the user, if there is one, in redux (even tho this component isn't connected to store)
@@ -79,7 +77,7 @@ class App extends Component {
 
             {/* temporary!!! */}
             <Route path="/add-task-haley" component={AddTaskHaley} />
-              {/* <Route path={`/add-task-haley/summary`} component={AddTaskSummary} /> */}
+      
 
             {/* 404 page creation below */}
             <Route render={() => 
