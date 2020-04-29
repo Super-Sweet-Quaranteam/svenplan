@@ -8,7 +8,7 @@ The Svenplan app helps enterprises build customized business workflows and track
 
 The purpose of the beta version of this app is to develop a robust multi-step process, or workflow, generator on the enterprises' ‘admin’ side, and an intuitive workflow completion path on the team members' ‘user’ side.
 
-To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
+To see the fully functional site, please visit: [DEPLOYED VERSION OF SVENPLAN](https://svenplan.herokuapp.com/)
 
 ## Technologies
 This version uses:
