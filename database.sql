@@ -3,7 +3,11 @@
 -----------------
 --CREATE TABLES--
 -----------------
-
+CREATE TABLE "teams"
+(
+    "id" SERIAL PRIMARY KEY,
+    "name" VARCHAR (80) UNIQUE NOT NULL
+);
 CREATE TABLE "workflows"
 (
     "id" SERIAL PRIMARY KEY,
@@ -65,13 +69,6 @@ CREATE TABLE "inputs"
     "prompt" VARCHAR,
     "task_id" INT REFERENCES "default_tasks"("id") ON DELETE CASCADE
 );
-
-CREATE TABLE "teams"
-(
-    "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR (80) UNIQUE NOT NULL
-);
-
 CREATE TABLE "users"
 (
     "id" SERIAL PRIMARY KEY,
