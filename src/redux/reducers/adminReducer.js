@@ -10,6 +10,7 @@ const clientList = (state = [], action) => {
     }
 }
 
+// currently not being used
 const adminDisplay = (state = {}, action) => {
   switch (action.type) {
     case 'ADMIN_DISPLAY':

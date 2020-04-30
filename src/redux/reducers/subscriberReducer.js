@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 
+// holds current user existing projects
 const existingProjects = (state=[], action) => {
     switch (action.type) {
       case 'SET_EXISTING_PROJECTS':
@@ -9,6 +10,7 @@ const existingProjects = (state=[], action) => {
     }
 }
 
+// holds the specific project client wants to view
 const currentProject = (state=[], action) => {
     switch (action.type) {
       case 'SET_CURRENT_PROJECT':
@@ -18,7 +20,7 @@ const currentProject = (state=[], action) => {
     }
 }
 
-
+// holds project data
 const projectData = (state = [], action) => {
     switch (action.type) {
         case 'SET_PROJECT_DATA':
@@ -28,6 +30,7 @@ const projectData = (state = [], action) => {
     }
 }
 
+// stores id of the project client chooses
 const projectId = (state = [], action) => {
     switch (action.type) {
         case 'SET_PROJECT_ID':
@@ -37,7 +40,7 @@ const projectId = (state = [], action) => {
     }
 }
 
-
+// stores the order of tasks to be displayed as user proceeds through workflow
 const tasksInPhase = (state=[], action) => {
     switch (action.type) {
       case 'SET_TASKS_IN_PHASE':

@@ -1,3 +1,5 @@
+
+// holds current user's team info
 const teamReducer = (state = {}, action) => {
   switch (action.type) {
     case 'SET_TEAMS':
@@ -7,6 +9,5 @@ const teamReducer = (state = {}, action) => {
   }
 };
 
-// user will be on the redux state at:
-// state.user
+
 export default teamReducer;

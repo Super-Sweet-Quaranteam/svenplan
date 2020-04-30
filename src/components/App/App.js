@@ -3,27 +3,36 @@ import './App.css';
 import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 
+// routes for all users regardless of access level
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
-
-import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
-
 import UserProfile from '../UserProfile/UserProfile';
+
+// currently unused
+import LandingPage from '../LandingPage/LandingPage';
+
+// routes for level 3 access level, subscribers
+import SubscriberHome from '../SubscriberHome/SubscriberHome';
+import ExistingProjects from '../ProjectManager/ExistingProjects';
+import SupportPage from '../SupportPage/SupportPage';
+import NewProject from '../ProjectManager/NewProject';
+import ProjectDetails from '../ProjectManager/ProjectDetails';
+import ProjectData from '../ProjectManager/ProjectData';
+
+// routes for level 1 or 2 admin access level
 import Alerts from '../Alerts/Alerts';
 import CreateWorkflow from '../WorkflowEditor/CreateWorkflow';
 import ExistingWorkflows from '../WorkflowEditor/ExistingWorkflows';
 import Subscribers from '../Subscribers/Subscribers';
 import AdminHome from '../AdminHome/AdminHome';
-import SubscriberHome from '../SubscriberHome/SubscriberHome';
-import ExistingProjects from '../ProjectManager/ExistingProjects';
-import SupportPage from '../SupportPage/SupportPage';
-import NewProject from '../ProjectManager/NewProject';
 import EditWorkflow from '../WorkflowEditor/EditWorkflow';
 import TeamMembers from '../TeamMembers/TeamMembers'
-import ProjectDetails from '../ProjectManager/ProjectDetails';
-import ProjectData from '../ProjectManager/ProjectData';
+import Teams from '../Teams/Teams';
+
+// added security to be set up
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+
 
 
 class App extends Component {
@@ -44,29 +53,28 @@ class App extends Component {
             <Route exact path="/logIn" component ={LoginPage} />
             {/* these routes should be available when logged in as subscriber or admin */}
             <Route exact path="/profile" component={UserProfile}/>
-            <Route exact path="/support" component={SupportPage}/>
+            
 
-            {/* this is for subscribers (maybe also admins?) */}
+            {/* this is for subscribers only level 3 access */}
             <Route exact path="/dashboard" component={SubscriberHome}/>
             <Route exact path="/projects" component={ExistingProjects}/>
             <Route exact path="/projects/new" component={NewProject} />
-            <Route exact path="/alerts" component={Alerts}/>
-
-            <Route exact path="/projects/new" component={NewProject}/>
             <Route exact path="/projects/:projectId" component={ProjectDetails}/>
             <Route exact path="/projects/data/:projectId" component={ProjectData}/>
+            <Route exact path="/support" component={SupportPage}/>
 
 
-            {/* these routes should be available to admins only */}
-            <Route exact path="/admin" component={AdminHome}/>
-              {/* maybe '/dashboard' as a protected route that would display AdminHome or ClientHome would be more intuitive */}
-            <Route exact path="/workflows/edit" component={EditWorkflow}/>
-            <Route exact path="/workflows/new" component={CreateWorkflow}/>
-            <Route exact path="/workflows" component={ExistingWorkflows}/>
-            <Route exact path="/subscribers" component={Subscribers}/>
-            <Route exact path="/teammembers" component={TeamMembers}/>
+            {/* these routes are available to admins only level 1 or 2 access */}
+            <ProtectedRoute exact path="/admin" component={AdminHome}/>
+            <ProtectedRoute exact path="/workflows/edit" component={EditWorkflow}/>
+            <ProtectedRoute exact path="/workflows/new" component={CreateWorkflow}/>
+            <ProtectedRoute exact path="/workflows" component={ExistingWorkflows}/>
+            <ProtectedRoute exact path="/subscribers" component={Subscribers}/>
+            <ProtectedRoute exact path="/teammembers" component={TeamMembers}/>
+            <ProtectedRoute exact path="/teams" component={Teams}/>
+            <ProtectedRoute exact path="/alerts" component={Alerts}/>
 
-            {/* protected route */}
+            {/* protected route currently no routes are being protected in this manner*/}
             <ProtectedRoute exact path="/home" component={AdminHome}/>
 
       
