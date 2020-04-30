@@ -13,7 +13,7 @@ CREATE TABLE "workflows"
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR NOT NULL,
     "description" VARCHAR,
-    "team_id" INT REFERENCES "teams"."id" ON DELETE CASCADE,
+    "team_id" INT REFERENCES "teams"("id") ON DELETE CASCADE,
     "created" TIMESTAMPTZ,
     "edited" TIMESTAMPTZ,
     "published" BOOLEAN DEFAULT FALSE
