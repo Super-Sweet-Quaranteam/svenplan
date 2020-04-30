@@ -1,22 +1,20 @@
 import React from 'react';
-import logo from '../Logo/svenplan-logo2.png'
 import "./LandingPage.css"
 
 
 // changing landing page to user home routes, this will be deleteable along with the css
 function LandingPage(props) {
-    function Admin(event) {props.history.push({ pathname: '/admin' })}
-    function Client(event) { props.history.push({ pathname: '/dashboard' })}
+    function Login(event) {
+        props.history.push({ pathname: '/login' });
+
+    }
     
 
     return (
         <div id="landingDisplay">
-            <h3>routes aren't protected yet.</h3>
-            <p>Later, logging in will go to '/home'. For now:</p>
-                <button className="btn-sml" onClick={Admin}>Go to Admin Home</button>
-                <button className="btn-sml" onClick={Client}>Go to Subscriber Home</button>
-                <br/>
-            <img className="logo" width="300px" src={logo} alt="SvenPlan Logo"></img>
+            <img className="hero-image" src="/images/skyline.png" alt="skyline" />
+            <p className="landing-text">The Svenplan app helps enterprises build customized business workflows and track those workflows' progress with more transparency and accountability. Enterprises are able to add members to their team, and those team members are then able to choose among the workflows created by their overseeing enterprise, and guide themselves through the process.</p>
+                <button className="btn-sml" onClick={Login}>Log In or Sign Up</button>
         </div>
     );
 }
