@@ -2,6 +2,17 @@
 
 #landingDisplay{
     text-align: center;
+    position: relative;
+    margin: 0;
+}
+
+.landing-text{
+    background-color: var(--bg-secondary);
+    color: white;
+    padding: 4em 2em;
+    margin: 0;
+    bottom: 5em;
+    right: 3em;
 }
 
 .logo{
