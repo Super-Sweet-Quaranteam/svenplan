@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 
 
-
 // gets full alert list for admin
 const alertList = (state = [], action) => {
     switch (action.type) {

@@ -65,10 +65,8 @@ class CurrentWorkflow extends Component {
         return (
             <div className='CurrentWorkflow'>
                 <h2>{this.props.reduxState.subscriber.projectId.name}</h2>
-                {/* button to take user back to existing projects */}
-                <button className="button" onClick={()=>this.props.dispatch({type: 'CLIENT_DISPLAY', payload: {displayOldWorkFlow: true}})}>
-                    <a className="no-link" href="#/projects">Back</a>
-                </button>
+                {/* button to take user back to existing project */}
+                <button className="button" onClick={()=>this.props.history.push('/projects')}>Back</button>
                 {/* phase divs are set up as buttons for a11y. onClick, specific tasks show up */}
                 <div className="phaseOverview">
                 <div className="phaseOverviewItem-start">Phases</div>

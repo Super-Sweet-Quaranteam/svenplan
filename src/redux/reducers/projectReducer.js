@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
 
-
+// stores task details to be used in project details .js
 const taskDetails = (state = {}, action) => {
   switch (action.type) {
-    case 'UNSET_TASK_DETAILS':
-      return {};
     case 'SET_TASK_DETAILS':
       return action.payload;
     default:
