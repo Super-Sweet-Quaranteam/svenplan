@@ -65,14 +65,14 @@ class App extends Component {
 
 
             {/* these routes are available to admins only level 1 or 2 access */}
-            <Route exact path="/admin" component={AdminHome}/>
-            <Route exact path="/workflows/edit" component={EditWorkflow}/>
-            <Route exact path="/workflows/new" component={CreateWorkflow}/>
-            <Route exact path="/workflows" component={ExistingWorkflows}/>
-            <Route exact path="/subscribers" component={Subscribers}/>
-            <Route exact path="/teammembers" component={TeamMembers}/>
-            <Route exact path="/teams" component={Teams}/>
-            <Route exact path="/alerts" component={Alerts}/>
+            <ProtectedRoute exact path="/admin" component={AdminHome}/>
+            <ProtectedRoute exact path="/workflows/edit" component={EditWorkflow}/>
+            <ProtectedRoute exact path="/workflows/new" component={CreateWorkflow}/>
+            <ProtectedRoute exact path="/workflows" component={ExistingWorkflows}/>
+            <ProtectedRoute exact path="/subscribers" component={Subscribers}/>
+            <ProtectedRoute exact path="/teammembers" component={TeamMembers}/>
+            <ProtectedRoute exact path="/teams" component={Teams}/>
+            <ProtectedRoute exact path="/alerts" component={Alerts}/>
 
             {/* protected route currently no routes are being protected in this manner*/}
             <ProtectedRoute exact path="/home" component={AdminHome}/>
