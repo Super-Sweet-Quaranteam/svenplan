@@ -51,15 +51,15 @@ app.listen(PORT, () => {
 });
 
 // test that database is up - remove this fully once we deploy to heroku
-const client = new Client({
-  // user: null || 'con',
-  // password: null || 'secretpass',
-  host: 'localhost',
-  port: 5432,
-})
-client
-  .connect()
-  .then(() => console.log('postgres database connected....'))
-  .catch(err => console.error('connection error', err.stack))
+// const client = new Client({
+//   // user: null || 'con',
+//   // password: null || 'secretpass',
+//   host: 'localhost',
+//   port: 5432,
+// })
+// client
+//   .connect()
+//   .then(() => console.log('postgres database connected....'))
+//   .catch(err => console.error('connection error', err.stack))
 
 
